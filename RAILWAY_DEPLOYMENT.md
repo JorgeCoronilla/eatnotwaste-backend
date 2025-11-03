@@ -242,6 +242,59 @@ curl https://tu-backend-url.railway.app/health
 4. **CORS**: Configurar dominios específicos
 5. **JWT**: Usar claves seguras (256-bit)
 
+## 🚨 Solución de Problemas Comunes
+
+### Error: "Cannot find module '../../generated/prisma'"
+
+**Problema**: El cliente de Prisma no se genera durante el build.
+
+**Solución**: 
+1. Actualizar `package.json`:
+```json
+{
+  "scripts": {
+    "build": "prisma generate && tsc",
+    "postinstall": "prisma generate",
+    "deploy": "prisma migrate deploy && npm run start"
+  }
+}
+```
+
+2. Crear `railway.json`:
+```json
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "npm run deploy",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}
+```
+
+### Error: "P1001 - Can't reach database server"
+
+**Problema**: Usando URL interna desde local o URL pública desde Railway.
+
+**Solución**:
+- **Local**: Usar URL pública (`centerbeam.proxy.rlwy.net:55367`)
+- **Railway**: Usar URL interna (`postgres.railway.internal:5432`)
+
+### Build lento o falla
+
+**Problema**: Dependencias o migraciones fallan.
+
+**Solución**:
+```bash
+# Limpiar caché
+railway run --service backend npm ci
+railway run --service backend npx prisma generate
+railway run --service backend npx prisma migrate deploy
+```
+
 ## 📞 Soporte
 
 - **Railway Docs**: [docs.railway.app](https://docs.railway.app)
