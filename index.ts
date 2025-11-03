@@ -38,7 +38,21 @@ app.use(helmet({
 }));
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://freshkeeper.vercel.app', 'https://www.freshkeeper.app']
+    ? [
+        // Dominios de producción
+        'https://freshkeeper.vercel.app', 
+        'https://www.freshkeeper.app',
+        // Agregar dominios comunes de deployment
+        'https://freshkeeper-frontend.vercel.app',
+        'https://freshkeeper-frontend.netlify.app',
+        'https://eatnotwaste-frontend.vercel.app',
+        'https://eatnotwaste-frontend.netlify.app',
+        // Localhost para desarrollo/testing
+        'http://localhost:5173',
+        'https://localhost:5173',
+        'http://localhost:3000',
+        'https://localhost:3000'
+      ]
     : [
         'http://localhost:3000', 
         'http://localhost:5173', 
