@@ -15,7 +15,7 @@ import type {
   MovementType,
   Platform,
   NotificationStatus,
-} from '../../generated/prisma';
+} from '../config/database';
 
 // Extended User type with computed properties (without sensitive data)
 export interface UserWithStats extends Omit<PrismaUser, 'passwordHash'> {

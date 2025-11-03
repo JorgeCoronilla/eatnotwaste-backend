@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { prisma } from '../config/database';
-import { ProductSource } from '../../generated/prisma';
 import ProductAPIService from '../services/ProductAPIService';
 
 interface AuthenticatedRequest extends Request {
@@ -64,7 +63,7 @@ export const scanBarcode = async (req: Request, res: Response): Promise<void> =>
             description: productData.description || null,
             imageUrl: productData.imageUrl || null,
             nutritionalInfo: productData.nutrition || {},
-            source: ProductSource.openfoodfacts,
+            source: 'openfoodfacts',
             isVerified: true
           }
         });
@@ -207,7 +206,7 @@ export const createProduct = async (req: AuthenticatedRequest, res: Response): P
         nutritionalInfo: nutritionalInfo || {},
         allergens: allergens || [],
         ingredients,
-        source: ProductSource.manual,
+        source: 'manual',
         isVerified: false
       }
     });
