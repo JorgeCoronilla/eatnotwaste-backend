@@ -119,29 +119,30 @@ app.use(errorHandler);
 // Para desarrollo local
 const PORT = Number(process.env.PORT) || 3000;
 
-if (process.env.NODE_ENV !== 'production') {
-  // Configuración HTTP temporal para evitar problemas de certificados
-  const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 FreshKeeper API ejecutándose en puerto ${PORT} (HTTP)`);
-    console.log(`📱 Health check: http://localhost:${PORT}/health`);
+// Iniciar servidor en todos los entornos
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 FreshKeeper API ejecutándose en puerto ${PORT}`);
+  console.log(`📱 Health check disponible en /health`);
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`🌐 Local access: http://localhost:${PORT}/health`);
     console.log(`🌐 Network access: http://192.168.1.111:${PORT}/health`);
-  });
+  }
+});
 
-  // Manejar cierre graceful
-  process.on('SIGTERM', () => {
-    console.log('SIGTERM received, shutting down gracefully');
-    server.close(() => {
-      console.log('Process terminated');
-    });
+// Manejar cierre graceful
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
   });
+});
 
-  process.on('SIGINT', () => {
-    console.log('SIGINT received, shutting down gracefully');
-    server.close(() => {
-      console.log('Process terminated');
-    });
+process.on('SIGINT', () => {
+  console.log('SIGINT received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
   });
-}
+});
 
 // Exportar para Vercel
 export default app;
