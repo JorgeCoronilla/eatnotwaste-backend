@@ -1,7 +1,7 @@
 // FreshKeeper v2.0.0 - Database Configuration
 // PostgreSQL connection with Prisma ORM
 
-import { PrismaClient } from '../../generated/prisma';
+import { PrismaClient } from '@prisma/client';
 import { logger } from '../utils/logger';
 
 // Singleton pattern for Prisma Client
@@ -95,4 +95,4 @@ export type {
   MovementType,
   Platform,
   NotificationStatus,
-} from '../../generated/prisma';
+} from '@prisma/client';

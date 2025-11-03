@@ -7,7 +7,7 @@ type UserDeviceToken = {
   userId: string;
   deviceId: string;
   fcmToken: string;
-  platform: 'IOS' | 'ANDROID';
+  platform: 'ios' | 'android' | 'web';
   appVersion: string | null;
   isActive: boolean;
   lastUsed: Date;
@@ -88,9 +88,9 @@ export class NotificationService {
   ): Promise<void> {
     try {
       // Mock implementation to avoid database errors
-      const platformUpper = platform.toUpperCase() as 'IOS' | 'ANDROID';
+      const platformLower = platform.toLowerCase() as 'ios' | 'android';
 
-      if (!['IOS', 'ANDROID'].includes(platformUpper)) {
+    if (!['ios', 'android'].includes(platformLower)) {
         throw new Error('Plataforma no válida. Debe ser IOS o ANDROID.');
       }
 
@@ -111,7 +111,7 @@ export class NotificationService {
             deviceId: oldToken.deviceId,
             createdAt: oldToken.createdAt,
             fcmToken: fcmToken,
-            platform: platformUpper,
+            platform: platformLower,
             appVersion: appVersion || oldToken.appVersion,
             isActive: true,
             lastUsed: new Date(),
@@ -126,7 +126,7 @@ export class NotificationService {
           userId,
           deviceId,
           fcmToken,
-          platform: platformUpper,
+          platform: platformLower,
           appVersion: appVersion || '1.0.0',
           isActive: true,
           createdAt: new Date(),
