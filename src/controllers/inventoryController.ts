@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
 
 // Interfaces para inventario
@@ -36,9 +36,10 @@ interface AuthenticatedRequest extends Request {
 /**
  * Obtener inventario del usuario
  */
-export const getInventory = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const getInventory: RequestHandler = async (req, res) => {
   try {
-    if (!req.user) {
+    const reqAuth = req as AuthenticatedRequest;
+    if (!reqAuth.user) {
       res.status(401).json({
         success: false,
         message: 'Usuario no autenticado',
@@ -47,7 +48,7 @@ export const getInventory = async (req: AuthenticatedRequest, res: Response): Pr
       return;
     }
 
-    const userId = req.user.id;
+    const userId = reqAuth.user.id;
     const { 
       page = 1, 
       limit = 20, 
@@ -56,7 +57,7 @@ export const getInventory = async (req: AuthenticatedRequest, res: Response): Pr
       location,
       category,
       expiring = false
-    } = req.query;
+    } = req.query as any;
 
     console.log(`📦 Obteniendo inventario para usuario: ${userId}`);
 
@@ -154,8 +155,9 @@ export const getInventory = async (req: AuthenticatedRequest, res: Response): Pr
 /**
  * Agregar producto al inventario
  */
-export const addToInventory = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const addToInventory: RequestHandler = async (req, res) => {
   try {
+    const reqAuth = req as AuthenticatedRequest;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(400).json({
@@ -166,7 +168,7 @@ export const addToInventory = async (req: AuthenticatedRequest, res: Response): 
       return;
     }
 
-    if (!req.user) {
+    if (!reqAuth.user) {
       res.status(401).json({
         success: false,
         message: 'Usuario no autenticado',
@@ -175,12 +177,12 @@ export const addToInventory = async (req: AuthenticatedRequest, res: Response): 
       return;
     }
 
-    const inventoryData = req.body;
+    const inventoryData = req.body as any;
 
     // Mock inventory item creation
      const newInventoryItem: InventoryItem = {
        id: Math.random().toString(36).substr(2, 9),
-       userId: req.user.id,
+       userId: reqAuth.user.id,
        productId: inventoryData.productId || 'unknown',
        quantity: inventoryData.quantity || 1,
        unit: inventoryData.unit || 'units',
@@ -192,7 +194,7 @@ export const addToInventory = async (req: AuthenticatedRequest, res: Response): 
        ...(inventoryData.expirationDate && { expirationDate: new Date(inventoryData.expirationDate) })
      };
 
-    console.log(`✅ Producto agregado al inventario: ${newInventoryItem.id} por ${req.user.email}`);
+    console.log(`✅ Producto agregado al inventario: ${newInventoryItem.id} por ${reqAuth.user.email}`);
 
     res.status(201).json({
       success: true,
@@ -213,8 +215,9 @@ export const addToInventory = async (req: AuthenticatedRequest, res: Response): 
 /**
  * Actualizar producto en inventario
  */
-export const updateInventoryItem = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const updateInventoryItem: RequestHandler = async (req, res) => {
   try {
+    const reqAuth = req as AuthenticatedRequest;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(400).json({
@@ -225,7 +228,7 @@ export const updateInventoryItem = async (req: AuthenticatedRequest, res: Respon
       return;
     }
 
-    if (!req.user) {
+    if (!reqAuth.user) {
       res.status(401).json({
         success: false,
         message: 'Usuario no autenticado',
@@ -235,12 +238,12 @@ export const updateInventoryItem = async (req: AuthenticatedRequest, res: Respon
     }
 
     const { id } = req.params;
-    const updateData = req.body;
+    const updateData = req.body as any;
 
     // Mock inventory item update
     const updatedItem: InventoryItem = {
       id: id as string,
-      userId: req.user.id,
+      userId: reqAuth.user.id,
       productId: 'prod1',
       quantity: updateData.quantity || 1,
       unit: updateData.unit || 'units',
@@ -251,7 +254,7 @@ export const updateInventoryItem = async (req: AuthenticatedRequest, res: Respon
       price: updateData.price
     };
 
-    console.log(`📝 Producto actualizado en inventario: ${id} por ${req.user.email}`);
+    console.log(`📝 Producto actualizado en inventario: ${id} por ${reqAuth.user.email}`);
 
     res.json({
       success: true,
@@ -272,9 +275,10 @@ export const updateInventoryItem = async (req: AuthenticatedRequest, res: Respon
 /**
  * Eliminar producto del inventario
  */
-export const deleteInventoryItem = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const deleteInventoryItem: RequestHandler = async (req, res) => {
   try {
-    if (!req.user) {
+    const reqAuth = req as AuthenticatedRequest;
+    if (!reqAuth.user) {
       res.status(401).json({
         success: false,
         message: 'Usuario no autenticado',
@@ -285,7 +289,7 @@ export const deleteInventoryItem = async (req: AuthenticatedRequest, res: Respon
 
     const { id } = req.params;
 
-    console.log(`🗑️ Producto eliminado del inventario: ${id} por ${req.user.email}`);
+    console.log(`🗑️ Producto eliminado del inventario: ${id} por ${reqAuth.user.email}`);
 
     res.json({
       success: true,
@@ -306,9 +310,10 @@ export const deleteInventoryItem = async (req: AuthenticatedRequest, res: Respon
 /**
  * Marcar producto como consumido
  */
-export const markAsConsumed = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const markAsConsumed: RequestHandler = async (req, res) => {
   try {
-    if (!req.user) {
+    const reqAuth = req as AuthenticatedRequest;
+    if (!reqAuth.user) {
       res.status(401).json({
         success: false,
         message: 'Usuario no autenticado',
@@ -318,9 +323,9 @@ export const markAsConsumed = async (req: AuthenticatedRequest, res: Response): 
     }
 
     const { id } = req.params;
-    const { consumedQuantity } = req.body;
+    const { consumedQuantity } = (req.body as any);
 
-    console.log(`✅ Producto marcado como consumido: ${id} (cantidad: ${consumedQuantity}) por ${req.user.email}`);
+    console.log(`✅ Producto marcado como consumido: ${id} (cantidad: ${consumedQuantity}) por ${reqAuth.user.email}`);
 
     res.json({
       success: true,
@@ -346,9 +351,10 @@ export const markAsConsumed = async (req: AuthenticatedRequest, res: Response): 
 /**
  * Obtener estadísticas del inventario
  */
-export const getInventoryStats = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const getInventoryStats: RequestHandler = async (req, res) => {
   try {
-    if (!req.user) {
+    const reqAuth = req as AuthenticatedRequest;
+    if (!reqAuth.user) {
       res.status(401).json({
         success: false,
         message: 'Usuario no autenticado',
@@ -357,44 +363,26 @@ export const getInventoryStats = async (req: AuthenticatedRequest, res: Response
       return;
     }
 
-    const userId = req.user.id;
+    const userId = reqAuth.user.id;
 
-    console.log(`📊 Obteniendo estadísticas de inventario para usuario: ${userId}`);
-
-    // Mock statistics
-    const mockStats = {
-      totalItems: 15,
-      freshItems: 10,
-      expiringSoon: 3,
-      expired: 2,
-      consumed: 25,
-      totalValue: 125.50,
+    const stats = {
+      totalItems: 42,
+      expiringSoon: 7,
+      expired: 3,
+      consumedThisWeek: 12,
       categories: {
-        dairy: 4,
-        fruits: 3,
-        vegetables: 5,
-        grains: 2,
-        other: 1
-      },
-      locations: {
-        refrigerator: 8,
-        pantry: 5,
-        freezer: 2
-      },
-      expiringThisWeek: [
-        {
-          id: '2',
-          productName: 'Pan Integral',
-          expirationDate: new Date('2024-01-25'),
-          daysLeft: 2
-        }
-      ]
+        dairy: 10,
+        fruits: 8,
+        vegetables: 12,
+        grains: 7,
+        other: 5
+      }
     };
 
     res.json({
       success: true,
-      message: 'Estadísticas obtenidas exitosamente',
-      data: mockStats
+      message: 'Estadísticas del inventario obtenidas',
+      data: stats
     });
 
   } catch (error) {
@@ -410,9 +398,10 @@ export const getInventoryStats = async (req: AuthenticatedRequest, res: Response
 /**
  * Obtener productos próximos a expirar
  */
-export const getExpiringItems = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+export const getExpiringItems: RequestHandler = async (req, res) => {
   try {
-    if (!req.user) {
+    const reqAuth = req as AuthenticatedRequest;
+    if (!reqAuth.user) {
       res.status(401).json({
         success: false,
         message: 'Usuario no autenticado',
@@ -421,39 +410,16 @@ export const getExpiringItems = async (req: AuthenticatedRequest, res: Response)
       return;
     }
 
-    const userId = req.user.id;
-    const { days = 7 } = req.query;
-
-    console.log(`⏰ Obteniendo productos que expiran en ${days} días para usuario: ${userId}`);
-
-    // Mock expiring items
-    const mockExpiringItems: InventoryItem[] = [
-      {
-        id: '2',
-        userId: userId,
-        productId: 'prod2',
-        quantity: 1,
-        unit: 'kg',
-        location: 'pantry',
-        purchaseDate: new Date('2024-01-10'),
-        expirationDate: new Date('2024-01-25'),
-        status: 'expiring_soon',
-        product: {
-          name: 'Pan Integral',
-          brand: 'Bimbo',
-          category: 'grains'
-        }
-      }
+    const items = [
+      { id: '1', name: 'Yogur natural', daysUntilExpiry: 2 },
+      { id: '2', name: 'Plátanos', daysUntilExpiry: 3 },
+      { id: '3', name: 'Queso cheddar', daysUntilExpiry: 1 },
     ];
 
     res.json({
       success: true,
-      message: 'Productos próximos a expirar obtenidos exitosamente',
-      data: {
-        items: mockExpiringItems,
-        total: mockExpiringItems.length,
-        daysFilter: Number(days)
-      }
+      message: 'Productos próximos a expirar obtenidos',
+      data: items
     });
 
   } catch (error) {

@@ -9,8 +9,8 @@ import type {
   ApiResponse,
   PaginatedResponse,
 } from '../types/database';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import * as bcrypt from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
 
 export class UserService {
   /**
@@ -95,6 +95,14 @@ export class UserService {
         };
       }
 
+      // If the account has no password (Google-only), block password login
+      if (!user.passwordHash) {
+        return {
+          success: false,
+          error: 'La cuenta no tiene contraseña. Inicia con Google o configura una contraseña.',
+        };
+      }
+
       // Verify password
       const isValidPassword = await bcrypt.compare(password, user.passwordHash);
       if (!isValidPassword) {
@@ -143,6 +151,91 @@ export class UserService {
         success: false,
         error: 'Error interno del servidor',
       };
+    }
+  }
+
+  /**
+   * Find user by Google ID
+   */
+  static async findByGoogleId(googleId: string): Promise<any> {
+    try {
+      return await prisma.user.findUnique({
+        where: { googleId },
+      });
+    } catch (error) {
+      logger.error('Error finding user by Google ID:', error);
+      throw new Error('Error interno del servidor');
+    }
+  }
+
+  /**
+   * Find user by email
+   */
+  static async findByEmail(email: string): Promise<any> {
+    try {
+      return await prisma.user.findUnique({
+        where: { email: email.toLowerCase() },
+      });
+    } catch (error) {
+      logger.error('Error finding user by email:', error);
+      throw new Error('Error interno del servidor');
+    }
+  }
+
+  /**
+   * Find user by ID
+   */
+  static async findById(id: string): Promise<any> {
+    try {
+      return await prisma.user.findUnique({
+        where: { id },
+      });
+    } catch (error) {
+      logger.error('Error finding user by ID:', error);
+      throw new Error('Error interno del servidor');
+    }
+  }
+
+
+
+  /**
+   * Create user with Google OAuth
+   */
+  static async createUserWithGoogle(userData: {
+    email: string;
+    name: string;
+    googleId: string;
+    avatar?: string;
+    language?: string;
+    timezone?: string;
+  }): Promise<any> {
+    try {
+      const user = await prisma.user.create({
+        data: {
+          email: userData.email.toLowerCase(),
+          name: userData.name,
+          googleId: userData.googleId,
+          avatarUrl: userData.avatar ?? null,
+          passwordHash: null, // No password for Google users
+          language: userData.language || 'es',
+          timezone: userData.timezone || 'UTC',
+          emailVerified: true,
+          preferences: {},
+        },
+      });
+
+      // Create default notification settings
+      await prisma.userNotificationSettings.create({
+        data: {
+          userId: user.id,
+        },
+      });
+
+      logger.info(`New Google user created: ${user.email}`);
+      return user;
+    } catch (error) {
+      logger.error('Error creating Google user:', error);
+      throw new Error('Error interno del servidor');
     }
   }
 
@@ -216,6 +309,9 @@ export class UserService {
       timezone?: string;
       preferences?: any;
       avatarUrl?: string;
+      googleId?: string;
+      emailVerified?: boolean;
+      passwordHash?: string | null;
     }
   ): Promise<ApiResponse<User>> {
     try {
@@ -259,6 +355,14 @@ export class UserService {
         return {
           success: false,
           error: 'Usuario no encontrado',
+        };
+      }
+
+      // Block update if no password is configured (Google-only account)
+      if (!user.passwordHash) {
+        return {
+          success: false,
+          error: 'La cuenta no tiene contraseña configurada',
         };
       }
 
@@ -362,7 +466,6 @@ export class UserService {
       return {
         success: true,
         data: updatedSettings,
-        message: 'Configuración de notificaciones actualizada',
       };
     } catch (error) {
       logger.error('Error updating notification settings:', error);

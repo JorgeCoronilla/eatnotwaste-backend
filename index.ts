@@ -92,6 +92,13 @@ if (process.env.NODE_ENV !== 'production') {
 // Conectar a la base de datos
 import './src/config/database';
 
+// Configurar autenticación con Passport
+import './src/config/passport';
+import passport from 'passport';
+
+// Middleware de Passport
+app.use(passport.initialize());
+
 // Rutas principales
 app.get('/', (req, res) => {
   res.json({

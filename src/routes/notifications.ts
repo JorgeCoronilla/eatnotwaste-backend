@@ -1,4 +1,4 @@
-import express, { Response } from 'express';
+import express, { Response, Request } from 'express';
 import { body, validationResult } from 'express-validator';
 import { authenticateToken } from '../middleware/auth';
 import { NotificationService } from '../services/NotificationService';
@@ -20,7 +20,7 @@ router.post(
     body('platform').isIn(['ios', 'android']).withMessage('Plataforma debe ser ios o android'),
     body('appVersion').optional().isString(),
   ],
-  async (req: AuthenticatedRequest, res: Response) => {
+  async (req: Request, res: Response) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -31,7 +31,8 @@ router.post(
         });
       }
 
-      const userId = req.user?.id;
+      const reqAuth = req as AuthenticatedRequest;
+      const userId = reqAuth.user?.id;
       if (!userId) {
         return res.status(401).json({
           success: false,
@@ -69,9 +70,10 @@ router.post(
  * @desc    Desregistrar dispositivo
  * @access  Private
  */
-router.delete('/unregister-device/:deviceId', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
+router.delete('/unregister-device/:deviceId', authenticateToken, async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
     const deviceId = req.params.deviceId;
 
     if (!userId) {
@@ -118,7 +120,7 @@ router.post(
     body('body').notEmpty().withMessage('Cuerpo del mensaje es requerido'),
     body('data').optional().isObject(),
   ],
-  async (req: AuthenticatedRequest, res: Response) => {
+  async (req: Request, res: Response) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -129,8 +131,9 @@ router.post(
         });
       }
 
+      const reqAuth = req as AuthenticatedRequest;
       // Verificar que el usuario sea admin
-      if (req.user?.role !== 'admin') {
+      if (reqAuth.user?.role !== 'admin') {
         return res.status(403).json({
           success: false,
           error: 'Acceso denegado',
@@ -165,9 +168,10 @@ router.post(
  * @desc    Enviar alerta de productos próximos a vencer
  * @access  Private
  */
-router.post('/send-expiry-alert', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
+router.post('/send-expiry-alert', authenticateToken, async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
 
     if (!userId) {
       return res.status(401).json({
@@ -201,9 +205,10 @@ router.post('/send-expiry-alert', authenticateToken, async (req: AuthenticatedRe
  * @desc    Enviar recordatorio de compras
  * @access  Private
  */
-router.post('/send-shopping-reminder', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
+router.post('/send-shopping-reminder', authenticateToken, async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
 
     if (!userId) {
       return res.status(401).json({
@@ -237,9 +242,10 @@ router.post('/send-shopping-reminder', authenticateToken, async (req: Authentica
  * @desc    Obtener historial de notificaciones del usuario
  * @access  Private
  */
-router.get('/history', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
+router.get('/history', authenticateToken, async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
 
     if (!userId) {
       return res.status(401).json({
@@ -275,9 +281,10 @@ router.get('/history', authenticateToken, async (req: AuthenticatedRequest, res:
  * @desc    Marcar notificación como leída
  * @access  Private
  */
-router.put('/:notificationId/read', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
+router.put('/:notificationId/read', authenticateToken, async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
     const { notificationId } = req.params;
 
     if (!userId) {

@@ -1,4 +1,4 @@
-import express, { Response } from 'express';
+import express, { Request, Response } from 'express';
 import { authenticateToken } from '../middleware/auth';
 import { DashboardService } from '../services/DashboardService';
 import { AuthenticatedRequest } from '../types';
@@ -10,9 +10,10 @@ const router = express.Router();
  * @desc    Obtener datos completos del dashboard
  * @access  Private
  */
-router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
+router.get('/', authenticateToken, async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
     
     if (!userId) {
       return res.status(401).json({
@@ -41,9 +42,10 @@ router.get('/', authenticateToken, async (req: AuthenticatedRequest, res: Respon
  * @desc    Obtener resumen del inventario
  * @access  Private
  */
-router.get('/inventory-summary', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
+router.get('/inventory-summary', authenticateToken, async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
     
     if (!userId) {
       return res.status(401).json({
@@ -72,9 +74,10 @@ router.get('/inventory-summary', authenticateToken, async (req: AuthenticatedReq
  * @desc    Obtener estadísticas de consumo
  * @access  Private
  */
-router.get('/consumption-stats', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
+router.get('/consumption-stats', authenticateToken, async (req: Request, res: Response) => {
   try {
-    const userId = req.user?.id;
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
     const days = parseInt(req.query.days as string) || 30;
     
     if (!userId) {
