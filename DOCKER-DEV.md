@@ -22,10 +22,8 @@ npm run dev:docker
 
 | Servicio | Puerto | URL | Credenciales |
 |----------|--------|-----|--------------|
-| **MongoDB** | 27017 | `mongodb://localhost:27017/freshkeeper` | `freshkeeper_app:freshkeeper123` |
 | **PostgreSQL** | 5432 | `postgresql://freshkeeper:freshkeeper123@localhost:5432/freshkeeper` | `freshkeeper:freshkeeper123` |
 | **Redis** | 6379 | `redis://localhost:6379` | Sin contraseña |
-| **Mongo Express** | 8081 | http://localhost:8081 | `admin:admin123` |
 | **Adminer** | 8080 | http://localhost:8080 | Ver credenciales DB |
 
 ## 🛠️ Scripts Disponibles
@@ -41,17 +39,12 @@ npm run dev:docker      # Iniciar servidor con configuración Docker
 npm run docker:logs     # Ver logs de todos los servicios
 
 # Acceso a bases de datos
-npm run docker:mongo    # Conectar a MongoDB CLI
 npm run docker:postgres # Conectar a PostgreSQL CLI
 ```
 
 ## 🗄️ Bases de Datos
 
-### MongoDB
-- **Base de datos**: `freshkeeper`
-- **Usuario**: `freshkeeper_app`
-- **Contraseña**: `freshkeeper123`
-- **Colecciones**: `users`, `products`, `inventory`
+
 
 ### PostgreSQL
 - **Base de datos**: `freshkeeper`
@@ -64,9 +57,7 @@ npm run docker:postgres # Conectar a PostgreSQL CLI
 El archivo `.env.docker` contiene todas las variables necesarias:
 
 ```env
-# Base de datos (cambiar según necesidad)
-DATABASE_TYPE=mongodb  # o 'postgresql'
-MONGODB_URI=mongodb://freshkeeper_app:freshkeeper123@localhost:27017/freshkeeper
+# Base de datos (PostgreSQL)
 POSTGRES_URI=postgresql://freshkeeper:freshkeeper123@localhost:5432/freshkeeper
 
 # APIs externas
@@ -112,7 +103,6 @@ npm run docker:stop
 ### Error: Puerto ocupado
 ```bash
 # Ver qué proceso usa el puerto
-lsof -i :27017  # MongoDB
 lsof -i :5432   # PostgreSQL
 
 # Detener servicios Docker
@@ -136,10 +126,7 @@ docker-compose up -d
 
 ## 📊 Herramientas de Administración
 
-### Mongo Express (MongoDB)
-- URL: http://localhost:8081
-- Usuario: `admin`
-- Contraseña: `admin123`
+
 
 ### Adminer (PostgreSQL)
 - URL: http://localhost:8080
@@ -149,18 +136,11 @@ docker-compose up -d
 - Contraseña: `freshkeeper123`
 - Base de datos: `freshkeeper`
 
-## 🔄 Migración entre Bases de Datos
 
-Para cambiar entre MongoDB y PostgreSQL:
-
-1. Modificar `DATABASE_TYPE` en `.env.docker`
-2. Reiniciar el servidor: `npm run dev:docker`
-3. Los modelos TypeScript se adaptan automáticamente
 
 ## 📝 Notas Importantes
 
 - Los datos persisten entre reinicios (volúmenes Docker)
 - Use `npm run docker:reset` solo si quiere eliminar TODOS los datos
 - Los scripts de inicialización se ejecutan solo en el primer arranque
-- Para desarrollo, se recomienda MongoDB por simplicidad
-- Para producción, considere PostgreSQL por rendimiento y consistencia
+- Para producción, use PostgreSQL por rendimiento y consistencia

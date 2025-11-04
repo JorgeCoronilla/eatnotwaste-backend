@@ -20,14 +20,37 @@ import {
   validateAddToInventory,
   validateUpdateInventory,
   validateConsumeItem,
-  validateMongoId,
+  validateUuid,
   validatePagination
 } from '../middleware/validation';
+
+/**
+ * @swagger
+ * tags:
+ *   name: Inventory
+ *   description: API for managing user inventory
+ */
 
 /**
  * @route   GET /api/inventory
  * @desc    Obtener inventario del usuario
  * @access  Private
+ */
+
+/**
+ * @swagger
+ * /api/inventory:
+ *   get:
+ *     summary: Get user inventory
+ *     description: Retrieves the user's inventory.
+ *     tags: [Inventory]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: A list of inventory items.
+ *       401:
+ *         description: Unauthorized.
  */
 router.get('/',
   authenticateToken,
@@ -39,6 +62,30 @@ router.get('/',
  * @route   POST /api/inventory
  * @desc    Agregar producto al inventario
  * @access  Private
+ */
+
+/**
+ * @swagger
+ * /api/inventory:
+ *   post:
+ *     summary: Add product to inventory
+ *     description: Adds a product to the user's inventory.
+ *     tags: [Inventory]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/InventoryItem'
+ *     responses:
+ *       201:
+ *         description: Item added to inventory.
+ *       400:
+ *         description: Bad request.
+ *       401:
+ *         description: Unauthorized.
  */
 router.post('/',
   authenticateToken,
@@ -126,7 +173,7 @@ router.get('/location/:location',
  */
 router.put('/:id',
   authenticateToken,
-  validateMongoId('id'),
+  validateUuid('id'),
   validateUpdateInventory,
   updateInventoryItem
 );
@@ -138,7 +185,7 @@ router.put('/:id',
  */
 router.post('/:id/consume',
   authenticateToken,
-  validateMongoId('id'),
+  validateUuid('id'),
   validateConsumeItem,
   markAsConsumed
 );
@@ -150,7 +197,7 @@ router.post('/:id/consume',
  */
 router.delete('/:id',
   authenticateToken,
-  validateMongoId('id'),
+  validateUuid('id'),
   deleteInventoryItem
 );
 

@@ -43,24 +43,6 @@ services:
       timeout: 10s
       retries: 3
 
-  # MongoDB - Temporal para migración gradual
-  mongodb:
-    image: mongo:7.0
-    container_name: freshkeeper-mongodb-legacy
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: freshkeeper123
-      MONGO_INITDB_DATABASE: freshkeeper
-    volumes:
-      - mongodb_data:/data/db
-      - ./docker/mongodb/init:/docker-entrypoint-initdb.d
-    networks:
-      - freshkeeper-network
-    profiles:
-      - migration  # Solo se ejecuta con --profile migration
 
   # Adminer - Interfaz web para PostgreSQL
   adminer:
@@ -78,29 +60,9 @@ services:
       postgresql:
         condition: service_healthy
 
-  # Mongo Express - Interfaz web para MongoDB (solo para migración)
-  mongo-express:
-    image: mongo-express:1.0.0
-    container_name: freshkeeper-mongo-express
-    restart: unless-stopped
-    ports:
-      - "8081:8081"
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: freshkeeper123
-      ME_CONFIG_MONGODB_URL: mongodb://admin:freshkeeper123@mongodb:27017/
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: freshkeeper123
-    networks:
-      - freshkeeper-network
-    depends_on:
-      - mongodb
-    profiles:
-      - migration  # Solo se ejecuta con --profile migration
 
 volumes:
-  mongodb_data:
-    driver: local
+
   postgresql_data:
     driver: local
   redis_data:

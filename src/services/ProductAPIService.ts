@@ -1,5 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
-import Product from '../models/Product';
+import { prisma } from '../config/database';
+import { ProductService } from './ProductService';
+import type { ProductSource } from '../types/database';
 
 interface APIHandler {
   name: string;
@@ -394,21 +396,20 @@ class ProductAPIService {
    */
   async getLocalData(barcode: string, language: string = 'es'): Promise<ProductResult> {
     try {
-      const product = await Product.findOne({ barcode });
-      
+      const product = await prisma.product.findFirst({ where: { barcode } });
+
       if (product) {
         return {
           success: true,
-          product: product.toObject(),
-          source: 'Local'
-        };
-      } else {
-        return {
-          success: false,
-          error: 'Producto no encontrado en base de datos local',
+          product,
           source: 'Local'
         };
       }
+      return {
+        success: false,
+        error: 'Producto no encontrado en base de datos local',
+        source: 'Local'
+      };
     } catch (error: any) {
       return {
         success: false,
@@ -423,19 +424,8 @@ class ProductAPIService {
    */
   async cacheProduct(productData: ProductData): Promise<void> {
     try {
-      await Product.findOneAndUpdate(
-        { barcode: productData.barcode },
-        {
-          ...productData,
-          lastUpdated: new Date()
-        },
-        { 
-          upsert: true, 
-          new: true,
-          setDefaultsOnInsert: true
-        }
-      );
-      console.log(`💾 Producto guardado en cache: ${productData.barcode}`);
+      await ProductService.cacheProduct(productData as any, productData.source as ProductSource);
+      console.log(`💾 Producto cacheado: ${productData.barcode}`);
     } catch (error: any) {
       console.warn('⚠️ Error guardando en cache:', error.message);
     }
@@ -447,17 +437,10 @@ class ProductAPIService {
   async searchProducts(query: string, language: string = 'es', limit: number = 20): Promise<any[]> {
     try {
       // Primero buscar en base de datos local
-      const localResults = await Product.find({
-        $or: [
-          { name: { $regex: query, $options: 'i' } },
-          { brand: { $regex: query, $options: 'i' } },
-          { category: { $regex: query, $options: 'i' } }
-        ]
-      }).limit(limit);
+      const resp = await ProductService.searchProducts(query, 1, limit);
 
-      // Si hay resultados locales, devolverlos
-      if (localResults.length > 0) {
-        return localResults;
+      if (resp.success && Array.isArray(resp.data) && resp.data.length > 0) {
+        return resp.data;
       }
 
       // Si no hay resultados locales, buscar en OpenFoodFacts

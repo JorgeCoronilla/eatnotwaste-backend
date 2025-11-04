@@ -25,7 +25,7 @@ Backend API para FreshKeeper - Aplicación de gestión de inventario de alimento
 
 - Node.js 18+ 
 - Docker y Docker Compose (recomendado)
-- MongoDB, PostgreSQL y Redis (incluidos en Docker)
+- PostgreSQL y Redis (incluidos en Docker)
 - npm o yarn
 
 ## 🛠️ Instalación
@@ -227,8 +227,6 @@ El proyecto incluye un `docker-compose.yml` completo con:
 - **PostgreSQL** - Base de datos principal optimizada
 - **Redis** - Cache y sesiones
 - **Adminer** - Gestión de PostgreSQL
-- **MongoDB** - Para migración gradual (temporal)
-- **Mongo Express** - Interface web para MongoDB (temporal)
 
 ```bash
 # Iniciar todos los servicios
@@ -246,8 +244,6 @@ docker-compose down
 - PostgreSQL: `5432`
 - Redis: `6379`
 - Adminer: `8080`
-- MongoDB: `27017` (temporal)
-- Mongo Express: `8081` (temporal)
 
 ## 🔒 Seguridad Implementada
 
@@ -707,7 +703,7 @@ PORT=3000
 3. **Configurar variables** de entorno desde el dashboard
 4. **Deploy automático** en cada push a main
 
-### Migración desde MongoDB
+### Migración desde MongoDB (LEGACY: sección obsoleta, ya no aplicable)
 ```bash
 # Script de migración (desarrollo futuro)
 npm run migrate:mongo-to-postgres
@@ -914,7 +910,7 @@ Para soporte y preguntas:
 - Carga progresiva para móvil
 - Connection pooling para PostgreSQL
 
-### v1.0.0 (Actual) - Base MongoDB
+### v1.0.0 (Histórico) - Base MongoDB
 - ✅ Sistema de autenticación JWT completo
 - ✅ Integración OpenFoodFacts y ChompAPI
 - ✅ Gestión completa de inventario
