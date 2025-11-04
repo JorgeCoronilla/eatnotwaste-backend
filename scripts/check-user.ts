@@ -58,7 +58,7 @@ async function checkUser(email: string) {
 
     console.log('\n📋 Últimos 10 usuarios registrados:');
     console.log('-----------------------------------');
-    allUsers.forEach((u, index) => {
+    allUsers.forEach((u: any, index: number) => {
       console.log(`${index + 1}. ${u.email} (${u.name}) - ${u.createdAt}`);
     });
 
