@@ -19,6 +19,8 @@ import recipeRoutes from './src/routes/recipes';
 import userRoutes from './src/routes/users';
 import dashboardRoutes from './src/routes/dashboard';
 import notificationRoutes from './src/routes/notifications';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './src/config/swagger';
 
 // Crear aplicación Express
 const app = express();
@@ -132,6 +134,9 @@ app.use('/api/recipes', recipeRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/notifications', notificationRoutes);
+
+// Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Middleware de rutas no encontradas
 app.use(notFound);

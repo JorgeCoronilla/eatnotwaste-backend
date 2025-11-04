@@ -7,9 +7,54 @@ import { AuthenticatedRequest } from '../types';
 const router = express.Router();
 
 /**
+ * @swagger
+ * tags:
+ *   name: Notifications
+ *   description: API for managing notifications
+ */
+
+/**
  * @route   POST /api/notifications/register-device
  * @desc    Registrar token de dispositivo para notificaciones push
  * @access  Private
+ */
+
+/**
+ * @swagger
+ * /api/notifications/register-device:
+ *   post:
+ *     summary: Register a device for push notifications
+ *     description: Registers a device token to enable push notifications.
+ *     tags: [Notifications]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - fcmToken
+ *               - deviceId
+ *               - platform
+ *             properties:
+ *               fcmToken:
+ *                 type: string
+ *               deviceId:
+ *                 type: string
+ *               platform:
+ *                 type: string
+ *                 enum: [ios, android]
+ *               appVersion:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Device registered successfully.
+ *       400:
+ *         description: Bad request.
+ *       401:
+ *         description: Unauthorized.
  */
 router.post(
   '/register-device',

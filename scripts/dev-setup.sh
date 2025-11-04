@@ -30,7 +30,7 @@ fi
 
 # Levantar servicios de base de datos
 echo "🗄️  Iniciando servicios de base de datos..."
-docker-compose up -d mongodb postgresql redis
+docker-compose up -d postgresql redis
 
 # Esperar a que las bases de datos estén listas
 echo "⏳ Esperando a que las bases de datos estén listas..."
@@ -39,12 +39,7 @@ sleep 10
 # Verificar conexiones
 echo "🔍 Verificando conexiones..."
 
-# MongoDB
-if docker exec freshkeeper-mongodb mongosh --eval "db.runCommand('ping')" > /dev/null 2>&1; then
-    echo "✅ MongoDB está funcionando"
-else
-    echo "❌ MongoDB no responde"
-fi
+
 
 # PostgreSQL
 if docker exec freshkeeper-postgresql pg_isready -U freshkeeper > /dev/null 2>&1; then
@@ -62,18 +57,18 @@ fi
 
 # Levantar interfaces de administración
 echo "🖥️  Iniciando interfaces de administración..."
-docker-compose up -d adminer mongo-express
+docker-compose up -d adminer
 
 echo ""
 echo "🎉 ¡Entorno de desarrollo configurado!"
 echo ""
 echo "📊 Interfaces disponibles:"
-echo "   • Mongo Express: http://localhost:8081 (admin/freshkeeper123)"
+
 echo "   • Adminer (PostgreSQL): http://localhost:8080"
 echo "   • Servidor: http://localhost:3001"
 echo ""
 echo "🗄️  Conexiones de base de datos:"
-echo "   • MongoDB: mongodb://freshkeeper_app:freshkeeper123@localhost:27017/freshkeeper"
+
 echo "   • PostgreSQL: postgresql://freshkeeper:freshkeeper123@localhost:5432/freshkeeper"
 echo "   • Redis: redis://:freshkeeper123@localhost:6379"
 echo ""
