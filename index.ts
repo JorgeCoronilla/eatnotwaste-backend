@@ -19,6 +19,8 @@ import recipeRoutes from './src/routes/recipes';
 import userRoutes from './src/routes/users';
 import dashboardRoutes from './src/routes/dashboard';
 import notificationRoutes from './src/routes/notifications';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './src/config/swagger';
 
 // Crear aplicación Express
 const app = express();
@@ -50,6 +52,8 @@ app.use(cors({
         // Localhost para desarrollo/testing
         'http://localhost:5173',
         'https://localhost:5173',
+        'http://localhost:5174',
+        'https://localhost:5174',
         'http://localhost:3000',
         'https://localhost:3000'
       ]
@@ -90,6 +94,13 @@ if (process.env.NODE_ENV !== 'production') {
 // Conectar a la base de datos
 import './src/config/database';
 
+// Configurar autenticación con Passport
+import './src/config/passport';
+import passport from 'passport';
+
+// Middleware de Passport
+app.use(passport.initialize());
+
 // Rutas principales
 app.get('/', (req, res) => {
   res.json({
@@ -123,6 +134,9 @@ app.use('/api/recipes', recipeRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/notifications', notificationRoutes);
+
+// Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Middleware de rutas no encontradas
 app.use(notFound);

@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Backend API para FreshKeeper - Aplicación de gestión de inventario de alimentos",
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon --exec ts-node index.ts",
@@ -18,10 +22,8 @@
     "docker:stop": "./scripts/dev-stop.sh",
     "docker:reset": "./scripts/dev-reset.sh",
     "docker:logs": "docker-compose logs -f",
-    "docker:mongo": "docker exec -it freshkeeper-mongodb mongosh freshkeeper -u freshkeeper_app -p freshkeeper123",
     "docker:postgres": "docker exec -it freshkeeper-postgresql psql -U freshkeeper -d freshkeeper",
     "db:setup": "ts-node scripts/setup-database.ts",
-    "db:migrate": "ts-node scripts/migrate-from-mongodb.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:studio": "prisma studio"
@@ -33,14 +35,15 @@
     "barcode",
     "nutrition",
     "api",
-    "express",
-    "mongodb"
+    "express"
   ],
   "author": "FreshKeeper Team",
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "@prisma/client": "^6.18.0",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.17",
     "axios": "^1.13.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -50,10 +53,13 @@
     "express-validator": "^7.3.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.2",
     "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "pg": "^8.16.3",
-    "prisma": "^6.18.0"
+    "prisma": "^6.18.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -64,6 +70,8 @@
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.9.2",
     "@types/pg": "^8.15.6",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"

@@ -322,7 +322,7 @@ export const validateLanguage: ValidationChain[] = [
     .withMessage('Idioma no soportado')
 ];
 
-export const validateMongoId = (paramName: string = 'id'): ValidationChain[] => [
+export const validateUuid = (paramName: string = 'id'): ValidationChain[] => [
   param(paramName)
     .isUUID()
     .withMessage(`${paramName} no es un ID válido`)

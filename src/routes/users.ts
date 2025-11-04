@@ -8,11 +8,36 @@ const router = express.Router();
 // TODO: Implementar controlador de usuarios completo
 
 /**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: API for managing users
+ */
+
+/**
  * @route   GET /api/users
  * @desc    Obtener lista de usuarios (solo admin)
  * @access  Private (Admin only)
  */
-router.get('/', authenticateToken, requireRole('admin'), async (req, res) => {
+
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Get a list of users (admin only)
+ *     description: Retrieves a list of all users. This endpoint is restricted to administrators.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: A list of users.
+ *       401:
+ *         description: Unauthorized.
+ *       403:
+ *         description: Forbidden.
+ */
+router.get('/', authenticateToken, requireRole('admin'), async (req: Request, res: Response) => {
   try {
     // TODO: Implementar listado de usuarios para admin
     res.json({
@@ -39,7 +64,23 @@ router.get('/', authenticateToken, requireRole('admin'), async (req, res) => {
  * @desc    Obtener estadísticas de usuarios
  * @access  Private
  */
-router.get('/stats', authenticateToken, async (req, res) => {
+
+/**
+ * @swagger
+ * /api/users/stats:
+ *   get:
+ *     summary: Get user statistics
+ *     description: Retrieves statistics for the authenticated user.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User statistics.
+ *       401:
+ *         description: Unauthorized.
+ */
+router.get('/stats', authenticateToken, async (req: Request, res: Response) => {
   try {
     // TODO: Implementar estadísticas de usuario
     res.json({
@@ -67,7 +108,31 @@ router.get('/stats', authenticateToken, async (req, res) => {
  * @desc    Actualizar preferencias de usuario
  * @access  Private
  */
-router.put('/preferences', authenticateToken, async (req, res) => {
+
+/**
+ * @swagger
+ * /api/users/preferences:
+ *   put:
+ *     summary: Update user preferences
+ *     description: Updates the preferences for the authenticated user.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserPreferences'
+ *     responses:
+ *       200:
+ *         description: User preferences updated successfully.
+ *       400:
+ *         description: Bad request.
+ *       401:
+ *         description: Unauthorized.
+ */
+router.put('/preferences', authenticateToken, async (req: Request, res: Response) => {
   try {
     // TODO: Implementar actualización de preferencias
     res.json({

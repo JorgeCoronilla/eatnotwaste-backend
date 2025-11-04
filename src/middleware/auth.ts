@@ -1,63 +1,47 @@
-import jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import * as jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { AuthenticatedRequest } from '../types';
 
 /**
  * Middleware de autenticación
  * Verifica el token JWT y agrega el usuario a req.user
  */
-export const authenticateToken = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<Response | void> => {
+export const authenticateToken: RequestHandler = (req, res, next) => {
   try {
     // Obtener token del header Authorization
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.startsWith('Bearer ') 
-      ? authHeader.substring(7) 
+    const token = authHeader && authHeader.startsWith('Bearer ')
+      ? authHeader.substring(7)
       : null;
 
     if (!token) {
-      return res.status(401).json({
-        success: false,
-        error: 'Token de acceso requerido'
-      });
+      return res.status(401).json({ success: false, error: 'Token de acceso requerido' });
     }
 
-    // Verificar token
     const decoded = jwt.verify(
       token,
       process.env.JWT_SECRET || 'fallback_secret_key'
     ) as any;
 
-    // Por ahora, crear un usuario mock hasta que convirtamos los modelos
     const mockUser = {
       id: decoded.userId || 'mock-user-id',
       email: decoded.email || 'user@example.com',
-      role: decoded.role,
+      name: decoded.name || 'Usuario',
+      role: decoded.role || 'user',
       preferences: {
         language: 'es' as const,
         units: 'metric' as const,
-        notifications: {
-          expiration: true,
-          lowStock: true,
-          recipes: true,
-          marketing: false
-        },
-        privacy: {
-          shareData: false,
-          analytics: true
-        }
+        notifications: { expiration: true, lowStock: true, recipes: true, marketing: false },
+        privacy: { shareData: false, analytics: true }
       }
     };
 
-    // Agregar usuario a la request
-    req.user = mockUser;
+    (req as AuthenticatedRequest).user = mockUser;
 
-    next();
+    return next();
   } catch (error) {
     console.error('Error en autenticación:', (error as Error).message);
-    return res.status(401).json({
-      success: false,
-      error: 'Token inválido'
-    });
+    return res.status(401).json({ success: false, error: 'Token inválido' });
   }
 };
 
@@ -65,11 +49,11 @@ export const authenticateToken = async (req: AuthenticatedRequest, res: Response
  * Middleware de autenticación opcional
  * Similar a authenticateToken pero no falla si no hay token
  */
-export const optionalAuth = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> => {
+export const optionalAuth: RequestHandler = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.startsWith('Bearer ') 
-      ? authHeader.substring(7) 
+    const token = authHeader && authHeader.startsWith('Bearer ')
+      ? authHeader.substring(7)
       : null;
 
     if (!token) {
@@ -81,50 +65,42 @@ export const optionalAuth = async (req: AuthenticatedRequest, res: Response, nex
       process.env.JWT_SECRET || 'fallback_secret_key'
     ) as any;
 
-    // Por ahora, crear un usuario mock hasta que convirtamos los modelos
     const mockUser = {
       id: decoded.userId || 'mock-user-id',
       email: decoded.email || 'user@example.com',
+      name: decoded.name || 'Usuario',
       role: decoded.role || 'user',
       preferences: {
         language: 'es' as const,
         units: 'metric' as const,
-        notifications: {
-          expiration: true,
-          lowStock: true,
-          recipes: true,
-          marketing: false
-        },
-        privacy: {
-          shareData: false,
-          analytics: true
-        }
+        notifications: { expiration: true, lowStock: true, recipes: true, marketing: false },
+        privacy: { shareData: false, analytics: true }
       }
     };
 
-    // Agregar usuario a la request
-    req.user = mockUser;
+    (req as AuthenticatedRequest).user = mockUser;
 
-    next();
+    return next();
   } catch (error) {
-    // Si hay error en el token opcional, continuar sin usuario
-    next();
+    return next();
   }
 };
 
 /**
  * Middleware para requerir roles específicos
  */
-export const requireRole = (roles: string | string[]) => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction): Response | void => {
-    if (!req.user) {
+export const requireRole = (roles: string | string[]): RequestHandler => {
+  return (req, res, next) => {
+    const reqAuth = req as AuthenticatedRequest;
+
+    if (!reqAuth.user) {
       return res.status(401).json({
         success: false,
         error: 'Autenticación requerida'
       });
     }
 
-    const userRole = req.user.role;
+    const userRole = reqAuth.user.role;
     const allowedRoles = Array.isArray(roles) ? roles : [roles];
 
     if (!allowedRoles.includes(userRole)) {
@@ -134,6 +110,6 @@ export const requireRole = (roles: string | string[]) => {
       });
     }
 
-    next();
+    return next();
   };
 };

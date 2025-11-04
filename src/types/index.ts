@@ -1,8 +1,7 @@
 import { Request } from 'express';
-import { Document } from 'mongoose';
 
 // Tipos de usuario
-export interface IUser extends Document {
+export interface IUser {
   email: string;
   password: string;
   firstName: string;
@@ -63,7 +62,7 @@ export interface INutrition {
   servingsPerContainer?: number;
 }
 
-export interface IProduct extends Document {
+export interface IProduct {
   barcode: string;
   names: {
     es?: string;
@@ -121,7 +120,7 @@ export interface IProduct extends Document {
 }
 
 // Tipos de inventario
-export interface IInventory extends Document {
+export interface IInventory {
   userId: string;
   productId: string;
   quantity: number;

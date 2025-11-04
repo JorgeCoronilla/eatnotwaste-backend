@@ -25,7 +25,7 @@ Backend API para FreshKeeper - Aplicación de gestión de inventario de alimento
 
 - Node.js 18+ 
 - Docker y Docker Compose (recomendado)
-- MongoDB, PostgreSQL y Redis (incluidos en Docker)
+- PostgreSQL y Redis (incluidos en Docker)
 - npm o yarn
 
 ## 🛠️ Instalación
@@ -108,6 +108,15 @@ npm run dev
 # Producción
 npm start
 ```
+
+## ✅ Prueba rápida (Smoke Test)
+- Verifica salud: `curl http://localhost:3000/health`
+- Prueba endpoint público: `curl http://localhost:3000/api/products/categories`
+
+## 🧩 Notas de Tipado
+- Rutas y controladores usan `Request`/`Response` de Express.
+- Se castea internamente a `AuthenticatedRequest` donde se requiere `user`.
+- Compilación TypeScript: `npx tsc -p tsconfig.json --noEmit`
 
 ## 🌐 Endpoints de la API
 
@@ -218,8 +227,6 @@ El proyecto incluye un `docker-compose.yml` completo con:
 - **PostgreSQL** - Base de datos principal optimizada
 - **Redis** - Cache y sesiones
 - **Adminer** - Gestión de PostgreSQL
-- **MongoDB** - Para migración gradual (temporal)
-- **Mongo Express** - Interface web para MongoDB (temporal)
 
 ```bash
 # Iniciar todos los servicios
@@ -237,8 +244,6 @@ docker-compose down
 - PostgreSQL: `5432`
 - Redis: `6379`
 - Adminer: `8080`
-- MongoDB: `27017` (temporal)
-- Mongo Express: `8081` (temporal)
 
 ## 🔒 Seguridad Implementada
 
@@ -698,7 +703,7 @@ PORT=3000
 3. **Configurar variables** de entorno desde el dashboard
 4. **Deploy automático** en cada push a main
 
-### Migración desde MongoDB
+### Migración desde MongoDB (LEGACY: sección obsoleta, ya no aplicable)
 ```bash
 # Script de migración (desarrollo futuro)
 npm run migrate:mongo-to-postgres
@@ -721,6 +726,91 @@ npm run migrate:mongo-to-postgres
 - Render
 - Heroku
 - DigitalOcean App Platform
+
+## 🔐 Login con Google (Producción y Android)
+
+### Requisitos
+- Backend `.env`:
+  - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
+  - `GOOGLE_CALLBACK_URL` → `https://<backend-domain>/api/auth/google/callback`
+  - `FRONTEND_URL` → producción: `https://<frontend-domain>`; Android: `freshkeeper://auth`
+- Frontend `.env`:
+  - `VITE_API_URL` → dominio del backend (`https://<backend-domain>`)
+
+### Configuración en Google Cloud Console
+- Crea credenciales OAuth 2.0 de tipo "Aplicación web".
+- Añade URIs de redirección autorizadas:
+  - Producción: `https://<backend-domain>/api/auth/google/callback`
+  - Desarrollo: `http://localhost:3000/api/auth/google/callback`
+- (Opcional) Cliente Android para One Tap: no requerido para este flujo basado en backend.
+
+### Producción (Web)
+- Backend:
+  - `.env`:
+    - `FRONTEND_URL=https://<frontend-domain>`
+    - `GOOGLE_CALLBACK_URL=https://<backend-domain>/api/auth/google/callback`
+  - CORS: añade `https://<frontend-domain>` a la lista `origin` en `index.ts`.
+- Frontend:
+  - `.env`:
+    - `VITE_API_URL=https://<backend-domain>`
+- Flujo:
+  - Frontend inicia `GET /api/auth/google`.
+  - Tras login, el backend redirige a `https://<frontend-domain>/auth/callback?accessToken=...&refreshToken=...`.
+  - `OAuthCallback` guarda los tokens y navega a `/dashboard`.
+
+### Android (Capacitor)
+Usa un esquema propio para deep links y captura el callback en la app.
+
+- Backend:
+  - `.env`:
+    - `FRONTEND_URL=freshkeeper://auth`
+    - `GOOGLE_CALLBACK_URL=https://<backend-domain>/api/auth/google/callback`
+  - CORS: añade `capacitor://localhost` y `ionic://localhost` en `index.ts` para permitir llamadas desde la app.
+
+- AndroidManifest (`android/app/src/main/AndroidManifest.xml`): dentro de la actividad principal añade este `intent-filter`:
+```xml
+<intent-filter android:autoVerify="true">
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="freshkeeper" android:host="auth" android:pathPrefix="/callback" />
+</intent-filter>
+```
+
+- Frontend (capturar el deep link): añade este listener lo antes posible (por ejemplo en `src/main.tsx`):
+```ts
+import { App } from '@capacitor/app';
+import { AUTH_CONFIG } from './constants';
+
+App.addListener('appUrlOpen', ({ url }) => {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname === 'auth' && parsed.pathname === '/callback') {
+      const accessToken = parsed.searchParams.get('accessToken');
+      const refreshToken = parsed.searchParams.get('refreshToken');
+
+      if (accessToken) localStorage.setItem(AUTH_CONFIG.TOKEN_KEY, accessToken!);
+      if (refreshToken) localStorage.setItem(AUTH_CONFIG.REFRESH_TOKEN_KEY, refreshToken || '');
+
+      window.location.replace('/dashboard');
+    }
+  } catch (e) {
+    console.error('Error procesando callback OAuth', e);
+  }
+});
+```
+
+### Notas y resolución de problemas
+- `404 Ruta no encontrada` con `.../undefined/auth/callback` → define `FRONTEND_URL` en el backend.
+- `Blocked by CORS` desde Android → añade `capacitor://localhost` y `ionic://localhost` a CORS.
+- La app no vuelve tras Google → revisa el `intent-filter` y que `FRONTEND_URL` use el esquema `freshkeeper://auth`.
+- Si tu frontend no está en `/auth/callback` usa la ruta que tengas y ajusta `FRONTEND_URL`.
+
+### Checklist rápido
+- Backend: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_CALLBACK_URL`, `FRONTEND_URL` definidos.
+- Frontend: `VITE_API_URL` apunta al backend correcto.
+- Google Cloud: URI de redirección del backend añadida.
+- Android: `intent-filter` creado y listener `appUrlOpen` activo.
 
 ## 🧪 Testing y Desarrollo
 
@@ -820,7 +910,7 @@ Para soporte y preguntas:
 - Carga progresiva para móvil
 - Connection pooling para PostgreSQL
 
-### v1.0.0 (Actual) - Base MongoDB
+### v1.0.0 (Histórico) - Base MongoDB
 - ✅ Sistema de autenticación JWT completo
 - ✅ Integración OpenFoodFacts y ChompAPI
 - ✅ Gestión completa de inventario

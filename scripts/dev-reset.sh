@@ -18,7 +18,7 @@ docker-compose down -v --remove-orphans
 
 # Eliminar volúmenes específicos
 echo "🗑️  Eliminando volúmenes..."
-docker volume rm freshkeeper-backend_mongodb_data 2>/dev/null || true
+
 docker volume rm freshkeeper-backend_postgresql_data 2>/dev/null || true
 docker volume rm freshkeeper-backend_redis_data 2>/dev/null || true
 
