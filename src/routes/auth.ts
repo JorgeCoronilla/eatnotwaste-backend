@@ -1,9 +1,8 @@
-import express, { Request, Response } from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import rateLimit from 'express-rate-limit';
-import { body, validationResult } from 'express-validator';
-import { ApiResponse } from '../types';
+import * as express from 'express';
+import { Request, Response } from 'express';
+import * as jwt from 'jsonwebtoken';
+import passport from 'passport';
+import { AuthenticatedRequest } from '../types';
 
 const router = express.Router();
 
@@ -88,4 +87,47 @@ router.delete('/account', authenticateToken, (req: Request, res: Response) => {
     message: 'Cuenta eliminada exitosamente'
   });
 });
+
+/**
+ * @route   GET /api/auth/google
+ * @desc    Iniciar autenticación con Google OAuth
+ * @access  Public
+ */
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
+
+/**
+ * @route   GET /api/auth/google/callback
+ * @desc    Callback de autenticación con Google OAuth
+ * @access  Public
+ */
+router.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login', session: false }),
+  (req: Request, res: Response) => {
+    const reqAuth = req as AuthenticatedRequest;
+    const user = reqAuth.user;
+
+    if (!user) {
+      return res.redirect(`${process.env.FRONTEND_URL}/auth/callback?error=NoUser`);
+    }
+
+    // Generar tokens JWT
+    const accessToken = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.JWT_SECRET!,
+      { expiresIn: '15m' }
+    );
+    
+    const refreshToken = jwt.sign(
+      { userId: user.id },
+      process.env.JWT_REFRESH_SECRET!,
+      { expiresIn: '7d' }
+    );
+    
+    // Redirigir al frontend con los tokens
+    res.redirect(`${process.env.FRONTEND_URL}/auth/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
+  }
+);
+
 export default router;

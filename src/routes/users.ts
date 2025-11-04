@@ -12,7 +12,7 @@ const router = express.Router();
  * @desc    Obtener lista de usuarios (solo admin)
  * @access  Private (Admin only)
  */
-router.get('/', authenticateToken, requireRole('admin'), async (req, res) => {
+router.get('/', authenticateToken, requireRole('admin'), async (req: Request, res: Response) => {
   try {
     // TODO: Implementar listado de usuarios para admin
     res.json({
@@ -39,7 +39,7 @@ router.get('/', authenticateToken, requireRole('admin'), async (req, res) => {
  * @desc    Obtener estadísticas de usuarios
  * @access  Private
  */
-router.get('/stats', authenticateToken, async (req, res) => {
+router.get('/stats', authenticateToken, async (req: Request, res: Response) => {
   try {
     // TODO: Implementar estadísticas de usuario
     res.json({
@@ -67,7 +67,7 @@ router.get('/stats', authenticateToken, async (req, res) => {
  * @desc    Actualizar preferencias de usuario
  * @access  Private
  */
-router.put('/preferences', authenticateToken, async (req, res) => {
+router.put('/preferences', authenticateToken, async (req: Request, res: Response) => {
   try {
     // TODO: Implementar actualización de preferencias
     res.json({

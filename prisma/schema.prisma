@@ -52,7 +52,8 @@ enum NotificationStatus {
 model User {
   id              String   @id @default(uuid()) @db.Uuid
   email           String   @unique @db.VarChar(255)
-  passwordHash    String   @map("password_hash") @db.VarChar(255)
+  passwordHash    String?  @map("password_hash") @db.VarChar(255)
+  googleId        String?  @map("google_id") @db.VarChar(255) @unique
   name            String   @db.VarChar(255)
   avatarUrl       String?  @map("avatar_url") @db.Text
   language        String   @default("es") @db.VarChar(10)

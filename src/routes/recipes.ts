@@ -12,7 +12,7 @@ const router = express.Router();
  * @desc    Obtener recetas del usuario
  * @access  Private
  */
-router.get('/', authenticateToken, async (req, res) => {
+router.get('/', authenticateToken, async (req: Request, res: Response) => {
   try {
     // TODO: Implementar lógica de recetas
     res.json({
@@ -39,7 +39,7 @@ router.get('/', authenticateToken, async (req, res) => {
  * @desc    Obtener sugerencias de recetas basadas en inventario
  * @access  Private
  */
-router.get('/suggestions', authenticateToken, async (req, res) => {
+router.get('/suggestions', authenticateToken, async (req: Request, res: Response) => {
   try {
     // TODO: Implementar sugerencias basadas en inventario
     res.json({
@@ -65,7 +65,7 @@ router.get('/suggestions', authenticateToken, async (req, res) => {
  * @desc    Crear nueva receta
  * @access  Private
  */
-router.post('/', authenticateToken, async (req, res) => {
+router.post('/', authenticateToken, async (req: Request, res: Response) => {
   try {
     // TODO: Implementar creación de recetas
     res.status(201).json({

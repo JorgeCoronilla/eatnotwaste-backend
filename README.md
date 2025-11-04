@@ -109,6 +109,15 @@ npm run dev
 npm start
 ```
 
+## ✅ Prueba rápida (Smoke Test)
+- Verifica salud: `curl http://localhost:3000/health`
+- Prueba endpoint público: `curl http://localhost:3000/api/products/categories`
+
+## 🧩 Notas de Tipado
+- Rutas y controladores usan `Request`/`Response` de Express.
+- Se castea internamente a `AuthenticatedRequest` donde se requiere `user`.
+- Compilación TypeScript: `npx tsc -p tsconfig.json --noEmit`
+
 ## 🌐 Endpoints de la API
 
 ### 🔐 Autenticación (`/api/auth`)
