@@ -3,8 +3,26 @@
 ## Información General
 
 - **Base URL**: `http://localhost:3001`
-- **Versión**: 1.0.0
+- **Versión**: 2.0.0
 - **Autenticación**: JWT Bearer Token
+- **Estado**: ✅ Backend migrado al nuevo diseño de inventario
+
+## 🔄 Migración al Nuevo Diseño de Inventario
+
+FreshKeeper ha completado la migración a un nuevo diseño de inventario más flexible y potente:
+
+### Cambios Principales
+- **Modelo Mejorado**: De `Inventory` único a `UserProduct` + `UserProductLocation`
+- **Múltiples Ubicaciones**: Un mismo producto puede estar en diferentes ubicaciones
+- **Gestión de Precios**: Soporte para precios y tiendas
+- **Cálculo Automático**: Días hasta vencimiento y alertas automáticas
+- **API Unificada**: Endpoints base (`/inventory`) ahora usan el nuevo diseño
+
+### Compatibilidad
+- ✅ Todos los endpoints base (`/inventory`) funcionan con el nuevo diseño
+- ✅ Endpoints `/inventory/v2` disponibles para mayor claridad
+- ✅ El diseño legacy sigue disponible internamente con sufijo "Legacy"
+- ✅ Sin cambios rotos para clientes existentes
 
 ## Endpoints
 
@@ -228,8 +246,24 @@ Authorization: Bearer <token>
 
 ### 📋 Inventario (`/inventory`)
 
+> **🔄 Nota sobre el Diseño de Inventario**: FreshKeeper está migrando a un nuevo diseño de inventario. Los endpoints base (`/inventory`) ahora utilizan el nuevo diseño, mientras que el diseño anterior está disponible con el sufijo "Legacy" en el código.
+>
+> **Diseño Nuevo** (activo): Utiliza `UserProduct` y `UserProductLocation` para una gestión más flexible
+> **Diseño Legacy** (en desuso): Utiliza el modelo `Inventory` tradicional
+
+### 📋 Inventario v2 (`/inventory/v2`)
+
+Endpoints adicionales del nuevo diseño con prefijo `/v2` para mayor claridad:
+
+- `GET /inventory/v2` - Obtener inventario (mismo que GET /inventory)
+- `POST /inventory/v2` - Agregar producto (mismo que POST /inventory)
+- `PUT /inventory/v2/:id` - Actualizar producto (mismo que PUT /inventory/:id)
+- `DELETE /inventory/v2/:id` - Eliminar producto (mismo que DELETE /inventory/:id)
+- `POST /inventory/v2/:id/consume` - Marcar como consumido
+- `GET /inventory/v2/expiring` - Productos próximos a vencer
+
 #### GET `/inventory`
-Obtiene el inventario del usuario autenticado.
+Obtiene el inventario del usuario autenticado (nuevo diseño).
 
 **Headers:**
 ```
@@ -237,8 +271,120 @@ Authorization: Bearer <token>
 ```
 
 **Query Parameters:**
-- `listType` (string): Filtrar por tipo de lista (fridge, pantry, freezer, shopping)
+- `location` (string): Filtrar por ubicación (fridge, pantry, freezer, shopping)
 - `expiring` (boolean): Solo productos próximos a vencer
+- `page` (number): Número de página (default: 1)
+- `limit` (number): Elementos por página (default: 10)
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "string",
+      "product": {
+        "id": "string",
+        "name": "string",
+        "brand": "string",
+        "category": "string",
+        "barcode": "string"
+      },
+      "location": "string",
+      "quantity": "number",
+      "unit": "string",
+      "purchaseDate": "string",
+      "expiryDate": "string",
+      "daysUntilExpiry": "number",
+      "isExpiringSoon": "boolean",
+      "notes": "string"
+    }
+  ],
+  "pagination": {
+    "page": "number",
+    "limit": "number",
+    "total": "number",
+    "pages": "number"
+  }
+}
+```
+
+#### POST `/inventory`
+Agrega un producto al inventario (nuevo diseño).
+
+**Headers:**
+```
+Authorization: Bearer <token>
+```
+
+**Request Body:**
+```json
+{
+  "productId": "string",
+  "location": "fridge|pantry|freezer|shopping",
+  "quantity": "number",
+  "unit": "string",
+  "purchaseDate": "string",
+  "expiryDate": "string",
+  "price": "number",
+  "store": "string",
+  "notes": "string"
+}
+```
+
+#### PUT `/inventory/:id`
+Actualiza un item del inventario (nuevo diseño).
+
+**Headers:**
+```
+Authorization: Bearer <token>
+```
+
+**Request Body:**
+```json
+{
+  "quantity": "number",
+  "unit": "string",
+  "expiryDate": "string",
+  "price": "number",
+  "store": "string",
+  "notes": "string"
+}
+```
+
+#### DELETE `/inventory/:id`
+Elimina un item del inventario (nuevo diseño).
+
+**Headers:**
+```
+Authorization: Bearer <token>
+```
+
+#### POST `/inventory/:id/consume`
+Marca un item del inventario como consumido (nuevo diseño).
+
+**Headers:**
+```
+Authorization: Bearer <token>
+```
+
+**Request Body:**
+```json
+{
+  "consumedQuantity": "number"
+}
+```
+
+#### GET `/inventory/expiring`
+Obtiene productos próximos a expirar (nuevo diseño).
+
+**Headers:**
+```
+Authorization: Bearer <token>
+```
+
+**Query Parameters:**
+- `days` (number): Días hasta el vencimiento (default: 3)
 
 **Response:**
 ```json
@@ -253,62 +399,42 @@ Authorization: Bearer <token>
         "brand": "string",
         "category": "string"
       },
-      "listType": "string",
+      "location": "string",
       "quantity": "number",
       "unit": "string",
-      "purchaseDate": "string",
       "expiryDate": "string",
-      "notes": "string"
+      "daysUntilExpiry": "number",
+      "isExpiringSoon": "boolean"
     }
   ]
 }
 ```
 
-#### POST `/inventory`
-Agrega un item al inventario.
+#### GET `/inventory/stats`
+Obtiene estadísticas del inventario (nuevo diseño).
 
 **Headers:**
 ```
 Authorization: Bearer <token>
 ```
 
-**Request Body:**
+**Response:**
 ```json
 {
-  "productId": "string",
-  "listType": "fridge|pantry|freezer|shopping",
-  "quantity": "number",
-  "unit": "string",
-  "purchaseDate": "string",
-  "expiryDate": "string",
-  "notes": "string"
+  "success": true,
+  "data": {
+    "totalItems": "number",
+    "totalQuantity": "number",
+    "expiringItems": "number",
+    "expiringItemsCount": "number",
+    "categoriesCount": {
+      "fridge": "number",
+      "pantry": "number",
+      "freezer": "number",
+      "shopping": "number"
+    }
+  }
 }
-```
-
-#### PUT `/inventory/:id`
-Actualiza un item del inventario.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "quantity": "number",
-  "unit": "string",
-  "expiryDate": "string",
-  "notes": "string"
-}
-```
-
-#### DELETE `/inventory/:id`
-Elimina un item del inventario.
-
-**Headers:**
-```
-Authorization: Bearer <token>
 ```
 
 ### 🍳 Recetas (`/recipes`)
@@ -440,6 +566,52 @@ Authorization: Bearer <token>
 }
 ```
 
+## Modelos de Datos
+
+### UserProductLocation (Nuevo Diseño)
+
+Representa una ubicación específica de un producto en el inventario del usuario:
+
+```json
+{
+  "id": "string",
+  "userProductId": "string",
+  "location": "fridge|pantry|freezer|shopping",
+  "quantity": "number",
+  "unit": "string",
+  "purchaseDate": "string",
+  "expiryDate": "string",
+  "price": "number",
+  "store": "string",
+  "notes": "string",
+  "createdAt": "string",
+  "updatedAt": "string"
+}
+```
+
+### UserProduct (Nuevo Diseño)
+
+Representa un producto en el contexto de un usuario:
+
+```json
+{
+  "id": "string",
+  "userId": "string",
+  "productId": "string",
+  "product": {
+    "id": "string",
+    "barcode": "string",
+    "name": "string",
+    "brand": "string",
+    "category": "string"
+  },
+  "locations": [UserProductLocation],
+  "totalQuantity": "number",
+  "createdAt": "string",
+  "updatedAt": "string"
+}
+```
+
 ## Autenticación
 
 La API utiliza JWT (JSON Web Tokens) para la autenticación. Después de iniciar sesión exitosamente, incluye el token en el header `Authorization` de todas las solicitudes protegidas:
@@ -467,20 +639,38 @@ curl -X GET http://localhost:3001/inventory \
   -H "Authorization: Bearer <your-token>"
 ```
 
-### Agregar Producto al Inventario
+### Agregar Producto al Inventario (Nuevo Diseño)
 ```bash
 curl -X POST http://localhost:3001/inventory \
   -H "Authorization: Bearer <your-token>" \
   -H "Content-Type: application/json" \
   -d '{
     "productId": "product-id",
-    "listType": "fridge",
+    "location": "fridge",
     "quantity": 1,
     "unit": "unidades",
     "purchaseDate": "2024-01-15",
     "expiryDate": "2024-01-22",
-    "notes": "Comprado en el supermercado"
+    "price": 4.99,
+    "store": "Supermercado La Plaza",
+    "notes": "Oferta especial"
   }'
+```
+
+### Marcar Producto como Consumido
+```bash
+curl -X POST http://localhost:3001/inventory/item-id/consume \
+  -H "Authorization: Bearer <your-token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "consumedQuantity": 1
+  }'
+```
+
+### Obtener Productos Próximos a Vencer
+```bash
+curl -X GET "http://localhost:3001/inventory/expiring?days=5" \
+  -H "Authorization: Bearer <your-token>"
 ```
 
 ## Configuración de Base de Datos

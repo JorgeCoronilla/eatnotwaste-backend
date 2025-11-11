@@ -4,22 +4,26 @@ import { ApiResponse, IInventory } from '../types';
 
 const router = express.Router();
 
-// Controladores
+// Nuevos controladores
 import {
-  getInventory,
-  addToInventory,
-  updateInventoryItem,
-  deleteInventoryItem,
-  markAsConsumed,
+  getInventory as getInventoryNew,
+  addToInventory as addToInventoryNew,
+  updateInventoryItem as updateInventoryItemNew,
+  deleteInventoryItem as deleteInventoryItemNew,
+  markAsConsumed as markAsConsumedNew,
   getInventoryStats,
-  getExpiringItems
-} from '../controllers/inventoryController';
+  getExpiringItems as getExpiringItemsNew
+} from '../controllers/inventoryControllerNew';
 
-// Middleware ya importado arriba
+// Nuevas validaciones
 import {
-  validateAddToInventory,
-  validateUpdateInventory,
-  validateConsumeItem,
+  validateAddProductLocation,
+  validateUpdateProductLocation,
+  validateConsumeProductLocation,
+  validateUserProductFilters,
+  validateExpiringProducts
+} from '../middleware/validationNew';
+import {
   validateUuid,
   validatePagination
 } from '../middleware/validation';
@@ -27,80 +31,41 @@ import {
 /**
  * @swagger
  * tags:
- *   name: Inventory
- *   description: API for managing user inventory
+ *   name: Inventory (New)
+ *   description: API for managing user inventory with new design
  */
 
 /**
- * @route   GET /api/inventory
- * @desc    Obtener inventario del usuario
+ * @route   GET /api/inventory/v2
+ * @desc    Obtener inventario del usuario (nuevo diseño)
  * @access  Private
  */
-
-/**
- * @swagger
- * /api/inventory:
- *   get:
- *     summary: Get user inventory
- *     description: Retrieves the user's inventory.
- *     tags: [Inventory]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: A list of inventory items.
- *       401:
- *         description: Unauthorized.
- */
-router.get('/',
+router.get('/v2',
   authenticateToken,
-  validatePagination,
-  getInventory
+  validateUserProductFilters,
+  getInventoryNew
 );
 
 /**
- * @route   POST /api/inventory
- * @desc    Agregar producto al inventario
+ * @route   POST /api/inventory/v2
+ * @desc    Agregar producto al inventario (nuevo diseño)
  * @access  Private
  */
-
-/**
- * @swagger
- * /api/inventory:
- *   post:
- *     summary: Add product to inventory
- *     description: Adds a product to the user's inventory.
- *     tags: [Inventory]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/InventoryItem'
- *     responses:
- *       201:
- *         description: Item added to inventory.
- *       400:
- *         description: Bad request.
- *       401:
- *         description: Unauthorized.
- */
-router.post('/',
+router.post('/v2',
   authenticateToken,
-  validateAddToInventory,
-  addToInventory
+  validateAddProductLocation,
+  addToInventoryNew
 );
 
 /**
- * @route   GET /api/inventory/expiring
- * @desc    Obtener productos próximos a expirar
+ * @route   GET /api/inventory/v2/expiring
+ * @desc    Obtener productos próximos a expirar (nuevo diseño)
  * @access  Private
  */
-router.get('/expiring',
+router.get('/v2/expiring',
   authenticateToken,
-  getExpiringItems
+  validateExpiringProducts,
+  getExpiringItemsNew
 );
 
 /**
@@ -167,38 +132,38 @@ router.get('/location/:location',
 );
 
 /**
- * @route   PUT /api/inventory/:id
- * @desc    Actualizar item del inventario
+ * @route   PUT /api/inventory/v2/:id
+ * @desc    Actualizar item del inventario (nuevo diseño)
  * @access  Private
  */
-router.put('/:id',
+router.put('/v2/:id',
   authenticateToken,
   validateUuid('id'),
-  validateUpdateInventory,
-  updateInventoryItem
+  validateUpdateProductLocation,
+  updateInventoryItemNew
 );
 
 /**
- * @route   POST /api/inventory/:id/consume
- * @desc    Marcar item como consumido
+ * @route   POST /api/inventory/v2/:id/consume
+ * @desc    Marcar item como consumido (nuevo diseño)
  * @access  Private
  */
-router.post('/:id/consume',
+router.post('/v2/:id/consume',
   authenticateToken,
   validateUuid('id'),
-  validateConsumeItem,
-  markAsConsumed
+  validateConsumeProductLocation,
+  markAsConsumedNew
 );
 
 /**
- * @route   DELETE /api/inventory/:id
- * @desc    Eliminar item del inventario
+ * @route   DELETE /api/inventory/v2/:id
+ * @desc    Eliminar item del inventario (nuevo diseño)
  * @access  Private
  */
-router.delete('/:id',
+router.delete('/v2/:id',
   authenticateToken,
   validateUuid('id'),
-  deleteInventoryItem
+  deleteInventoryItemNew
 );
 
 export default router;

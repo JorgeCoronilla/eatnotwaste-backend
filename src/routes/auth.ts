@@ -301,14 +301,12 @@ router.get('/google/callback',
       process.env.JWT_SECRET!,
       { expiresIn: '15m' }
     );
-    
     const refreshToken = jwt.sign(
       { userId: user.id },
       process.env.JWT_REFRESH_SECRET!,
       { expiresIn: '7d' }
     );
-    
-    // Redirigir al frontend con los tokens
+
     res.redirect(`${process.env.FRONTEND_URL}/auth/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
   }
 );

@@ -1,12 +1,15 @@
 import * as jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { AuthenticatedRequest } from '../types';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 /**
  * Middleware de autenticación
  * Verifica el token JWT y agrega el usuario a req.user
  */
-export const authenticateToken: RequestHandler = (req, res, next) => {
+export const authenticateToken: RequestHandler = async (req, res, next) => {
   try {
     // Obtener token del header Authorization
     const authHeader = req.headers.authorization;
@@ -23,20 +26,15 @@ export const authenticateToken: RequestHandler = (req, res, next) => {
       process.env.JWT_SECRET || 'fallback_secret_key'
     ) as any;
 
-    const mockUser = {
-      id: decoded.userId || 'mock-user-id',
-      email: decoded.email || 'user@example.com',
-      name: decoded.name || 'Usuario',
-      role: decoded.role || 'user',
-      preferences: {
-        language: 'es' as const,
-        units: 'metric' as const,
-        notifications: { expiration: true, lowStock: true, recipes: true, marketing: false },
-        privacy: { shareData: false, analytics: true }
-      }
-    };
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+    });
 
-    (req as AuthenticatedRequest).user = mockUser;
+    if (!user) {
+      return res.status(401).json({ success: false, error: 'Usuario no encontrado' });
+    }
+
+    (req as AuthenticatedRequest).user = user;
 
     return next();
   } catch (error) {
@@ -49,7 +47,7 @@ export const authenticateToken: RequestHandler = (req, res, next) => {
  * Middleware de autenticación opcional
  * Similar a authenticateToken pero no falla si no hay token
  */
-export const optionalAuth: RequestHandler = (req, res, next) => {
+export const optionalAuth: RequestHandler = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.startsWith('Bearer ')
@@ -65,20 +63,13 @@ export const optionalAuth: RequestHandler = (req, res, next) => {
       process.env.JWT_SECRET || 'fallback_secret_key'
     ) as any;
 
-    const mockUser = {
-      id: decoded.userId || 'mock-user-id',
-      email: decoded.email || 'user@example.com',
-      name: decoded.name || 'Usuario',
-      role: decoded.role || 'user',
-      preferences: {
-        language: 'es' as const,
-        units: 'metric' as const,
-        notifications: { expiration: true, lowStock: true, recipes: true, marketing: false },
-        privacy: { shareData: false, analytics: true }
-      }
-    };
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+    });
 
-    (req as AuthenticatedRequest).user = mockUser;
+    if (user) {
+      (req as AuthenticatedRequest).user = user;
+    }
 
     return next();
   } catch (error) {

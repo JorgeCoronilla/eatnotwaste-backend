@@ -1,13 +1,14 @@
 import { Request, RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
-import { InventoryService } from '../services/InventoryService';
+import { UserProductService } from '../services/UserProductService';
 import { DashboardService } from '../services/DashboardService';
 import { AuthenticatedRequest } from '../types';
+import { ListType } from '../types/database';
 
 /**
- * Obtener inventario del usuario
+ * Obtener inventario del usuario (nuevo diseño)
  */
-export const getInventoryLegacy: RequestHandler = async (req, res) => {
+export const getInventory: RequestHandler = async (req, res) => {
   try {
     const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
@@ -18,25 +19,45 @@ export const getInventoryLegacy: RequestHandler = async (req, res) => {
     const userId = reqAuth.user.id;
     const { page = 1, limit = 20, location, category, expiring = false } = req.query as any;
 
+    // Si se solicitan productos expirando, usar el método específico
+    if (expiring === 'true') {
+      const result = await UserProductService.getExpiringLocations(userId, 3);
+      if (!result.success) {
+        res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
+        return;
+      }
+
+      res.json({ 
+        success: true, 
+        message: 'Productos próximos a expirar obtenidos', 
+        data: result.data
+      });
+      return;
+    }
+
+    // Construir filtros para ubicaciones de productos
     const filters: any = {};
     if (location && location !== 'all') {
-      // location en rutas se mapea a listType en BD
-      filters.listType = location; // 'fridge' | 'freezer' | 'pantry'
+      filters.listType = location; // 'fridge' | 'freezer' | 'pantry' | 'shopping'
     }
     if (category && category !== 'all') {
       filters.category = category;
     }
-    if (expiring === 'true') {
-      filters.expiringBefore = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
-    }
 
-    const result = await InventoryService.getUserItems(userId, filters, Number(page), Number(limit));
+    // Obtener ubicaciones de productos del usuario
+    const result = await UserProductService.getUserProductLocations(userId, filters, Number(page), Number(limit));
+    
     if (!result.success) {
       res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
       return;
     }
 
-    res.json({ success: true, message: 'Inventario obtenido exitosamente', data: result.data, pagination: result.pagination });
+    res.json({ 
+      success: true, 
+      message: 'Inventario obtenido exitosamente', 
+      data: result.data, 
+      pagination: result.pagination
+    });
 
   } catch (error) {
     console.error('Error en getInventory:', error);
@@ -49,9 +70,9 @@ export const getInventoryLegacy: RequestHandler = async (req, res) => {
 };
 
 /**
- * Agregar producto al inventario
+ * Agregar producto al inventario (nuevo diseño)
  */
-export const addToInventoryLegacy: RequestHandler = async (req, res) => {
+export const addToInventory: RequestHandler = async (req, res) => {
   try {
     const reqAuth = req as AuthenticatedRequest;
     const errors = validationResult(req);
@@ -67,25 +88,40 @@ export const addToInventoryLegacy: RequestHandler = async (req, res) => {
 
     const { productId, quantity, unit, location, purchaseDate, expirationDate, price, notes } = req.body as any;
 
-    const addPayload: any = {
+    const locationData: {
+      productId: string;
+      location: ListType;
+      quantity: number;
+      unit?: string;
+      purchaseDate?: Date;
+      expiryDate?: Date;
+      price?: number;
+      store?: string;
+      notes?: string;
+    } = {
       productId,
-      listType: location || 'pantry',
+      location: location || 'pantry',
       quantity: Number(quantity),
     };
-    if (unit !== undefined) addPayload.unit = unit;
-    if (purchaseDate) addPayload.purchaseDate = new Date(purchaseDate);
-    if (expirationDate) addPayload.expiryDate = new Date(expirationDate);
-    if (price !== undefined) addPayload.price = price;
-    if (notes !== undefined) addPayload.notes = notes;
 
-    const result = await InventoryService.addItem(reqAuth.user.id, addPayload);
+    if (unit !== undefined) locationData.unit = unit;
+    if (purchaseDate !== undefined) locationData.purchaseDate = new Date(purchaseDate);
+    if (expirationDate !== undefined) locationData.expiryDate = new Date(expirationDate);
+    if (price !== undefined) locationData.price = price;
+    if (notes !== undefined) locationData.notes = notes;
+
+    const result = await UserProductService.addProductLocation(reqAuth.user.id, locationData);
 
     if (!result.success) {
       res.status(400).json({ success: false, message: 'Error al agregar producto', error: result.error });
       return;
     }
 
-    res.status(201).json({ success: true, message: result.message || 'Producto agregado al inventario exitosamente', data: result.data });
+    res.status(201).json({ 
+      success: true, 
+      message: 'Producto agregado al inventario exitosamente', 
+      data: result.data 
+    });
 
   } catch (error) {
     console.error('Error en addToInventory:', error);
@@ -98,9 +134,9 @@ export const addToInventoryLegacy: RequestHandler = async (req, res) => {
 };
 
 /**
- * Actualizar producto en inventario
+ * Actualizar producto en inventario (nuevo diseño)
  */
-export const updateInventoryItemLegacy: RequestHandler = async (req, res) => {
+export const updateInventoryItem: RequestHandler = async (req, res) => {
   try {
     const reqAuth = req as AuthenticatedRequest;
     const errors = validationResult(req);
@@ -120,19 +156,23 @@ export const updateInventoryItemLegacy: RequestHandler = async (req, res) => {
     const updatePayload: any = {};
     if (quantity !== undefined) updatePayload.quantity = Number(quantity);
     if (unit !== undefined) updatePayload.unit = unit;
-    if (location !== undefined) updatePayload.listType = location;
+    if (location !== undefined) updatePayload.location = location;
     if (expirationDate) updatePayload.expiryDate = new Date(expirationDate);
     if (price !== undefined) updatePayload.price = price;
     if (notes !== undefined) updatePayload.notes = notes;
 
-    const result = await InventoryService.updateItem(reqAuth.user.id, id, updatePayload);
+    const result = await UserProductService.updateProductLocation(reqAuth.user.id, id, updatePayload);
 
     if (!result.success) {
       res.status(400).json({ success: false, message: 'Error al actualizar producto', error: result.error });
       return;
     }
 
-    res.json({ success: true, message: result.message || 'Producto actualizado exitosamente', data: result.data });
+    res.json({ 
+      success: true, 
+      message: 'Producto actualizado exitosamente', 
+      data: result.data 
+    });
 
   } catch (error) {
     console.error('Error en updateInventoryItem:', error);
@@ -145,9 +185,9 @@ export const updateInventoryItemLegacy: RequestHandler = async (req, res) => {
 };
 
 /**
- * Eliminar producto del inventario
+ * Eliminar producto del inventario (nuevo diseño)
  */
-export const deleteInventoryItemLegacy: RequestHandler = async (req, res) => {
+export const deleteInventoryItem: RequestHandler = async (req, res) => {
   try {
     const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
@@ -156,14 +196,17 @@ export const deleteInventoryItemLegacy: RequestHandler = async (req, res) => {
     }
 
     const { id } = req.params as { id: string };
-    const result = await InventoryService.deleteItem(reqAuth.user.id, id);
+    const result = await UserProductService.deleteProductLocation(reqAuth.user.id, id);
 
     if (!result.success) {
       res.status(400).json({ success: false, message: 'Error al eliminar producto', error: result.error });
       return;
     }
 
-    res.json({ success: true, message: result.message || 'Producto eliminado del inventario exitosamente' });
+    res.json({ 
+      success: true, 
+      message: 'Producto eliminado del inventario exitosamente' 
+    });
 
   } catch (error) {
     console.error('Error en deleteInventoryItem:', error);
@@ -176,9 +219,9 @@ export const deleteInventoryItemLegacy: RequestHandler = async (req, res) => {
 };
 
 /**
- * Marcar producto como consumido
+ * Marcar producto como consumido (nuevo diseño)
  */
-export const markAsConsumedLegacy: RequestHandler = async (req, res) => {
+export const markAsConsumed: RequestHandler = async (req, res) => {
   try {
     const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
@@ -189,14 +232,29 @@ export const markAsConsumedLegacy: RequestHandler = async (req, res) => {
     const { id } = req.params as { id: string };
     const { consumedQuantity } = req.body as any;
 
-    const result = await InventoryService.consumeItem(reqAuth.user.id, id, consumedQuantity ? Number(consumedQuantity) : undefined);
+    const updateData: {
+      isConsumed: boolean;
+      quantity?: number;
+    } = {
+      isConsumed: true,
+    };
+
+    if (consumedQuantity !== undefined) {
+      updateData.quantity = Number(consumedQuantity);
+    }
+
+    const result = await UserProductService.updateProductLocation(reqAuth.user.id, id, updateData);
 
     if (!result.success) {
       res.status(400).json({ success: false, message: 'Error al consumir producto', error: result.error });
       return;
     }
 
-    res.json({ success: true, message: result.message || 'Producto marcado como consumido exitosamente' });
+    res.json({ 
+      success: true, 
+      message: 'Producto marcado como consumido exitosamente',
+      data: result.data
+    });
 
   } catch (error) {
     console.error('Error en markAsConsumed:', error);
@@ -211,7 +269,7 @@ export const markAsConsumedLegacy: RequestHandler = async (req, res) => {
 /**
  * Obtener estadísticas del inventario
  */
-export const getInventoryStatsLegacy: RequestHandler = async (req, res) => {
+export const getInventoryStats: RequestHandler = async (req, res) => {
   try {
     const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
@@ -239,9 +297,9 @@ export const getInventoryStatsLegacy: RequestHandler = async (req, res) => {
 };
 
 /**
- * Obtener productos próximos a expirar
+ * Obtener productos próximos a expirar (nuevo diseño)
  */
-export const getExpiringItemsLegacy: RequestHandler = async (req, res) => {
+export const getExpiringItems: RequestHandler = async (req, res) => {
   try {
     const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
@@ -250,13 +308,19 @@ export const getExpiringItemsLegacy: RequestHandler = async (req, res) => {
     }
 
     const userId = reqAuth.user.id;
-    const result = await InventoryService.getExpiringItems(userId, 3);
+    const { days = 3 } = req.query as any;
+    
+    const result = await UserProductService.getExpiringLocations(userId, Number(days));
     if (!result.success) {
       res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
       return;
     }
 
-    res.json({ success: true, message: 'Productos próximos a expirar obtenidos', data: result.data });
+    res.json({ 
+      success: true, 
+      message: 'Productos próximos a expirar obtenidos', 
+      data: result.data 
+    });
 
   } catch (error) {
     console.error('Error en getExpiringItems:', error);

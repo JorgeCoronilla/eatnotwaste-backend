@@ -5,6 +5,8 @@ import type {
   User as PrismaUser,
   Product as PrismaProduct,
   UserItem as PrismaUserItem,
+  UserProduct as PrismaUserProduct,
+  UserProductLocation as PrismaUserProductLocation,
   ItemMovement as PrismaItemMovement,
   ProductCache as PrismaProductCache,
   UserDeviceToken as PrismaUserDeviceToken,
@@ -31,17 +33,27 @@ export interface ProductWithUsage extends PrismaProduct {
   averagePrice?: number;
 }
 
-// Extended UserItem with product details
-export interface UserItemWithProduct extends PrismaUserItem {
+// Extended UserProduct with product details
+export interface UserProductWithProduct extends PrismaUserProduct {
   product: PrismaProduct;
+  locations: PrismaUserProductLocation[];
+  totalQuantity?: number;
+  activeLocations?: number;
+}
+
+// Extended UserProductLocation with product details
+export interface UserProductLocationWithProduct extends PrismaUserProductLocation {
+  userProduct: UserProductWithProduct;
   daysUntilExpiry?: number | null;
   isExpiringSoon?: boolean;
 }
 
-// Extended ItemMovement with related data
+// Extended ItemMovement with related data (updated for new schema)
 export interface ItemMovementWithDetails extends PrismaItemMovement {
   product: PrismaProduct;
   userItem?: PrismaUserItem;
+  userProduct?: UserProductWithProduct;
+  userProductLocation?: UserProductLocationWithProduct;
 }
 
 // Dashboard data structure
@@ -110,11 +122,18 @@ export interface ProductSearchFilters {
   isVerified?: boolean;
 }
 
-export interface UserItemFilters {
+// New filter interfaces for the redesigned schema
+export interface UserProductFilters {
+  isActive?: boolean;
+  category?: string;
+  hasLocations?: boolean;
+}
+
+export interface UserProductLocationFilters {
   listType?: ListType;
   expiringBefore?: Date;
-  category?: string;
   isConsumed?: boolean;
+  category?: string;
 }
 
 export interface ItemMovementFilters {
@@ -164,6 +183,8 @@ export type {
   PrismaUser as User,
   PrismaProduct as Product,
   PrismaUserItem as UserItem,
+  PrismaUserProduct as UserProduct,
+  PrismaUserProductLocation as UserProductLocation,
   PrismaItemMovement as ItemMovement,
   PrismaProductCache as ProductCache,
   PrismaUserDeviceToken as UserDeviceToken,

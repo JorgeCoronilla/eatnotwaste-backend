@@ -85,6 +85,8 @@ export type {
   User,
   Product,
   UserItem,
+  UserProduct,
+  UserProductLocation,
   ItemMovement,
   ProductCache,
   UserDeviceToken,

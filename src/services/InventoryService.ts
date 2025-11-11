@@ -3,21 +3,61 @@
 
 import { prisma } from '../config/database';
 import { logger } from '../utils/logger';
+import type { Decimal } from '@prisma/client/runtime/library';
 import type {
   UserItem,
-  UserItemWithProduct,
+  UserProductWithProduct,
+  UserProductLocationWithProduct,
   ItemMovement,
   ApiResponse,
   PaginatedResponse,
   ListType,
   MovementType,
-  UserItemFilters,
+  Product,
 } from '../types/database';
+
+// Tipos de compatibilidad para migración
+interface UserItemFilters {
+  listType?: ListType;
+  isConsumed?: boolean;
+  expiringBefore?: Date;
+  category?: string;
+}
+
+interface UserItemWithProduct {
+  id: string;
+  userId: string;
+  productId: string;
+  listType: ListType;
+  quantity: number;
+  unit?: string | null;
+  purchaseDate?: Date | null;
+  expiryDate?: Date | null;
+  price?: number | Decimal | null;
+  store?: string | null;
+  notes?: string | null;
+  isConsumed: boolean;
+  consumedAt?: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+  product: Product;
+  daysUntilExpiry?: number | null | undefined;
+  isExpiringSoon?: boolean | undefined;
+  addedAt?: Date; // Campo adicional del nuevo esquema
+  userProduct?: UserProductWithProduct; // Para compatibilidad con el mapeo
+}
 import { ProductService } from './ProductService';
+import { UserProductService } from './UserProductService';
 
 export class InventoryService {
   /**
+   * @deprecated Este servicio está siendo migrado a UserProductService.
+   * Se mantiene por compatibilidad temporal. Use UserProductService para nueva funcionalidad.
+   */
+  static readonly DEPRECATION_NOTICE = 'InventoryService está en proceso de migración. Use UserProductService para nueva funcionalidad.';
+  /**
    * Add item to user's inventory
+   * @deprecated Use UserProductService.addProductLocation instead
    */
   static async addItem(
     userId: string,
@@ -74,29 +114,28 @@ export class InventoryService {
         }
       }
 
-      // Create user item data
-      const createData: any = {
-        userId,
+      // Use new UserProductService for adding location
+      const locationData: any = {
         productId,
-        listType: itemData.listType,
+        location: itemData.listType,
         quantity: itemData.quantity,
-        unit: itemData.unit || 'units',
       };
+      
+      if (itemData.unit !== undefined) locationData.unit = itemData.unit;
+      if (itemData.purchaseDate !== undefined) locationData.purchaseDate = itemData.purchaseDate;
+      if (itemData.expiryDate !== undefined) locationData.expiryDate = itemData.expiryDate;
+      if (itemData.price !== undefined) locationData.price = itemData.price;
+      if (itemData.store !== undefined) locationData.store = itemData.store;
+      if (itemData.notes !== undefined) locationData.notes = itemData.notes;
 
-      // Add optional fields only if they exist
-      if (itemData.purchaseDate) createData.purchaseDate = itemData.purchaseDate;
-      if (itemData.expiryDate) createData.expiryDate = itemData.expiryDate;
-      if (itemData.price) createData.price = itemData.price;
-      if (itemData.store) createData.store = itemData.store;
-      if (itemData.notes) createData.notes = itemData.notes;
+      const result = await UserProductService.addProductLocation(userId, locationData);
 
-      // Create user item
-      const userItem = await prisma.userItem.create({
-        data: createData,
-        include: {
-          product: true,
-        },
-      });
+      if (!result.success || !result.data) {
+        return {
+          success: false,
+          error: result.error || 'Error al agregar producto',
+        };
+      }
 
       // Create movement record
       await prisma.itemMovement.create({
@@ -114,18 +153,29 @@ export class InventoryService {
       // Increment product usage count
       await ProductService.incrementUsageCount(productId);
 
-      // Calculate additional properties
+      // Convert to UserItem format for backward compatibility
       const userItemWithProduct: UserItemWithProduct = {
-        ...userItem,
-        daysUntilExpiry: userItem.expiryDate
-          ? Math.ceil((userItem.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
-          : null,
-        isExpiringSoon: userItem.expiryDate
-          ? Math.ceil((userItem.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) <= 3
-          : false,
+        id: result.data.id,
+        userId,
+        productId,
+        listType: result.data.listType,
+        quantity: result.data.quantity,
+        unit: result.data.unit,
+        purchaseDate: result.data.purchaseDate,
+        expiryDate: result.data.expiryDate,
+        price: result.data.price,
+        store: result.data.store,
+        notes: result.data.notes,
+        isConsumed: result.data.isConsumed,
+        consumedAt: result.data.consumedAt,
+        createdAt: result.data.addedAt,
+        updatedAt: result.data.addedAt,
+        product: result.data.userProduct.product,
+        daysUntilExpiry: result.data.daysUntilExpiry,
+        isExpiringSoon: result.data.isExpiringSoon,
       };
 
-      logger.info(`Item added to inventory: ${userItem.product.name} for user ${userId}`);
+      logger.info(`Item added to inventory: ${result.data.userProduct.product.name} for user ${userId}`);
 
       return {
         success: true,
@@ -143,6 +193,7 @@ export class InventoryService {
 
   /**
    * Get user's inventory items with filters
+   * @deprecated Use UserProductService.getUserProductLocations instead
    */
   static async getUserItems(
     userId: string,
@@ -151,67 +202,64 @@ export class InventoryService {
     limit: number = 20
   ): Promise<PaginatedResponse<UserItemWithProduct>> {
     try {
-      const skip = (page - 1) * limit;
-
-      // Build where clause
-      const where: any = {
-        userId,
+      // Use new UserProductService for getting locations
+      // Build filters dynamically to avoid undefined values with exactOptionalPropertyTypes
+      const locationFilters: any = {
         isConsumed: filters.isConsumed ?? false,
       };
-
-      if (filters.listType) {
-        where.listType = filters.listType;
+      
+      if (filters.listType !== undefined) {
+        locationFilters.listType = filters.listType;
       }
+      if (filters.expiringBefore !== undefined) {
+        locationFilters.expiringBefore = filters.expiringBefore;
+      }
+      if (filters.category !== undefined) {
+        locationFilters.category = filters.category;
+      }
+      
+      const result = await UserProductService.getUserProductLocations(
+        userId,
+        locationFilters,
+        page,
+        limit
+      );
 
-      if (filters.expiringBefore) {
-        where.expiryDate = {
-          lte: filters.expiringBefore,
-          gte: new Date(),
+      if (!result.success || !result.data) {
+        return {
+          success: false,
+          error: result.error || 'Error al obtener productos',
+          data: [],
+          pagination: { page, limit, total: 0, totalPages: 0 },
         };
       }
 
-      if (filters.category) {
-        where.product = {
-          category: { equals: filters.category, mode: 'insensitive' },
-        };
-      }
-
-      const [items, total] = await Promise.all([
-        prisma.userItem.findMany({
-          where,
-          include: {
-            product: true,
-          },
-          skip,
-          take: limit,
-          orderBy: [
-            { expiryDate: 'asc' },
-            { createdAt: 'desc' },
-          ],
-        }),
-        prisma.userItem.count({ where }),
-      ]);
-
-      // Add computed properties
-      const itemsWithDetails: UserItemWithProduct[] = items.map(item => ({
-        ...item,
-        daysUntilExpiry: item.expiryDate
-          ? Math.ceil((item.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
-          : null,
-        isExpiringSoon: item.expiryDate
-          ? Math.ceil((item.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) <= 3
-          : false,
+      // Convert UserProductLocation to UserItem format for backward compatibility
+      const itemsWithDetails: UserItemWithProduct[] = result.data.map(location => ({
+        id: location.id,
+        userId,
+        productId: location.userProduct.productId,
+        listType: location.listType,
+        quantity: location.quantity,
+        unit: location.unit,
+        purchaseDate: location.purchaseDate,
+        expiryDate: location.expiryDate,
+        price: location.price,
+        store: location.store,
+        notes: location.notes,
+        isConsumed: location.isConsumed,
+        consumedAt: location.consumedAt,
+        createdAt: location.addedAt,
+        updatedAt: location.addedAt,
+        product: location.userProduct.product,
+        daysUntilExpiry: location.daysUntilExpiry,
+        isExpiringSoon: location.isExpiringSoon,
       }));
 
       return {
         success: true,
         data: itemsWithDetails,
-        pagination: {
-          page,
-          limit,
-          total,
-          totalPages: Math.ceil(total / limit),
-        },
+        pagination: result.pagination,
       };
     } catch (error) {
       logger.error('Error getting user items:', error);
@@ -226,6 +274,7 @@ export class InventoryService {
 
   /**
    * Update user item
+   * @deprecated Use UserProductService.updateProductLocation instead
    */
   static async updateItem(
     userId: string,
@@ -241,53 +290,61 @@ export class InventoryService {
     }
   ): Promise<ApiResponse<UserItemWithProduct>> {
     try {
-      // Get current item
-      const currentItem = await prisma.userItem.findFirst({
-        where: { id: itemId, userId },
-        include: { product: true },
-      });
+      // Use new UserProductService for updating location
+      const result = await UserProductService.updateProductLocation(userId, itemId, updateData);
 
-      if (!currentItem) {
+      if (!result.success || !result.data) {
         return {
           success: false,
-          error: 'Producto no encontrado',
+          error: result.error || 'Error al actualizar producto',
         };
       }
 
-      // Update item
-      const updatedItem = await prisma.userItem.update({
-        where: { id: itemId },
-        data: updateData,
-        include: { product: true },
-      });
-
       // Create movement record if list type changed
-      if (updateData.listType && updateData.listType !== currentItem.listType) {
-        await prisma.itemMovement.create({
-          data: {
-            userId,
-            productId: currentItem.productId,
-            movementType: 'move',
-            quantity: currentItem.quantity,
-            fromList: currentItem.listType,
-            toList: updateData.listType,
-            metadata: { action: `Movido de ${currentItem.listType} a ${updateData.listType}` },
-          },
+      if (updateData.listType) {
+        const currentItem = await prisma.userItem.findFirst({
+          where: { id: itemId, userId },
+          include: { product: true },
         });
+
+        if (currentItem && updateData.listType !== currentItem.listType) {
+          await prisma.itemMovement.create({
+            data: {
+              userId,
+              productId: currentItem.productId,
+              movementType: 'move',
+              quantity: currentItem.quantity,
+              fromList: currentItem.listType,
+              toList: updateData.listType,
+              metadata: { action: `Movido de ${currentItem.listType} a ${updateData.listType}` },
+            },
+          });
+        }
       }
 
-      // Add computed properties
+      // Convert to UserItem format for backward compatibility
       const itemWithDetails: UserItemWithProduct = {
-        ...updatedItem,
-        daysUntilExpiry: updatedItem.expiryDate
-          ? Math.ceil((updatedItem.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
-          : null,
-        isExpiringSoon: updatedItem.expiryDate
-          ? Math.ceil((updatedItem.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) <= 3
-          : false,
+        id: result.data.id,
+        userId,
+        productId: result.data.userProduct.productId,
+        listType: result.data.listType,
+        quantity: result.data.quantity,
+        unit: result.data.unit,
+        purchaseDate: result.data.purchaseDate,
+        expiryDate: result.data.expiryDate,
+        price: result.data.price,
+        store: result.data.store,
+        notes: result.data.notes,
+        isConsumed: result.data.isConsumed,
+        consumedAt: result.data.consumedAt,
+        createdAt: result.data.addedAt,
+        updatedAt: result.data.addedAt,
+        product: result.data.userProduct.product,
+        daysUntilExpiry: result.data.daysUntilExpiry,
+        isExpiringSoon: result.data.isExpiringSoon,
       };
 
-      logger.info(`Item updated: ${updatedItem.product.name} for user ${userId}`);
+      logger.info(`Item updated: ${result.data.userProduct.product.name} for user ${userId}`);
 
       return {
         success: true,
@@ -305,6 +362,7 @@ export class InventoryService {
 
   /**
    * Consume/use item
+   * @deprecated Use UserProductService.updateProductLocation instead
    */
   static async consumeItem(
     userId: string,
@@ -312,44 +370,49 @@ export class InventoryService {
     consumedQuantity?: number
   ): Promise<ApiResponse<void>> {
     try {
-      const item = await prisma.userItem.findFirst({
-        where: { id: itemId, userId },
-        include: { product: true },
+      // Get the location first to check current state
+      const location = await prisma.userProductLocation.findFirst({
+        where: {
+          id: itemId,
+          userProduct: {
+            userId,
+          },
+        },
+        include: {
+          userProduct: {
+            include: {
+              product: true,
+            },
+          },
+        },
       });
 
-      if (!item) {
+      if (!location) {
         return {
           success: false,
           error: 'Producto no encontrado',
         };
       }
 
-      if (item.isConsumed) {
+      if (location.isConsumed) {
         return {
           success: false,
           error: 'El producto ya ha sido consumido',
         };
       }
 
-      const quantityToConsume = consumedQuantity || item.quantity;
+      const quantityToConsume = consumedQuantity || location.quantity;
 
-      if (quantityToConsume >= item.quantity) {
-        // Consume entire item
-        await prisma.userItem.update({
-          where: { id: itemId },
-          data: {
-            isConsumed: true,
-            consumedAt: new Date(),
-            quantity: 0,
-          },
+      if (quantityToConsume >= location.quantity) {
+        // Consume entire location
+        await UserProductService.updateProductLocation(userId, itemId, {
+          isConsumed: true,
+          quantity: 0,
         });
       } else {
         // Partial consumption - reduce quantity
-        await prisma.userItem.update({
-          where: { id: itemId },
-          data: {
-            quantity: item.quantity - quantityToConsume,
-          },
+        await UserProductService.updateProductLocation(userId, itemId, {
+          quantity: location.quantity - quantityToConsume,
         });
       }
 
@@ -357,16 +420,16 @@ export class InventoryService {
       await prisma.itemMovement.create({
         data: {
           userId,
-          productId: item.productId,
+          productId: location.userProduct.productId,
           movementType: 'consume',
           quantity: quantityToConsume,
-          fromList: item.listType,
+          fromList: location.listType,
           toList: null,
-          metadata: { action: `Consumido ${quantityToConsume} ${item.unit}` },
+          metadata: { action: `Consumido ${quantityToConsume} ${location.unit}` },
         },
       });
 
-      logger.info(`Item consumed: ${item.product.name} (${quantityToConsume}) for user ${userId}`);
+      logger.info(`Item consumed: ${location.userProduct.product.name} (${quantityToConsume}) for user ${userId}`);
 
       return {
         success: true,
@@ -383,40 +446,58 @@ export class InventoryService {
 
   /**
    * Delete item from inventory
+   * @deprecated Use UserProductService.deleteProductLocation instead
    */
   static async deleteItem(userId: string, itemId: string): Promise<ApiResponse<void>> {
     try {
-      const item = await prisma.userItem.findFirst({
-        where: { id: itemId, userId },
-        include: { product: true },
+      // Get location details first for movement record
+      const location = await prisma.userProductLocation.findFirst({
+        where: {
+          id: itemId,
+          userProduct: {
+            userId,
+          },
+        },
+        include: {
+          userProduct: {
+            include: {
+              product: true,
+            },
+          },
+        },
       });
 
-      if (!item) {
+      if (!location) {
         return {
           success: false,
           error: 'Producto no encontrado',
         };
       }
 
-      // Delete item
-      await prisma.userItem.delete({
-        where: { id: itemId },
-      });
+      // Use new UserProductService for deletion
+      const result = await UserProductService.deleteProductLocation(userId, itemId);
+
+      if (!result.success) {
+        return {
+          success: false,
+          error: result.error || 'Error al eliminar producto',
+        };
+      }
 
       // Create movement record
       await prisma.itemMovement.create({
         data: {
           userId,
-          productId: item.productId,
+          productId: location.userProduct.productId,
           movementType: 'remove',
-          quantity: item.quantity,
-          fromList: item.listType,
+          quantity: location.quantity,
+          fromList: location.listType,
           toList: null,
           metadata: { action: 'Producto eliminado del inventario' },
         },
       });
 
-      logger.info(`Item deleted: ${item.product.name} for user ${userId}`);
+      logger.info(`Item deleted: ${location.userProduct.product.name} for user ${userId}`);
 
       return {
         success: true,
@@ -433,36 +514,43 @@ export class InventoryService {
 
   /**
    * Get items expiring soon
+   * @deprecated Use UserProductService.getExpiringLocations instead
    */
   static async getExpiringItems(
     userId: string,
     days: number = 3
   ): Promise<ApiResponse<UserItemWithProduct[]>> {
     try {
-      const expiryDate = new Date();
-      expiryDate.setDate(expiryDate.getDate() + days);
+      // Use new UserProductService for getting expiring locations
+      const result = await UserProductService.getExpiringLocations(userId, days);
 
-      const items = await prisma.userItem.findMany({
-        where: {
-          userId,
-          isConsumed: false,
-          expiryDate: {
-            gte: new Date(),
-            lte: expiryDate,
-          },
-        },
-        include: {
-          product: true,
-        },
-        orderBy: { expiryDate: 'asc' },
-      });
+      if (!result.success || !result.data) {
+        return {
+          success: false,
+          error: result.error || 'Error al obtener productos próximos a vencer',
+        };
+      }
 
-      const itemsWithDetails: UserItemWithProduct[] = items.map(item => ({
-        ...item,
-        daysUntilExpiry: item.expiryDate
-          ? Math.ceil((item.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
-          : null,
-        isExpiringSoon: true,
+      // Convert UserProductLocation to UserItem format for backward compatibility
+      const itemsWithDetails: UserItemWithProduct[] = result.data.map(location => ({
+        id: location.id,
+        userId,
+        productId: location.userProduct.productId,
+        listType: location.listType,
+        quantity: location.quantity,
+        unit: location.unit,
+        purchaseDate: location.purchaseDate,
+        expiryDate: location.expiryDate,
+        price: location.price,
+        store: location.store,
+        notes: location.notes,
+        isConsumed: location.isConsumed,
+        consumedAt: location.consumedAt,
+        createdAt: location.addedAt,
+        updatedAt: location.addedAt,
+        product: location.userProduct.product,
+        daysUntilExpiry: location.daysUntilExpiry,
+        isExpiringSoon: location.isExpiringSoon,
       }));
 
       return {
@@ -531,6 +619,7 @@ export class InventoryService {
 
   /**
    * Move item between lists
+   * @deprecated Use UserProductService.updateProductLocation instead
    */
   static async moveItem(
     userId: string,
@@ -538,58 +627,136 @@ export class InventoryService {
     toList: ListType
   ): Promise<ApiResponse<UserItemWithProduct>> {
     try {
-      const item = await prisma.userItem.findFirst({
-        where: { id: itemId, userId },
-        include: { product: true },
+      // Get current location
+      const location = await prisma.userProductLocation.findFirst({
+        where: {
+          id: itemId,
+          userProduct: {
+            userId,
+          },
+        },
+        include: {
+          userProduct: {
+            include: {
+              product: true,
+            },
+          },
+        },
       });
 
-      if (!item) {
+      if (!location) {
         return {
           success: false,
           error: 'Producto no encontrado',
         };
       }
 
-      if (item.listType === toList) {
+      if (location.listType === toList) {
         return {
           success: false,
           error: 'El producto ya está en esa lista',
         };
       }
 
-      const fromList = item.listType;
+      const fromList = location.listType;
+      let updatedLocation: UserProductLocationWithProduct;
 
-      // Update item list
-      const updatedItem = await prisma.userItem.update({
-        where: { id: itemId },
-        data: { listType: toList },
-        include: { product: true },
-      });
+      // If moving from shopping list, mark as consumed and create a new location
+      if (fromList === 'shopping') {
+        // Mark original location as consumed
+        await UserProductService.updateProductLocation(userId, itemId, {
+          isConsumed: true,
+        });
+
+        // Create a new location in the destination list
+        const newLocationData: {
+          productId: string;
+          location: ListType;
+          quantity: number;
+          unit: string;
+          purchaseDate: Date;
+          price?: number;
+          store?: string;
+          notes?: string;
+        } = {
+          productId: location.userProduct.productId,
+          location: toList,
+          quantity: location.quantity,
+          unit: location.unit || 'units',
+          purchaseDate: new Date(),
+        };
+        
+        if (location.price !== null && location.price !== undefined) {
+          newLocationData.price = Number(location.price);
+        }
+        if (location.store !== null && location.store !== undefined) {
+          newLocationData.store = location.store;
+        }
+        if (location.notes !== null && location.notes !== undefined) {
+          newLocationData.notes = location.notes;
+        }
+
+        const newLocationResult = await UserProductService.addProductLocation(userId, newLocationData);
+
+        if (!newLocationResult.success || !newLocationResult.data) {
+          return {
+            success: false,
+            error: newLocationResult.error || 'Error al mover producto',
+          };
+        }
+        updatedLocation = newLocationResult.data;
+
+      } else {
+        // For other movements, just update the listType
+        const updateResult = await UserProductService.updateProductLocation(userId, itemId, {
+          location: toList,
+        });
+
+        if (!updateResult.success || !updateResult.data) {
+          return {
+            success: false,
+            error: updateResult.error || 'Error al mover producto',
+          };
+        }
+        updatedLocation = updateResult.data;
+      }
 
       // Create movement record
       await prisma.itemMovement.create({
         data: {
           userId,
-          productId: item.productId,
+          productId: location.userProduct.productId,
           movementType: 'move',
-          quantity: item.quantity,
+          quantity: location.quantity,
           fromList,
           toList,
           metadata: { action: `Movido de ${fromList} a ${toList}` },
         },
       });
 
+      // Convert to UserItem format for backward compatibility
       const itemWithDetails: UserItemWithProduct = {
-        ...updatedItem,
-        daysUntilExpiry: updatedItem.expiryDate
-          ? Math.ceil((updatedItem.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
-          : null,
-        isExpiringSoon: updatedItem.expiryDate
-          ? Math.ceil((updatedItem.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) <= 3
-          : false,
+        id: updatedLocation.id,
+        userId,
+        productId: updatedLocation.userProduct.productId,
+        listType: updatedLocation.listType,
+        quantity: updatedLocation.quantity,
+        unit: updatedLocation.unit,
+        purchaseDate: updatedLocation.purchaseDate,
+        expiryDate: updatedLocation.expiryDate,
+        price: updatedLocation.price,
+        store: updatedLocation.store,
+        notes: updatedLocation.notes,
+        isConsumed: updatedLocation.isConsumed,
+        consumedAt: updatedLocation.consumedAt,
+        createdAt: updatedLocation.addedAt,
+        updatedAt: updatedLocation.addedAt,
+        product: updatedLocation.userProduct.product,
+        daysUntilExpiry: updatedLocation.daysUntilExpiry,
+        isExpiringSoon: updatedLocation.isExpiringSoon,
       };
 
-      logger.info(`Item moved: ${item.product.name} from ${fromList} to ${toList} for user ${userId}`);
+      logger.info(`Item moved: ${location.userProduct.product.name} from ${fromList} to ${toList} for user ${userId}`);
 
       return {
         success: true,

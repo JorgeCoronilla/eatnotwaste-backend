@@ -14,7 +14,8 @@ import { requestIdMiddleware, morganConfig, authLogger, performanceLogger } from
 // Importar rutas
 import authRoutes from './src/routes/auth';
 import productRoutes from './src/routes/products';
-import inventoryRoutes from './src/routes/inventory';
+import inventoryRoutesNew from './src/routes/inventoryNew';
+import shoppingRoutes from './src/routes/shopping';
 import recipeRoutes from './src/routes/recipes';
 import userRoutes from './src/routes/users';
 import dashboardRoutes from './src/routes/dashboard';
@@ -39,40 +40,7 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? [
-        // Dominios de producción
-        'https://freshkeeper.vercel.app', 
-        'https://www.freshkeeper.app',
-        // Agregar dominios comunes de deployment
-        'https://freshkeeper-frontend.vercel.app',
-        'https://freshkeeper-frontend.netlify.app',
-        'https://eatnotwaste-frontend.vercel.app',
-        'https://eatnotwaste-frontend.netlify.app',
-        // Localhost para desarrollo/testing
-        'http://localhost:5173',
-        'https://localhost:5173',
-        'http://localhost:5174',
-        'https://localhost:5174',
-        'http://localhost:3000',
-        'https://localhost:3000'
-      ]
-    : [
-        'http://localhost:3000', 
-        'http://localhost:5173', 
-        'http://localhost:5174', // Puerto HTTP para diagnóstico móvil
-        'http://localhost:5175', // Puerto HTTPS alternativo
-        'http://localhost:19006',
-        'https://localhost:5173', // HTTPS localhost
-        'https://localhost:5175', // HTTPS localhost alternativo
-        'https://192.168.1.111:5173', // IP local para acceso desde móvil HTTPS
-        'https://192.168.1.111:5175', // IP local para acceso desde móvil HTTPS alternativo
-        'http://192.168.1.111:5173', // IP local para acceso desde móvil HTTPS
-        'http://192.168.1.111:5174', // IP local para acceso desde móvil HTTP
-        'http://192.168.1.111:3000',
-        'https://localhost:3000', // Backend HTTPS localhost
-        'https://192.168.1.111:3000' // Backend HTTPS IP local
-      ],
+  origin: ['http://localhost:5174', 'http://localhost:5173', 'http://localhost:3000'],
   credentials: true
 }));
 app.use(limiter);
@@ -110,7 +78,7 @@ app.get('/', (req, res) => {
     endpoints: {
       auth: '/api/auth',
       products: '/api/products',
-      inventory: '/api/inventory',
+      inventoryV2: '/api/inventory/v2',
       recipes: '/api/recipes',
       users: '/api/users'
     }
@@ -129,7 +97,8 @@ app.get('/health', (req, res) => {
 // Rutas de la API
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
-app.use('/api/inventory', inventoryRoutes);
+app.use('/api/inventory', inventoryRoutesNew); // Nuevas rutas v2
+app.use('/api/shopping', shoppingRoutes);
 app.use('/api/recipes', recipeRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);

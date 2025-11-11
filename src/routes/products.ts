@@ -61,7 +61,7 @@ import {
 router.get('/scan/:barcode', 
   validateBarcode, 
   validateLanguage,
-  optionalAuth, 
+  authenticateToken, 
   scanBarcode
 );
 
