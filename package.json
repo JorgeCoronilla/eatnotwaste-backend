@@ -18,6 +18,8 @@
     "vercel-build": "npm run build",
     "postinstall": "prisma generate",
     "deploy": "prisma migrate deploy && npm run start",
+    "seed": "ts-node prisma/seed.ts",
+    "seed:prod": "node -r ts-node/register prisma/seed.ts",
     "docker:setup": "./scripts/dev-setup.sh",
     "docker:stop": "./scripts/dev-stop.sh",
     "docker:reset": "./scripts/dev-reset.sh",
