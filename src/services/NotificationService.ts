@@ -30,24 +30,46 @@ type NotificationHistory = {
   status: 'sent' | 'delivered' | 'failed' | 'read' | 'clicked';
 };
 
-// Firebase admin types (mock for now)
-interface FirebaseAdmin {
-  messaging(): {
-    sendMulticast(message: any): Promise<{ successCount: number; failureCount: number }>;
-  };
-}
+// Firebase Admin SDK
+import * as admin from 'firebase-admin';
 
-// Mock firebase admin for now
-const admin: any = {
-  apps: { length: 0 },
-  initializeApp: (config: any) => {},
-  credential: {
-    cert: (config: any) => config,
-  },
-  messaging: () => ({
-    sendMulticast: async (message: any) => ({ successCount: 1, failureCount: 0 }),
-  }),
-};
+// Initialize Firebase Admin SDK
+if (!admin.apps.length) {
+  try {
+    // Try environment variables first (for Railway/production)
+    const projectId = process.env.FIREBASE_PROJECT_ID;
+    const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+    const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+    
+    if (projectId && clientEmail && privateKey) {
+      // Use environment variables (Railway/production)
+      admin.initializeApp({
+        credential: admin.credential.cert({
+          projectId,
+          clientEmail,
+          privateKey,
+        }),
+        projectId,
+      });
+      console.log('🔥 Firebase Admin SDK initialized with environment variables');
+    } else {
+      // Fallback to JSON file (local development)
+      try {
+        const serviceAccount = require('../../config/firebase-service-account.json');
+        admin.initializeApp({
+          credential: admin.credential.cert(serviceAccount),
+          projectId: serviceAccount.project_id,
+        });
+        console.log('🔥 Firebase Admin SDK initialized with JSON file (local)');
+      } catch (fileError) {
+        throw new Error('Firebase configuration missing. Set environment variables or add JSON file.');
+      }
+    }
+  } catch (error) {
+    console.error('❌ Failed to initialize Firebase Admin SDK:', error);
+    throw new Error('Firebase configuration failed');
+  }
+}
 
 interface NotificationPayload {
   title: string;
@@ -235,7 +257,7 @@ export class NotificationService {
          },
        };
 
-       const response = await admin.messaging().sendMulticast(message);
+       const response = await admin.messaging().sendEachForMulticast(message);
 
       // Log notification history
        if (userId) {
