@@ -12,32 +12,7 @@
 FIREBASE_PROJECT_ID=eatwise-notifications
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@eatwise-notifications.iam.gserviceaccount.com
 FIREBASE_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDHfPG615wNrLa7
-BFz+C907CoYYGG2nhbCKfwOealyLcs5s2XGQDJDPC6RvThJHK1XaWTqncj7iyQyQ
-bQ3ywH9mcdPRo1F9R48esu3Crx81io/6PyZ1ho65EBnQy0PKOK7FmDv9ajU5sR00
-NnuaHixXH5TcB+HIwY3T1TjN2HE36jLMDhNeZLIJyuob0kK2MrizLH9eNNZGnMoB
-eQvoWKp/Tj5KkKw2ZxUDJhYeGgVz1+KT9xom4Dok6badkiDqV+Gpq48HN/xwfXTh
-zBPHfkksybW83qCweiGcuVmC98brakcfBbJe7173xup0+6R97Dx52aPn2wUff0XV
-5tXOD8tnAgMBAAECggEAUhFvWygPfbqztC2f2i3kVkFGmEwYdIY18kw9n2LvbrkM
-/k/YfeQFgQAvplDOiTPlTn5N+IwyHdeLUTFkPx19bBZhB4oyYKFbWkxPLzwfUUYP
-ZGqtdkUkmzLqA/FTkrKOCCFQcLlMa08Xjh7p66YFJNSLx5eAhjhGkkLSazDjpxX6
-liy+swKbXmhSMPA8zOiz029xkGtROM4AueizMAu94DDPJjQjXakrz74t5qpLoVgl
-TP5BqHiCPKLFsNl8iCy5NUau5T6U8GfTX5Cw3WHDZMex+0qzD/WFChjNaUhDGjzC
-cWKiaQFLqC7LFQTv8XuTxGLgjA6l/O5zJ6v4s9GdRQKBgQDuxQxjbxb/oxDikPzX
-DRS17wjzuTZaDnp0ABaVGkSu+aQT9pLSpLBaKftdzh3A4V+/Ap7hiisimBQhaObb
-Ei47OUdsbPkmp8CoC0/JhX7vsiWxhnQQ4QT0cWN6IGybVOh0X/S7bkgbLtpL008c
-O6QQNF4HFyGR4TmRoRQuDu3s4wKBgQDV4jhAZ2JV4H0wbh8UpZg0ahEHu0LTBYc9
-P3uWROd3QdNmJFB6yXy4Zj+sksWDE5gd5d0u5/QvNxDRtPRfEjVEt14SKtX5n4p0
-dFgoTYwEASV0cGfGvz+6nsg7BUSE11OBOvAE0gjkG8YIvETyWi95WPv4vLxMWdPR
-4Is66+JSrQKBgEEaDwepiX7IKllsKNRF58i3VRyG+m/RlMe+ImojEGkY/gjHaT7v
-0nmzCquIAIrPqHh/MWzTbHFxP8PgQ1ml+l8BfhztFX3ZrWjkNKwArxyR2T8vJsRX
-Zi90Hyh0YMh1fTAF3cehCR4IR1L3WZGcHV6huKV8RBXvb+/qGIN6ZJr7AoGBAKSh
-TSUdrs5lTldR3DCbSe3GWrd1x3kAf1mAnNNM1FGyZFLxztTEdHDHm2ltTASZt3QD
-891gA0+4dgTE4XiwXjo3XnxjZnKPABalWxoinoySiU74GpkbqqUuBPeRFW2fBJKr
-WAaN2PQkAKnGqNdW3cXs3X5XYCTw259n1COVX469AoGAUTPkIWJxzylGflKtlLyr
-+7VaMHrk4nQoMW2pgpvZ3A/PQQlFSZbL8YQpvV5e3jpuO0E4LWPK0ifYVZqiNCkE
-hthJYvSSxfQ30U5Fb8BaVGIDJMaC9CoGdi8Zb4c/fxsJvK5wspwW1nnFNIeO2iKe
-KdsWOhNeGe8hPSeTMC/qNHc=
+[PEGAR_AQUI_LA_CLAVE_PRIVADA_COMPLETA_DE_FIREBASE]
 -----END PRIVATE KEY-----
 ```
 
@@ -45,10 +20,21 @@ KdsWOhNeGe8hPSeTMC/qNHc=
 
 **En Railway, pega la clave privada COMPLETA incluyendo:**
 - `-----BEGIN PRIVATE KEY-----`
-- Todo el contenido de la clave
+- Todo el contenido de la clave (obtenido del archivo JSON de Firebase)
 - `-----END PRIVATE KEY-----`
 
 **Railway automáticamente manejará los saltos de línea.**
+
+---
+
+## 🔍 Obtener las Credenciales
+
+### **Desde Firebase Console:**
+1. Ve a Firebase Console → Configuración del proyecto
+2. Pestaña "Cuentas de servicio"
+3. Click "Generar nueva clave privada"
+4. Descargar archivo JSON
+5. Copiar los valores del JSON a las variables de Railway
 
 ---
 
