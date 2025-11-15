@@ -32,8 +32,8 @@ async function main() {
     // Split SQL commands (basic splitting by semicolon)
     const commands = seedSql
       .split(';')
-      .map((cmd: string) => cmd.trim())
-      .filter((cmd: string) => cmd.length > 0 && !cmd.startsWith('--'));
+      .map(cmd => cmd.trim())
+      .filter(cmd => cmd.length > 0 && !cmd.startsWith('--'));
 
     console.log(`📄 Found ${commands.length} SQL commands to execute`);
 
@@ -44,7 +44,7 @@ async function main() {
         try {
           console.log(`⚡ Executing command ${i + 1}/${commands.length}...`);
           await prisma.$executeRawUnsafe(command);
-        } catch (error: any) {
+        } catch (error) {
           console.warn(`⚠️ Warning on command ${i + 1}: ${error.message}`);
           // Continue with other commands even if one fails
         }
@@ -55,19 +55,23 @@ async function main() {
     
     // Verify some data was inserted
     const productCount = await prisma.product.count();
+    console.log(`📊 Total products in database: ${productCount}`);
     
-    console.log(`📊 Seed results:`);
-    console.log(`   - Products: ${productCount}`);
+    if (productCount > 0) {
+      console.log('🎉 Seed data verified successfully!');
+    } else {
+      console.log('⚠️ No products found after seed. Check SQL file.');
+    }
 
   } catch (error) {
-    console.error('❌ Error during seed:', error);
-    throw error;
+    console.error('❌ Error during database seed:', error);
+    process.exit(1);
   }
 }
 
 main()
   .catch((e) => {
-    console.error('💥 Seed failed:', e);
+    console.error('❌ Seed failed:', e);
     process.exit(1);
   })
   .finally(async () => {
