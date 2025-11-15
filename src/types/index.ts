@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { User } from '@prisma/client';
 
 // Tipos de usuario
 export interface IUser {
@@ -181,12 +182,7 @@ export interface OpenFoodFactsProduct {
 
 // Tipos de request extendidos
 export interface AuthenticatedRequest extends Request {
-  user?: {
-    id: string;
-    email: string;
-    role: string;
-    preferences: IUser['preferences'];
-  };
+  user?: User;
 }
 
 // Tipos de respuesta API

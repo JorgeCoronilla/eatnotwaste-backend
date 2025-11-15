@@ -38,14 +38,14 @@
       "@/utils/*": ["src/utils/*"],
       "@/types/*": ["src/types/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./src/types"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
     "src/**/*",
     "index.ts",
-    "*.ts"
+    "*.ts",
+    "generated/**/*"
   ],
   "exclude": [
     "node_modules",

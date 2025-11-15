@@ -1,509 +1,898 @@
-# FreshKeeper API Documentation
+# Documentación de la API de FreshKeeper
 
 ## Información General
 
-- **Base URL**: `http://localhost:3001`
-- **Versión**: 1.0.0
+- **URL Base**: `/api`
+- **Versión**: 2.0.0
 - **Autenticación**: JWT Bearer Token
+
+Esta documentación describe la versión 2 de la API de FreshKeeper, que incluye un nuevo diseño de inventario y numerosas mejoras.
 
 ## Endpoints
 
-### 🔐 Autenticación (`/auth`)
+### 🔐 Autenticación (`/api/auth`)
 
-#### POST `/auth/register`
+#### `POST /api/auth/register`
+
 Registra un nuevo usuario en el sistema.
 
-**Request Body:**
-```json
-{
-  "name": "string",
-  "email": "string",
-  "password": "string"
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "user": {
-      "id": "string",
-      "name": "string",
-      "email": "string"
-    },
-    "token": "string"
-  }
-}
-```
-
-#### POST `/auth/login`
-Inicia sesión con credenciales existentes.
-
-**Request Body:**
-```json
-{
-  "email": "string",
-  "password": "string"
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "user": {
-      "id": "string",
-      "name": "string",
-      "email": "string"
-    },
-    "token": "string"
-  }
-}
-```
-
-#### POST `/auth/logout`
-Cierra la sesión del usuario actual.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "message": "Sesión cerrada exitosamente"
-}
-```
-
-### 👤 Usuarios (`/users`)
-
-#### GET `/users/profile`
-Obtiene el perfil del usuario autenticado.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "id": "string",
+- **Request Body**:
+  ```json
+  {
     "name": "string",
     "email": "string",
-    "createdAt": "string",
-    "updatedAt": "string"
+    "password": "string"
   }
-}
-```
+  ```
 
-#### PUT `/users/profile`
-Actualiza el perfil del usuario autenticado.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "name": "string",
-  "email": "string"
-}
-```
-
-### 📦 Productos (`/products`)
-
-#### GET `/products`
-Obtiene la lista de productos con paginación y filtros.
-
-**Query Parameters:**
-- `page` (number): Número de página (default: 1)
-- `limit` (number): Elementos por página (default: 10)
-- `search` (string): Término de búsqueda
-- `category` (string): Filtrar por categoría
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "products": [
-      {
+- **Response (201 - Created)**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "user": {
         "id": "string",
-        "barcode": "string",
         "name": "string",
-        "brand": "string",
-        "category": "string",
-        "nutritionalInfo": {
-          "calories": "number",
-          "protein": "number",
-          "carbs": "number",
-          "fat": "number",
-          "fiber": "number",
-          "sugar": "number"
-        },
-        "imageUrl": "string"
-      }
-    ],
-    "pagination": {
-      "page": "number",
-      "limit": "number",
-      "total": "number",
-      "pages": "number"
+        "email": "string"
+      },
+      "token": "string"
     }
   }
-}
-```
+  ```
 
-#### GET `/products/:id`
-Obtiene un producto específico por ID.
+#### `POST /api/auth/login`
 
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "id": "string",
-    "barcode": "string",
-    "name": "string",
-    "brand": "string",
-    "category": "string",
-    "nutritionalInfo": "object",
-    "imageUrl": "string"
+Inicia sesión con las credenciales del usuario.
+
+- **Request Body**:
+  ```json
+  {
+    "email": "string",
+    "password": "string"
   }
-}
-```
+  ```
 
-#### GET `/products/barcode/:barcode`
-Busca un producto por código de barras.
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "user": {
+        "id": "string",
+        "name": "string",
+        "email": "string"
+      },
+      "token": "string"
+    }
+  }
+  ```
 
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "id": "string",
-    "barcode": "string",
+#### `POST /api/auth/logout`
+
+Cierra la sesión del usuario y elimina el token.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Sesión cerrada exitosamente"
+  }
+  ```
+
+#### `GET /api/auth/refresh`
+
+Refresca el token de autenticación del usuario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "token": "string"
+    }
+  }
+  ```
+
+#### `POST /api/auth/change-password`
+
+Permite al usuario cambiar su contraseña.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "currentPassword": "string",
+    "newPassword": "string"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Contraseña actualizada correctamente"
+  }
+  ```
+
+#### `DELETE /api/auth/account`
+
+Elimina la cuenta del usuario autenticado.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Cuenta eliminada correctamente"
+  }
+  ```
+
+#### `GET /api/auth/google`
+
+Inicia el proceso de autenticación con Google.
+
+- **Response**: Redirige al usuario a la página de autenticación de Google.
+
+#### `GET /api/auth/google/callback`
+
+Callback que Google utiliza para redirigir al usuario después de la autenticación.
+
+- **Response**: Redirige al cliente con un token de autenticación.
+
+### 📊 Panel de Control (`/api/dashboard`)
+
+#### `GET /api/dashboard`
+
+Obtiene un resumen general del estado del usuario, incluyendo productos que expiran pronto, niveles de inventario y actividad reciente.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "expiringSoon": [],
+      "inventoryLevels": [],
+      "recentActivity": []
+    }
+  }
+  ```
+
+#### `GET /api/dashboard/inventory-summary`
+
+Proporciona un resumen del inventario, incluyendo el número total de artículos y la cantidad por ubicación.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "totalItems": "number",
+      "locations": [
+        {
+          "location": "string",
+          "count": "number"
+        }
+      ]
+    }
+  }
+  ```
+
+#### `GET /api/dashboard/consumption-stats`
+
+Devuelve estadísticas sobre el consumo de productos, el desperdicio y los patrones de compra.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Query Parameters**:
+  - `period` (string): `week` o `month` (default: `week`)
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {
+      "consumedItems": "number",
+      "wastedItems": "number",
+      "purchasePatterns": "object"
+    }
+  }
+  ```
+
+### 📦 Inventario (`/api/inventory`)
+
+#### `GET /api/inventory/v2`
+
+Obtiene el inventario del usuario con filtros y paginación.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Query Parameters**:
+  - `page` (number): Número de página.
+  - `limit` (number): Resultados por página.
+  - `sort` (string): Campo por el que ordenar.
+  - `order` (string): `asc` o `desc`.
+  - `search` (string): Término de búsqueda.
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": [],
+    "pagination": {}
+  }
+  ```
+
+#### `POST /api/inventory/v2`
+
+Añade un producto al inventario del usuario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "productId": "string",
+    "location": "string",
+    "quantity": "number",
+    "expiryDate": "string"
+  }
+  ```
+
+- **Response (201 - Created)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `PUT /api/inventory/v2/:userProductId`
+
+Actualiza un producto existente en el inventario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "quantity": "number",
+    "expiryDate": "string"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `DELETE /api/inventory/v2/:userProductId`
+
+Elimina un producto del inventario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Producto eliminado del inventario"
+  }
+  ```
+
+#### `POST /api/inventory/v2/:userProductId/consume`
+
+Registra el consumo de una cantidad de un producto.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "consumedQuantity": "number"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `PUT /api/inventory/v2/:productId/move`
+
+Mueve un producto a una nueva ubicación.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "from": "string",
+    "to": "string",
+    "quantity": "number"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `GET /api/inventory/expiring`
+
+Obtiene una lista de productos que están a punto de expirar.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Query Parameters**:
+  - `days` (number): Número de días para considerar un producto como "expirando".
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
+
+#### `GET /api/inventory/waste`
+
+Obtiene estadísticas sobre el desperdicio de alimentos.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `GET /api/inventory/location/:location`
+
+Obtiene todos los productos de una ubicación específica.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
+
+### 🔔 Notificaciones (`/api/notifications`)
+
+#### `POST /api/notifications/register-device`
+
+Registra un dispositivo para recibir notificaciones push.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "token": "string",
+    "platform": "string" 
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Dispositivo registrado para notificaciones"
+  }
+  ```
+
+#### `DELETE /api/notifications/unregister-device/:deviceId`
+
+Elimina el registro de un dispositivo para notificaciones.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Dispositivo desregistrado"
+  }
+  ```
+
+#### `POST /api/notifications/send-expiry-alert`
+
+Envía una alerta de expiración de un producto.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "userProductId": "string"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Alerta de expiración enviada"
+  }
+  ```
+
+#### `POST /api/notifications/send-shopping-reminder`
+
+Envía un recordatorio para la lista de compras.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Recordatorio de compras enviado"
+  }
+  ```
+
+#### `GET /api/notifications/history`
+
+Obtiene el historial de notificaciones del usuario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
+
+#### `PUT /api/notifications/:notificationId/read`
+
+Marca una notificación como leída.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+### 🛍️ Productos (`/api/products`)
+
+#### `GET /api/products`
+
+Obtiene una lista de todos los productos.
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
+
+#### `POST /api/products`
+
+Crea un nuevo producto.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
     "name": "string",
     "brand": "string",
     "category": "string"
   }
-}
-```
+  ```
 
-#### POST `/products`
-Crea un nuevo producto.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "barcode": "string",
-  "name": "string",
-  "brand": "string",
-  "category": "string",
-  "nutritionalInfo": {
-    "calories": "number",
-    "protein": "number",
-    "carbs": "number",
-    "fat": "number",
-    "fiber": "number",
-    "sugar": "number"
-  },
-  "imageUrl": "string"
-}
-```
-
-### 📋 Inventario (`/inventory`)
-
-#### GET `/inventory`
-Obtiene el inventario del usuario autenticado.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Query Parameters:**
-- `listType` (string): Filtrar por tipo de lista (fridge, pantry, freezer, shopping)
-- `expiring` (boolean): Solo productos próximos a vencer
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "product": {
-        "id": "string",
-        "name": "string",
-        "brand": "string",
-        "category": "string"
-      },
-      "listType": "string",
-      "quantity": "number",
-      "unit": "string",
-      "purchaseDate": "string",
-      "expiryDate": "string",
-      "notes": "string"
-    }
-  ]
-}
-```
-
-#### POST `/inventory`
-Agrega un item al inventario.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "productId": "string",
-  "listType": "fridge|pantry|freezer|shopping",
-  "quantity": "number",
-  "unit": "string",
-  "purchaseDate": "string",
-  "expiryDate": "string",
-  "notes": "string"
-}
-```
-
-#### PUT `/inventory/:id`
-Actualiza un item del inventario.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "quantity": "number",
-  "unit": "string",
-  "expiryDate": "string",
-  "notes": "string"
-}
-```
-
-#### DELETE `/inventory/:id`
-Elimina un item del inventario.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-### 🍳 Recetas (`/recipes`)
-
-#### GET `/recipes`
-Obtiene recetas basadas en ingredientes disponibles.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Query Parameters:**
-- `ingredients` (string): Lista de ingredientes separados por coma
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": "string",
-      "title": "string",
-      "description": "string",
-      "ingredients": ["string"],
-      "instructions": ["string"],
-      "prepTime": "number",
-      "cookTime": "number",
-      "servings": "number"
-    }
-  ]
-}
-```
-
-### 🔔 Notificaciones (`/notifications`)
-
-#### POST `/notifications/register-device`
-Registra un dispositivo para notificaciones push.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "token": "string",
-  "platform": "ios|android|web"
-}
-```
-
-#### DELETE `/notifications/unregister-device`
-Desregistra un dispositivo.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "token": "string"
-}
-```
-
-#### POST `/notifications/send`
-Envía notificaciones (solo para administradores).
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
-```json
-{
-  "type": "expiry_reminder|shopping_reminder|general",
-  "title": "string",
-  "body": "string",
-  "data": "object"
-}
-```
-
-### 📊 Dashboard (`/dashboard`)
-
-#### GET `/dashboard/stats`
-Obtiene estadísticas del dashboard del usuario.
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "totalItems": "number",
-    "expiringItems": "number",
-    "categoriesCount": "object",
-    "recentActivity": "array"
+- **Response (201 - Created)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
   }
-}
-```
+  ```
 
-## Códigos de Estado HTTP
+#### `GET /api/products/search`
 
-- `200` - OK: Solicitud exitosa
-- `201` - Created: Recurso creado exitosamente
-- `400` - Bad Request: Error en la solicitud
-- `401` - Unauthorized: No autenticado
-- `403` - Forbidden: No autorizado
-- `404` - Not Found: Recurso no encontrado
-- `500` - Internal Server Error: Error del servidor
+Busca productos por un término de búsqueda.
 
-## Estructura de Respuesta de Error
+- **Query Parameters**:
+  - `q` (string): Término de búsqueda.
 
-```json
-{
-  "success": false,
-  "error": {
-    "message": "string",
-    "code": "string",
-    "details": "object"
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
   }
-}
-```
+  ```
 
-## Autenticación
+#### `GET /api/products/popular`
 
-La API utiliza JWT (JSON Web Tokens) para la autenticación. Después de iniciar sesión exitosamente, incluye el token en el header `Authorization` de todas las solicitudes protegidas:
+Obtiene una lista de los productos más populares.
 
-```
-Authorization: Bearer <your-jwt-token>
-```
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
 
-## Ejemplos de Uso
+#### `GET /api/products/categories`
 
-### Registro de Usuario
-```bash
-curl -X POST http://localhost:3001/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Juan Pérez",
-    "email": "juan@example.com",
-    "password": "password123"
-  }'
-```
+Obtiene todas las categorías de productos.
 
-### Obtener Inventario
-```bash
-curl -X GET http://localhost:3001/inventory \
-  -H "Authorization: Bearer <your-token>"
-```
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
 
-### Agregar Producto al Inventario
-```bash
-curl -X POST http://localhost:3001/inventory \
-  -H "Authorization: Bearer <your-token>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "productId": "product-id",
-    "listType": "fridge",
-    "quantity": 1,
-    "unit": "unidades",
-    "purchaseDate": "2024-01-15",
-    "expiryDate": "2024-01-22",
-    "notes": "Comprado en el supermercado"
-  }'
-```
+#### `GET /api/products/scan/:barcode`
 
-## Configuración de Base de Datos
+Busca un producto por su código de barras.
 
-La aplicación utiliza PostgreSQL con Prisma ORM. Para configurar la base de datos:
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
 
-1. Configura las variables de entorno en `.env`
-2. Ejecuta `npm run db:push` para aplicar el esquema
-3. Ejecuta `npm run db:setup` para poblar con datos iniciales
+#### `GET /api/products/:id`
 
-## Health Check
+Obtiene un producto por su ID.
 
-Endpoint para verificar el estado del servidor:
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
 
-```
-GET /health
-```
+#### `PUT /api/products/:id`
 
-**Response:**
-```json
-{
-  "status": "ok",
-  "timestamp": "2024-01-15T10:30:00.000Z",
-  "uptime": 3600
-}
-```
+Actualiza un producto existente.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "name": "string",
+    "brand": "string",
+    "category": "string"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `DELETE /api/products/:id`
+
+Elimina un producto.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Producto eliminado"
+  }
+  ```
+
+### 🍳 Recetas (`/api/recipes`)
+
+#### `GET /api/recipes`
+
+Obtiene una lista de recetas, con la opción de filtrar por ingredientes.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Query Parameters**:
+  - `ingredients` (string): Lista de ingredientes separados por comas para sugerir recetas.
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
+
+#### `POST /api/recipes`
+
+Crea una nueva receta.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "title": "string",
+    "description": "string",
+    "ingredients": [],
+    "instructions": "string"
+  }
+  ```
+
+- **Response (201 - Created)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `GET /api/recipes/suggestions`
+
+Obtiene sugerencias de recetas basadas en el inventario del usuario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
+
+### 🛒 Lista de Compras (`/api/shopping`)
+
+#### `GET /api/shopping`
+
+Obtiene la lista de compras del usuario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
+
+#### `POST /api/shopping`
+
+Añade un producto a la lista de compras.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "productId": "string",
+    "quantity": "number"
+  }
+  ```
+
+- **Response (201 - Created)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `PUT /api/shopping/:id`
+
+Actualiza un producto en la lista de compras.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "quantity": "number",
+    "purchased": "boolean"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `PUT /api/shopping/:id/move`
+
+Mueve un producto de la lista de compras al inventario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "location": "string"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Producto movido al inventario"
+  }
+  ```
+
+#### `DELETE /api/shopping/:id`
+
+Elimina un producto de la lista de compras.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "message": "Producto eliminado de la lista de compras"
+  }
+  ```
+
+### 👤 Usuarios (`/api/users`)
+
+#### `GET /api/users`
+
+Obtiene una lista de todos los usuarios (solo para administradores).
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": []
+  }
+  ```
+
+#### `GET /api/users/profile`
+
+Obtiene el perfil del usuario autenticado.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `PUT /api/users/profile`
+
+Actualiza el perfil del usuario autenticado.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "name": "string",
+    "email": "string"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `GET /api/users/stats`
+
+Obtiene estadísticas sobre los usuarios (solo para administradores).
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```
+
+#### `PUT /api/users/preferences`
+
+Actualiza las preferencias del usuario.
+
+- **Headers**:
+  - `Authorization`: `Bearer <token>`
+
+- **Request Body**:
+  ```json
+  {
+    "notifications": "boolean",
+    "theme": "string"
+  }
+  ```
+
+- **Response (200 - OK)**:
+  ```json
+  {
+    "success": true,
+    "data": {}
+  }
+  ```

@@ -1,24 +1,18 @@
+import { PrismaClient, ProductSource } from '@prisma/client';
 import { Request, Response, RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
 import { prisma } from '../config/database';
 import ProductAPIService from '../services/ProductAPIService';
-
-interface AuthenticatedRequest extends Request {
-  user?: {
-    id: string;
-    email: string;
-    name: string;
-    role: string;
-  };
-}
+import { AuthenticatedRequest } from '../types';
 
 /**
  * Escanear código de barras
  */
-export const scanBarcode = async (req: Request, res: Response): Promise<void> => {
+export const scanBarcode: RequestHandler = async (req, res) => {
   try {
-    const { barcode } = req.params;
-    const { lang = 'es' } = req.query;
+    const reqAuth = req as AuthenticatedRequest;
+    const { barcode } = reqAuth.params;
+    const { lang = 'es' } = reqAuth.query;
 
     if (!barcode) {
       res.status(400).json({
@@ -49,6 +43,7 @@ export const scanBarcode = async (req: Request, res: Response): Promise<void> =>
     
     try {
       const apiResult = await ProductAPIService.getProductData(barcode, lang as string);
+      console.log('Resultado de la API:', apiResult);
       
       if (apiResult.success && apiResult.product) {
         // Crear producto en base de datos local con los datos de la API
@@ -62,15 +57,25 @@ export const scanBarcode = async (req: Request, res: Response): Promise<void> =>
             category: productData.category || null,
             description: productData.description || null,
             imageUrl: productData.imageUrl || null,
-            nutritionalInfo: productData.nutrition || {},
-            source: 'openfoodfacts',
-            isVerified: true
+            nutritionalInfo: productData.nutritionalInfo || {},
+            source: apiResult.source as ProductSource,
+            isVerified: false, // Los productos de API no se verifican automáticamente
           }
         });
 
+        // Asociar el producto con el usuario que lo escaneó
+        if (reqAuth.user) {
+          await prisma.userProduct.create({
+            data: {
+              userId: reqAuth.user.id,
+              productId: newProduct.id,
+            },
+          });
+        }
+
         res.json({
           success: true,
-          message: 'Producto encontrado y agregado a la base de datos',
+          message: 'Producto obtenido de API externa y guardado',
           data: newProduct,
           source: apiResult.source
         });
@@ -204,15 +209,14 @@ export const createProduct: RequestHandler = async (req, res) => {
         subcategory,
         description,
         imageUrl,
-        nutritionalInfo: nutritionalInfo || {},
-        allergens: allergens || [],
+        nutritionalInfo,
+        allergens,
         ingredients,
-        source: 'manual',
-        isVerified: false
+        source: ProductSource.manual,
+        isVerified: true, // Productos creados por el usuario se consideran verificados
+        createdById: reqAuth.user.id
       }
     });
-
-    console.log(`✅ Producto creado: ${newProduct.name} por ${reqAuth.user.email}`);
 
     res.status(201).json({
       success: true,

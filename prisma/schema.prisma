@@ -58,6 +58,7 @@ model User {
   avatarUrl       String?  @map("avatar_url") @db.Text
   language        String   @default("es") @db.VarChar(10)
   timezone        String   @default("UTC") @db.VarChar(50)
+  role            String   @default("user") @db.VarChar(50)
   preferences     Json     @default("{}")
   isActive        Boolean  @default(true) @map("is_active")
   emailVerified   Boolean  @default(false) @map("email_verified")
@@ -71,6 +72,8 @@ model User {
   deviceTokens           UserDeviceToken[]
   notificationHistory    NotificationHistory[]
   notificationSettings   UserNotificationSettings?
+  userProducts           UserProduct[]
+  createdProducts        Product[]     @relation("CreatedProducts")
 
   @@map("users")
 }
@@ -90,12 +93,15 @@ model Product {
   source           ProductSource @default(manual)
   sourceId         String?       @map("source_id") @db.VarChar(255)
   isVerified       Boolean       @default(false) @map("is_verified")
+  createdById      String?       @map("created_by_id") @db.Uuid
   createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz
   updatedAt        DateTime      @updatedAt @map("updated_at") @db.Timestamptz
 
   // Relations
   userItems        UserItem[]
   itemMovements    ItemMovement[]
+  userProducts     UserProduct[]
+  createdBy        User?         @relation("CreatedProducts", fields: [createdById], references: [id], onDelete: SetNull)
 
   @@map("products")
 }
@@ -124,6 +130,25 @@ model UserItem {
 
   @@unique([userId, productId, listType, purchaseDate, expiryDate])
   @@map("user_items")
+}
+
+model UserProduct {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @map("user_id") @db.Uuid
+  productId   String   @map("product_id") @db.Uuid
+  isActive    Boolean  @default(true) @map("is_active")
+  firstAdded  DateTime @default(now()) @map("first_added") @db.Timestamptz
+  lastUsed    DateTime @updatedAt @map("last_used") @db.Timestamptz
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  // Relations
+  user      User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product               @relation(fields: [productId], references: [id], onDelete: Cascade)
+  locations UserProductLocation[]
+
+  @@unique([userId, productId])
+  @@map("user_products")
 }
 
 model ItemMovement {
@@ -220,4 +245,29 @@ model UserNotificationSettings {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_notification_settings")
+}
+
+model UserProductLocation {
+  id            String      @id @default(uuid()) @db.Uuid
+  userProductId String      @map("user_product_id") @db.Uuid
+  listType      ListType    @map("list_type")
+  quantity      Int         @default(1)
+  unit          String      @default("units") @db.VarChar(50)
+  purchaseDate  DateTime?   @map("purchase_date") @db.Date
+  expiryDate    DateTime?   @map("expiry_date") @db.Date
+  price         Decimal?    @db.Decimal(10, 2)
+  store         String?     @db.VarChar(255)
+  notes         String?     @db.Text
+  isConsumed    Boolean     @default(false) @map("is_consumed")
+  consumedAt    DateTime?   @map("consumed_at") @db.Timestamptz
+  addedAt       DateTime    @default(now()) @map("added_at") @db.Timestamptz
+  removedAt     DateTime?   @map("removed_at") @db.Timestamptz
+  createdAt     DateTime    @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime    @updatedAt @map("updated_at") @db.Timestamptz
+
+  // Relations
+  userProduct UserProduct @relation(fields: [userProductId], references: [id], onDelete: Cascade)
+
+  @@index([userProductId, listType, removedAt])
+  @@map("user_product_locations")
 }

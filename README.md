@@ -1,6 +1,15 @@
 # FreshKeeper Backend
 
-Backend API para FreshKeeper - Aplicación de gestión de inventario de alimentos con soporte para códigos de barras, múltiples idiomas y gestión inteligente de desperdicio alimentario. Rediseñado con PostgreSQL para máximo rendimiento y escalabilidad.
+Backend API para FreshKeeper - Aplicación de gestión de inventario de alimentos con soporte para códigos de barras, múltiples idiomas y gestión inteligente de desperdicio alimentario. 
+
+**✅ Versión 2.1.0 - Nuevo Diseño de Inventario Implementado**
+- Modelo de datos mejorado: UserProduct + UserProductLocation
+- Múltiples ubicaciones por producto (nevera, congelador, alacena, compras)
+- Paginación inteligente y filtros avanzados
+- Cálculos automáticos de expiración y alertas proactivas
+- Endpoints /api/inventory/v2 completamente funcionales
+
+Rediseñado con PostgreSQL para máximo rendimiento y escalabilidad.
 
 ## 🚀 Características Implementadas
 
@@ -149,6 +158,15 @@ npm start
 - `DELETE /:id` - Eliminar item del inventario ✅
 - `POST /:id/consume` - Marcar como consumido ✅
 
+### 📋 Inventario v2 - Nuevo Diseño (`/api/inventory/v2`)
+- `GET /` - Obtener inventario con paginación y filtros ✅
+- `POST /` - Agregar producto con ubicación específica ✅
+- `PUT /:id` - Actualizar item con nuevos campos (precio, tienda) ✅
+- `DELETE /:id` - Eliminar item del inventario ✅
+- `POST /:id/consume` - Consumir producto de ubicación específica ✅
+- `GET /expiring` - Productos próximos a expirar con filtro de días ✅
+- `GET /stats` - Estadísticas detalladas por ubicación ✅
+
 ### 👥 Usuarios (`/api/users`) - En desarrollo
 - `GET /` - Listar usuarios (admin) 🚧
 - `GET /stats` - Estadísticas de usuarios 🚧
@@ -161,6 +179,48 @@ npm start
 
 **Leyenda:** ✅ Implementado | 🚧 En desarrollo
 
+## 🔌 Configuración de CORS
+
+La configuración de CORS es crucial para permitir que el frontend se comunique con el backend. La estrategia varía según el entorno.
+
+### 1. Desarrollo Local (Conexión Directa)
+
+Para simplificar el desarrollo local, puedes configurar CORS para que acepte peticiones directamente desde el servidor de desarrollo del frontend.
+
+- **Ubicación:** `src/index.ts`
+- **Configuración:**
+  ```ts
+  app.use(cors({
+    origin: ['http://localhost:5174', 'http://localhost:5173', 'http://localhost:3000'],
+    credentials: true
+  }));
+  ```
+
+### 2. Producción (Web y Capacitor)
+
+En producción, la configuración debe ser más restrictiva y basarse en variables de entorno para permitir solo los orígenes autorizados.
+
+- **Ubicación:** `src/index.ts`
+- **Configuración:**
+  ```ts
+  const whitelist = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : [];
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (whitelist.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true
+  }));
+  ```
+- **Variable de Entorno (`.env`):**
+  ```
+  # Lista de orígenes permitidos, separados por comas
+  CORS_ORIGIN=https://your-frontend-domain.com,capacitor://localhost,http://localhost
+  ```
+
 ## 🔧 Estructura del Proyecto
 
 ```
@@ -170,30 +230,37 @@ src/
 ├── controllers/
 │   ├── authController.ts    # Autenticación y gestión de usuarios
 │   ├── productController.ts # Gestión de productos y escaneo
-│   ├── inventoryController.ts # Gestión de listas e inventario
+│   ├── inventoryController.ts # Gestión de listas e inventario (diseño antiguo)
+│   ├── inventoryControllerNew.ts # Gestión de inventario - Nuevo diseño v2 ✅
 │   ├── userController.ts    # Gestión de usuarios (parcial)
 │   ├── dashboardController.ts # Carga optimizada de datos iniciales
 │   └── recipeController.ts  # Gestión de recetas (en desarrollo)
 ├── middleware/
 │   ├── auth.ts             # Autenticación JWT
 │   ├── validation.ts       # Validaciones con express-validator
+│   ├── validationNew.ts    # Validaciones para nuevo diseño ✅
 │   └── rateLimiter.ts      # Rate limiting
 ├── models/
 │   ├── User.ts             # Modelo de usuario con preferencias
 │   ├── Product.ts          # Modelo de producto con múltiples fuentes
-│   ├── UserItem.ts         # Modelo unificado de listas
+│   ├── UserItem.ts         # Modelo unificado de listas (diseño antiguo)
+│   ├── UserProduct.ts      # Modelo de producto de usuario - Nuevo diseño ✅
+│   ├── UserProductLocation.ts # Modelo de ubicación de producto - Nuevo diseño ✅
 │   ├── ItemMovement.ts     # Historial de movimientos
 │   └── ProductCache.ts     # Caché de productos escaneados
 ├── routes/
 │   ├── auth.ts             # Rutas de autenticación
 │   ├── products.ts         # Rutas de productos
-│   ├── inventory.ts        # Rutas de inventario y listas
+│   ├── inventory.ts        # Rutas de inventario (diseño antiguo)
+│   ├── inventoryNew.ts     # Rutas de inventario v2 - Nuevo diseño ✅
 │   ├── users.ts            # Rutas de usuarios
 │   ├── dashboard.ts        # Rutas optimizadas para móvil
 │   └── recipes.ts          # Rutas de recetas
 ├── services/
 │   ├── ProductAPIService.ts # Integración con APIs externas
 │   ├── DashboardService.ts  # Consultas optimizadas para login
+│   ├── InventoryService.ts  # Servicio de inventario - Nuevo diseño ✅
+│   ├── UserProductService.ts # Servicio de productos de usuario - Nuevo diseño ✅
 │   └── CacheService.ts      # Gestión de caché de productos
 ├── types/
 │   └── index.ts            # Definiciones de tipos TypeScript
@@ -274,7 +341,7 @@ docker-compose down
 - **Metadatos**: imágenes, popularidad, verificación de calidad
 - **Caché inteligente**: datos de APIs con TTL optimizado
 
-### Lista de Usuario (user_items)
+### Lista de Usuario (user_items) - Diseño Anterior
 - **Sistema unificado**: shopping, fridge, freezer, pantry en una tabla
 - **Información del item**: cantidad, unidad, ubicación específica
 - **Fechas importantes**: compra, expiración, apertura del producto
@@ -282,6 +349,23 @@ docker-compose down
 - **Estado del producto**: activo, consumido, expirado, descartado
 - **Información de compra**: precio, moneda, tienda
 - **Notas personales**: recordatorios, observaciones del usuario
+
+### Producto de Usuario (user_products) - Nuevo Diseño v2 ✅
+- **Modelo principal**: Productos únicos por usuario
+- **Información base**: product_id, user_id, preferencias personales
+- **Datos configurables**: nombre personalizado, categoría personalizada
+- **Sistema de alertas**: configuración específica por producto
+- **Estadísticas de uso**: frecuencia de compra, consumo promedio
+- **Notas y etiquetas**: información personal del usuario
+
+### Ubicación de Producto (user_product_locations) - Nuevo Diseño v2 ✅
+- **Modelo de ubicaciones**: Múltiples ubicaciones por producto
+- **Ubicaciones estándar**: nevera, congelador, alacena, compras
+- **Información de cantidad**: cantidad actual y unidad de medida
+- **Gestión de fechas**: fecha de compra, expiración, apertura
+- **Datos de compra**: precio, moneda, tienda, notas
+- **Estado del producto**: activo, consumido, expirado, descartado
+- **Cálculos automáticos**: días hasta expiración, alertas proactivas
 
 ### Movimientos de Items (item_movements)
 - **Historial completo**: todos los cambios entre listas
@@ -300,8 +384,9 @@ docker-compose down
 ### Consultas Optimizadas
 - **Carga inicial unificada**: Una sola consulta para dashboard completo
 - **Índices estratégicos**: Optimizados para consultas frecuentes
-- **Paginación inteligente**: Carga progresiva de datos
+- **Paginación inteligente**: Carga progresiva de datos con límites configurables
 - **Caché de productos**: TTL de 30 días para datos de APIs
+- **Nuevo diseño v2**: Consultas optimizadas con JOINs eficientes entre user_products y user_product_locations
 
 ### Estrategia de Carga Inicial
 ```sql
@@ -836,7 +921,12 @@ npm test
 ### ✅ Completado
 - Sistema de autenticación completo
 - Gestión de productos con APIs externas
-- Inventario con alertas y estadísticas
+- **Nuevo diseño de inventario v2 implementado**
+  - Modelos UserProduct y UserProductLocation
+  - Endpoints /api/inventory/v2 completos
+  - Paginación inteligente y filtros avanzados
+  - Cálculos automáticos de expiración
+  - Consumo específico por ubicación
 - **Sistema de notificaciones backend completo**
   - NotificationService.ts con Firebase FCM
   - NotificationScheduler.ts con cron jobs automáticos
@@ -845,6 +935,8 @@ npm test
 - Modelos de base de datos robustos
 - Dockerización completa
 - Middleware de seguridad
+- Código TypeScript sin errores de compilación
+- API Documentation actualizada
 
 ### 🚧 En Desarrollo
 - Sistema de recetas
@@ -878,7 +970,21 @@ Para soporte y preguntas:
 
 ## 🔄 Changelog
 
-### v2.0.0 (En Desarrollo) - Rediseño PostgreSQL
+### v2.1.0 (Actual) - Nuevo Diseño de Inventario ✅
+- 🆕 **Nuevo diseño de inventario v2**: Modelo UserProduct + UserProductLocation
+- 🆕 **Múltiples ubicaciones por producto**: Nevera, congelador, alacena, compras
+- 🆕 **Paginación inteligente**: Límite y offset configurables en endpoints
+- 🆕 **Campos adicionales**: Precio, tienda, notas en ubicaciones
+- 🆕 **Cálculos automáticos**: Días hasta expiración, alertas proactivas
+- 🆕 **Endpoints v2 completos**: CRUD completo con /api/inventory/v2
+- 🆕 **Consumo específico por ubicación**: POST /inventory/v2/:id/consume
+- 🆕 **Estadísticas mejoradas**: Stats por ubicación y producto
+- 🆕 **Validaciones mejoradas**: Nuevo middleware validationNew.ts
+- ⚡ **Rendimiento optimizado**: Consultas más eficientes con JOINs
+- 🔧 **Código TypeScript limpio**: Sin errores de compilación
+- 📚 **API Documentation actualizada**: Documentación completa del nuevo diseño
+
+### v2.0.0 (Anterior) - Rediseño PostgreSQL
 - 🔄 **MIGRACIÓN COMPLETA A POSTGRESQL**: Transición desde MongoDB
 - 🆕 **Nuevo diseño de base de datos**: Sistema unificado y optimizado
 - 🆕 **Sistema de listas inteligente**: Shopping, fridge, freezer, pantry en una tabla

@@ -234,6 +234,78 @@ export const validateConsumeItem: ValidationChain[] = [
 ];
 
 /**
+ * Validaciones para lista de compras
+ */
+export const validateAddToShopping: ValidationChain[] = [
+  body('productId')
+    .optional()
+    .isUUID()
+    .withMessage('ID de producto no válido'),
+  
+  body('barcode')
+    .optional()
+    .isLength({ min: 8, max: 18 })
+    .withMessage('Código de barras debe tener entre 8 y 18 dígitos')
+    .matches(/^\d+$/)
+    .withMessage('Código de barras solo puede contener números'),
+  
+  body('productName')
+    .optional()
+    .isLength({ min: 2, max: 255 })
+    .withMessage('Nombre de producto debe tener entre 2 y 255 caracteres'),
+
+  body('quantity')
+    .isFloat({ min: 0.1, max: 9999 })
+    .withMessage('Cantidad debe ser mayor a 0'),
+
+  body('unit')
+    .optional()
+    .isIn(['pieces', 'kg', 'g', 'l', 'ml', 'cups', 'tbsp', 'tsp', 'units'])
+    .withMessage('Unidad no válida'),
+
+  body('notes')
+    .optional()
+    .isLength({ max: 500 })
+    .withMessage('Notas no pueden exceder 500 caracteres')
+];
+
+export const validateUpdateShoppingItem: ValidationChain[] = [
+  param('id')
+    .isUUID()
+    .withMessage('ID de item no válido'),
+
+  body('quantity')
+    .optional()
+    .isFloat({ min: 0, max: 9999 })
+    .withMessage('Cantidad debe ser positiva'),
+
+  body('unit')
+    .optional()
+    .isIn(['pieces', 'kg', 'g', 'l', 'ml', 'cups', 'tbsp', 'tsp', 'units'])
+    .withMessage('Unidad no válida'),
+
+  body('notes')
+    .optional()
+    .isLength({ max: 500 })
+    .withMessage('Notas no pueden exceder 500 caracteres')
+];
+
+export const validateMoveShoppingItem: ValidationChain[] = [
+  param('id')
+    .isUUID()
+    .withMessage('ID de item no válido'),
+
+  body('toList')
+    .isIn(['fridge', 'freezer', 'pantry'])
+    .withMessage('Lista destino no válida'),
+
+  body('expiryDate')
+    .optional()
+    .isISO8601()
+    .withMessage('Fecha de expiración no válida')
+];
+
+/**
  * Validaciones para perfil de usuario
  */
 export const validateUpdateProfile: ValidationChain[] = [
@@ -322,8 +394,15 @@ export const validateLanguage: ValidationChain[] = [
     .withMessage('Idioma no soportado')
 ];
 
-export const validateUuid = (paramName: string = 'id'): ValidationChain[] => [
-  param(paramName)
-    .isUUID()
-    .withMessage(`${paramName} no es un ID válido`)
-];
+import { logger } from '../utils/logger';
+
+// ... existing code ...
+
+export const validateUuid = (paramName: string = 'id'): ValidationChain[] => {
+  logger.info(`validateUuid: Validating param '${paramName}'`);
+  return [
+    param(paramName)
+      .isUUID()
+      .withMessage(`${paramName} no es un ID válido`)
+  ];
+};
