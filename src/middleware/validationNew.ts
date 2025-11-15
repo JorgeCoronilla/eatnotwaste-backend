@@ -96,6 +96,13 @@ export const validateUpdateProductLocation: ValidationChain[] = [
     .withMessage('Cantidad consumida debe ser positiva')
 ];
 
+// Validaciones para mover un producto a una nueva ubicación
+export const validateMoveProductLocation: ValidationChain[] = [
+  body('location')
+    .isIn(['fridge', 'freezer', 'pantry', 'shopping'])
+    .withMessage('Ubicación de destino no válida'),
+];
+
 // Validaciones para marcar producto como consumido (nuevo diseño)
 export const validateConsumeProductLocation: ValidationChain[] = [
   param('id')

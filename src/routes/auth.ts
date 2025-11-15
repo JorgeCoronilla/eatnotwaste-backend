@@ -146,7 +146,7 @@ router.post('/refresh', refreshToken);
 
 /**
  * @swagger
- * /api/auth/profile:
+ * /api/auth/me:
  *   get:
  *     summary: Obtener perfil del usuario actual
  *     description: Obtiene el perfil del usuario autenticado.
@@ -184,8 +184,8 @@ router.post('/refresh', refreshToken);
  *       401:
  *         description: No autorizado.
  */
-router.get('/profile', authenticateToken, getProfile);
-router.put('/profile', authenticateToken, validateUpdateProfile, updateProfile);
+router.get('/me', authenticateToken, getProfile);
+router.put('/me', authenticateToken, validateUpdateProfile, updateProfile);
 
 /**
  * @swagger

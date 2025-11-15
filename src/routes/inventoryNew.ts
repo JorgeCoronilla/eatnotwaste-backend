@@ -12,7 +12,8 @@ import {
   deleteInventoryItem as deleteInventoryItemNew,
   markAsConsumed as markAsConsumedNew,
   getInventoryStats,
-  getExpiringItems as getExpiringItemsNew
+  getExpiringItems as getExpiringItemsNew,
+  moveInventoryItem as moveInventoryItemNew, // <-- Importar el nuevo controlador
 } from '../controllers/inventoryControllerNew';
 
 // Nuevas validaciones
@@ -21,7 +22,8 @@ import {
   validateUpdateProductLocation,
   validateConsumeProductLocation,
   validateUserProductFilters,
-  validateExpiringProducts
+  validateExpiringProducts,
+  validateMoveProductLocation, // <-- Importar la nueva validación
 } from '../middleware/validationNew';
 import {
   validateUuid,
@@ -76,6 +78,18 @@ router.get('/v2/expiring',
 router.get('/stats',
   authenticateToken,
   getInventoryStats
+);
+
+/**
+ * @route   PUT /api/inventory/v2/:id/move
+ * @desc    Mover un producto a una nueva ubicación (nuevo diseño)
+ * @access  Private
+ */
+router.put('/v2/:productId/move',
+  authenticateToken,
+  validateUuid('productId'),
+  validateMoveProductLocation,
+  moveInventoryItemNew
 );
 
 /**

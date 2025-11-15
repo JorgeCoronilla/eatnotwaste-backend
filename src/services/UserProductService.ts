@@ -99,9 +99,9 @@ export class UserProductService {
       ]);
 
       // Calculate additional properties
-      const userProductsWithDetails: UserProductWithProduct[] = userProducts.map(up => ({
+      const userProductsWithDetails: UserProductWithProduct[] = userProducts.map((up: UserProductWithProduct) => ({
         ...up,
-        totalQuantity: up.locations.reduce((sum, loc) => sum + loc.quantity, 0),
+        totalQuantity: up.locations.reduce((sum: number, loc: UserProductLocation) => sum + loc.quantity, 0),
         activeLocations: up.locations.length,
       }));
 
@@ -191,21 +191,17 @@ export class UserProductService {
       ]);
 
       // Add computed properties
-      const locationsWithDetails: UserProductLocationWithProduct[] = locations.map(loc => ({
-        ...loc,
-        userProduct: {
-          ...(loc as any).userProduct,
-          locations: [], // No necesitamos todas las ubicaciones aquí
-          totalQuantity: 0,
-          activeLocations: 0,
-        },
-        daysUntilExpiry: loc.expiryDate
-          ? Math.ceil((loc.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
-          : null,
-        isExpiringSoon: loc.expiryDate
-          ? Math.ceil((loc.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) <= 3
-          : false,
-      }));
+      const locationsWithDetails: UserProductLocationWithProduct[] = locations.map((loc: any) => {
+        const userProduct = loc.userProduct ? { ...loc.userProduct, locations: [] } : null;
+
+        return {
+          ...loc,
+          userProduct,
+          daysUntilExpiry: loc.expiryDate
+            ? Math.ceil((new Date(loc.expiryDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24))
+            : undefined,
+        };
+      });
 
       return {
         success: true,
@@ -277,8 +273,6 @@ export class UserProductService {
         userProduct: {
           ...(location as any).userProduct,
           locations: [], // No necesitamos todas las ubicaciones aquí
-          totalQuantity: 0,
-          activeLocations: 0,
         },
         daysUntilExpiry: location.expiryDate
           ? Math.ceil((location.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
@@ -322,6 +316,9 @@ export class UserProductService {
     }
   ): Promise<ApiResponse<UserProductLocationWithProduct>> {
     try {
+      logger.info(`[updateProductLocation] Starting update for locationId: ${locationId} and userId: ${userId}`);
+      logger.debug(`[updateProductLocation] Update data: ${JSON.stringify(updateData)}`);
+
       // Verify the location belongs to the user
       const existingLocation = await prisma.userProductLocation.findFirst({
         where: {
@@ -340,21 +337,27 @@ export class UserProductService {
       });
 
       if (!existingLocation) {
+        logger.warn(`[updateProductLocation] Location not found for locationId: ${locationId}`);
         return {
           success: false,
           error: 'Ubicación no encontrada',
         };
       }
 
+      logger.debug(`[updateProductLocation] Found existing location: ${JSON.stringify(existingLocation)}`);
+
       // Handle consumption and map location to listType
       let updatePayload: any = { ...updateData };
+      if (updateData.isConsumed && !existingLocation.isConsumed) {
+        updatePayload.consumedAt = new Date();
+      }
+
       if (updateData.location) {
         updatePayload.listType = updateData.location;
         delete updatePayload.location;
       }
-      if (updateData.isConsumed && !existingLocation.isConsumed) {
-        updatePayload.consumedAt = new Date();
-      }
+
+      logger.debug(`[updateProductLocation] Executing update with payload: ${JSON.stringify(updatePayload)}`);
 
       const updatedLocation = await prisma.userProductLocation.update({
         where: { id: locationId },
@@ -368,14 +371,14 @@ export class UserProductService {
         },
       });
 
+      logger.info(`[updateProductLocation] Successfully updated locationId: ${locationId}`);
+
       // Add computed properties
       const locationWithDetails: UserProductLocationWithProduct = {
         ...updatedLocation,
         userProduct: {
           ...updatedLocation.userProduct,
-          locations: [], // No necesitamos todas las ubicaciones aquí
-          totalQuantity: 0,
-          activeLocations: 0,
+          locations: [],
         },
         daysUntilExpiry: updatedLocation.expiryDate
           ? Math.ceil((updatedLocation.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
@@ -490,19 +493,17 @@ export class UserProductService {
       });
 
       // Add computed properties
-      const locationsWithDetails: UserProductLocationWithProduct[] = locations.map(loc => ({
-        ...loc,
-        userProduct: {
-          ...(loc as any).userProduct,
-          locations: [], // No necesitamos todas las ubicaciones aquí
-          totalQuantity: 0,
-          activeLocations: 0,
-        },
-        daysUntilExpiry: loc.expiryDate
-          ? Math.ceil((loc.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
-          : null,
-        isExpiringSoon: true,
-      }));
+      const locationsWithDetails: UserProductLocationWithProduct[] = locations.map((loc: any) => {
+        const userProduct = loc.userProduct ? { ...loc.userProduct, locations: [] } : null;
+
+        return {
+          ...loc,
+          userProduct,
+          daysUntilExpiry: loc.expiryDate
+            ? Math.ceil((new Date(loc.expiryDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24))
+            : undefined,
+        };
+      });
 
       return {
         success: true,
@@ -510,6 +511,118 @@ export class UserProductService {
       };
     } catch (error) {
       logger.error('Error getting expiring locations:', error);
+      return {
+        success: false,
+        error: 'Error interno del servidor',
+      };
+    }
+  }
+
+  /**
+   * Move a product to a new location
+   */
+  static async moveProductLocation(
+    userId: string,
+    userProductLocationId: string,
+    newLocation: ListType
+  ): Promise<ApiResponse<UserProductLocationWithProduct>> {
+    try {
+      const updatedLocation = await prisma.userProductLocation.update({
+        where: {
+          id: userProductLocationId,
+          userProduct: {
+            userId: userId,
+          },
+        },
+        data: {
+          listType: newLocation,
+        },
+        include: {
+          userProduct: {
+            include: {
+              product: true,
+            },
+          },
+        },
+      });
+
+      const locationWithDetails: UserProductLocationWithProduct = {
+        ...updatedLocation,
+        userProduct: {
+          ...updatedLocation.userProduct,
+          locations: [],
+        },
+        daysUntilExpiry: updatedLocation.expiryDate
+          ? Math.ceil((updatedLocation.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+          : null,
+        isExpiringSoon: updatedLocation.expiryDate
+          ? Math.ceil((updatedLocation.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) <= 3
+          : false,
+      };
+
+      return {
+        success: true,
+        message: 'Producto movido exitosamente.',
+        data: locationWithDetails,
+      };
+    } catch (error) {
+      logger.error('Error moving product location:', error);
+      return {
+        success: false,
+        message: 'Error al mover el producto de ubicación.',
+        error: 'Internal server error',
+      };
+    }
+  }
+
+  /**
+   * Mark a product location as consumed
+   */
+  static async markProductLocationAsConsumed(
+    userId: string,
+    locationId: string
+  ): Promise<ApiResponse<void>> {
+    try {
+      // Verify the location belongs to the user
+      const existingLocation = await prisma.userProductLocation.findFirst({
+        where: {
+          id: locationId,
+          userProduct: {
+            userId,
+          },
+        },
+        include: {
+          userProduct: {
+            include: {
+              product: true,
+            },
+          },
+        },
+      });
+
+      if (!existingLocation) {
+        return {
+          success: false,
+          error: 'Ubicación no encontrada',
+        };
+      }
+
+      // Soft delete by setting removedAt
+      await prisma.userProductLocation.update({
+        where: { id: locationId },
+        data: {
+          removedAt: new Date(),
+        },
+      });
+
+      logger.info(`Product location deleted: ${existingLocation.userProduct.product.name} for user ${userId}`);
+
+      return {
+        success: true,
+        message: 'Producto eliminado exitosamente',
+      };
+    } catch (error) {
+      logger.error('Error deleting product location:', error);
       return {
         success: false,
         error: 'Error interno del servidor',

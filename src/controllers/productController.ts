@@ -43,6 +43,7 @@ export const scanBarcode: RequestHandler = async (req, res) => {
     
     try {
       const apiResult = await ProductAPIService.getProductData(barcode, lang as string);
+      console.log('Resultado de la API:', apiResult);
       
       if (apiResult.success && apiResult.product) {
         // Crear producto en base de datos local con los datos de la API

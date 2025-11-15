@@ -394,8 +394,15 @@ export const validateLanguage: ValidationChain[] = [
     .withMessage('Idioma no soportado')
 ];
 
-export const validateUuid = (paramName: string = 'id'): ValidationChain[] => [
-  param(paramName)
-    .isUUID()
-    .withMessage(`${paramName} no es un ID válido`)
-];
+import { logger } from '../utils/logger';
+
+// ... existing code ...
+
+export const validateUuid = (paramName: string = 'id'): ValidationChain[] => {
+  logger.info(`validateUuid: Validating param '${paramName}'`);
+  return [
+    param(paramName)
+      .isUUID()
+      .withMessage(`${paramName} no es un ID válido`)
+  ];
+};

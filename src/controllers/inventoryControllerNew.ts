@@ -1,4 +1,5 @@
 import { Request, RequestHandler } from 'express';
+import { logger } from '../utils/logger';
 import { validationResult } from 'express-validator';
 import { UserProductService } from '../services/UserProductService';
 import { DashboardService } from '../services/DashboardService';
@@ -17,7 +18,7 @@ export const getInventory: RequestHandler = async (req, res) => {
     }
 
     const userId = reqAuth.user.id;
-    const { page = 1, limit = 20, location, category, expiring = false } = req.query as any;
+    const { page = 1, limit = 20, listType, category, expiring = false } = req.query as any;
 
     // Si se solicitan productos expirando, usar el método específico
     if (expiring === 'true') {
@@ -37,8 +38,8 @@ export const getInventory: RequestHandler = async (req, res) => {
 
     // Construir filtros para ubicaciones de productos
     const filters: any = {};
-    if (location && location !== 'all') {
-      filters.listType = location; // 'fridge' | 'freezer' | 'pantry' | 'shopping'
+    if (listType && listType !== 'all') {
+      filters.listType = listType; // 'fridge' | 'freezer' | 'pantry' | 'shopping'
     }
     if (category && category !== 'all') {
       filters.category = category;
@@ -185,7 +186,52 @@ export const updateInventoryItem: RequestHandler = async (req, res) => {
 };
 
 /**
- * Eliminar producto del inventario (nuevo diseño)
+ * Mover un producto a una nueva ubicación (nuevo diseño)
+ */
+export const moveInventoryItem: RequestHandler = async (req, res) => {
+  logger.info('moveInventoryItem: Received request');
+  try {
+    const reqAuth = req as AuthenticatedRequest;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      logger.warn('moveInventoryItem: Validation errors', { errors: errors.array() });
+      return res.status(400).json({ success: false, message: 'Datos de entrada inválidos', details: errors.array() });
+    }
+
+    if (!reqAuth.user) {
+      logger.warn('moveInventoryItem: Unauthenticated user');
+      return res.status(401).json({ success: false, message: 'Usuario no autenticado' });
+    }
+
+    const { productId } = req.params as { productId: string };
+    const { location, quantity, unit, notes } = req.body as any;
+    logger.info('moveInventoryItem: Parsed data', { productId, location, quantity, unit, notes });
+
+    logger.info('moveInventoryItem: Calling UserProductService.updateProductLocation');
+    const result = await UserProductService.updateProductLocation(reqAuth.user.id, productId, {
+      location,
+      quantity,
+      unit,
+      notes,
+    });
+    logger.info('moveInventoryItem: UserProductService.updateProductLocation returned', { result });
+
+    if (!result.success) {
+      logger.error('moveInventoryItem: Error moving product', { error: result.error });
+      return res.status(400).json({ success: false, message: 'Error al mover producto', error: result.error });
+    }
+
+    logger.info('moveInventoryItem: Product moved successfully');
+    return res.json({ success: true, message: 'Producto movido exitosamente', data: result.data });
+  } catch (error) {
+    logger.error('moveInventoryItem: Caught exception', { error });
+    console.error('Error en moveInventoryItem:', error);
+    return res.status(500).json({ success: false, message: 'Error interno del servidor' });
+  }
+};
+
+/**
+ * Eliminar un ítem del inventario (nuevo diseño)
  */
 export const deleteInventoryItem: RequestHandler = async (req, res) => {
   try {

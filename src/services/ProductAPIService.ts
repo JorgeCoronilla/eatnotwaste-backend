@@ -110,28 +110,32 @@ class ProductAPIService {
    */
   async getOpenFoodFactsData(barcode: string, language: string = 'es'): Promise<ProductResult> {
     try {
-      const url = `${process.env.OPEN_FOOD_FACTS_API_URL}/product/${barcode}.json`;
+      const url = `${process.env.OPEN_FOOD_FACTS_BASE_URL}/api/v0/product/${barcode}.json`;
+      console.log('OpenFoodFacts URL:', url);
       const response = await this.httpClient.get(url);
+      console.log('OpenFoodFacts raw response:', JSON.stringify(response.data, null, 2));
       
       if (response.data.status === 1 && response.data.product) {
         const normalizedProduct = this.normalizeOpenFoodFactsData(response.data.product, barcode);
         return {
           success: true,
           product: normalizedProduct,
-          source: 'OpenFoodFacts'
+          source: 'openfoodfacts'
         };
       } else {
+        console.log('OpenFoodFacts status check failed:', { status: response.data.status, productExists: !!response.data.product });
         return {
           success: false,
           error: 'Producto no encontrado en OpenFoodFacts',
-          source: 'OpenFoodFacts'
+          source: 'openfoodfacts'
         };
       }
     } catch (error: any) {
+      console.error('Error in getOpenFoodFactsData:', error);
       return {
         success: false,
         error: error.message,
-        source: 'OpenFoodFacts'
+        source: 'openfoodfacts'
       };
     }
   }
@@ -153,20 +157,20 @@ class ProductAPIService {
         return {
           success: true,
           product: normalizedProduct,
-          source: 'ChompAPI'
+          source: 'chomp'
         };
       } else {
         return {
           success: false,
           error: 'Producto no encontrado en Chomp API',
-          source: 'ChompAPI'
+          source: 'chomp'
         };
       }
     } catch (error: any) {
       return {
         success: false,
         error: error.message,
-        source: 'ChompAPI'
+        source: 'chomp'
       };
     }
   }
@@ -189,7 +193,7 @@ class ProductAPIService {
       servingUnit: rawData.serving_unit || undefined,
       packageSize: rawData.household_serving_fulltext || undefined,
       packageUnit: undefined,
-      source: 'ChompAPI',
+      source: 'chomp',
       language: 'en', // Chomp API principalmente en inglés
       lastUpdated: new Date()
     };
@@ -297,7 +301,7 @@ class ProductAPIService {
       servingUnit: undefined,
       packageSize: rawData.quantity || undefined,
       packageUnit: undefined,
-      source: 'OpenFoodFacts',
+      source: 'openfoodfacts',
       language: 'es',
       lastUpdated: new Date()
     };
