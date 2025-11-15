@@ -30,24 +30,26 @@ type NotificationHistory = {
   status: 'sent' | 'delivered' | 'failed' | 'read' | 'clicked';
 };
 
-// Firebase admin types (mock for now)
-interface FirebaseAdmin {
-  messaging(): {
-    sendMulticast(message: any): Promise<{ successCount: number; failureCount: number }>;
-  };
-}
+// Firebase Admin SDK
+import * as admin from 'firebase-admin';
 
-// Mock firebase admin for now
-const admin: any = {
-  apps: { length: 0 },
-  initializeApp: (config: any) => {},
-  credential: {
-    cert: (config: any) => config,
-  },
-  messaging: () => ({
-    sendMulticast: async (message: any) => ({ successCount: 1, failureCount: 0 }),
-  }),
-};
+// Initialize Firebase Admin SDK
+if (!admin.apps.length) {
+  try {
+    // Try using JSON file first
+    const serviceAccount = require('../../config/firebase-service-account.json');
+    
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      projectId: serviceAccount.project_id,
+    });
+    
+    console.log('🔥 Firebase Admin SDK initialized with JSON file');
+  } catch (error) {
+    console.error('❌ Failed to initialize Firebase Admin SDK:', error);
+    throw new Error('Firebase configuration failed');
+  }
+}
 
 interface NotificationPayload {
   title: string;
@@ -235,7 +237,7 @@ export class NotificationService {
          },
        };
 
-       const response = await admin.messaging().sendMulticast(message);
+       const response = await admin.messaging().sendEachForMulticast(message);
 
       // Log notification history
        if (userId) {

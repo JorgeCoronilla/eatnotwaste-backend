@@ -2,9 +2,12 @@ import express, { Response, Request } from 'express';
 import { body, validationResult } from 'express-validator';
 import { authenticateToken } from '../middleware/auth';
 import { NotificationService } from '../services/NotificationService';
+import { NotificationScheduler } from '../services/NotificationScheduler';
 import { AuthenticatedRequest } from '../types';
 
 const router = express.Router();
+
+console.log('🔔 Notification routes loaded');
 
 /**
  * @swagger
@@ -358,6 +361,76 @@ router.put('/:notificationId/read', authenticateToken, async (req: Request, res:
     return res.status(500).json({
       success: false,
       error: 'Error interno del servidor',
+    });
+  }
+});
+
+/**
+ * @route   POST /api/notifications/test-expiry-check
+ * @desc    Verificar productos próximos a vencer del usuario (para testing)
+ * @access  Private
+ */
+router.post('/test-expiry-check', authenticateToken, async (req: Request, res: Response) => {
+  try {
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        error: 'Usuario no autenticado',
+      });
+    }
+
+    const notificationScheduler = new NotificationScheduler();
+    await notificationScheduler.checkUserExpiringProducts(userId);
+
+    return res.json({
+      success: true,
+      message: 'Verificación de productos próximos a vencer completada',
+    });
+  } catch (error) {
+    console.error('Error in test expiry check:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor',
+    });
+  }
+});
+
+/**
+ * @route   POST /api/notifications/test-firebase
+ * @desc    Probar Firebase sin autenticación (solo para testing)
+ * @access  Public
+ */
+router.post('/test-firebase', async (req: Request, res: Response) => {
+  try {
+    const notificationService = new NotificationService();
+    
+    // Simular datos de productos próximos a vencer
+    const testExpiringItems = [
+      { name: 'Leche', daysUntilExpiry: 2 },
+      { name: 'Pan', daysUntilExpiry: 1 }
+    ];
+    
+    // Intentar enviar notificación (aunque no haya tokens registrados)
+    const result = await notificationService.sendExpiryNotification(
+      'a78f1560-d99b-429c-909b-938e2f47236b', 
+      testExpiringItems
+    );
+
+    return res.json({
+      success: true,
+      message: 'Test de Firebase completado',
+      result: result,
+      note: 'Si no hay tokens FCM registrados, no se enviará notificación real'
+    });
+  } catch (error) {
+    console.error('Error in Firebase test:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Error en test de Firebase',
+      details: error instanceof Error ? error.message : 'Error desconocido'
     });
   }
 });
