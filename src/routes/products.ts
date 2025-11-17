@@ -10,7 +10,9 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
-  getPopularProducts
+  getPopularProducts,
+  getAllProducts,
+  getUserRecentProducts
 } from '../controllers/productController';
 
 // Middleware
@@ -117,6 +119,29 @@ router.get('/popular',
   validatePagination,
   validateLanguage,
   getPopularProducts
+);
+
+/**
+ * @route   GET /api/products
+ * @desc    Obtener todos los productos con paginación
+ * @access  Public
+ */
+router.get('/',
+  validatePagination,
+  validateLanguage,
+  getAllProducts
+);
+
+/**
+ * @route   GET /api/products/user/recent
+ * @desc    Obtener productos recientes del usuario
+ * @access  Private
+ */
+router.get('/user/recent',
+  authenticateToken,
+  validatePagination,
+  validateLanguage,
+  getUserRecentProducts
 );
 
 /**

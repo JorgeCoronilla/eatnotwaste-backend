@@ -140,6 +140,8 @@ npm start
 - `DELETE /delete-account` - Eliminar cuenta ✅
 
 ### 📦 Productos (`/api/products`)
+- `GET /` - Obtener todos los productos con paginación ✅
+- `GET /user/recent` - Obtener productos recientes del usuario ✅
 - `GET /scan/:barcode` - Escanear código de barras ✅
 - `GET /search` - Buscar productos ✅
 - `GET /popular` - Productos populares ✅
@@ -178,6 +180,69 @@ npm start
 - `POST /` - Crear nueva receta 🚧
 
 **Leyenda:** ✅ Implementado | 🚧 En desarrollo
+
+## 🔄 Sistema Unificado de Añadir Productos
+
+### ✅ Arquitectura Implementada (v2.2.0)
+
+El sistema ahora utiliza **una arquitectura unificada** para añadir productos tanto desde el escáner como desde la lista de productos básicos:
+
+#### **Endpoints Unificados**
+- **Shopping List**: `POST /api/shopping` - Para lista de compras
+- **Inventario**: `POST /api/inventory/v2` - Para nevera, congelador, despensa
+
+#### **Flujo UX Consistente**
+1. **Selección de Ubicación**: 4 opciones (Shopping List, Fridge, Freezer, Pantry)
+2. **Modal de Fecha** (opcional): Solo para inventario (fridge/freezer/pantry)
+3. **Confirmación**: Toast de éxito y actualización automática
+
+#### **Componentes Reutilizables**
+- `useAddProduct.ts` - Hook con lógica compartida
+- `AddProductModal.tsx` - Modal unificado para ambos flujos
+- `ProductForm.tsx` - Formulario con 4 opciones de ubicación
+
+#### **Productos Recientes**
+- **Endpoint**: `GET /api/products/user/recent`
+- **Lógica**: Productos añadidos recientemente al inventario del usuario
+- **Filtros**: Solo productos activos (no eliminados) del inventario
+- **Ordenación**: Por fecha de adición descendente (`addedAt DESC`)
+
+### **Migración de Endpoints Obsoletos**
+
+#### ❌ Endpoints Eliminados
+```typescript
+// ANTES (obsoleto)
+POST /api/products/{id}/add-to-inventory  // 404 - No existe
+
+// AHORA (unificado)
+POST /api/inventory/v2                    // ✅ Para inventario
+POST /api/shopping                        // ✅ Para lista de compras
+```
+
+#### **Estructura de Datos Unificada**
+```typescript
+// Payload para inventario
+{
+  "productId": "uuid",
+  "location": "fridge" | "freezer" | "pantry",
+  "quantity": 1,
+  "expiryDate": "2025-01-15T00:00:00.000Z"
+}
+
+// Payload para shopping list  
+{
+  "productId": "uuid",
+  "quantity": 1
+}
+```
+
+### **Beneficios de la Unificación**
+
+1. **UX Consistente**: Mismo flujo para productos escaneados y básicos
+2. **Mantenimiento Simplificado**: Un solo modal, un solo hook
+3. **Endpoints Correctos**: Sin rutas 404, usando APIs existentes
+4. **Productos Recientes**: Lógica correcta basada en inventario real
+5. **Código Reutilizable**: Componentes compartidos entre funcionalidades
 
 ## 🔌 Configuración de CORS
 

@@ -40,8 +40,11 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(cors({
-  origin: ['http://localhost:5174', 'http://localhost:5173', 'http://localhost:3000', 'http://localhost'],
-  credentials: true
+  origin: ['http://localhost:5174', 'http://localhost:5173', 'http://localhost:8082', 'http://localhost:8083', 'http://localhost:3000', 'http://localhost'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept-Language', 'X-Requested-With'],
+  optionsSuccessStatus: 200
 }));
 app.use(limiter);
 

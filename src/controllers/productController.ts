@@ -380,6 +380,126 @@ export const deleteProduct: RequestHandler = async (req, res) => {
 };
 
 /**
+ * Obtener todos los productos con paginación
+ */
+export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { page = 1, limit = 20, lang = 'es' } = req.query;
+    const pageNum = parseInt(page as string);
+    const limitNum = parseInt(limit as string);
+    const offset = (pageNum - 1) * limitNum;
+
+    const [products, total] = await Promise.all([
+      prisma.product.findMany({
+        skip: offset,
+        take: limitNum,
+        orderBy: { createdAt: 'desc' }
+      }),
+      prisma.product.count()
+    ]);
+
+    res.json({
+      success: true,
+      message: 'Productos obtenidos exitosamente',
+      data: products,
+      pagination: {
+        page: pageNum,
+        limit: limitNum,
+        total,
+        totalPages: Math.ceil(total / limitNum)
+      }
+    });
+  } catch (error) {
+    console.error('Error al obtener productos:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error interno del servidor'
+    });
+  }
+};
+
+/**
+ * Obtener productos recientes del usuario
+ */
+export const getUserRecentProducts = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const reqAuth = req as AuthenticatedRequest;
+    const userId = reqAuth.user?.id;
+    
+    if (!userId) {
+      res.status(401).json({
+        success: false,
+        message: 'Usuario no autenticado'
+      });
+      return;
+    }
+
+    const { page = 1, limit = 5, lang = 'es' } = req.query;
+    const pageNum = parseInt(page as string);
+    const limitNum = parseInt(limit as string);
+    const offset = (pageNum - 1) * limitNum;
+
+    // Obtener productos que el usuario ha añadido recientemente a sus listas
+    const recentUserProductLocations = await prisma.userProductLocation.findMany({
+      where: {
+        userProduct: {
+          userId: userId
+        },
+        removedAt: null, // Solo productos activos
+        listType: {
+          in: ['fridge', 'freezer', 'pantry'] // Solo inventario, no shopping
+        }
+      },
+      include: {
+        userProduct: {
+          include: {
+            product: true
+          }
+        }
+      },
+      orderBy: {
+        addedAt: 'desc'
+      },
+      skip: offset,
+      take: limitNum,
+      distinct: ['userProductId'] // Evitar duplicados del mismo producto
+    });
+
+    const products = recentUserProductLocations.map(location => location.userProduct.product);
+    const total = await prisma.userProductLocation.groupBy({
+      by: ['userProductId'],
+      where: { 
+        userProduct: {
+          userId: userId
+        },
+        removedAt: null,
+        listType: {
+          in: ['fridge', 'freezer', 'pantry']
+        }
+      }
+    }).then(groups => groups.length);
+
+    res.json({
+      success: true,
+      message: 'Productos recientes del usuario obtenidos exitosamente',
+      data: products,
+      pagination: {
+        page: pageNum,
+        limit: limitNum,
+        total,
+        totalPages: Math.ceil(total / limitNum)
+      }
+    });
+  } catch (error) {
+    console.error('Error al obtener productos recientes del usuario:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error interno del servidor'
+    });
+  }
+};
+
+/**
  * Obtener productos populares
  */
 export const getPopularProducts = async (req: Request, res: Response): Promise<void> => {
