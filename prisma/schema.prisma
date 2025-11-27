@@ -23,6 +23,7 @@ enum ProductSource {
   chomp
   manual
   catalog
+  llm
 }
 
 enum MovementType {

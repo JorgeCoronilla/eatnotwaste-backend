@@ -40,6 +40,9 @@ interface ProductData {
   description?: string;
   ingredients?: string[];
   allergens?: string[];
+  // Clave unificada
+  nutritionalInfo?: NutritionInfo;
+  // Alias legacy para compatibilidad
   nutrition?: NutritionInfo;
   imageUrl?: string;
   servingSize?: string;
@@ -179,6 +182,7 @@ class ProductAPIService {
    * Normalizar datos de Chomp API
    */
   normalizeChompAPIData(rawData: any, barcode: string): ProductData {
+    const nutrition = this.extractChompNutrition(rawData);
     return {
       barcode,
       name: rawData.food_name || 'Producto sin nombre',
@@ -187,7 +191,8 @@ class ProductAPIService {
       description: rawData.food_description || undefined,
       ingredients: rawData.ingredients ? rawData.ingredients.split(', ') : [],
       allergens: this.extractChompAllergens(rawData),
-      nutrition: this.extractChompNutrition(rawData),
+      nutritionalInfo: nutrition,
+      nutrition,
       imageUrl: rawData.photo?.thumb || undefined,
       servingSize: rawData.serving_qty?.toString() || undefined,
       servingUnit: rawData.serving_unit || undefined,
@@ -285,6 +290,7 @@ class ProductAPIService {
    * Normalizar datos de OpenFoodFacts
    */
   normalizeOpenFoodFactsData(rawData: any, barcode: string): ProductData {
+    const nutrition = this.extractNutrition(rawData.nutriments);
     return {
       barcode,
       name: rawData.product_name || rawData.product_name_es || rawData.product_name_en || 'Producto sin nombre',
@@ -295,7 +301,8 @@ class ProductAPIService {
         rawData.ingredients_text.split(/[,;]/).map((ing: string) => ing.trim()).filter((ing: string) => ing.length > 0) : 
         [],
       allergens: this.extractAllergens(rawData.allergens),
-      nutrition: this.extractNutrition(rawData.nutriments),
+      nutritionalInfo: nutrition,
+      nutrition,
       imageUrl: rawData.image_url || rawData.image_front_url || undefined,
       servingSize: rawData.serving_size || undefined,
       servingUnit: undefined,

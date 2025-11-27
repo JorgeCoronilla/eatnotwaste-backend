@@ -896,3 +896,37 @@ Actualiza las preferencias del usuario.
     "data": {}
   }
   ```
+## Búsqueda por Nombre
+
+- Endpoint: `GET /api/products/search/name`
+- Parámetros:
+  - `q` (string, requerido): texto de búsqueda.
+  - `lang` (string, opcional, por defecto `es`): idioma preferido.
+- Decisiones y respuestas:
+  - `found`: devuelve `product` único de fuente `local` u `openfoodfacts`.
+  - `list`: devuelve `products` sugeridos, priorizando verificados y con marca.
+  - `clarify`: devuelve `questions` para aclarar si es con marca o fresco/sin marca.
+  - `generated`: devuelve `product` genérico creado por LLM, persistido con `source=llm` y `isVerified=false`.
+  - `none`: consulta vacía.
+- Persistencia de productos LLM:
+  - Guarda `brand=null`, `imageUrl=null`, `ingredients` como string, nutrición en `nutritionalInfo`.
+  - `source` se establece en `ProductSource.llm` directamente (sin fallback).
+
+## Búsqueda por Código de Barras
+
+- Endpoint: `GET /api/products/scan/:barcode`
+- Flujo:
+  - Busca primero en BD local por `barcode`.
+  - Si no existe, consulta fuentes externas (OpenFoodFacts, Chomp) mediante `ProductAPIService.getProductData`.
+  - Normaliza datos y persiste en BD con `source` según la fuente (`openfoodfacts`, `chomp`). `isVerified=false`.
+  - Asocia el producto al usuario si viene autenticado.
+- Respuestas:
+  - `success=true` con `data=product` y `source=local|openfoodfacts|chomp`.
+  - `404` si no se encuentra en ninguna fuente.
+
+## Pendientes
+
+- Añadir trazas/métricas del uso LLM (cuándo y para qué consultas).
+- Caching simple para búsquedas por nombre (memoria o tabla de cache).
+- Rate limiting para el endpoint de nombre si esperas alto tráfico.
+- Documentación breve del endpoint en este archivo (completada) y ampliar ejemplos.

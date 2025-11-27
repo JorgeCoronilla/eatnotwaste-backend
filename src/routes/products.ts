@@ -6,6 +6,7 @@ const router = express.Router();
 import {
   scanBarcode,
   searchProducts,
+  manualSearchByName,
   getProduct,
   createProduct,
   updateProduct,
@@ -65,6 +66,17 @@ router.get('/scan/:barcode',
   validateLanguage,
   authenticateToken, 
   scanBarcode
+);
+
+/**
+ * @route   GET /api/products/search/name
+ * @desc    Búsqueda manual por nombre con flujo avanzado (local, OFF, LLM)
+ * @access  Public (auth opcional)
+ */
+router.get('/search/name',
+  validateProductSearch,
+  optionalAuth,
+  manualSearchByName
 );
 
 /**

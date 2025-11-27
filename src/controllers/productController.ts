@@ -3,6 +3,7 @@ import { Request, Response, RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
 import { prisma } from '../config/database';
 import ProductAPIService from '../services/ProductAPIService';
+import ProductSearchService from '../services/ProductSearchService';
 import { AuthenticatedRequest } from '../types';
 
 /**
@@ -57,7 +58,11 @@ export const scanBarcode: RequestHandler = async (req, res) => {
             category: productData.category || null,
             description: productData.description || null,
             imageUrl: productData.imageUrl || null,
-            nutritionalInfo: productData.nutritionalInfo || {},
+            // Persistir nutrición desde datos normalizados (acepta ambas claves)
+            nutritionalInfo: (productData as any).nutritionalInfo || productData.nutrition || {},
+            // Persistir alérgenos e ingredientes
+            allergens: productData.allergens || [],
+            ingredients: productData.ingredients ? productData.ingredients.join(", ") : null,
             source: apiResult.source as ProductSource,
             isVerified: false, // Los productos de API no se verifican automáticamente
           }
@@ -152,6 +157,28 @@ export const searchProducts = async (req: Request, res: Response): Promise<void>
       message: 'Error interno del servidor',
       error: 'Internal server error'
     });
+  }
+};
+
+/**
+ * Búsqueda manual por nombre con flujo avanzado
+ */
+export const manualSearchByName: RequestHandler = async (req, res) => {
+  try {
+    const reqAuth = req as AuthenticatedRequest;
+    const { q, lang = 'es' } = req.query;
+
+    if (!q || typeof q !== 'string') {
+      res.status(400).json({ success: false, message: 'Parámetro de búsqueda requerido' });
+      return;
+    }
+
+    const result = await ProductSearchService.searchByName(q, String(lang), reqAuth.user?.id);
+
+    res.json({ success: true, ...result });
+  } catch (error) {
+    console.error('Error en manualSearchByName:', error);
+    res.status(500).json({ success: false, message: 'Error interno del servidor' });
   }
 };
 

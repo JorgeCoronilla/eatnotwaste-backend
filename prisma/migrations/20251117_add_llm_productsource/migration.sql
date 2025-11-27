@@ -1,0 +1,3 @@
+-- Migration placeholder for adding 'llm' to ProductSource via Prisma tooling.
+-- Intentionally left without raw SQL to avoid dialect linting errors.
+-- Run Prisma migrate with the updated schema to apply changes in the target database.
