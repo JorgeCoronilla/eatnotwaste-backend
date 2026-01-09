@@ -89,7 +89,7 @@ export const addToInventory: RequestHandler = async (req, res) => {
       return;
     }
 
-    const { productId: incomingProductId, product, quantity, unit, location, purchaseDate, expirationDate, price, notes } = req.body as any;
+    const { productId: incomingProductId, product, quantity, unit, location, purchaseDate, expirationDate, expiryDate, price, notes } = req.body as any;
 
     const locationData: {
       productId: string;
@@ -109,7 +109,9 @@ export const addToInventory: RequestHandler = async (req, res) => {
 
     if (unit !== undefined) locationData.unit = unit;
     if (purchaseDate !== undefined) locationData.purchaseDate = new Date(purchaseDate);
-    if (expirationDate !== undefined) locationData.expiryDate = new Date(expirationDate);
+    if (expirationDate !== undefined || expiryDate !== undefined) {
+      locationData.expiryDate = new Date(expirationDate || expiryDate);
+    }
     if (price !== undefined) locationData.price = price;
     if (notes !== undefined) locationData.notes = notes;
 
@@ -144,6 +146,28 @@ export const addToInventory: RequestHandler = async (req, res) => {
             isVerified: false,
           }
         });
+      } else {
+        // Feature: Auto-upgrade product data if existing is "low quality" (LLM/empty) and incoming is better
+        const isExistingLowQuality = (dbProduct.source === ProductSource.llm || dbProduct.source === null) && (!dbProduct.imageUrl || !dbProduct.description);
+        const isIncomingBetter = sourceRaw === 'openfoodfacts' || (imageUrl && !dbProduct.imageUrl);
+
+        if (isExistingLowQuality && isIncomingBetter) {
+            logger.info('addToInventory: Upgrading product data', { id: dbProduct.id, oldSource: dbProduct.source, newSource: sourceRaw });
+            dbProduct = await prisma.product.update({
+                where: { id: dbProduct.id },
+                data: {
+                    brand: brand || dbProduct.brand,
+                    category: category || dbProduct.category,
+                    imageUrl: imageUrl || dbProduct.imageUrl,
+                    description: product.description || dbProduct.description,
+                    source: sourceRaw === 'openfoodfacts' ? ProductSource.openfoodfacts : ProductSource.llm,
+                    // Merge nutritional info if existing is empty
+                    nutritionalInfo: (Object.keys(dbProduct.nutritionalInfo || {}).length === 0 && product.nutritionalInfo) 
+                        ? product.nutritionalInfo 
+                        : dbProduct.nutritionalInfo
+                }
+            });
+        }
       }
 
       locationData.productId = dbProduct.id;

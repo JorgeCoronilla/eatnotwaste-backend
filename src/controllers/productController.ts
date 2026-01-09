@@ -173,7 +173,7 @@ export const manualSearchByName: RequestHandler = async (req, res) => {
       return;
     }
 
-    const searchType = (type === 'fast' || type === 'external') ? type : 'all';
+    const searchType = (type === 'fast' || type === 'external') ? type : 'smart';
     console.info('manualSearchByName:request', { q, lang, type: searchType, userId: reqAuth.user?.id });
     const result = await ProductSearchService.searchByName(q, String(lang), reqAuth.user?.id, searchType);
     console.info('manualSearchByName:response', { decision: result.decision, source: result.source, products: result.products?.length || 0 });
@@ -413,18 +413,24 @@ export const deleteProduct: RequestHandler = async (req, res) => {
  */
 export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { page = 1, limit = 20, lang = 'es' } = req.query;
+    const { page = 1, limit = 20, lang = 'es', category } = req.query;
     const pageNum = parseInt(page as string);
     const limitNum = parseInt(limit as string);
     const offset = (pageNum - 1) * limitNum;
 
+    const whereClause: any = {};
+    if (category && typeof category === 'string' && category !== 'all') {
+      whereClause.category = { equals: category, mode: 'insensitive' };
+    }
+
     const [products, total] = await Promise.all([
       prisma.product.findMany({
+        where: whereClause,
         skip: offset,
         take: limitNum,
         orderBy: { createdAt: 'desc' }
       }),
-      prisma.product.count()
+      prisma.product.count({ where: whereClause })
     ]);
 
     res.json({
