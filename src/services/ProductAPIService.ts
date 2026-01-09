@@ -67,7 +67,7 @@ class ProductAPIService {
     
     // Configurar axios con timeout
     this.httpClient = axios.create({
-      timeout: 10000, // 10 segundos (no bloquea UI en modo paralelo)
+      timeout: 25000, // 25 segundos para tolerar lentitud de OpenFoodFacts
       headers: {
         'User-Agent': 'FreshKeeper/1.0 (https://freshkeeper.app)'
       }
@@ -299,10 +299,10 @@ class ProductAPIService {
     const nutrition = this.extractNutrition(rawData.nutriments);
     return {
       barcode,
-      name: rawData.product_name || rawData.product_name_es || rawData.product_name_en || 'Producto sin nombre',
+      name: rawData.product_name_es || rawData.product_name_en || rawData.product_name || 'Producto sin nombre',
       brand: rawData.brands || undefined,
       category: this.mapCategory(rawData.categories),
-      description: rawData.generic_name || rawData.generic_name_es || rawData.generic_name_en || undefined,
+      description: rawData.generic_name_es || rawData.generic_name_en || rawData.generic_name || undefined,
       ingredients: rawData.ingredients_text ? 
         rawData.ingredients_text.split(/[,;]/).map((ing: string) => ing.trim()).filter((ing: string) => ing.length > 0) : 
         [],
@@ -473,14 +473,33 @@ class ProductAPIService {
    */
   async searchOpenFoodFacts(query: string, language: string = 'es', limit: number = 20): Promise<any[]> {
     try {
+      const params: any = {
+        search_terms: query,
+        search_simple: 1,
+        action: 'process',
+        json: 1,
+        page_size: limit,
+        lang: language,
+        fields: 'code,product_name,product_name_es,product_name_en,brands,categories,ingredients_text,nutriments,image_url,quantity,generic_name,generic_name_es,generic_name_en'
+      };
+
+      // Dynamic Country Filtering based on language
+      const countryTag = this.getCountryForLanguage(language);
+      if (countryTag) {
+        params.tagtype_0 = 'countries';
+        params.tag_contains_0 = 'contains';
+        params.tag_0 = countryTag;
+      }
+
       const response = await this.httpClient.get('https://world.openfoodfacts.org/cgi/search.pl', {
-        params: {
-          search_terms: query,
-          search_simple: 1,
-          action: 'process',
-          json: 1,
-          page_size: limit,
-          lang: language
+        params,
+        paramsSerializer: (params) => {
+          // OpenFoodFacts CGI script seems to have trouble with unencoded single quotes
+          const searchParams = new URLSearchParams();
+          Object.keys(params).forEach(key => {
+            searchParams.append(key, params[key]);
+          });
+          return searchParams.toString().replace(/'/g, '%27');
         }
       });
 
@@ -495,6 +514,22 @@ class ProductAPIService {
       console.error('Error buscando en OpenFoodFacts:', error);
       return [];
     }
+  }
+
+  /**
+   * Helper to map language code to OpenFoodFacts country tag
+   * This improves search relevance by prioritizing products from the user's region
+   */
+  private getCountryForLanguage(lang: string): string | null {
+    const map: { [key: string]: string } = {
+      'es': 'spain',
+      'fr': 'france',
+      'it': 'italy',
+      'de': 'germany',
+      'pt': 'portugal',
+      'en': 'united-kingdom', // Default to UK for English in Europe context, can be changed
+    };
+    return map[lang.toLowerCase()] || null;
   }
 }
 

@@ -1,0 +1,4972 @@
+[
+  {
+    "id": "03b5578f-380d-4a63-83fd-97bd3901b242",
+    "name": "Manzana",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Manzana",
+    "nutritionalInfo": {
+      "calories": 52,
+      "protein": 0.3,
+      "carbohydrates": 14,
+      "fat": 0.2,
+      "fiber": 2.4,
+      "sugar": 10
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a3926df0-5029-4d25-b66e-242b74baf521",
+    "name": "Plátano",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Plátano",
+    "nutritionalInfo": {
+      "calories": 89,
+      "protein": 1.1,
+      "carbohydrates": 23,
+      "fat": 0.3,
+      "fiber": 2.6,
+      "sugar": 12
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ffea2590-6937-4398-9926-24b0725c1d2c",
+    "name": "Naranja",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Naranja",
+    "nutritionalInfo": {
+      "calories": 47,
+      "protein": 0.9,
+      "carbohydrates": 12,
+      "fat": 0.1,
+      "fiber": 2.4,
+      "sugar": 9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1ab9cf65-ad35-49cc-b98f-4de8514e2128",
+    "name": "Pera",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Pera",
+    "nutritionalInfo": {
+      "calories": 57,
+      "protein": 0.4,
+      "carbohydrates": 15,
+      "fat": 0.1,
+      "fiber": 3.1,
+      "sugar": 10
+    },
+    "source": "manual"
+  },
+  {
+    "id": "2215b76c-70e7-46cc-b4e8-4693efb478f4",
+    "name": "Fresa",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Fresa",
+    "nutritionalInfo": {
+      "calories": 32,
+      "protein": 0.7,
+      "carbohydrates": 7.7,
+      "fat": 0.3,
+      "fiber": 2,
+      "sugar": 4.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b619cb5a-cd1f-4ca9-9541-0dbceafe2ef1",
+    "name": "Mandarina",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Mandarina",
+    "nutritionalInfo": {
+      "calories": 53,
+      "protein": 0.8,
+      "carbohydrates": 13,
+      "fat": 0.3,
+      "fiber": 1.8,
+      "sugar": 11
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ad9ad61a-2677-4b71-baca-e189289fa663",
+    "name": "Uva",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Uva",
+    "nutritionalInfo": {
+      "calories": 67,
+      "protein": 0.6,
+      "carbohydrates": 17,
+      "fat": 0.4,
+      "fiber": 0.9,
+      "sugar": 16
+    },
+    "source": "manual"
+  },
+  {
+    "id": "982a5f0d-23c1-4ab8-9227-5f29ec93795f",
+    "name": "Sandía",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Sandía",
+    "nutritionalInfo": {
+      "calories": 30,
+      "protein": 0.6,
+      "carbohydrates": 8,
+      "fat": 0.2,
+      "fiber": 0.4,
+      "sugar": 6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "52d0c180-6ce4-471c-8f9c-2c54c2334337",
+    "name": "Melón",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Melón",
+    "nutritionalInfo": {
+      "calories": 34,
+      "protein": 0.8,
+      "carbohydrates": 8,
+      "fat": 0.2,
+      "fiber": 0.9,
+      "sugar": 8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "642bf869-96f1-436c-bfcb-9779c1e88332",
+    "name": "Kiwi",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Kiwi",
+    "nutritionalInfo": {
+      "calories": 61,
+      "protein": 1.1,
+      "carbohydrates": 15,
+      "fat": 0.5,
+      "fiber": 3,
+      "sugar": 9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ec80b9c9-e5ee-4ba3-be5d-8d623354f0c4",
+    "name": "Piña",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Piña",
+    "nutritionalInfo": {
+      "calories": 50,
+      "protein": 0.5,
+      "carbohydrates": 13,
+      "fat": 0.1,
+      "fiber": 1.4,
+      "sugar": 10
+    },
+    "source": "manual"
+  },
+  {
+    "id": "cd4e0e0c-b4e7-45fa-ab73-c0ebe67f0fc2",
+    "name": "Mango",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Mango",
+    "nutritionalInfo": {
+      "calories": 60,
+      "protein": 0.8,
+      "carbohydrates": 15,
+      "fat": 0.4,
+      "fiber": 1.6,
+      "sugar": 14
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-1111-4a63-83fd-97bd3901b201",
+    "name": "Papaya",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Papaya",
+    "nutritionalInfo": {
+      "calories": 43,
+      "protein": 0.5,
+      "carbohydrates": 11,
+      "fat": 0.3,
+      "fiber": 1.7,
+      "sugar": 8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b2c3d4e5-2222-4b12-91aa-12fd3901b202",
+    "name": "Limón",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Limón",
+    "nutritionalInfo": {
+      "calories": 29,
+      "protein": 1.1,
+      "carbohydrates": 9,
+      "fat": 0.3,
+      "fiber": 2.8,
+      "sugar": 2.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c3d4e5f6-3333-4c21-82bb-22fd3901b203",
+    "name": "Pomelo",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Pomelo",
+    "nutritionalInfo": {
+      "calories": 42,
+      "protein": 0.8,
+      "carbohydrates": 11,
+      "fat": 0.1,
+      "fiber": 1.6,
+      "sugar": 7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d4e5f6a7-4444-4d32-93cc-32fd3901b204",
+    "name": "Ciruela",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Ciruela",
+    "nutritionalInfo": {
+      "calories": 46,
+      "protein": 0.7,
+      "carbohydrates": 11,
+      "fat": 0.3,
+      "fiber": 1.4,
+      "sugar": 10
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e5f6a7b8-5555-4e43-84dd-42fd3901b205",
+    "name": "Melocotón",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Melocotón",
+    "nutritionalInfo": {
+      "calories": 39,
+      "protein": 0.9,
+      "carbohydrates": 10,
+      "fat": 0.3,
+      "fiber": 1.5,
+      "sugar": 8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f6a7b8c9-6666-4f54-95ee-52fd3901b206",
+    "name": "Albaricoque",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Albaricoque",
+    "nutritionalInfo": {
+      "calories": 48,
+      "protein": 1.4,
+      "carbohydrates": 11,
+      "fat": 0.4,
+      "fiber": 2,
+      "sugar": 9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a7b8c9d0-7777-40a1-86ff-62fd3901b207",
+    "name": "Cereza",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Cereza",
+    "nutritionalInfo": {
+      "calories": 50,
+      "protein": 1,
+      "carbohydrates": 12,
+      "fat": 0.3,
+      "fiber": 1.6,
+      "sugar": 8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b8c9d0e1-8888-41b2-97aa-72fd3901b208",
+    "name": "Frambuesa",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Frambuesa",
+    "nutritionalInfo": {
+      "calories": 52,
+      "protein": 1.2,
+      "carbohydrates": 12,
+      "fat": 0.7,
+      "fiber": 6.5,
+      "sugar": 4.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c9d0e1f2-9999-42c3-88bb-82fd3901b209",
+    "name": "Arándanos",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Arándanos",
+    "nutritionalInfo": {
+      "calories": 57,
+      "protein": 0.7,
+      "carbohydrates": 14,
+      "fat": 0.3,
+      "fiber": 2.4,
+      "sugar": 10
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d0e1f2a3-aaaa-43d4-99cc-92fd3901b210",
+    "name": "Mora",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Mora",
+    "nutritionalInfo": {
+      "calories": 43,
+      "protein": 1.4,
+      "carbohydrates": 10,
+      "fat": 0.5,
+      "fiber": 5.3,
+      "sugar": 4.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e1f2a3b4-bbbb-44e5-80dd-a2fd3901b211",
+    "name": "Higo",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Higo",
+    "nutritionalInfo": {
+      "calories": 74,
+      "protein": 0.8,
+      "carbohydrates": 19,
+      "fat": 0.3,
+      "fiber": 2.9,
+      "sugar": 16
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f2a3b4c5-cccc-45f6-91ee-b2fd3901b212",
+    "name": "Granada",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Granada",
+    "nutritionalInfo": {
+      "calories": 83,
+      "protein": 1.7,
+      "carbohydrates": 19,
+      "fat": 1.2,
+      "fiber": 4,
+      "sugar": 14
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a3b4c5d6-dddd-46a1-82ff-c2fd3901b213",
+    "name": "Caqui",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Caqui",
+    "nutritionalInfo": {
+      "calories": 70,
+      "protein": 0.6,
+      "carbohydrates": 19,
+      "fat": 0.2,
+      "fiber": 3.6,
+      "sugar": 13
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b4c5d6e7-eeee-47b2-93aa-d2fd3901b214",
+    "name": "Nectarina",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Nectarina",
+    "nutritionalInfo": {
+      "calories": 44,
+      "protein": 1.1,
+      "carbohydrates": 11,
+      "fat": 0.3,
+      "fiber": 1.7,
+      "sugar": 8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c5d6e7f8-ffff-48c3-84bb-e2fd3901b215",
+    "name": "Aguacate",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Aguacate",
+    "nutritionalInfo": {
+      "calories": 160,
+      "protein": 2,
+      "carbohydrates": 9,
+      "fat": 15,
+      "fiber": 7,
+      "sugar": 0.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d6e7f8a9-1111-49d4-95cc-f2fd3901b216",
+    "name": "Coco",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Coco",
+    "nutritionalInfo": {
+      "calories": 354,
+      "protein": 3.3,
+      "carbohydrates": 15,
+      "fat": 33,
+      "fiber": 9,
+      "sugar": 6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e7f8a9b0-2222-4ae5-86dd-02fd3901b217",
+    "name": "Maracuyá",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Maracuyá",
+    "nutritionalInfo": {
+      "calories": 97,
+      "protein": 2.2,
+      "carbohydrates": 23,
+      "fat": 0.7,
+      "fiber": 10,
+      "sugar": 11
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f8a9b0c1-3333-4bf6-97ee-12fd3901b218",
+    "name": "Lichis",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Lichis",
+    "nutritionalInfo": {
+      "calories": 66,
+      "protein": 0.8,
+      "carbohydrates": 17,
+      "fat": 0.4,
+      "fiber": 1.3,
+      "sugar": 15
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a9b0c1d2-4444-4ca1-88aa-22fd3901b219",
+    "name": "Guayaba",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Guayaba",
+    "nutritionalInfo": {
+      "calories": 68,
+      "protein": 2.6,
+      "carbohydrates": 14,
+      "fat": 1,
+      "fiber": 5.4,
+      "sugar": 9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b0c1d2e3-5555-4db2-99bb-32fd3901b220",
+    "name": "Plátano macho",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Plátano macho",
+    "nutritionalInfo": {
+      "calories": 122,
+      "protein": 1.3,
+      "carbohydrates": 32,
+      "fat": 0.4,
+      "fiber": 2.3,
+      "sugar": 15
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c1d2e3f4-6666-4ec3-80cc-42fd3901b221",
+    "name": "Chirimoya",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Chirimoya",
+    "nutritionalInfo": {
+      "calories": 75,
+      "protein": 1.6,
+      "carbohydrates": 18,
+      "fat": 0.7,
+      "fiber": 3,
+      "sugar": 13
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d2e3f4a5-7777-4fd4-91dd-52fd3901b222",
+    "name": "Membrillo",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Membrillo",
+    "nutritionalInfo": {
+      "calories": 57,
+      "protein": 0.4,
+      "carbohydrates": 15,
+      "fat": 0.1,
+      "fiber": 1.9,
+      "sugar": 12
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e3f4a5b6-8888-40a1-82ee-62fd3901b223",
+    "name": "Níspero",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Níspero",
+    "nutritionalInfo": {
+      "calories": 47,
+      "protein": 0.4,
+      "carbohydrates": 12,
+      "fat": 0.2,
+      "fiber": 1.7,
+      "sugar": 7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f4a5b6c7-9999-41b2-93ff-72fd3901b224",
+    "name": "Carambola",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Carambola",
+    "nutritionalInfo": {
+      "calories": 31,
+      "protein": 1,
+      "carbohydrates": 7,
+      "fat": 0.3,
+      "fiber": 2.8,
+      "sugar": 4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a5b6c7d8-aaaa-42c3-84aa-82fd3901b225",
+    "name": "Pitaya (fruta del dragón)",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Pitaya",
+    "nutritionalInfo": {
+      "calories": 60,
+      "protein": 1.2,
+      "carbohydrates": 13,
+      "fat": 0.4,
+      "fiber": 3,
+      "sugar": 8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b6c7d8e9-bbbb-43d4-95bb-92fd3901b226",
+    "name": "Tamarindo",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Tamarindo",
+    "nutritionalInfo": {
+      "calories": 239,
+      "protein": 2.8,
+      "carbohydrates": 63,
+      "fat": 0.6,
+      "fiber": 5.1,
+      "sugar": 38
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c7d8e9f0-cccc-44e5-86cc-a2fd3901b227",
+    "name": "Guanábana",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Guanábana",
+    "nutritionalInfo": {
+      "calories": 66,
+      "protein": 1,
+      "carbohydrates": 17,
+      "fat": 0.3,
+      "fiber": 3.3,
+      "sugar": 13
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d8e9f0a1-dddd-45f6-97dd-b2fd3901b228",
+    "name": "Tuna (higo chumbo)",
+    "category": "fruits",
+    "description": "Producto básico",
+    "ingredients": "Tuna",
+    "nutritionalInfo": {
+      "calories": 41,
+      "protein": 0.7,
+      "carbohydrates": 10,
+      "fat": 0.5,
+      "fiber": 3.6,
+      "sugar": 7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d0957a64-0f8d-4592-a04b-2ab7e3a11850",
+    "name": "Tomate",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Tomate",
+    "nutritionalInfo": {
+      "calories": 18,
+      "protein": 0.9,
+      "carbohydrates": 3.9,
+      "fat": 0.2,
+      "fiber": 1.2,
+      "sugar": 2.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "32e4cc18-9625-4008-ba7f-c3e340a67ae3",
+    "name": "Lechuga",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Lechuga",
+    "nutritionalInfo": {
+      "calories": 15,
+      "protein": 1.4,
+      "carbohydrates": 2.9,
+      "fat": 0.2,
+      "fiber": 1.3,
+      "sugar": 0.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b54a81e1-c870-4eee-9804-a0406e020eb6",
+    "name": "Cebolla",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Cebolla",
+    "nutritionalInfo": {
+      "calories": 40,
+      "protein": 1.1,
+      "carbohydrates": 9.3,
+      "fat": 0.1,
+      "fiber": 1.7,
+      "sugar": 4.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "13bbdb85-aeec-412a-9deb-869988322e58",
+    "name": "Ajo",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Ajo",
+    "nutritionalInfo": {
+      "calories": 149,
+      "protein": 6.4,
+      "carbohydrates": 33,
+      "fat": 0.5,
+      "fiber": 2.1,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "9157cc44-878d-48fb-a4cd-3c3717dedcbc",
+    "name": "Zanahoria",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Zanahoria",
+    "nutritionalInfo": {
+      "calories": 41,
+      "protein": 0.9,
+      "carbohydrates": 10,
+      "fat": 0.2,
+      "fiber": 2.8,
+      "sugar": 4.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "7a6c798d-5771-4bbd-a7a4-47e08271ac6a",
+    "name": "Pepino",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Pepino",
+    "nutritionalInfo": {
+      "calories": 15,
+      "protein": 0.7,
+      "carbohydrates": 3.6,
+      "fat": 0.1,
+      "fiber": 0.5,
+      "sugar": 1.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "be969b6c-5d22-488a-a635-ef41511dcf95",
+    "name": "Pimiento rojo",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Pimiento rojo",
+    "nutritionalInfo": {
+      "calories": 31,
+      "protein": 1,
+      "carbohydrates": 6,
+      "fat": 0.3,
+      "fiber": 2.1,
+      "sugar": 4.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1248c01b-7d9c-4644-9c39-b10c86deb1bf",
+    "name": "Pimiento verde",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Pimiento verde",
+    "nutritionalInfo": {
+      "calories": 20,
+      "protein": 0.9,
+      "carbohydrates": 4.6,
+      "fat": 0.2,
+      "fiber": 1.7,
+      "sugar": 2.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440053",
+    "name": "Cebollinos",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Cebollinos (cebolleta)",
+    "nutritionalInfo": {
+      "calories": 32,
+      "protein": 1.8,
+      "carbohydrates": 7.3,
+      "fat": 0.2,
+      "fiber": 2.6,
+      "sugar": 2.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "71ac9edf-6398-4f8b-a47c-85a4cbb93d93",
+    "name": "Calabacín",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Calabacín",
+    "nutritionalInfo": {
+      "calories": 17,
+      "protein": 1.2,
+      "carbohydrates": 3.1,
+      "fat": 0.3,
+      "fiber": 1,
+      "sugar": 2.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "206e082e-cae1-4acd-b1ad-ad1267ec2744",
+    "name": "Berenjena",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Berenjena",
+    "nutritionalInfo": {
+      "calories": 25,
+      "protein": 1,
+      "carbohydrates": 6,
+      "fat": 0.2,
+      "fiber": 3,
+      "sugar": 3.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "8825b667-96b4-4210-ae18-89fff82d4d1d",
+    "name": "Patata",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Patata",
+    "nutritionalInfo": {
+      "calories": 77,
+      "protein": 2,
+      "carbohydrates": 17,
+      "fat": 0.1,
+      "fiber": 2.1,
+      "sugar": 0.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "0cd239a2-ca48-47ee-942c-431853692667",
+    "name": "Brócoli",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Brócoli",
+    "nutritionalInfo": {
+      "calories": 34,
+      "protein": 2.8,
+      "carbohydrates": 7,
+      "fat": 0.4,
+      "fiber": 2.6,
+      "sugar": 1.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e101a2b3-1a2b-4c01-8a11-97bd3901c301",
+    "name": "Espinacas",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Espinacas",
+    "nutritionalInfo": {
+      "calories": 23,
+      "protein": 2.9,
+      "carbohydrates": 3.6,
+      "fat": 0.4,
+      "fiber": 2.2,
+      "sugar": 0.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e102b3c4-2b3c-4d02-8a12-97bd3901c302",
+    "name": "Acelgas",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Acelgas",
+    "nutritionalInfo": {
+      "calories": 19,
+      "protein": 1.8,
+      "carbohydrates": 3.7,
+      "fat": 0.2,
+      "fiber": 1.6,
+      "sugar": 1.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e103c4d5-3c4d-4e03-8a13-97bd3901c303",
+    "name": "Judías verdes",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Judías verdes",
+    "nutritionalInfo": {
+      "calories": 31,
+      "protein": 1.8,
+      "carbohydrates": 7,
+      "fat": 0.1,
+      "fiber": 3.4,
+      "sugar": 3.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e104d5e6-4d5e-4f04-8a14-97bd3901c304",
+    "name": "Guisantes",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Guisantes",
+    "nutritionalInfo": {
+      "calories": 81,
+      "protein": 5.4,
+      "carbohydrates": 14,
+      "fat": 0.4,
+      "fiber": 5.1,
+      "sugar": 5.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e105e6f7-5e6f-4015-8a15-97bd3901c305",
+    "name": "Coliflor",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Coliflor",
+    "nutritionalInfo": {
+      "calories": 25,
+      "protein": 1.9,
+      "carbohydrates": 5,
+      "fat": 0.3,
+      "fiber": 2,
+      "sugar": 1.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e106f7a8-6f7a-4126-8a16-97bd3901c306",
+    "name": "Alcachofa",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Alcachofa",
+    "nutritionalInfo": {
+      "calories": 47,
+      "protein": 3.3,
+      "carbohydrates": 11,
+      "fat": 0.2,
+      "fiber": 5.4,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e107a8b9-7a8b-4237-8a17-97bd3901c307",
+    "name": "Espárragos",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Espárragos",
+    "nutritionalInfo": {
+      "calories": 20,
+      "protein": 2.2,
+      "carbohydrates": 3.9,
+      "fat": 0.1,
+      "fiber": 2.1,
+      "sugar": 1.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e108b9c0-8b9c-4348-8a18-97bd3901c308",
+    "name": "Apio",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Apio",
+    "nutritionalInfo": {
+      "calories": 16,
+      "protein": 0.7,
+      "carbohydrates": 3,
+      "fat": 0.2,
+      "fiber": 1.6,
+      "sugar": 1.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e109c0d1-9c0d-4459-8a19-97bd3901c309",
+    "name": "Puerro",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Puerro",
+    "nutritionalInfo": {
+      "calories": 61,
+      "protein": 1.5,
+      "carbohydrates": 14,
+      "fat": 0.3,
+      "fiber": 1.8,
+      "sugar": 3.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e110d1e2-ad1e-456a-8a20-97bd3901c310",
+    "name": "Remolacha",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Remolacha",
+    "nutritionalInfo": {
+      "calories": 43,
+      "protein": 1.6,
+      "carbohydrates": 10,
+      "fat": 0.2,
+      "fiber": 2.8,
+      "sugar": 7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e111e2f3-be2f-467b-8a21-97bd3901c311",
+    "name": "Rábano",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Rábano",
+    "nutritionalInfo": {
+      "calories": 16,
+      "protein": 0.7,
+      "carbohydrates": 3.4,
+      "fat": 0.1,
+      "fiber": 1.6,
+      "sugar": 1.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e112f3a4-cf3a-478c-8a22-97bd3901c312",
+    "name": "Nabo",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Nabo",
+    "nutritionalInfo": {
+      "calories": 28,
+      "protein": 0.9,
+      "carbohydrates": 6.4,
+      "fat": 0.1,
+      "fiber": 1.8,
+      "sugar": 3.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e113a4b5-da4b-489d-8a23-97bd3901c313",
+    "name": "Calabaza",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Calabaza",
+    "nutritionalInfo": {
+      "calories": 26,
+      "protein": 1,
+      "carbohydrates": 6.5,
+      "fat": 0.1,
+      "fiber": 0.5,
+      "sugar": 2.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e114b5c6-eb5c-490e-8a24-97bd3901c314",
+    "name": "Boniato (batata)",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Boniato",
+    "nutritionalInfo": {
+      "calories": 86,
+      "protein": 1.6,
+      "carbohydrates": 20,
+      "fat": 0.1,
+      "fiber": 3,
+      "sugar": 4.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e115c6d7-fc6d-4a1f-8a25-97bd3901c315",
+    "name": "Col",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Col",
+    "nutritionalInfo": {
+      "calories": 25,
+      "protein": 1.3,
+      "carbohydrates": 6,
+      "fat": 0.1,
+      "fiber": 2.5,
+      "sugar": 3.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e115c6d7-fa6d-4a1f-8a25-97bd3901c315",
+    "name": "Repollo",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Repollo",
+    "nutritionalInfo": {
+      "calories": 25,
+      "protein": 1.3,
+      "carbohydrates": 6,
+      "fat": 0.1,
+      "fiber": 2.5,
+      "sugar": 3.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e116d7e8-0d7e-4b20-8a26-97bd3901c316",
+    "name": "Col lombarda",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Col lombarda",
+    "nutritionalInfo": {
+      "calories": 31,
+      "protein": 1.4,
+      "carbohydrates": 7.4,
+      "fat": 0.2,
+      "fiber": 2.1,
+      "sugar": 3.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e117e8f9-1e8f-4c31-8a27-97bd3901c317",
+    "name": "Coles de Bruselas",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Coles de Bruselas",
+    "nutritionalInfo": {
+      "calories": 43,
+      "protein": 3.4,
+      "carbohydrates": 9,
+      "fat": 0.3,
+      "fiber": 3.8,
+      "sugar": 2.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e118f9a0-2f9a-4d42-8a28-97bd3901c318",
+    "name": "Berros",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Berros",
+    "nutritionalInfo": {
+      "calories": 11,
+      "protein": 2.3,
+      "carbohydrates": 1.3,
+      "fat": 0.1,
+      "fiber": 0.5,
+      "sugar": 0.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e119a0b1-3a0b-4e53-8a29-97bd3901c319",
+    "name": "Escarola",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Escarola",
+    "nutritionalInfo": {
+      "calories": 17,
+      "protein": 1.2,
+      "carbohydrates": 3.4,
+      "fat": 0.2,
+      "fiber": 3.1,
+      "sugar": 0.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e120b1c2-4b1c-4f64-8a30-97bd3901c320",
+    "name": "Endivias",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Endivias",
+    "nutritionalInfo": {
+      "calories": 17,
+      "protein": 1.3,
+      "carbohydrates": 4,
+      "fat": 0.2,
+      "fiber": 3.1,
+      "sugar": 0.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e121c2d3-5c2d-4065-8a31-97bd3901c321",
+    "name": "Rúcula",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Rúcula",
+    "nutritionalInfo": {
+      "calories": 25,
+      "protein": 2.6,
+      "carbohydrates": 3.7,
+      "fat": 0.7,
+      "fiber": 1.6,
+      "sugar": 2.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e122d3e4-6d3e-4176-8a32-97bd3901c322",
+    "name": "Canónigos",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Canónigos",
+    "nutritionalInfo": {
+      "calories": 21,
+      "protein": 2,
+      "carbohydrates": 3.6,
+      "fat": 0.4,
+      "fiber": 1.5,
+      "sugar": 0.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e123e4f5-7e4f-4287-8a33-97bd3901c323",
+    "name": "Champiñones",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Champiñones",
+    "nutritionalInfo": {
+      "calories": 22,
+      "protein": 3.1,
+      "carbohydrates": 3.3,
+      "fat": 0.3,
+      "fiber": 1,
+      "sugar": 2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e124f5a6-8f5a-4398-8a34-97bd3901c324",
+    "name": "Setas",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Setas",
+    "nutritionalInfo": {
+      "calories": 22,
+      "protein": 3,
+      "carbohydrates": 3.5,
+      "fat": 0.3,
+      "fiber": 2.2,
+      "sugar": 1.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d3f1a8c2-7b5e-4a9d-8c32-9876543210ab",
+    "name": "Chayote",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Chayote",
+    "nutritionalInfo": {
+      "calories": 19,
+      "protein": 0.8,
+      "carbohydrates": 4.5,
+      "fat": 0.1,
+      "fiber": 1.7,
+      "sugar": 1.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c9b2bd38-a2b9-4a24-be8a-bba2feed9036",
+    "name": "Yuca (mandioca)",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Yuca",
+    "nutritionalInfo": {
+      "calories": 160,
+      "protein": 1.4,
+      "carbohydrates": 38,
+      "fat": 0.3,
+      "fiber": 1.8,
+      "sugar": 1.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "58952c97-cfc0-415b-9227-41d5d7764879",
+    "name": "Plátano verde",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Plátano verde",
+    "nutritionalInfo": {
+      "calories": 122,
+      "protein": 1.3,
+      "carbohydrates": 32,
+      "fat": 0.4,
+      "fiber": 2.3,
+      "sugar": 15
+    },
+    "source": "manual"
+  },
+  {
+    "id": "bc26b965-1ba6-4acb-8aa2-6fd92c7b3a18",
+    "name": "Cilantro",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Cilantro",
+    "nutritionalInfo": {
+      "calories": 23,
+      "protein": 2.1,
+      "carbohydrates": 3.7,
+      "fat": 0.5,
+      "fiber": 2.8,
+      "sugar": 0.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "64f1b649-e26e-4ee9-8817-bb793d752aab",
+    "name": "Ñame",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Ñame",
+    "nutritionalInfo": {
+      "calories": 118,
+      "protein": 1.5,
+      "carbohydrates": 28,
+      "fat": 0.2,
+      "fiber": 4.1,
+      "sugar": 0.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b67854c9-3740-4579-ae52-d551800021f4",
+    "name": "Malanga",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Malanga",
+    "nutritionalInfo": {
+      "calories": 112,
+      "protein": 1.5,
+      "carbohydrates": 26,
+      "fat": 0.2,
+      "fiber": 4.1,
+      "sugar": 0.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "4a917b7c-0069-462f-801f-52a148b60d94",
+    "name": "Chile jalapeño",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Chile jalapeño",
+    "nutritionalInfo": {
+      "calories": 29,
+      "protein": 0.9,
+      "carbohydrates": 6.5,
+      "fat": 0.4,
+      "fiber": 2.8,
+      "sugar": 4.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "22e21bb2-64b7-4b80-8d66-60b923cecdaf",
+    "name": "Chile serrano",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Chile serrano",
+    "nutritionalInfo": {
+      "calories": 32,
+      "protein": 1.7,
+      "carbohydrates": 7.1,
+      "fat": 0.4,
+      "fiber": 3.7,
+      "sugar": 3.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "bbe7f86e-a689-4cfd-9130-8310d3ec36fd",
+    "name": "Chile habanero",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Chile habanero",
+    "nutritionalInfo": {
+      "calories": 40,
+      "protein": 1.9,
+      "carbohydrates": 9,
+      "fat": 0.4,
+      "fiber": 4.4,
+      "sugar": 5.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "96d98430-a773-4b3d-b2c7-257d9e5a855d",
+    "name": "Tomatillo",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Tomatillo",
+    "nutritionalInfo": {
+      "calories": 32,
+      "protein": 1,
+      "carbohydrates": 5.8,
+      "fat": 1,
+      "fiber": 1.9,
+      "sugar": 3.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a66a91da-7974-4ef1-a190-ea93d6fa0ae5",
+    "name": "Nopal",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Nopal",
+    "nutritionalInfo": {
+      "calories": 16,
+      "protein": 1.3,
+      "carbohydrates": 3.3,
+      "fat": 0.1,
+      "fiber": 2.2,
+      "sugar": 1.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f1b75e6a-011c-49ce-bb10-5f02d409ed8e",
+    "name": "Jícama",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Jícama",
+    "nutritionalInfo": {
+      "calories": 38,
+      "protein": 0.7,
+      "carbohydrates": 9,
+      "fat": 0.1,
+      "fiber": 4.9,
+      "sugar": 1.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "0fc43ec5-58a0-4c3b-9745-b5b44e7d66b2",
+    "name": "Aguacate",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Aguacate",
+    "nutritionalInfo": {
+      "calories": 160,
+      "protein": 2,
+      "carbohydrates": 9,
+      "fat": 15,
+      "fiber": 7,
+      "sugar": 0.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d82aaefa-0242-42b8-a80e-8631efffe455",
+    "name": "Choclo",
+    "category": "vegetables",
+    "description": "Producto básico",
+    "ingredients": "Choclo",
+    "nutritionalInfo": {
+      "calories": 86,
+      "protein": 3.2,
+      "carbohydrates": 19,
+      "fat": 1.2,
+      "fiber": 2.7,
+      "sugar": 3.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440011",
+    "name": "Leche Fresca",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Leche Fresca",
+    "nutritionalInfo": {
+      "calories": 61,
+      "protein": 3.2,
+      "carbohydrates": 4.8,
+      "fat": 3.3,
+      "fiber": 0,
+      "sugar": 5.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440012",
+    "name": "Queso Fresco",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso Fresco",
+    "nutritionalInfo": {
+      "calories": 264,
+      "protein": 18,
+      "carbohydrates": 3.4,
+      "fat": 21,
+      "fiber": 0,
+      "sugar": 2.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440013",
+    "name": "Yogur Natural",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Yogur Natural",
+    "nutritionalInfo": {
+      "calories": 61,
+      "protein": 3.5,
+      "carbohydrates": 4.7,
+      "fat": 3.3,
+      "fiber": 0,
+      "sugar": 4.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d401a2b3-1a2b-4c01-8b11-97bd3901d401",
+    "name": "Queso Manchego",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso Manchego",
+    "nutritionalInfo": {
+      "calories": 393,
+      "protein": 25,
+      "carbohydrates": 1,
+      "fat": 33,
+      "fiber": 0,
+      "sugar": 0.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d402b3c4-2b3c-4d02-8b12-97bd3901d402",
+    "name": "Queso para untar",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso para untar",
+    "nutritionalInfo": {
+      "calories": 342,
+      "protein": 6,
+      "carbohydrates": 4,
+      "fat": 34,
+      "fiber": 0,
+      "sugar": 3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d403c4d5-3c4d-4e03-8b13-97bd3901d403",
+    "name": "Mantequilla",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Mantequilla",
+    "nutritionalInfo": {
+      "calories": 717,
+      "protein": 0.9,
+      "carbohydrates": 0.1,
+      "fat": 81,
+      "fiber": 0,
+      "sugar": 0.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d404d5e6-4d5e-4f04-8b14-97bd3901d404",
+    "name": "Margarina",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Margarina",
+    "nutritionalInfo": {
+      "calories": 717,
+      "protein": 0.5,
+      "carbohydrates": 0.7,
+      "fat": 80,
+      "fiber": 0,
+      "sugar": 0.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d405e6f7-5e6f-4015-8b15-97bd3901d405",
+    "name": "Kéfir de vaca",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Kéfir de vaca",
+    "nutritionalInfo": {
+      "calories": 41,
+      "protein": 3.5,
+      "carbohydrates": 4.5,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 4.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d406f7a8-6f7a-4126-8b16-97bd3901d406",
+    "name": "Kéfir de cabra",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Kéfir de cabra",
+    "nutritionalInfo": {
+      "calories": 45,
+      "protein": 3.3,
+      "carbohydrates": 4.7,
+      "fat": 1.6,
+      "fiber": 0,
+      "sugar": 4.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d407a8b9-7a8b-4237-8b17-97bd3901d407",
+    "name": "Rulo de cabra",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso de cabra",
+    "nutritionalInfo": {
+      "calories": 364,
+      "protein": 22,
+      "carbohydrates": 1.5,
+      "fat": 30,
+      "fiber": 0,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d408b9c0-8b9c-4348-8b18-97bd3901d408",
+    "name": "Yogur de sabores",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Yogur",
+    "nutritionalInfo": {
+      "calories": 95,
+      "protein": 3.5,
+      "carbohydrates": 14,
+      "fat": 2.5,
+      "fiber": 0,
+      "sugar": 13
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d409c0d1-9c0d-4459-8b19-97bd3901d409",
+    "name": "Nata para cocinar",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Nata",
+    "nutritionalInfo": {
+      "calories": 195,
+      "protein": 2,
+      "carbohydrates": 3,
+      "fat": 20,
+      "fiber": 0,
+      "sugar": 3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d410d1e2-ad1e-456a-8b20-97bd3901d410",
+    "name": "Nata montada",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Nata",
+    "nutritionalInfo": {
+      "calories": 257,
+      "protein": 2,
+      "carbohydrates": 3,
+      "fat": 27,
+      "fiber": 0,
+      "sugar": 3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d411e2f3-be2f-467b-8b21-97bd3901d411",
+    "name": "Queso Burgos",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso Burgos",
+    "nutritionalInfo": {
+      "calories": 174,
+      "protein": 14,
+      "carbohydrates": 2,
+      "fat": 12,
+      "fiber": 0,
+      "sugar": 2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d412f3a4-cf3a-478c-8b22-97bd3901d412",
+    "name": "Queso semicurado",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso semicurado",
+    "nutritionalInfo": {
+      "calories": 380,
+      "protein": 24,
+      "carbohydrates": 1.5,
+      "fat": 31,
+      "fiber": 0,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d413a4b5-da4b-489d-8b23-97bd3901d413",
+    "name": "Queso curado",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso curado",
+    "nutritionalInfo": {
+      "calories": 402,
+      "protein": 26,
+      "carbohydrates": 1,
+      "fat": 33,
+      "fiber": 0,
+      "sugar": 0.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d414b5c6-eb5c-490e-8b24-97bd3901d414",
+    "name": "Requesón",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Requesón",
+    "nutritionalInfo": {
+      "calories": 98,
+      "protein": 11,
+      "carbohydrates": 3,
+      "fat": 4,
+      "fiber": 0,
+      "sugar": 3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d415c6d7-fc6d-4a1f-8b25-97bd3901d415",
+    "name": "Cuajada",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Cuajada",
+    "nutritionalInfo": {
+      "calories": 92,
+      "protein": 5,
+      "carbohydrates": 4,
+      "fat": 6,
+      "fiber": 0,
+      "sugar": 4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d416d7e8-0d7e-4b20-8b26-97bd3901d416",
+    "name": "Leche sin lactosa",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Leche sin lactosa",
+    "nutritionalInfo": {
+      "calories": 46,
+      "protein": 3.2,
+      "carbohydrates": 5,
+      "fat": 1.6,
+      "fiber": 0,
+      "sugar": 5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d417e8f9-1e8f-4c31-8b27-97bd3901d417",
+    "name": "Leche desnatada",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Leche desnatada",
+    "nutritionalInfo": {
+      "calories": 34,
+      "protein": 3.4,
+      "carbohydrates": 5,
+      "fat": 0.1,
+      "fiber": 0,
+      "sugar": 5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d418f9a0-2f9a-4d42-8b28-97bd3901d418",
+    "name": "Leche semidesnatada",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Leche semidesnatada",
+    "nutritionalInfo": {
+      "calories": 46,
+      "protein": 3.3,
+      "carbohydrates": 5,
+      "fat": 1.6,
+      "fiber": 0,
+      "sugar": 5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d419a0b1-3a0b-4e53-8b29-97bd3901d419",
+    "name": "Yogur griego",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Yogur griego",
+    "nutritionalInfo": {
+      "calories": 120,
+      "protein": 6,
+      "carbohydrates": 4,
+      "fat": 10,
+      "fiber": 0,
+      "sugar": 4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d420b1c2-4b1c-4f64-8b30-97bd3901d420",
+    "name": "Queso rallado",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso rallado",
+    "nutritionalInfo": {
+      "calories": 410,
+      "protein": 25,
+      "carbohydrates": 2,
+      "fat": 33,
+      "fiber": 0,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d421c2d3-5c2d-4065-8b31-97bd3901d421",
+    "name": "Queso en lonchas",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso en lonchas",
+    "nutritionalInfo": {
+      "calories": 280,
+      "protein": 18,
+      "carbohydrates": 6,
+      "fat": 21,
+      "fiber": 0,
+      "sugar": 4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d422d3e4-6d3e-4176-8b32-97bd3901d422",
+    "name": "Batidos de leche",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Leche",
+    "nutritionalInfo": {
+      "calories": 85,
+      "protein": 3.2,
+      "carbohydrates": 12,
+      "fat": 2.5,
+      "fiber": 0,
+      "sugar": 11
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d423e4f5-7e4f-4287-8b33-97bd3901d423",
+    "name": "Flan",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Flan",
+    "nutritionalInfo": {
+      "calories": 145,
+      "protein": 4,
+      "carbohydrates": 22,
+      "fat": 4,
+      "fiber": 0,
+      "sugar": 21
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d424f5a6-8f5a-4398-8b34-97bd3901d424",
+    "name": "Natillas",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Natillas",
+    "nutritionalInfo": {
+      "calories": 130,
+      "protein": 3.5,
+      "carbohydrates": 20,
+      "fat": 4,
+      "fiber": 0,
+      "sugar": 18
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d425a6b7-9a6b-44a9-8b35-97bd3901d425",
+    "name": "Arroz con leche",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Arroz con leche",
+    "nutritionalInfo": {
+      "calories": 120,
+      "protein": 3,
+      "carbohydrates": 21,
+      "fat": 3,
+      "fiber": 0.4,
+      "sugar": 10
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d426b7c8-ab7c-45ba-8b36-97bd3901d426",
+    "name": "Queso crema (tipo Philadelphia)",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Queso crema",
+    "nutritionalInfo": {
+      "calories": 342,
+      "protein": 6,
+      "carbohydrates": 4,
+      "fat": 34,
+      "fiber": 0,
+      "sugar": 3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d427c8d9-bc8d-46cb-8b37-97bd3901d427",
+    "name": "Mozzarella",
+    "category": "dairy",
+    "description": "Producto básico",
+    "ingredients": "Mozzarella",
+    "nutritionalInfo": {
+      "calories": 280,
+      "protein": 18,
+      "carbohydrates": 3,
+      "fat": 22,
+      "fiber": 0,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440014",
+    "name": "Pollo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Pollo",
+    "nutritionalInfo": {
+      "calories": 165,
+      "protein": 31,
+      "carbohydrates": 0,
+      "fat": 3.6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440014",
+    "name": "Pechuga de pollo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Pechuga de pollo",
+    "nutritionalInfo": {
+      "calories": 165,
+      "protein": 31,
+      "carbohydrates": 0,
+      "fat": 3.6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440021",
+    "name": "Muslo de pollo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Muslo de pollo",
+    "nutritionalInfo": {
+      "calories": 209,
+      "protein": 26,
+      "carbohydrates": 0,
+      "fat": 11,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440022",
+    "name": "Alas de pollo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Alas de pollo",
+    "nutritionalInfo": {
+      "calories": 203,
+      "protein": 30,
+      "carbohydrates": 0,
+      "fat": 8.1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440015",
+    "name": "Ternera",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Ternera",
+    "nutritionalInfo": {
+      "calories": 250,
+      "protein": 26,
+      "carbohydrates": 0,
+      "fat": 15,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440023",
+    "name": "Solomillo de ternera",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Solomillo de ternera",
+    "nutritionalInfo": {
+      "calories": 143,
+      "protein": 22,
+      "carbohydrates": 0,
+      "fat": 5.4,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440015",
+    "name": "Carne picada de ternera",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Carne picada de ternera",
+    "nutritionalInfo": {
+      "calories": 250,
+      "protein": 26,
+      "carbohydrates": 0,
+      "fat": 15,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440024",
+    "name": "Filete de ternera",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Filete de ternera",
+    "nutritionalInfo": {
+      "calories": 271,
+      "protein": 25,
+      "carbohydrates": 0,
+      "fat": 18,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440025",
+    "name": "Lomo de cerdo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Lomo de cerdo",
+    "nutritionalInfo": {
+      "calories": 143,
+      "protein": 21,
+      "carbohydrates": 0,
+      "fat": 6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440016",
+    "name": "Chuleta de cerdo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Chuleta de cerdo",
+    "nutritionalInfo": {
+      "calories": 242,
+      "protein": 27,
+      "carbohydrates": 0,
+      "fat": 14,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440026",
+    "name": "Costillas de cerdo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Costillas de cerdo",
+    "nutritionalInfo": {
+      "calories": 277,
+      "protein": 19,
+      "carbohydrates": 0,
+      "fat": 22,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440027",
+    "name": "Pierna de cordero",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Pierna de cordero",
+    "nutritionalInfo": {
+      "calories": 234,
+      "protein": 25,
+      "carbohydrates": 0,
+      "fat": 14,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440028",
+    "name": "Chuletas de cordero",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Chuletas de cordero",
+    "nutritionalInfo": {
+      "calories": 282,
+      "protein": 24,
+      "carbohydrates": 0,
+      "fat": 20,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440029",
+    "name": "Pechuga de pavo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Pechuga de pavo",
+    "nutritionalInfo": {
+      "calories": 135,
+      "protein": 30,
+      "carbohydrates": 0,
+      "fat": 1.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440030",
+    "name": "Muslo de pavo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Muslo de pavo",
+    "nutritionalInfo": {
+      "calories": 144,
+      "protein": 28,
+      "carbohydrates": 0,
+      "fat": 3.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440031",
+    "name": "Conejo",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Conejo",
+    "nutritionalInfo": {
+      "calories": 173,
+      "protein": 33,
+      "carbohydrates": 0,
+      "fat": 3.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440032",
+    "name": "Hígado",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Hígado de ternera",
+    "nutritionalInfo": {
+      "calories": 135,
+      "protein": 20,
+      "carbohydrates": 3.9,
+      "fat": 3.6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440033",
+    "name": "Salchichas",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Salchichas de cerdo",
+    "nutritionalInfo": {
+      "calories": 301,
+      "protein": 12,
+      "carbohydrates": 3.4,
+      "fat": 27,
+      "fiber": 0,
+      "sugar": 1.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440034",
+    "name": "Bacon",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Bacon (panceta)",
+    "nutritionalInfo": {
+      "calories": 541,
+      "protein": 37,
+      "carbohydrates": 1.4,
+      "fat": 42,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440035",
+    "name": "Jamón cocido",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Jamón cocido",
+    "nutritionalInfo": {
+      "calories": 145,
+      "protein": 21,
+      "carbohydrates": 1.5,
+      "fat": 6,
+      "fiber": 0,
+      "sugar": 1.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440036",
+    "name": "Jamón serrano",
+    "category": "meat",
+    "description": "Producto básico",
+    "ingredients": "Jamón serrano",
+    "nutritionalInfo": {
+      "calories": 241,
+      "protein": 30,
+      "carbohydrates": 0.5,
+      "fat": 13,
+      "fiber": 0,
+      "sugar": 0.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "7a3e1b6f-9b7a-4c7d-b8c2-1a2e3f4a5b01",
+    "name": "Chorizo",
+    "category": "meats",
+    "description": "Embutido curado",
+    "ingredients": "Carne de cerdo, pimentón, ajo, sal",
+    "nutritionalInfo": {
+      "calories": 455,
+      "protein": 24,
+      "carbohydrates": 2,
+      "fat": 38,
+      "fiber": 0,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "8b2c6e14-1c8d-4f91-a9c2-6d9a5e7b3a02",
+    "name": "Salchichón",
+    "category": "meats",
+    "description": "Embutido curado",
+    "ingredients": "Carne de cerdo, pimienta, sal",
+    "nutritionalInfo": {
+      "calories": 420,
+      "protein": 22,
+      "carbohydrates": 1,
+      "fat": 35,
+      "fiber": 0,
+      "sugar": 0.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "9d4a2f77-3a6e-41cb-92b4-8d1e6f5c0a03",
+    "name": "Fuet",
+    "category": "meats",
+    "description": "Embutido catalán curado",
+    "ingredients": "Carne de cerdo, pimienta, sal",
+    "nutritionalInfo": {
+      "calories": 450,
+      "protein": 23,
+      "carbohydrates": 1,
+      "fat": 38,
+      "fiber": 0,
+      "sugar": 0.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1f6b3d0a-92c4-4db7-bf13-0a7e6c2b9e04",
+    "name": "Morcilla",
+    "category": "meats",
+    "description": "Embutido cocido",
+    "ingredients": "Sangre de cerdo, arroz, cebolla",
+    "nutritionalInfo": {
+      "calories": 379,
+      "protein": 14,
+      "carbohydrates": 19,
+      "fat": 30,
+      "fiber": 1,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "2b9f71c8-0a3e-49dc-b4a5-7d6e3c8a1f05",
+    "name": "Butifarra",
+    "category": "meats",
+    "description": "Embutido fresco",
+    "ingredients": "Carne de cerdo, sal, especias",
+    "nutritionalInfo": {
+      "calories": 326,
+      "protein": 17,
+      "carbohydrates": 1,
+      "fat": 28,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c6a9b7f2-1e5d-4e63-8c5a-0f4d3b8e9a06",
+    "name": "Longaniza",
+    "category": "meats",
+    "description": "Embutido curado",
+    "ingredients": "Carne de cerdo, especias",
+    "nutritionalInfo": {
+      "calories": 410,
+      "protein": 21,
+      "carbohydrates": 2,
+      "fat": 34,
+      "fiber": 0,
+      "sugar": 0.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e2d4f6a1-78c9-4b9e-92d3-1a0f5c8b7e07",
+    "name": "Lomo embuchado",
+    "category": "meats",
+    "description": "Carne curada",
+    "ingredients": "Lomo de cerdo, pimentón, sal",
+    "nutritionalInfo": {
+      "calories": 380,
+      "protein": 50,
+      "carbohydrates": 0,
+      "fat": 20,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "5c8b9e7f-4a2d-48a6-9c31-2f0d6b1e3a08",
+    "name": "Sobrasada",
+    "category": "meats",
+    "description": "Embutido untado",
+    "ingredients": "Carne de cerdo, pimentón, manteca",
+    "nutritionalInfo": {
+      "calories": 500,
+      "protein": 14,
+      "carbohydrates": 2,
+      "fat": 48,
+      "fiber": 0,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "6a7c1e8d-9b5f-41c2-a0f3-8b4d2e6a9c09",
+    "name": "Mortadela",
+    "category": "meats",
+    "description": "Embutido cocido",
+    "ingredients": "Carne de cerdo, grasa, especias",
+    "nutritionalInfo": {
+      "calories": 311,
+      "protein": 15,
+      "carbohydrates": 2,
+      "fat": 25,
+      "fiber": 0,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f9b6c2d4-7a81-43e9-8c3f-1e5d0a2b6a10",
+    "name": "Salami",
+    "category": "meats",
+    "description": "Embutido curado",
+    "ingredients": "Carne de cerdo, especias",
+    "nutritionalInfo": {
+      "calories": 407,
+      "protein": 22,
+      "carbohydrates": 2,
+      "fat": 33,
+      "fiber": 0,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440017",
+    "name": "Arroz",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Arroz",
+    "nutritionalInfo": {
+      "calories": 130,
+      "protein": 2.7,
+      "carbohydrates": 28,
+      "fat": 0.3,
+      "fiber": 0.4,
+      "sugar": 0.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440018",
+    "name": "Pasta",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Pasta",
+    "nutritionalInfo": {
+      "calories": 131,
+      "protein": 5,
+      "carbohydrates": 25,
+      "fat": 1.1,
+      "fiber": 1.8,
+      "sugar": 0.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440019",
+    "name": "Pan",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Pan",
+    "nutritionalInfo": {
+      "calories": 265,
+      "protein": 9,
+      "carbohydrates": 49,
+      "fat": 3.2,
+      "fiber": 2.7,
+      "sugar": 5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440020",
+    "name": "Avena",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Avena",
+    "nutritionalInfo": {
+      "calories": 389,
+      "protein": 17,
+      "carbohydrates": 66,
+      "fat": 7,
+      "fiber": 11,
+      "sugar": 1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440021",
+    "name": "Trigo",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Trigo",
+    "nutritionalInfo": {
+      "calories": 340,
+      "protein": 13,
+      "carbohydrates": 72,
+      "fat": 2.5,
+      "fiber": 10.7,
+      "sugar": 0.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440022",
+    "name": "Cebada",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Cebada",
+    "nutritionalInfo": {
+      "calories": 354,
+      "protein": 12,
+      "carbohydrates": 73,
+      "fat": 2.3,
+      "fiber": 17.3,
+      "sugar": 0.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440023",
+    "name": "Centeno",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Centeno",
+    "nutritionalInfo": {
+      "calories": 338,
+      "protein": 10,
+      "carbohydrates": 76,
+      "fat": 1.6,
+      "fiber": 15.1,
+      "sugar": 0.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440024",
+    "name": "Quinoa",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Quinoa",
+    "nutritionalInfo": {
+      "calories": 120,
+      "protein": 4.4,
+      "carbohydrates": 21,
+      "fat": 1.9,
+      "fiber": 2.8,
+      "sugar": 0.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440025",
+    "name": "Cuscús",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Cuscús",
+    "nutritionalInfo": {
+      "calories": 112,
+      "protein": 3.8,
+      "carbohydrates": 23,
+      "fat": 0.2,
+      "fiber": 1.4,
+      "sugar": 0.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440026",
+    "name": "Bulgur",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Bulgur",
+    "nutritionalInfo": {
+      "calories": 83,
+      "protein": 3.1,
+      "carbohydrates": 18.6,
+      "fat": 0.2,
+      "fiber": 4.5,
+      "sugar": 0.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440027",
+    "name": "Mijo",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Mijo",
+    "nutritionalInfo": {
+      "calories": 119,
+      "protein": 3.5,
+      "carbohydrates": 23.7,
+      "fat": 1,
+      "fiber": 1.3,
+      "sugar": 0.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440028",
+    "name": "Amaranto",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Amaranto",
+    "nutritionalInfo": {
+      "calories": 102,
+      "protein": 3.8,
+      "carbohydrates": 19,
+      "fat": 1.6,
+      "fiber": 2.1,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440029",
+    "name": "Espelta",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Espelta",
+    "nutritionalInfo": {
+      "calories": 338,
+      "protein": 14.6,
+      "carbohydrates": 70,
+      "fat": 2.4,
+      "fiber": 10.7,
+      "sugar": 6.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440030",
+    "name": "Arroz integral",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Arroz integral",
+    "nutritionalInfo": {
+      "calories": 111,
+      "protein": 2.6,
+      "carbohydrates": 23,
+      "fat": 0.9,
+      "fiber": 1.8,
+      "sugar": 0.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440031",
+    "name": "Harina de trigo",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Harina de trigo",
+    "nutritionalInfo": {
+      "calories": 364,
+      "protein": 10,
+      "carbohydrates": 76,
+      "fat": 1,
+      "fiber": 2.7,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440032",
+    "name": "Harina de maíz",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Harina de maíz",
+    "nutritionalInfo": {
+      "calories": 364,
+      "protein": 8.1,
+      "carbohydrates": 76.9,
+      "fat": 3.9,
+      "fiber": 7.3,
+      "sugar": 1.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440033",
+    "name": "Copos de maíz",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Copos de maíz",
+    "nutritionalInfo": {
+      "calories": 365,
+      "protein": 8,
+      "carbohydrates": 80,
+      "fat": 2.5,
+      "fiber": 3.5,
+      "sugar": 6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440034",
+    "name": "Sémola",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Sémola",
+    "nutritionalInfo": {
+      "calories": 360,
+      "protein": 12.7,
+      "carbohydrates": 72.8,
+      "fat": 1.1,
+      "fiber": 3.9,
+      "sugar": 0.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440035",
+    "name": "Trigo sarraceno",
+    "category": "grains",
+    "description": "Producto básico",
+    "ingredients": "Trigo sarraceno",
+    "nutritionalInfo": {
+      "calories": 343,
+      "protein": 13.3,
+      "carbohydrates": 71.5,
+      "fat": 3.4,
+      "fiber": 10,
+      "sugar": 0.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+    "name": "Quinoa blanca",
+    "category": "grains",
+    "description": "Quinoa tradicional, sabor suave y textura esponjosa",
+    "ingredients": "Quinoa blanca",
+    "nutritionalInfo": {
+      "calories": 120,
+      "protein": 4.4,
+      "carbohydrates": 21.3,
+      "fat": 1.9,
+      "fiber": 2.8,
+      "sugar": 0.9
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "15-20 minutos",
+      "flavorProfile": "Suave y neutro",
+      "commonUses": [
+        "Ensaladas",
+        "Guarniciones",
+        "Sustituto de arroz"
+      ]
+    }
+  },
+  {
+    "id": "b2c3d4e5-f6a7-8901-bcde-f23456789012",
+    "name": "Quinoa roja",
+    "category": "grains",
+    "description": "Quinoa de color rojo intenso, textura más crujiente",
+    "ingredients": "Quinoa roja",
+    "nutritionalInfo": {
+      "calories": 122,
+      "protein": 4.8,
+      "carbohydrates": 21,
+      "fat": 2,
+      "fiber": 3.3,
+      "sugar": 0.8
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "15-20 minutos",
+      "flavorProfile": "Terroso y ligeramente dulce",
+      "commonUses": [
+        "Ensaladas frías",
+        "Platos de invierno",
+        "Decoración"
+      ]
+    }
+  },
+  {
+    "id": "c3d4e5f6-a7b8-9012-cdef-345678901234",
+    "name": "Quinoa negra",
+    "category": "grains",
+    "description": "Quinoa de color negro, textura más crujiente y sabor terroso",
+    "ingredients": "Quinoa negra",
+    "nutritionalInfo": {
+      "calories": 125,
+      "protein": 5.1,
+      "carbohydrates": 20.5,
+      "fat": 2.1,
+      "fiber": 3.5,
+      "sugar": 0.7
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "20-25 minutos",
+      "flavorProfile": "Terroso intenso",
+      "commonUses": [
+        "Platos gourmet",
+        "Contraste visual",
+        "Mezclas multicolores"
+      ]
+    }
+  },
+  {
+    "id": "d4e5f6a7-b8c9-0123-def0-456789012345",
+    "name": "Quinoa tricolor (mezcla)",
+    "category": "grains",
+    "description": "Mezcla de quinoa blanca, roja y negra",
+    "ingredients": "Quinoa blanca, quinoa roja, quinoa negra",
+    "nutritionalInfo": {
+      "calories": 122,
+      "protein": 4.8,
+      "carbohydrates": 21,
+      "fat": 2,
+      "fiber": 3.2,
+      "sugar": 0.8
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "18-22 minutos",
+      "flavorProfile": "Complejo y equilibrado",
+      "commonUses": [
+        "Presentaciones especiales",
+        "Buffets",
+        "Cocina creativa"
+      ]
+    }
+  },
+  {
+    "id": "e5f6a7b8-c9d0-1234-ef01-567890123456",
+    "name": "Quinoa Real (orgánica)",
+    "category": "grains",
+    "description": "Quinoa de alta calidad, granos más grandes y uniformes",
+    "ingredients": "Quinoa Real orgánica",
+    "nutritionalInfo": {
+      "calories": 121,
+      "protein": 5,
+      "carbohydrates": 20.8,
+      "fat": 1.8,
+      "fiber": 3.1,
+      "sugar": 0.8
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "15-18 minutos",
+      "flavorProfile": "Delicado y sutil",
+      "commonUses": [
+        "Cocina gourmet",
+        "Dietas especiales",
+        "Alimentación infantil"
+      ]
+    }
+  },
+  {
+    "id": "f6a7b8c9-d0e1-2345-f012-678901234567",
+    "name": "Quinoa germinada",
+    "category": "grains",
+    "description": "Quinoa que ha sido germinada para mejorar su digestibilidad",
+    "ingredients": "Quinoa germinada",
+    "nutritionalInfo": {
+      "calories": 118,
+      "protein": 4.6,
+      "carbohydrates": 20.2,
+      "fat": 1.7,
+      "fiber": 2.9,
+      "sugar": 0.7
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "8-10 minutos",
+      "flavorProfile": "Suave y ligeramente dulce",
+      "commonUses": [
+        "Dietas crudiveganas",
+        "Personas con digestiones sensibles",
+        "Ensaladas crudas"
+      ]
+    }
+  },
+  {
+    "id": "a7b8c9d0-e1f2-3456-0123-789012345678",
+    "name": "Harina de quinoa",
+    "category": "grains",
+    "description": "Harina obtenida de moler granos de quinoa",
+    "ingredients": "Harina de quinoa",
+    "nutritionalInfo": {
+      "calories": 368,
+      "protein": 14.1,
+      "carbohydrates": 64.2,
+      "fat": 6.1,
+      "fiber": 7,
+      "sugar": 2.4
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "Varía según receta",
+      "flavorProfile": "Ligeramente terroso y a nuez",
+      "commonUses": [
+        "Pan sin gluten",
+        "Repostería",
+        "Espesante para salsas"
+      ]
+    }
+  },
+  {
+    "id": "b8c9d0e1-f2a3-4567-1234-890123456789",
+    "name": "Copos de quinoa",
+    "category": "grains",
+    "description": "Quinoa prensada en forma de copos para cocción rápida",
+    "ingredients": "Copos de quinoa",
+    "nutritionalInfo": {
+      "calories": 378,
+      "protein": 13.8,
+      "carbohydrates": 68.9,
+      "fat": 5.9,
+      "fiber": 6.5,
+      "sugar": 2.8
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "2-3 minutos",
+      "flavorProfile": "Similar a la quinoa pero textura más suave",
+      "commonUses": [
+        "Desayunos",
+        "Barritas energéticas",
+        "Papillas infantiles"
+      ]
+    }
+  },
+  {
+    "id": "c9d0e1f2-a3b4-5678-2345-901234567890",
+    "name": "Quinoa inflada",
+    "category": "grains",
+    "description": "Quinoa que ha sido inflada mediante calor",
+    "ingredients": "Quinoa inflada",
+    "nutritionalInfo": {
+      "calories": 402,
+      "protein": 13.1,
+      "carbohydrates": 74.3,
+      "fat": 5.2,
+      "fiber": 6.1,
+      "sugar": 3.2
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "No requiere cocción",
+      "flavorProfile": "Crujiente y ligera",
+      "commonUses": [
+        "Cereales de desayuno",
+        "Toppings",
+        "Snacks saludables"
+      ]
+    }
+  },
+  {
+    "id": "d0e1f2a3-b4c5-6789-3456-012345678901",
+    "name": "Quinoa prelavada",
+    "category": "grains",
+    "description": "Quinoa lavada industrialmente para eliminar saponinas",
+    "ingredients": "Quinoa prelavada",
+    "nutritionalInfo": {
+      "calories": 119,
+      "protein": 4.4,
+      "carbohydrates": 21,
+      "fat": 1.9,
+      "fiber": 2.7,
+      "sugar": 0.9
+    },
+    "source": "manual",
+    "additionalInfo": {
+      "cookingTime": "12-15 minutos",
+      "flavorProfile": "Más suave (sin amargor)",
+      "commonUses": [
+        "Cocina rápida",
+        "Principiantes con quinoa",
+        "Cocina institucional"
+      ]
+    }
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
+    "name": "Lentejas",
+    "category": "grains",
+    "description": "Legumbre básica de color marrón",
+    "ingredients": "Lentejas",
+    "nutritionalInfo": {
+      "calories": 116,
+      "protein": 9,
+      "carbohydrates": 20,
+      "fat": 0.4,
+      "fiber": 8,
+      "sugar": 1.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567802",
+    "name": "Garbanzos",
+    "category": "grains",
+    "description": "Legumbre redonda de color beige",
+    "ingredients": "Garbanzos",
+    "nutritionalInfo": {
+      "calories": 164,
+      "protein": 8.9,
+      "carbohydrates": 27,
+      "fat": 2.6,
+      "fiber": 7.6,
+      "sugar": 4.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567803",
+    "name": "Judías blancas (alubias blancas)",
+    "category": "grains",
+    "description": "Judías de color blanco cremoso",
+    "ingredients": "Judías blancas",
+    "nutritionalInfo": {
+      "calories": 139,
+      "protein": 9,
+      "carbohydrates": 25,
+      "fat": 0.5,
+      "fiber": 9.3,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567804",
+    "name": "Judías pintas (alubias pintas)",
+    "category": "grains",
+    "description": "Judías con manchas rosadas/marrones",
+    "ingredients": "Judías pintas",
+    "nutritionalInfo": {
+      "calories": 143,
+      "protein": 9,
+      "carbohydrates": 26,
+      "fat": 0.7,
+      "fiber": 9,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567805",
+    "name": "Judías negras",
+    "category": "grains",
+    "description": "Judías de color negro brillante",
+    "ingredients": "Judías negras",
+    "nutritionalInfo": {
+      "calories": 132,
+      "protein": 8.9,
+      "carbohydrates": 24,
+      "fat": 0.5,
+      "fiber": 8.7,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567806",
+    "name": "Judías rojas (alubias rojas)",
+    "category": "grains",
+    "description": "Judías de color rojo oscuro",
+    "ingredients": "Judías rojas",
+    "nutritionalInfo": {
+      "calories": 127,
+      "protein": 8.7,
+      "carbohydrates": 22,
+      "fat": 0.5,
+      "fiber": 7.4,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567807",
+    "name": "Guisantes secos",
+    "category": "grains",
+    "description": "Guisantes deshidratados",
+    "ingredients": "Guisantes secos",
+    "nutritionalInfo": {
+      "calories": 118,
+      "protein": 8.3,
+      "carbohydrates": 21,
+      "fat": 0.4,
+      "fiber": 8.3,
+      "sugar": 2.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567808",
+    "name": "Habas secas",
+    "category": "grains",
+    "description": "Habas deshidratadas",
+    "ingredients": "Habas secas",
+    "nutritionalInfo": {
+      "calories": 341,
+      "protein": 26,
+      "carbohydrates": 58,
+      "fat": 1.5,
+      "fiber": 25,
+      "sugar": 5.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567809",
+    "name": "Soja",
+    "category": "grains",
+    "description": "Legumbre de alto contenido proteico",
+    "ingredients": "Soja",
+    "nutritionalInfo": {
+      "calories": 173,
+      "protein": 16.6,
+      "carbohydrates": 9.9,
+      "fat": 9,
+      "fiber": 6,
+      "sugar": 3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567810",
+    "name": "Azukis",
+    "category": "grains",
+    "description": "Judías pequeñas de color rojo oscuro",
+    "ingredients": "Azukis",
+    "nutritionalInfo": {
+      "calories": 128,
+      "protein": 7.5,
+      "carbohydrates": 25,
+      "fat": 0.1,
+      "fiber": 7.3,
+      "sugar": 0.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567811",
+    "name": "Garbanzos de Fuentesaúco",
+    "category": "grains",
+    "description": "Garbanzo con IGP, de tamaño mediano y color amarillo pajizo",
+    "ingredients": "Garbanzos de Fuentesaúco",
+    "nutritionalInfo": {
+      "calories": 168,
+      "protein": 9.2,
+      "carbohydrates": 28,
+      "fat": 2.8,
+      "fiber": 8.2,
+      "sugar": 4.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567812",
+    "name": "Fabes asturianas",
+    "category": "grains",
+    "description": "Judías blancas grandes típicas de Asturias para fabada",
+    "ingredients": "Fabes asturianas",
+    "nutritionalInfo": {
+      "calories": 142,
+      "protein": 9.3,
+      "carbohydrates": 26,
+      "fat": 0.6,
+      "fiber": 9.8,
+      "sugar": 0.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567813",
+    "name": "Pochas",
+    "category": "grains",
+    "description": "Judías blancas tiernas que se cosechan frescas",
+    "ingredients": "Pochas",
+    "nutritionalInfo": {
+      "calories": 136,
+      "protein": 8.8,
+      "carbohydrates": 24,
+      "fat": 0.5,
+      "fiber": 8.5,
+      "sugar": 0.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567814",
+    "name": "Judión de La Granja",
+    "category": "grains",
+    "description": "Judía blanca gigante de Segovia",
+    "ingredients": "Judión de La Granja",
+    "nutritionalInfo": {
+      "calories": 140,
+      "protein": 9.5,
+      "carbohydrates": 25,
+      "fat": 0.5,
+      "fiber": 9.2,
+      "sugar": 0.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567815",
+    "name": "Garbanzo de Escacena",
+    "category": "grains",
+    "description": "Garbanzo pequeño y rugoso de Huelva",
+    "ingredients": "Garbanzo de Escacena",
+    "nutritionalInfo": {
+      "calories": 166,
+      "protein": 9.4,
+      "carbohydrates": 28,
+      "fat": 2.7,
+      "fiber": 8.4,
+      "sugar": 4.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567816",
+    "name": "Lenteja pardina",
+    "category": "grains",
+    "description": "Lenteja pequeña de color marrón oscuro",
+    "ingredients": "Lenteja pardina",
+    "nutritionalInfo": {
+      "calories": 118,
+      "protein": 9.3,
+      "carbohydrates": 20,
+      "fat": 0.5,
+      "fiber": 8.5,
+      "sugar": 1.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567817",
+    "name": "Lenteja de La Armuña",
+    "category": "grains",
+    "description": "Lenteja con IGP, grande y de color verde",
+    "ingredients": "Lenteja de La Armuña",
+    "nutritionalInfo": {
+      "calories": 115,
+      "protein": 9.1,
+      "carbohydrates": 20,
+      "fat": 0.4,
+      "fiber": 8.2,
+      "sugar": 1.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567818",
+    "name": "Lenteja caviar (beluga)",
+    "category": "grains",
+    "description": "Lenteja pequeña y negra que recuerda al caviar",
+    "ingredients": "Lenteja beluga",
+    "nutritionalInfo": {
+      "calories": 120,
+      "protein": 9.5,
+      "carbohydrates": 20,
+      "fat": 0.5,
+      "fiber": 8.8,
+      "sugar": 1.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567819",
+    "name": "Alubias de Tolosa",
+    "category": "grains",
+    "description": "Judías negras pequeñas del País Vasco",
+    "ingredients": "Alubias de Tolosa",
+    "nutritionalInfo": {
+      "calories": 135,
+      "protein": 9.2,
+      "carbohydrates": 24,
+      "fat": 0.6,
+      "fiber": 9.1,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567820",
+    "name": "Mongetes",
+    "category": "grains",
+    "description": "Judías blancas pequeñas típicas de Cataluña",
+    "ingredients": "Mongetes",
+    "nutritionalInfo": {
+      "calories": 138,
+      "protein": 8.9,
+      "carbohydrates": 25,
+      "fat": 0.5,
+      "fiber": 9,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567821",
+    "name": "Cacahuetes",
+    "category": "grains",
+    "description": "Legumbre (no fruto seco) de alto contenido graso",
+    "ingredients": "Cacahuetes",
+    "nutritionalInfo": {
+      "calories": 567,
+      "protein": 25.8,
+      "carbohydrates": 16,
+      "fat": 49.2,
+      "fiber": 8.5,
+      "sugar": 4.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567822",
+    "name": "Altramuz",
+    "category": "grains",
+    "description": "Legumbre amarilla tradicionalmente consumida en salmuera",
+    "ingredients": "Altramuz",
+    "nutritionalInfo": {
+      "calories": 119,
+      "protein": 15.6,
+      "carbohydrates": 10,
+      "fat": 2.4,
+      "fiber": 2.8,
+      "sugar": 0.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "de91a86a-0b4d-451f-b9df-2233b5ff3c77",
+    "name": "Almendras",
+    "category": "nuts",
+    "description": "Fruto seco ovalado de sabor dulce",
+    "ingredients": "Almendras",
+    "nutritionalInfo": {
+      "calories": 579,
+      "protein": 21.2,
+      "carbohydrates": 21.6,
+      "fat": 49.9,
+      "fiber": 12.5,
+      "sugar": 4.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "9847c54e-583a-473a-abbd-fa386eba019f",
+    "name": "Nueces",
+    "category": "nuts",
+    "description": "Fruto seco con forma de cerebro, rico en omega-3",
+    "ingredients": "Nueces",
+    "nutritionalInfo": {
+      "calories": 654,
+      "protein": 15.2,
+      "carbohydrates": 13.7,
+      "fat": 65.2,
+      "fiber": 6.7,
+      "sugar": 2.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1a84aabf-7b99-4931-8a54-57fb26568a10",
+    "name": "Avellanas",
+    "category": "nuts",
+    "description": "Fruto seco redondo de sabor suave",
+    "ingredients": "Avellanas",
+    "nutritionalInfo": {
+      "calories": 628,
+      "protein": 15,
+      "carbohydrates": 16.7,
+      "fat": 60.8,
+      "fiber": 9.7,
+      "sugar": 4.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "34bc231b-0fb9-45d0-be45-528de9cbe3e7",
+    "name": "Pistachos",
+    "category": "nuts",
+    "description": "Fruto seco verde dentro de cáscara beige",
+    "ingredients": "Pistachos",
+    "nutritionalInfo": {
+      "calories": 560,
+      "protein": 20.3,
+      "carbohydrates": 27.2,
+      "fat": 45.4,
+      "fiber": 10.3,
+      "sugar": 7.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "76a1018a-1345-4597-9b37-9995805c88b3",
+    "name": "Piñones",
+    "category": "nuts",
+    "description": "Semillas de los pinos, pequeñas y alargadas",
+    "ingredients": "Piñones",
+    "nutritionalInfo": {
+      "calories": 673,
+      "protein": 13.7,
+      "carbohydrates": 13.1,
+      "fat": 68.4,
+      "fiber": 3.7,
+      "sugar": 3.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "8f73515d-3e91-4312-bbbf-c0a011987856",
+    "name": "Nueces de macadamia",
+    "category": "nuts",
+    "description": "Fruto seco redondo muy cremoso",
+    "ingredients": "Nueces de macadamia",
+    "nutritionalInfo": {
+      "calories": 718,
+      "protein": 7.9,
+      "carbohydrates": 13.8,
+      "fat": 75.8,
+      "fiber": 8.6,
+      "sugar": 4.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f97381b0-5a11-4bff-8a30-d3d573013201",
+    "name": "Nueces pecanas",
+    "category": "nuts",
+    "description": "Nueces alargadas de sabor mantecoso",
+    "ingredients": "Nueces pecanas",
+    "nutritionalInfo": {
+      "calories": 691,
+      "protein": 9.2,
+      "carbohydrates": 13.9,
+      "fat": 71.9,
+      "fiber": 9.6,
+      "sugar": 4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "dee0c75f-6bb3-4316-a8ed-782130c6a437",
+    "name": "Anacardos",
+    "category": "nuts",
+    "description": "Fruto seco en forma de media luna",
+    "ingredients": "Anacardos",
+    "nutritionalInfo": {
+      "calories": 553,
+      "protein": 18.2,
+      "carbohydrates": 30.2,
+      "fat": 43.9,
+      "fiber": 3.3,
+      "sugar": 5.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "3ea5c23d-5f49-48cf-947b-4ae07c2c0ebd",
+    "name": "Castañas",
+    "category": "nuts",
+    "description": "Fruto seco bajo en grasa, típico de otoño",
+    "ingredients": "Castañas",
+    "nutritionalInfo": {
+      "calories": 213,
+      "protein": 2.4,
+      "carbohydrates": 45.5,
+      "fat": 2.3,
+      "fiber": 8.1,
+      "sugar": 10.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "de1d291d-c120-4d9d-bc64-013eabef049c",
+    "name": "Nueces de Brasil",
+    "category": "nuts",
+    "description": "Fruto seco grande, rico en selenio",
+    "ingredients": "Nueces de Brasil",
+    "nutritionalInfo": {
+      "calories": 656,
+      "protein": 14.3,
+      "carbohydrates": 12.3,
+      "fat": 66.4,
+      "fiber": 7.5,
+      "sugar": 2.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d5401906-8195-4334-b85b-315c7e97603d",
+    "name": "Nueces de nogal",
+    "category": "nuts",
+    "description": "Variedad específica de nueces comunes",
+    "ingredients": "Nueces de nogal",
+    "nutritionalInfo": {
+      "calories": 654,
+      "protein": 15.2,
+      "carbohydrates": 13.7,
+      "fat": 65.2,
+      "fiber": 6.7,
+      "sugar": 2.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "5642e901-278a-4355-acc1-97f06c8c7374",
+    "name": "Bellotas",
+    "category": "nuts",
+    "description": "Fruto de la encina, tradicional en alimentación porcina",
+    "ingredients": "Bellotas",
+    "nutritionalInfo": {
+      "calories": 387,
+      "protein": 6.2,
+      "carbohydrates": 40.8,
+      "fat": 23.9,
+      "fiber": 4.7,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "07dd2730-0a5a-44cf-842e-e15085f4e2a4",
+    "name": "Perejil",
+    "category": "herbs",
+    "description": "Hierba aromática fresca de sabor suave",
+    "ingredients": "Perejil",
+    "nutritionalInfo": {
+      "calories": 36,
+      "protein": 3,
+      "carbohydrates": 6.3,
+      "fat": 0.8,
+      "fiber": 3.3,
+      "sugar": 0.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ddad591e-6ef7-4331-b1c5-a54fb3d82a53",
+    "name": "Menta",
+    "category": "herbs",
+    "description": "Hierba aromática refrescante",
+    "ingredients": "Menta",
+    "nutritionalInfo": {
+      "calories": 44,
+      "protein": 3.8,
+      "carbohydrates": 8.4,
+      "fat": 0.7,
+      "fiber": 6.8,
+      "sugar": 0.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "460f580d-2dcf-4b6d-a795-e407c3eea7c9",
+    "name": "Hierbabuena",
+    "category": "herbs",
+    "description": "Variedad de menta de sabor suave",
+    "ingredients": "Hierbabuena",
+    "nutritionalInfo": {
+      "calories": 42,
+      "protein": 3.3,
+      "carbohydrates": 8.4,
+      "fat": 0.7,
+      "fiber": 6.8,
+      "sugar": 0.2
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ae871806-8689-41ce-b9d8-960a9ac16824",
+    "name": "Cilantro fresco",
+    "category": "herbs",
+    "description": "Hierba aromática de sabor intenso y característico",
+    "ingredients": "Cilantro",
+    "nutritionalInfo": {
+      "calories": 23,
+      "protein": 2.1,
+      "carbohydrates": 3.7,
+      "fat": 0.5,
+      "fiber": 2.8,
+      "sugar": 0.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d65eb489-1dd0-43ca-b03d-12ab89d2212b",
+    "name": "Albahaca",
+    "category": "herbs",
+    "description": "Hierba aromática esencial en la cocina mediterránea",
+    "ingredients": "Albahaca",
+    "nutritionalInfo": {
+      "calories": 22,
+      "protein": 3.2,
+      "carbohydrates": 2.7,
+      "fat": 0.6,
+      "fiber": 1.6,
+      "sugar": 0.3
+    },
+    "source": "manual"
+  },
+  {
+    "id": "2a5e218c-be4e-4e9b-a0b2-0bf1a63647ec",
+    "name": "Orégano",
+    "category": "herbs",
+    "description": "Hierba aromática seca muy usada en pizzas y pastas",
+    "ingredients": "Orégano",
+    "nutritionalInfo": {
+      "calories": 265,
+      "protein": 9,
+      "carbohydrates": 68.9,
+      "fat": 4.3,
+      "fiber": 42.5,
+      "sugar": 4.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ef4e39bb-5b07-4ea5-ae4d-cc213a5ee96a",
+    "name": "Tomillo",
+    "category": "herbs",
+    "description": "Hierba aromática mediterránea para guisos y carnes",
+    "ingredients": "Tomillo",
+    "nutritionalInfo": {
+      "calories": 276,
+      "protein": 9.1,
+      "carbohydrates": 63.9,
+      "fat": 7.4,
+      "fiber": 37,
+      "sugar": 1.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "8d78d6b6-7d8d-4955-8a34-1f4d836fb782",
+    "name": "Romero",
+    "category": "herbs",
+    "description": "Hierba aromática leñosa de sabor intenso",
+    "ingredients": "Romero",
+    "nutritionalInfo": {
+      "calories": 131,
+      "protein": 3.3,
+      "carbohydrates": 20.7,
+      "fat": 5.9,
+      "fiber": 14.1,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "60e77e9c-19bd-4995-909c-4e2de31c940c",
+    "name": "Salvia",
+    "category": "herbs",
+    "description": "Hierba aromática de hojas aterciopeladas",
+    "ingredients": "Salvia",
+    "nutritionalInfo": {
+      "calories": 315,
+      "protein": 10.6,
+      "carbohydrates": 60.7,
+      "fat": 12.8,
+      "fiber": 40.3,
+      "sugar": 1.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a2782021-464c-459b-bd94-3717def0ff55",
+    "name": "Eneldo",
+    "category": "herbs",
+    "description": "Hierba aromática de sabor anisado",
+    "ingredients": "Eneldo",
+    "nutritionalInfo": {
+      "calories": 43,
+      "protein": 3.5,
+      "carbohydrates": 7,
+      "fat": 1.1,
+      "fiber": 2.1,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "fc2eadd8-244e-4a90-a88b-ce95af37e74d",
+    "name": "Cebollino",
+    "category": "herbs",
+    "description": "Hierba aromática de sabor suave a cebolla",
+    "ingredients": "Cebollino",
+    "nutritionalInfo": {
+      "calories": 30,
+      "protein": 3.3,
+      "carbohydrates": 4.4,
+      "fat": 0.7,
+      "fiber": 2.5,
+      "sugar": 1.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "8abb9dc9-4a50-462a-923f-0591a3c72b0a",
+    "name": "Estragón",
+    "category": "herbs",
+    "description": "Hierba aromática de sabor anisado intenso",
+    "ingredients": "Estragón",
+    "nutritionalInfo": {
+      "calories": 295,
+      "protein": 22.8,
+      "carbohydrates": 50.2,
+      "fat": 7.2,
+      "fiber": 7.4,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "68b83ae2-0bd6-43d2-a25f-36fbd7fe0e33",
+    "name": "Laurel",
+    "category": "herbs",
+    "description": "Hoja aromática seca para guisos y estofados",
+    "ingredients": "Laurel",
+    "nutritionalInfo": {
+      "calories": 313,
+      "protein": 7.6,
+      "carbohydrates": 74.9,
+      "fat": 8.4,
+      "fiber": 26.3,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b1c8f736-9d1c-429b-b3e5-4684281ff777",
+    "name": "Mejorana",
+    "category": "herbs",
+    "description": "Hierba aromática similar al orégano pero más suave",
+    "ingredients": "Mejorana",
+    "nutritionalInfo": {
+      "calories": 271,
+      "protein": 12.7,
+      "carbohydrates": 60.6,
+      "fat": 7,
+      "fiber": 40.3,
+      "sugar": 4.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "7054fd1f-51ff-4198-b69a-9ba1c58f5985",
+    "name": "Hinojo fresco",
+    "category": "herbs",
+    "description": "Hierba aromática de sabor anisado",
+    "ingredients": "Hinojo",
+    "nutritionalInfo": {
+      "calories": 31,
+      "protein": 1.2,
+      "carbohydrates": 7.3,
+      "fat": 0.2,
+      "fiber": 3.1,
+      "sugar": 3.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "25774914-646a-4733-a0e1-062221da6ead",
+    "name": "Lubina",
+    "category": "fish",
+    "description": "Pescado blanco mediterráneo de carne firme",
+    "ingredients": "Lubina",
+    "nutritionalInfo": {
+      "calories": 97,
+      "protein": 18.4,
+      "carbohydrates": 0,
+      "fat": 2.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c6a024c2-a1ca-4d08-98c4-6aa6d1f2d93d",
+    "name": "Dorada",
+    "category": "fish",
+    "description": "Pescado blanco mediterráneo muy apreciado",
+    "ingredients": "Dorada",
+    "nutritionalInfo": {
+      "calories": 96,
+      "protein": 18.9,
+      "carbohydrates": 0,
+      "fat": 2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "6eef8c7d-f15c-45c0-afaa-f3300793ed8a",
+    "name": "Merluza",
+    "category": "fish",
+    "description": "Pescado blanco de carne blanca y suave",
+    "ingredients": "Merluza",
+    "nutritionalInfo": {
+      "calories": 71,
+      "protein": 15.9,
+      "carbohydrates": 0,
+      "fat": 0.4,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ac0b1edb-ec0d-4141-a982-6e8c0dcfcd1b",
+    "name": "Lenguado",
+    "category": "fish",
+    "description": "Pescado plano de carne delicada",
+    "ingredients": "Lenguado",
+    "nutritionalInfo": {
+      "calories": 70,
+      "protein": 14.9,
+      "carbohydrates": 0,
+      "fat": 1.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "3744a186-c575-4d8a-8d8d-b27bb357a054",
+    "name": "Salmonete",
+    "category": "fish",
+    "description": "Pescado de roca con bigotes característicos",
+    "ingredients": "Salmonete",
+    "nutritionalInfo": {
+      "calories": 94,
+      "protein": 18.4,
+      "carbohydrates": 0,
+      "fat": 2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "97a508fe-d471-4832-b65c-67bc95e436ee",
+    "name": "Besugo",
+    "category": "fish",
+    "description": "Pescado blanco de carne firme y sabor intenso",
+    "ingredients": "Besugo",
+    "nutritionalInfo": {
+      "calories": 100,
+      "protein": 20.5,
+      "carbohydrates": 0,
+      "fat": 1.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f8f19cdb-01d8-4f55-b7f7-7af200a0e3a4",
+    "name": "Mero",
+    "category": "fish",
+    "description": "Pescado blanco de gran tamaño y carne firme",
+    "ingredients": "Mero",
+    "nutritionalInfo": {
+      "calories": 92,
+      "protein": 19.4,
+      "carbohydrates": 0,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "6ab83bc1-b510-4305-88fa-bf27309d69db",
+    "name": "Gallo",
+    "category": "fish",
+    "description": "Pescado plano de carne blanca y fina",
+    "ingredients": "Gallo",
+    "nutritionalInfo": {
+      "calories": 72,
+      "protein": 15.8,
+      "carbohydrates": 0,
+      "fat": 0.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "cee4e33a-2757-40f5-a788-d5f2e5f6ecc8",
+    "name": "Sardina",
+    "category": "fish",
+    "description": "Pescado azul pequeño muy nutritivo",
+    "ingredients": "Sardina",
+    "nutritionalInfo": {
+      "calories": 208,
+      "protein": 20.9,
+      "carbohydrates": 0,
+      "fat": 13.9,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "037825fb-6f62-4bc1-84b0-cf5bfe8c8b3a",
+    "name": "Boquerón (anchoa)",
+    "category": "fish",
+    "description": "Pescado azul pequeño, se consume fresco o en conserva",
+    "ingredients": "Boquerón",
+    "nutritionalInfo": {
+      "calories": 210,
+      "protein": 20.4,
+      "carbohydrates": 0,
+      "fat": 14.1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "288c07be-526b-4e73-b7ef-2cebdf59ac69",
+    "name": "Caballa",
+    "category": "fish",
+    "description": "Pescado azul de carne oscura y sabrosa",
+    "ingredients": "Caballa",
+    "nutritionalInfo": {
+      "calories": 205,
+      "protein": 18.6,
+      "carbohydrates": 0,
+      "fat": 13.9,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "74e870be-4471-4504-b70c-af481e343fbc",
+    "name": "Atún",
+    "category": "fish",
+    "description": "Pescado azul grande, muy versátil en cocina",
+    "ingredients": "Atún",
+    "nutritionalInfo": {
+      "calories": 184,
+      "protein": 25.5,
+      "carbohydrates": 0,
+      "fat": 8.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e4661b5e-0a38-46ba-b74e-76de7f29aef8",
+    "name": "Bonito del Norte",
+    "category": "fish",
+    "description": "Variedad de atún blanca muy apreciada",
+    "ingredients": "Bonito del Norte",
+    "nutritionalInfo": {
+      "calories": 186,
+      "protein": 23.7,
+      "carbohydrates": 0,
+      "fat": 9.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ddc5ea61-fb5f-4af8-af37-5521aae473a4",
+    "name": "Jurel",
+    "category": "fish",
+    "description": "Pescado azul económico y nutritivo",
+    "ingredients": "Jurel",
+    "nutritionalInfo": {
+      "calories": 157,
+      "protein": 18.5,
+      "carbohydrates": 0,
+      "fat": 9,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c13ff186-94c0-4cf3-8627-e693d1c8028b",
+    "name": "Pez espada",
+    "category": "fish",
+    "description": "Pescado grande de carne firme y rosada",
+    "ingredients": "Pez espada",
+    "nutritionalInfo": {
+      "calories": 144,
+      "protein": 19.8,
+      "carbohydrates": 0,
+      "fat": 6.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "509f883c-c204-4f86-8b8f-54a7ff8855d9",
+    "name": "Bacalao",
+    "category": "fish",
+    "description": "Pescado blanco del Atlántico, se consume fresco o salado",
+    "ingredients": "Bacalao",
+    "nutritionalInfo": {
+      "calories": 82,
+      "protein": 17.8,
+      "carbohydrates": 0,
+      "fat": 0.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a0c43500-d316-4b2c-a9f7-dbbc13357be7",
+    "name": "Perca (cherne)",
+    "category": "fish",
+    "description": "Pescado blanco del Atlántico de gran tamaño",
+    "ingredients": "Cherne",
+    "nutritionalInfo": {
+      "calories": 87,
+      "protein": 18.6,
+      "carbohydrates": 0,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1c7ef465-edea-483d-a22f-769c0fe293b8",
+    "name": "Abadejo",
+    "category": "fish",
+    "description": "Pescado blanco similar al bacalao",
+    "ingredients": "Abadejo",
+    "nutritionalInfo": {
+      "calories": 79,
+      "protein": 17.8,
+      "carbohydrates": 0,
+      "fat": 0.4,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d78e7416-77a6-4243-bddf-e3da80dac5c2",
+    "name": "Merluza del norte",
+    "category": "fish",
+    "description": "Variedad de merluza del Atlántico Norte",
+    "ingredients": "Merluza del norte",
+    "nutritionalInfo": {
+      "calories": 70,
+      "protein": 15.5,
+      "carbohydrates": 0,
+      "fat": 0.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "4b56ac5f-09ef-45ad-9861-2a12dc0c1b7b",
+    "name": "Congrio",
+    "category": "fish",
+    "description": "Pescado blanco alargado de carne firme",
+    "ingredients": "Congrio",
+    "nutritionalInfo": {
+      "calories": 82,
+      "protein": 18.3,
+      "carbohydrates": 0,
+      "fat": 0.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f33624a4-b041-4c4f-bdba-f6bd6748d47e",
+    "name": "Faneca",
+    "category": "fish",
+    "description": "Pescado pequeño del Atlántico",
+    "ingredients": "Faneca",
+    "nutritionalInfo": {
+      "calories": 76,
+      "protein": 16.5,
+      "carbohydrates": 0,
+      "fat": 0.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e26102be-12e8-4338-a3a4-970dd2c4db77",
+    "name": "Palometa",
+    "category": "fish",
+    "description": "Pescado plano del Atlántico",
+    "ingredients": "Palometa",
+    "nutritionalInfo": {
+      "calories": 95,
+      "protein": 17.8,
+      "carbohydrates": 0,
+      "fat": 2.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "09858adc-fc03-454e-b376-e05932e054fc",
+    "name": "Salmón",
+    "category": "fish",
+    "description": "Pescado azul de carne anaranjada, rico en omega-3",
+    "ingredients": "Salmón",
+    "nutritionalInfo": {
+      "calories": 208,
+      "protein": 20.4,
+      "carbohydrates": 0,
+      "fat": 13.4,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b45c5b94-0413-4863-8eca-905742d782b0",
+    "name": "Trucha de mar",
+    "category": "fish",
+    "description": "Trucha que migra al mar, de carne rosada",
+    "ingredients": "Trucha de mar",
+    "nutritionalInfo": {
+      "calories": 148,
+      "protein": 20.8,
+      "carbohydrates": 0,
+      "fat": 6.6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "cebd7813-0f24-417c-b692-91f00c716ca1",
+    "name": "Trucha",
+    "category": "fish",
+    "description": "Pescado de río de carne rosada y delicada",
+    "ingredients": "Trucha",
+    "nutritionalInfo": {
+      "calories": 119,
+      "protein": 20.5,
+      "carbohydrates": 0,
+      "fat": 3.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "908aad1e-1dd1-4578-a3ff-aa169642a462",
+    "name": "Carpa",
+    "category": "fish",
+    "description": "Pescado de agua dulce de carne blanca",
+    "ingredients": "Carpa",
+    "nutritionalInfo": {
+      "calories": 127,
+      "protein": 17.8,
+      "carbohydrates": 0,
+      "fat": 5.6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e724d1e8-835d-4747-86d3-82034d668dc3",
+    "name": "Lucio",
+    "category": "fish",
+    "description": "Pescado de río depredador de carne firme",
+    "ingredients": "Lucio",
+    "nutritionalInfo": {
+      "calories": 88,
+      "protein": 19.3,
+      "carbohydrates": 0,
+      "fat": 0.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ec528553-fdb2-4804-8ef1-0ca2729fe9ec",
+    "name": "Perca de río",
+    "category": "fish",
+    "description": "Pescado de agua dulce pequeño",
+    "ingredients": "Perca de río",
+    "nutritionalInfo": {
+      "calories": 91,
+      "protein": 19.4,
+      "carbohydrates": 0,
+      "fat": 0.9,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "90d4ae50-8544-4259-b113-066d41151fed",
+    "name": "Black bass",
+    "category": "fish",
+    "description": "Pescado de agua dulce americano introducido en España",
+    "ingredients": "Black bass",
+    "nutritionalInfo": {
+      "calories": 114,
+      "protein": 20.8,
+      "carbohydrates": 0,
+      "fat": 3.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "9bb5eaa6-0c48-4ff5-9867-6f967503c34e",
+    "name": "Tenca",
+    "category": "fish",
+    "description": "Pescado de río de carne apreciada",
+    "ingredients": "Tenca",
+    "nutritionalInfo": {
+      "calories": 106,
+      "protein": 18.4,
+      "carbohydrates": 0,
+      "fat": 3.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "6d9e64bf-91d9-4dcb-830f-12156c6ee0b9",
+    "name": "Tilapia",
+    "category": "fish",
+    "description": "Pescado de agua dulce de importación",
+    "ingredients": "Tilapia",
+    "nutritionalInfo": {
+      "calories": 96,
+      "protein": 20.1,
+      "carbohydrates": 0,
+      "fat": 1.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d83620e9-16d4-4511-bf7e-63ed6b1516b4",
+    "name": "Panga",
+    "category": "fish",
+    "description": "Pescado de agua dulce de importación",
+    "ingredients": "Panga",
+    "nutritionalInfo": {
+      "calories": 77,
+      "protein": 15.8,
+      "carbohydrates": 0,
+      "fat": 1.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "2ceb7fba-068a-4fb0-8190-13e15c602e98",
+    "name": "Corvina",
+    "category": "fish",
+    "description": "Pescado de importación de carne blanca",
+    "ingredients": "Corvina",
+    "nutritionalInfo": {
+      "calories": 104,
+      "protein": 19.8,
+      "carbohydrates": 0,
+      "fat": 2.4,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "37cb174f-af05-4ec8-8f8d-e3c9c4193f58",
+    "name": "Mahi-mahi",
+    "category": "fish",
+    "description": "Pescado tropical de importación",
+    "ingredients": "Mahi-mahi",
+    "nutritionalInfo": {
+      "calories": 85,
+      "protein": 18.5,
+      "carbohydrates": 0,
+      "fat": 0.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "8bcfdc79-2143-4eed-93ad-38a958bb0513",
+    "name": "Pargo",
+    "category": "fish",
+    "description": "Pescado tropical de importación",
+    "ingredients": "Pargo",
+    "nutritionalInfo": {
+      "calories": 109,
+      "protein": 20.5,
+      "carbohydrates": 0,
+      "fat": 2.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "dd47b14e-fdec-42f2-a432-2b78bc00e475",
+    "name": "Robalo",
+    "category": "fish",
+    "description": "Pescado de importación similar a la lubina",
+    "ingredients": "Robalo",
+    "nutritionalInfo": {
+      "calories": 97,
+      "protein": 18.4,
+      "carbohydrates": 0,
+      "fat": 2.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ac28ebc6-7373-4ab5-9920-6102cb2b64bf",
+    "name": "Cazón",
+    "category": "fish",
+    "description": "Tiburón pequeño, tradicional en Andalucía",
+    "ingredients": "Cazón",
+    "nutritionalInfo": {
+      "calories": 130,
+      "protein": 20.9,
+      "carbohydrates": 0,
+      "fat": 4.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "67ff4a0c-f505-4be5-8756-09df0b2f1e0d",
+    "name": "Bagre",
+    "category": "fish",
+    "description": "Pez de agua dulce con bigotes característicos",
+    "ingredients": "Bagre",
+    "nutritionalInfo": {
+      "calories": 95,
+      "protein": 16.4,
+      "carbohydrates": 0,
+      "fat": 2.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "5a5338e3-9083-4db6-bd32-327264d92e84",
+    "name": "Emperador",
+    "category": "fish",
+    "description": "Pez de profundidad de carne firme",
+    "ingredients": "Emperador",
+    "nutritionalInfo": {
+      "calories": 112,
+      "protein": 20.2,
+      "carbohydrates": 0,
+      "fat": 3.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e082caea-880d-44ff-bfc4-e8090c1f81b6",
+    "name": "Palometa negra",
+    "category": "fish",
+    "description": "Variedad de palometa de color oscuro",
+    "ingredients": "Palometa negra",
+    "nutritionalInfo": {
+      "calories": 98,
+      "protein": 18.2,
+      "carbohydrates": 0,
+      "fat": 2.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a96d3b95-7daa-4068-8cfb-3b39286e575a",
+    "name": "Gallineta",
+    "category": "fish",
+    "description": "Pescado de roca de color rojizo",
+    "ingredients": "Gallineta",
+    "nutritionalInfo": {
+      "calories": 87,
+      "protein": 18.3,
+      "carbohydrates": 0,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "76a0981a-dd44-4ea5-bd0c-6831aa39e39e",
+    "name": "Castañeta",
+    "category": "fish",
+    "description": "Pez pequeño de color castaño",
+    "ingredients": "Castañeta",
+    "nutritionalInfo": {
+      "calories": 92,
+      "protein": 18.6,
+      "carbohydrates": 0,
+      "fat": 1.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f3fbe329-23a3-45c8-b437-57a41c23375b",
+    "name": "Mojarra",
+    "category": "fish",
+    "description": "Pez pequeño de agua dulce o salada",
+    "ingredients": "Mojarra",
+    "nutritionalInfo": {
+      "calories": 89,
+      "protein": 18.4,
+      "carbohydrates": 0,
+      "fat": 1.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b2993b8d-9f2d-412b-ae65-c255594ef420",
+    "name": "Lisa",
+    "category": "fish",
+    "description": "Pez de estuarios y aguas costeras",
+    "ingredients": "Lisa",
+    "nutritionalInfo": {
+      "calories": 117,
+      "protein": 19.3,
+      "carbohydrates": 0,
+      "fat": 4,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "bed2fc32-c927-485e-b6b5-bde4d6994e6b",
+    "name": "Gambas",
+    "category": "seafood",
+    "description": "Crustáceo pequeño, muy versátil en cocina",
+    "ingredients": "Gambas",
+    "nutritionalInfo": {
+      "calories": 85,
+      "protein": 20.3,
+      "carbohydrates": 0.9,
+      "fat": 0.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "20eb21b5-4339-4a09-a30c-20f3230b0409",
+    "name": "Langostinos",
+    "category": "seafood",
+    "description": "Crustáceo similar a la gamba pero más grande",
+    "ingredients": "Langostinos",
+    "nutritionalInfo": {
+      "calories": 106,
+      "protein": 20.3,
+      "carbohydrates": 0.9,
+      "fat": 1.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "fea032cc-df0d-4aa1-9afd-bba069d5c1ea",
+    "name": "Carabineros",
+    "category": "seafood",
+    "description": "Langostino gigante de color rojo intenso",
+    "ingredients": "Carabineros",
+    "nutritionalInfo": {
+      "calories": 110,
+      "protein": 21.5,
+      "carbohydrates": 1.2,
+      "fat": 1.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "79acee63-ff7a-4b2f-9674-bc441dcf8385",
+    "name": "Cigalas",
+    "category": "seafood",
+    "description": "Crustáceo de pinzas largas y carne delicada",
+    "ingredients": "Cigalas",
+    "nutritionalInfo": {
+      "calories": 112,
+      "protein": 20.6,
+      "carbohydrates": 1.1,
+      "fat": 1.9,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "3ad46561-36ae-4480-91e2-1eb051b4654b",
+    "name": "Langosta",
+    "category": "seafood",
+    "description": "Crustáceo de gran tamaño muy apreciado",
+    "ingredients": "Langosta",
+    "nutritionalInfo": {
+      "calories": 90,
+      "protein": 18.8,
+      "carbohydrates": 0.8,
+      "fat": 0.9,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a26a8b6f-b3d5-4dae-9f07-66341af4276b",
+    "name": "Bogavante",
+    "category": "seafood",
+    "description": "Crustáceo similar a la langosta con pinzas grandes",
+    "ingredients": "Bogavante",
+    "nutritionalInfo": {
+      "calories": 92,
+      "protein": 19,
+      "carbohydrates": 0.7,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "00ad8a40-3f68-455c-b6b1-4ce4c3675fa0",
+    "name": "Centollo",
+    "category": "seafood",
+    "description": "Cangrejo de gran tamaño con caparazón espinoso",
+    "ingredients": "Centollo",
+    "nutritionalInfo": {
+      "calories": 87,
+      "protein": 18.1,
+      "carbohydrates": 0,
+      "fat": 1.1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "5f9b9c2b-0a6f-4037-b4be-468811dad1cf",
+    "name": "Buey de mar",
+    "category": "seafood",
+    "description": "Cangrejo grande de color rojo anaranjado",
+    "ingredients": "Buey de mar",
+    "nutritionalInfo": {
+      "calories": 86,
+      "protein": 18.3,
+      "carbohydrates": 0,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "35c49625-0b50-4dc2-b285-da0c89dafb01",
+    "name": "Cangrejo de río",
+    "category": "seafood",
+    "description": "Crustáceo de agua dulce pequeño",
+    "ingredients": "Cangrejo de río",
+    "nutritionalInfo": {
+      "calories": 82,
+      "protein": 16.8,
+      "carbohydrates": 0,
+      "fat": 1.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b4e6533b-783c-43f6-8170-3111b98a5d16",
+    "name": "Nécoras",
+    "category": "seafood",
+    "description": "Cangrejo pequeño muy apreciado en Galicia",
+    "ingredients": "Nécora",
+    "nutritionalInfo": {
+      "calories": 88,
+      "protein": 18.5,
+      "carbohydrates": 0,
+      "fat": 1.3,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "3f4a5ec5-c8f0-40a1-9c24-563e0db1cb4e",
+    "name": "Percebes",
+    "category": "seafood",
+    "description": "Crustáceo que vive adherido a las rocas",
+    "ingredients": "Percebe",
+    "nutritionalInfo": {
+      "calories": 76,
+      "protein": 14.3,
+      "carbohydrates": 0.6,
+      "fat": 1.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "3d376cd9-27be-4a7c-99ac-3df6c87188ab",
+    "name": "Quisquillas",
+    "category": "seafood",
+    "description": "Gambas muy pequeñas",
+    "ingredients": "Quisquillas",
+    "nutritionalInfo": {
+      "calories": 71,
+      "protein": 15.1,
+      "carbohydrates": 1.3,
+      "fat": 0.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "0266d625-474a-4537-9a8c-040a433c4148",
+    "name": "Camarones",
+    "category": "seafood",
+    "description": "Crustáceo muy pequeño de agua dulce",
+    "ingredients": "Camarón",
+    "nutritionalInfo": {
+      "calories": 69,
+      "protein": 14.8,
+      "carbohydrates": 0.9,
+      "fat": 0.4,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "50ef592f-455c-49e3-91ea-151fcf7caf90",
+    "name": "Mejillones",
+    "category": "seafood",
+    "description": "Molusco bivalvo de cultivo muy común",
+    "ingredients": "Mejillón",
+    "nutritionalInfo": {
+      "calories": 86,
+      "protein": 11.9,
+      "carbohydrates": 3.7,
+      "fat": 2.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "2e024d4e-3ca9-4a74-abd8-e16377c28965",
+    "name": "Almejas",
+    "category": "seafood",
+    "description": "Molusco bivalvo de concha dura",
+    "ingredients": "Almeja",
+    "nutritionalInfo": {
+      "calories": 74,
+      "protein": 12.8,
+      "carbohydrates": 2.6,
+      "fat": 0.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ac99a199-748b-4360-bdca-11ce3b228b5c",
+    "name": "Berberechos",
+    "category": "seafood",
+    "description": "Molusco bivalvo pequeño con conchas estriadas",
+    "ingredients": "Berberecho",
+    "nutritionalInfo": {
+      "calories": 79,
+      "protein": 13.2,
+      "carbohydrates": 2.7,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "4cb5ae16-63ff-4902-adb8-2849ff6165cd",
+    "name": "Navajas",
+    "category": "seafood",
+    "description": "Molusco bivalvo alargado en forma de navaja",
+    "ingredients": "Navaja",
+    "nutritionalInfo": {
+      "calories": 68,
+      "protein": 12.2,
+      "carbohydrates": 2.2,
+      "fat": 0.6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "66d420d3-5616-482f-81a9-1bd422793c4b",
+    "name": "Vieiras",
+    "category": "seafood",
+    "description": "Molusco bivalvo muy apreciado, con su coral",
+    "ingredients": "Vieira",
+    "nutritionalInfo": {
+      "calories": 88,
+      "protein": 16.8,
+      "carbohydrates": 1.9,
+      "fat": 0.8,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1a5102aa-3da3-4b6a-b5eb-f027b145a199",
+    "name": "Ostras",
+    "category": "seafood",
+    "description": "Molusco bivalvo considerado un manjar",
+    "ingredients": "Ostra",
+    "nutritionalInfo": {
+      "calories": 81,
+      "protein": 9.5,
+      "carbohydrates": 4.2,
+      "fat": 2.3,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d104e221-469d-41d0-b3da-a3be34f6535d",
+    "name": "Zamburiñas",
+    "category": "seafood",
+    "description": "Pequeña vieira muy apreciada en Galicia",
+    "ingredients": "Zamburiña",
+    "nutritionalInfo": {
+      "calories": 85,
+      "protein": 15.8,
+      "carbohydrates": 2.1,
+      "fat": 0.9,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "3cb36c25-df4e-4503-9e64-4ce2bb666ff5",
+    "name": "Coquinas",
+    "category": "seafood",
+    "description": "Molusco bivalvo muy pequeño",
+    "ingredients": "Coquina",
+    "nutritionalInfo": {
+      "calories": 62,
+      "protein": 10.8,
+      "carbohydrates": 2.1,
+      "fat": 0.6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "b6d2a608-dfc2-4be5-8800-0a5f13686470",
+    "name": "Chirlas",
+    "category": "seafood",
+    "description": "Almeja pequeña de sabor intenso",
+    "ingredients": "Chirla",
+    "nutritionalInfo": {
+      "calories": 70,
+      "protein": 12.1,
+      "carbohydrates": 2.3,
+      "fat": 0.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1a635236-9749-4a6e-9922-387ddc8fb109",
+    "name": "Tellinas",
+    "category": "seafood",
+    "description": "Almeja pequeña y plana",
+    "ingredients": "Tellina",
+    "nutritionalInfo": {
+      "calories": 67,
+      "protein": 11.9,
+      "carbohydrates": 2.2,
+      "fat": 0.6,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "16d97d56-54fb-4647-8cc9-f7ff099a872f",
+    "name": "Pulpo",
+    "category": "seafood",
+    "description": "Cefalópodo de ocho tentáculos",
+    "ingredients": "Pulpo",
+    "nutritionalInfo": {
+      "calories": 82,
+      "protein": 14.9,
+      "carbohydrates": 2.2,
+      "fat": 1,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "aeca8a93-0f9f-460c-bd82-252588c469aa",
+    "name": "Calamar",
+    "category": "seafood",
+    "description": "Cefalópodo de cuerpo alargado",
+    "ingredients": "Calamar",
+    "nutritionalInfo": {
+      "calories": 92,
+      "protein": 15.6,
+      "carbohydrates": 3.1,
+      "fat": 1.4,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "35c30b13-0bd2-46db-98b8-385812430904",
+    "name": "Sepia (jibia)",
+    "category": "seafood",
+    "description": "Cefalópodo de cuerpo ancho y plana",
+    "ingredients": "Sepia",
+    "nutritionalInfo": {
+      "calories": 79,
+      "protein": 16.2,
+      "carbohydrates": 0.8,
+      "fat": 0.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "4f4c832c-330b-43af-8d26-ae9c9a01f87b",
+    "name": "Chipirones",
+    "category": "seafood",
+    "description": "Calamares pequeños",
+    "ingredients": "Chipirón",
+    "nutritionalInfo": {
+      "calories": 87,
+      "protein": 15.1,
+      "carbohydrates": 2.8,
+      "fat": 1.2,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "4a220efa-8eb2-4363-9e48-fdc2c63c2597",
+    "name": "Pota",
+    "category": "seafood",
+    "description": "Cefalópodo similar al calamar pero más económico",
+    "ingredients": "Pota",
+    "nutritionalInfo": {
+      "calories": 75,
+      "protein": 15.6,
+      "carbohydrates": 1.6,
+      "fat": 0.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e2c152f9-d270-4f6f-8f46-b6079e5c160e",
+    "name": "Erizos de mar",
+    "category": "seafood",
+    "description": "Equinodermo cuya parte comestible son las gónadas",
+    "ingredients": "Erizo de mar",
+    "nutritionalInfo": {
+      "calories": 90,
+      "protein": 13.8,
+      "carbohydrates": 2.5,
+      "fat": 2.5,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1590f6b2-874e-48c8-84bf-f613104f3b76",
+    "name": "Caracoles de mar (cañaíllas, bígaros)",
+    "category": "seafood",
+    "description": "Gasterópodos marinos pequeños",
+    "ingredients": "Caracol de mar",
+    "nutritionalInfo": {
+      "calories": 79,
+      "protein": 14.1,
+      "carbohydrates": 2.1,
+      "fat": 0.7,
+      "fiber": 0,
+      "sugar": 0
+    },
+    "source": "manual"
+  }
+]
