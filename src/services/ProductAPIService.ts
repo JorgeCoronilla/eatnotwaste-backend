@@ -67,7 +67,7 @@ class ProductAPIService {
     
     // Configurar axios con timeout
     this.httpClient = axios.create({
-      timeout: 10000, // 10 segundos
+      timeout: 10000, // 10 segundos (no bloquea UI en modo paralelo)
       headers: {
         'User-Agent': 'FreshKeeper/1.0 (https://freshkeeper.app)'
       }

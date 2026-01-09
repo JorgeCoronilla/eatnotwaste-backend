@@ -5,6 +5,8 @@ import { UserProductService } from '../services/UserProductService';
 import { DashboardService } from '../services/DashboardService';
 import { AuthenticatedRequest } from '../types';
 import { ListType } from '../types/database';
+import { prisma } from '../config/database';
+import { ProductSource } from '@prisma/client';
 
 /**
  * Obtener inventario del usuario (nuevo diseño)
@@ -87,7 +89,7 @@ export const addToInventory: RequestHandler = async (req, res) => {
       return;
     }
 
-    const { productId, quantity, unit, location, purchaseDate, expirationDate, price, notes } = req.body as any;
+    const { productId: incomingProductId, product, quantity, unit, location, purchaseDate, expirationDate, price, notes } = req.body as any;
 
     const locationData: {
       productId: string;
@@ -100,7 +102,7 @@ export const addToInventory: RequestHandler = async (req, res) => {
       store?: string;
       notes?: string;
     } = {
-      productId,
+      productId: incomingProductId,
       location: location || 'pantry',
       quantity: Number(quantity),
     };
@@ -110,6 +112,42 @@ export const addToInventory: RequestHandler = async (req, res) => {
     if (expirationDate !== undefined) locationData.expiryDate = new Date(expirationDate);
     if (price !== undefined) locationData.price = price;
     if (notes !== undefined) locationData.notes = notes;
+
+    // Si no hay productId pero se envía `product`, crear/usar existente
+    if (!locationData.productId && product) {
+      const name = (product.name || '').trim();
+      const brand = product.brand || undefined;
+      const barcode = product.barcode || undefined;
+      const category = product.category || undefined;
+      const imageUrl = product.imageUrl || undefined;
+      const sourceRaw = product.source || 'llm';
+
+      // Buscar por barcode primero
+      let dbProduct = undefined as any;
+      if (barcode) {
+        dbProduct = await prisma.product.findFirst({ where: { barcode } });
+      }
+      // Si no hay barcode o no se encontró, intentar coincidencia exacta por nombre
+      if (!dbProduct && name) {
+        dbProduct = await prisma.product.findFirst({ where: { name: { equals: name, mode: 'insensitive' } } });
+      }
+
+      if (!dbProduct) {
+        dbProduct = await prisma.product.create({
+          data: {
+            name,
+            brand,
+            barcode,
+            category,
+            imageUrl,
+            source: sourceRaw === 'openfoodfacts' ? ProductSource.openfoodfacts : ProductSource.llm,
+            isVerified: false,
+          }
+        });
+      }
+
+      locationData.productId = dbProduct.id;
+    }
 
     const result = await UserProductService.addProductLocation(reqAuth.user.id, locationData);
 

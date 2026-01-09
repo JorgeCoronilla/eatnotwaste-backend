@@ -44,6 +44,55 @@ export const validateAddProductLocation: ValidationChain[] = [
     .withMessage('Notas no pueden exceder 500 caracteres')
 ];
 
+// Validación flexible: permite `productId` o un objeto `product` para creación inline
+export const validateAddProductLocationFlexible: ValidationChain[] = [
+  // Al menos uno de productId (UUID) o product.name
+  body('productId').optional().isUUID().withMessage('ID de producto no válido'),
+  body('product')
+    .optional()
+    .custom((val) => {
+      if (val == null) return true;
+      if (typeof val !== 'object') throw new Error('product debe ser un objeto');
+      if (!val.name || typeof val.name !== 'string' || val.name.trim().length < 2) {
+        throw new Error('product.name es obligatorio');
+      }
+      return true;
+    }),
+  body()
+    .custom((_, { req }) => {
+      if (!req.body.productId && !req.body.product) {
+        throw new Error('Debe incluir productId o un objeto product');
+      }
+      return true;
+    }),
+  body('quantity')
+    .isFloat({ min: 0.1, max: 9999 })
+    .withMessage('Cantidad debe ser mayor a 0'),
+  body('unit')
+    .optional()
+    .isIn(['pieces', 'kg', 'g', 'l', 'ml', 'cups', 'tbsp', 'tsp'])
+    .withMessage('Unidad no válida'),
+  body('location')
+    .isIn(['fridge', 'freezer', 'pantry', 'counter'])
+    .withMessage('Ubicación no válida'),
+  body('expiryDate')
+    .optional()
+    .isISO8601()
+    .withMessage('Fecha de expiración no válida'),
+  body('purchaseDate')
+    .optional()
+    .isISO8601()
+    .withMessage('Fecha de compra no válida'),
+  body('price')
+    .optional()
+    .isFloat({ min: 0 })
+    .withMessage('Precio debe ser positivo'),
+  body('notes')
+    .optional()
+    .isLength({ max: 500 })
+    .withMessage('Notas no pueden exceder 500 caracteres')
+];
+
 // Validaciones para actualizar ubicación de producto (nuevo diseño)
 export const validateUpdateProductLocation: ValidationChain[] = [
   param('id')
@@ -204,6 +253,7 @@ export const validateUpdateUserProduct: ValidationChain[] = [
 // Exportar todas las validaciones
 export default {
   validateAddProductLocation,
+  validateAddProductLocationFlexible,
   validateUpdateProductLocation,
   validateConsumeProductLocation,
   validateUserProductFilters,

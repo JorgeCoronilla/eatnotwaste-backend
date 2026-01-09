@@ -166,15 +166,17 @@ export const searchProducts = async (req: Request, res: Response): Promise<void>
 export const manualSearchByName: RequestHandler = async (req, res) => {
   try {
     const reqAuth = req as AuthenticatedRequest;
-    const { q, lang = 'es' } = req.query;
+    const { q, lang = 'es', type = 'all' } = req.query;
 
     if (!q || typeof q !== 'string') {
       res.status(400).json({ success: false, message: 'Parámetro de búsqueda requerido' });
       return;
     }
 
-    const result = await ProductSearchService.searchByName(q, String(lang), reqAuth.user?.id);
-
+    const searchType = (type === 'fast' || type === 'external') ? type : 'all';
+    console.info('manualSearchByName:request', { q, lang, type: searchType, userId: reqAuth.user?.id });
+    const result = await ProductSearchService.searchByName(q, String(lang), reqAuth.user?.id, searchType);
+    console.info('manualSearchByName:response', { decision: result.decision, source: result.source, products: result.products?.length || 0 });
     res.json({ success: true, ...result });
   } catch (error) {
     console.error('Error en manualSearchByName:', error);

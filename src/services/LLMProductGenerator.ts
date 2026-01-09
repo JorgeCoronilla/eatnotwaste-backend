@@ -26,7 +26,8 @@ export class LLMProductGenerator {
       : 'You are a nutrition and grocery expert. Only generate generic products when no real data exists. Do not mix invented data with real sources. Output should be plausible but estimated. Do not invent brands or overly specific data. Return ONLY valid JSON with the exact required structure.';
 
     const userPrompt = language === 'es'
-      ? `Genera un objeto JSON con la siguiente estructura para un producto genérico no verificado:
+      ? `Genera un objeto JSON con la siguiente estructura para un producto genérico no verificado basado en: "${query}".
+IMPORTANTE: Si la entrada incluye una marca (ej: "Coca Cola", "Leche Pascual"), IGNORA LA MARCA y genera el producto genérico equivalente (ej: "Refresco de Cola", "Leche Entera").
 {
   "name": "...",
   "brand": null,
@@ -41,12 +42,12 @@ export class LLMProductGenerator {
   "sourceId": null,
   "isVerified": false
 }
-El producto es: "${query}".
 El resultado debe ser plausible pero puede ser estimado.
-No inventes marcas.
+Si tiene marca, genera un nombre genérico.
 No inventes datos excesivamente específicos.
 Devuelve SOLO el JSON, sin texto adicional.`
-      : `Generate a JSON object with the following structure for an unverified generic product:
+      : `Generate a JSON object with the following structure for an unverified generic product based on: "${query}".
+IMPORTANT: If the input includes a brand (e.g., "Coca Cola", "Heinz Ketchup"), IGNORE THE BRAND and generate the equivalent generic product (e.g., "Cola Soda", "Ketchup").
 {
   "name": "...",
   "brand": null,
@@ -61,9 +62,8 @@ Devuelve SOLO el JSON, sin texto adicional.`
   "sourceId": null,
   "isVerified": false
 }
-The product is: "${query}".
 Output must be plausible but may be estimated.
-Do not invent brands.
+If it has a brand, generate a generic name.
 Avoid overly specific data.
 Return ONLY the JSON, no additional text.`;
 
@@ -80,6 +80,7 @@ Return ONLY the JSON, no additional text.`;
           Authorization: `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
+        timeout: 8000, // 8 seconds timeout
       });
 
       const content = resp.data?.choices?.[0]?.message?.content?.trim();
@@ -119,6 +120,7 @@ Return ONLY the JSON, no additional text.`;
         return null;
       }
     } catch (error: any) {
+      console.error('Error generating LLM product:', error?.response?.data || error?.message || error);
       logger.warn('Error generando producto genérico con LLM:', error?.message || error);
       return null;
     }

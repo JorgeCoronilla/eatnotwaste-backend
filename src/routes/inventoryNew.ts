@@ -19,6 +19,7 @@ import {
 // Nuevas validaciones
 import {
   validateAddProductLocation,
+  validateAddProductLocationFlexible,
   validateUpdateProductLocation,
   validateConsumeProductLocation,
   validateUserProductFilters,
@@ -55,7 +56,7 @@ router.get('/v2',
  */
 router.post('/v2',
   authenticateToken,
-  validateAddProductLocation,
+  validateAddProductLocationFlexible,
   addToInventoryNew
 );
 
