@@ -3,7 +3,7 @@ import ProductAPIService from './ProductAPIService';
 import LLMProductGenerator from './LLMProductGenerator';
 import { COMMON_BRANDS } from './brandConfig';
 import { normalizeTokens } from './tokenUtils';
-import NodeCache from 'node-cache';
+import { cache as redisCache } from '../config/redis';
 import { ProductSource } from '@prisma/client';
 import { logger } from '../utils/logger';
 
@@ -50,7 +50,7 @@ const hasBrandIndicators = (q: string): boolean => {
   return COMMON_BRANDS.some(b => nq.includes(b));
 };
 
-const searchCache = new NodeCache({ stdTTL: 600, checkperiod: 120 }); // 10 minutes TTL
+// const searchCache = new NodeCache(...) -> Removed in favor of redisCache
 
 export class ProductSearchService {
   static async searchByName(
@@ -190,7 +190,7 @@ export class ProductSearchService {
 
     logger.info('searchByName:aiFallbackTriggered', { query });
     const llmCacheKey = `${q}|${language}|llm`;
-    const cachedLlm = searchCache.get<SearchResult>(llmCacheKey);
+    const cachedLlm = await redisCache.get<SearchResult>(llmCacheKey);
     if (cachedLlm) {
        logger.debug('searchByName:llmCacheHit');
        return cachedLlm;
@@ -204,7 +204,7 @@ export class ProductSearchService {
          source: 'llm',
          message: 'Producto generado por IA'
        };
-       searchCache.set(llmCacheKey, result);
+       await redisCache.set(llmCacheKey, result, 600);
        return result;
     }
 
