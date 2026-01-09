@@ -113,8 +113,13 @@ class ProductAPIService {
    */
   async getOpenFoodFactsData(barcode: string, language: string = 'es'): Promise<ProductResult> {
     try {
-      const baseUrl = process.env.OPEN_FOOD_FACTS_BASE_URL || 'https://world.openfoodfacts.org';
-      const url = `${baseUrl}/api/v0/product/${barcode}.json`;
+      // En Railway/Local la variable es OPEN_FOOD_FACTS_API_URL y ya incluye "/api/v0"
+      // Ejemplo: https://world.openfoodfacts.org/api/v0
+      const apiUrl = process.env.OPEN_FOOD_FACTS_API_URL || 'https://world.openfoodfacts.org/api/v0';
+      
+      // Aseguramos no duplicar la barra /
+      const cleanUrl = apiUrl.endsWith('/') ? apiUrl.slice(0, -1) : apiUrl;
+      const url = `${cleanUrl}/product/${barcode}.json`;
       console.log('OpenFoodFacts URL:', url);
       const response = await this.httpClient.get(url);
       console.log('OpenFoodFacts raw response:', JSON.stringify(response.data, null, 2));
