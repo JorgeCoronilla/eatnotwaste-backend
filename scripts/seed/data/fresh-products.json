@@ -4968,5 +4968,453 @@
       "sugar": 0
     },
     "source": "manual"
+  },
+  {
+    "id": "ff03a28e-d899-4b8e-a553-645c9f1ba0ab",
+    "name": "Huevo de gallina",
+    "category": "eggs",
+    "description": "Huevo entero de gallina",
+    "ingredients": "Huevo de gallina",
+    "nutritionalInfo": {
+      "calories": 155,
+      "protein": 12.6,
+      "carbohydrates": 1.1,
+      "fat": 11,
+      "fiber": 0,
+      "sugar": 1.1
+    },
+    "source": "manual"
+  },
+  {
+    "id": "2167f5a1-4da5-44c0-87b6-fb25d984365e",
+    "name": "Clara de huevo",
+    "category": "eggs",
+    "description": "Clara de huevo de gallina",
+    "ingredients": "Clara de huevo",
+    "nutritionalInfo": {
+      "calories": 52,
+      "protein": 10.9,
+      "carbohydrates": 0.7,
+      "fat": 0.2,
+      "fiber": 0,
+      "sugar": 0.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e1040fa4-adbf-4635-a74d-4a64df79a5c5",
+    "name": "Yema de huevo",
+    "category": "eggs",
+    "description": "Yema de huevo de gallina",
+    "ingredients": "Yema de huevo",
+    "nutritionalInfo": {
+      "calories": 322,
+      "protein": 15.9,
+      "carbohydrates": 3.6,
+      "fat": 26.5,
+      "fiber": 0,
+      "sugar": 0.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "19d03e65-c3a3-4376-8bf7-1e39ea9a63da",
+    "name": "Huevo de codorniz",
+    "category": "eggs",
+    "description": "Huevo pequeño de codorniz",
+    "ingredients": "Huevo de codorniz",
+    "nutritionalInfo": {
+      "calories": 158,
+      "protein": 13.1,
+      "carbohydrates": 0.4,
+      "fat": 11.1,
+      "fiber": 0,
+      "sugar": 0.4
+    },
+    "source": "manual"
+  },
+  {
+    "id": "f48cd415-84cb-4d09-ab7b-04ab0976d5fd",
+    "name": "Pan blanco",
+    "category": "bakery",
+    "description": "Pan común de harina de trigo refinada",
+    "ingredients": "Harina de trigo, agua, sal, levadura",
+    "nutritionalInfo": {
+      "calories": 265,
+      "protein": 9,
+      "carbohydrates": 49,
+      "fat": 3.2,
+      "fiber": 2.7,
+      "sugar": 5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "ecdec58e-915c-42ca-ba26-6723f17c2cb3",
+    "name": "Pan integral",
+    "category": "bakery",
+    "description": "Pan elaborado con harina de trigo integral",
+    "ingredients": "Harina de trigo integral, agua, sal, levadura",
+    "nutritionalInfo": {
+      "calories": 243,
+      "protein": 13,
+      "carbohydrates": 41,
+      "fat": 3.5,
+      "fiber": 7,
+      "sugar": 2.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "40fc082d-fe0b-4def-a600-4922691ef66c",
+    "name": "Pan de centeno",
+    "category": "bakery",
+    "description": "Pan elaborado con harina de centeno",
+    "ingredients": "Harina de centeno, agua, sal, levadura",
+    "nutritionalInfo": {
+      "calories": 259,
+      "protein": 8.5,
+      "carbohydrates": 48,
+      "fat": 3.3,
+      "fiber": 5.8,
+      "sugar": 3.9
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c668c914-3ac9-46fb-bd7e-eb53f5356017",
+    "name": "Baguette",
+    "category": "bakery",
+    "description": "Pan largo y estrecho de origen francés",
+    "ingredients": "Harina de trigo, agua, sal, levadura",
+    "nutritionalInfo": {
+      "calories": 270,
+      "protein": 9.3,
+      "carbohydrates": 51,
+      "fat": 1.6,
+      "fiber": 2.2,
+      "sugar": 0.6
+    },
+    "source": "manual"
+  },
+  {
+    "id": "1f7043f8-1b9e-4d3e-924e-d3db01c69e49",
+    "name": "Chapata",
+    "category": "bakery",
+    "description": "Pan italiano de miga alveolada y corteza crujiente",
+    "ingredients": "Harina de trigo, agua, sal, levadura, aceite de oliva",
+    "nutritionalInfo": {
+      "calories": 271,
+      "protein": 8.5,
+      "carbohydrates": 52,
+      "fat": 2.5,
+      "fiber": 2.8,
+      "sugar": 0.7
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e6736536-297f-4028-b107-68c6c1878af3",
+    "name": "Pan de molde",
+    "category": "bakery",
+    "description": "Pan de corteza blanda para sandwich",
+    "ingredients": "Harina de trigo, agua, azúcar, sal, levadura, aceite",
+    "nutritionalInfo": {
+      "calories": 274,
+      "protein": 8.5,
+      "carbohydrates": 50,
+      "fat": 3.5,
+      "fiber": 2.5,
+      "sugar": 5.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "bd2977ed-d1f3-4b27-8f2d-52214bd584a4",
+    "name": "Croissant",
+    "category": "bakery",
+    "description": "Bollo de hojaldre de origen francés",
+    "ingredients": "Harina de trigo, mantequilla, agua, azúcar, sal, levadura",
+    "nutritionalInfo": {
+      "calories": 406,
+      "protein": 8.2,
+      "carbohydrates": 45,
+      "fat": 21,
+      "fiber": 2.6,
+      "sugar": 11
+    },
+    "source": "manual"
+  },
+  {
+    "id": "d53a56c3-6481-4c8e-ba7f-39d27dc65452",
+    "name": "Magdalena",
+    "category": "bakery",
+    "description": "Bollo individual esponjoso",
+    "ingredients": "Harina de trigo, azúcar, huevo, aceite, levadura",
+    "nutritionalInfo": {
+      "calories": 385,
+      "protein": 5.2,
+      "carbohydrates": 54,
+      "fat": 16,
+      "fiber": 1.2,
+      "sugar": 24
+    },
+    "source": "manual"
+  },
+  {
+    "id": "57c11250-f477-4fb2-a265-a3868d23310f",
+    "name": "Donut",
+    "category": "bakery",
+    "description": "Rosquilla frita glaseada",
+    "ingredients": "Harina de trigo, azúcar, aceite, huevo, levadura",
+    "nutritionalInfo": {
+      "calories": 452,
+      "protein": 5.3,
+      "carbohydrates": 51,
+      "fat": 25,
+      "fiber": 1.8,
+      "sugar": 19
+    },
+    "source": "manual"
+  },
+  {
+    "id": "78d93320-eaa6-4cf9-b9c5-fea01c5f9642",
+    "name": "Galleta tipo María",
+    "category": "bakery",
+    "description": "Galleta redonda y plana",
+    "ingredients": "Harina de trigo, azúcar, aceite, huevo, sal",
+    "nutritionalInfo": {
+      "calories": 468,
+      "protein": 6.4,
+      "carbohydrates": 70,
+      "fat": 18,
+      "fiber": 2.1,
+      "sugar": 21
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e8cf822f-40f0-460b-8372-bfb1e389dbc4",
+    "name": "Bizcocho",
+    "category": "bakery",
+    "description": "Torta esponjosa básica",
+    "ingredients": "Harina de trigo, azúcar, huevo, mantequilla, levadura",
+    "nutritionalInfo": {
+      "calories": 337,
+      "protein": 6.5,
+      "carbohydrates": 48,
+      "fat": 13,
+      "fiber": 1.2,
+      "sugar": 27
+    },
+    "source": "manual"
+  },
+  {
+    "id": "5cf835d7-3fa4-4475-a265-82a22f6cef1f",
+    "name": "Panecillo",
+    "category": "bakery",
+    "description": "Pan pequeño individual",
+    "ingredients": "Harina de trigo, agua, sal, levadura",
+    "nutritionalInfo": {
+      "calories": 261,
+      "protein": 8.8,
+      "carbohydrates": 50,
+      "fat": 2.3,
+      "fiber": 2.5,
+      "sugar": 0.8
+    },
+    "source": "manual"
+  },
+  {
+    "id": "c2ac0312-b8d4-49d8-a801-40aab4adb034",
+    "name": "Rosquilla",
+    "category": "bakery",
+    "description": "Dulce tradicional en forma de anillo",
+    "ingredients": "Harina de trigo, azúcar, huevo, aceite, anís",
+    "nutritionalInfo": {
+      "calories": 392,
+      "protein": 6.3,
+      "carbohydrates": 58,
+      "fat": 15,
+      "fiber": 1.8,
+      "sugar": 22
+    },
+    "source": "manual"
+  },
+  {
+    "id": "e230899b-c605-4a97-b775-6de5a6104637",
+    "name": "Tortilla de patata",
+    "category": "eggs",
+    "description": "Tortilla española con patata y cebolla",
+    "ingredients": "Huevo, patata, cebolla, aceite de oliva, sal",
+    "nutritionalInfo": {
+      "calories": 198,
+      "protein": 8.5,
+      "carbohydrates": 15,
+      "fat": 12,
+      "fiber": 1.8,
+      "sugar": 1.5
+    },
+    "source": "manual"
+  },
+  {
+    "id": "9a4c07bf-7e8f-474c-a6b9-5b0c31ad652f",
+    "name": "Napolitana de chocolate",
+    "category": "bakery",
+    "description": "Dulce de hojaldre relleno de chocolate",
+    "ingredients": "Harina de trigo, mantequilla, chocolate, azúcar, huevo",
+    "nutritionalInfo": {
+      "calories": 415,
+      "protein": 6.2,
+      "carbohydrates": 42,
+      "fat": 25,
+      "fiber": 2.1,
+      "sugar": 18
+    },
+    "source": "manual"
+  },
+  {
+    "id": "50e0ad64-2980-47aa-a7c0-2f29799416ea",
+    "name": "Napolitana de crema",
+    "category": "bakery",
+    "description": "Dulce de hojaldre relleno de crema pastelera",
+    "ingredients": "Harina de trigo, mantequilla, leche, azúcar, huevo, vainilla",
+    "nutritionalInfo": {
+      "calories": 398,
+      "protein": 6.8,
+      "carbohydrates": 40,
+      "fat": 23,
+      "fiber": 1.5,
+      "sugar": 16
+    },
+    "source": "manual"
+  },
+  {
+    "id": "8806bf08-c279-4e24-9726-113b7311c266",
+    "name": "Roscón de Reyes",
+    "category": "bakery",
+    "description": "Bollo con forma de rosca tradicional de Navidad",
+    "ingredients": "Harina de trigo, azúcar, huevo, mantequilla, agua de azahar, fruta confitada, almendras",
+    "nutritionalInfo": {
+      "calories": 375,
+      "protein": 7.5,
+      "carbohydrates": 55,
+      "fat": 14,
+      "fiber": 2.3,
+      "sugar": 22
+    },
+    "source": "manual"
+  },
+  {
+    "id": "721f740d-a5df-42d5-aec7-89b6f1dbbe09",
+    "name": "Polvorón",
+    "category": "bakery",
+    "description": "Dulce navideño de almendra y manteca",
+    "ingredients": "Harina de trigo, almendra, azúcar, manteca de cerdo, canela",
+    "nutritionalInfo": {
+      "calories": 498,
+      "protein": 7.2,
+      "carbohydrates": 48,
+      "fat": 32,
+      "fiber": 3.2,
+      "sugar": 24
+    },
+    "source": "manual"
+  },
+  {
+    "id": "a5f1c584-cb86-40fc-a068-6f99869f5cb9",
+    "name": "Mantecado",
+    "category": "bakery",
+    "description": "Dulce navideño similar al polvorón pero más mantecoso",
+    "ingredients": "Harina de trigo, manteca de cerdo, azúcar, ajonjolí, canela",
+    "nutritionalInfo": {
+      "calories": 485,
+      "protein": 5.8,
+      "carbohydrates": 52,
+      "fat": 28,
+      "fiber": 1.8,
+      "sugar": 26
+    },
+    "source": "manual"
+  },
+  {
+    "id": "3a1274ac-a086-40c0-8f14-b05e72680f3c",
+    "name": "Turrón blando",
+    "category": "bakery",
+    "description": "Turrón de textura blanda con almendra",
+    "ingredients": "Almendra, miel, azúcar, clara de huevo, oblea",
+    "nutritionalInfo": {
+      "calories": 532,
+      "protein": 12,
+      "carbohydrates": 55,
+      "fat": 31,
+      "fiber": 5.2,
+      "sugar": 48
+    },
+    "source": "manual"
+  },
+  {
+    "id": "0e3b354f-37c6-420a-a39d-43870d9b1150",
+    "name": "Turrón duro",
+    "category": "bakery",
+    "description": "Turrón de Alicante de textura dura",
+    "ingredients": "Almendra, miel, azúcar, clara de huevo, oblea",
+    "nutritionalInfo": {
+      "calories": 538,
+      "protein": 13.5,
+      "carbohydrates": 52,
+      "fat": 33,
+      "fiber": 5.8,
+      "sugar": 45
+    },
+    "source": "manual"
+  },
+  {
+    "id": "237d1574-1ca2-45cd-8887-5e599e136ca4",
+    "name": "Mazapán",
+    "category": "bakery",
+    "description": "Dulce de almendra y azúcar típico navideño",
+    "ingredients": "Almendra molida, azúcar, huevo",
+    "nutritionalInfo": {
+      "calories": 475,
+      "protein": 9.5,
+      "carbohydrates": 58,
+      "fat": 24,
+      "fiber": 4.8,
+      "sugar": 52
+    },
+    "source": "manual"
+  },
+  {
+    "id": "9bbeff57-386a-418f-a71c-dfc85b437553",
+    "name": "Peladilla",
+    "category": "bakery",
+    "description": "Almendra confitada con azúcar",
+    "ingredients": "Almendra, azúcar, agua",
+    "nutritionalInfo": {
+      "calories": 498,
+      "protein": 10.2,
+      "carbohydrates": 62,
+      "fat": 25,
+      "fiber": 5.2,
+      "sugar": 58
+    },
+    "source": "manual"
+  },
+  {
+    "id": "3ef33ab8-70ec-499a-b2f4-cd35640f4abd",
+    "name": "Fruta escarchada",
+    "category": "bakery",
+    "description": "Fruta confitada y bañada en azúcar",
+    "ingredients": "Fruta (naranja, limón, calabaza), azúcar, jarabe de glucosa",
+    "nutritionalInfo": {
+      "calories": 322,
+      "protein": 0.4,
+      "carbohydrates": 82,
+      "fat": 0.1,
+      "fiber": 1.8,
+      "sugar": 75
+    },
+    "source": "manual"
   }
 ]
