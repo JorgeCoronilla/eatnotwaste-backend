@@ -1,6 +1,7 @@
 import { prisma } from '../config/database';
 import ProductAPIService from './ProductAPIService';
 import LLMProductGenerator from './LLMProductGenerator';
+import NutritionCalculator from './NutritionCalculator';
 import { COMMON_BRANDS } from './brandConfig';
 import { normalizeTokens } from './tokenUtils';
 import { cache as redisCache } from '../config/redis';
@@ -198,9 +199,35 @@ export class ProductSearchService {
 
     const generated = await LLMProductGenerator.generateGenericProduct(query, language);
     if (generated) {
+       // Calcular Health Score para el producto generado
+       const ingredientsList = generated.ingredients 
+         ? generated.ingredients.split(',').map(i => i.trim()) 
+         : [];
+         
+       const nutritionInput = {
+         energy: generated.nutritionalInfo?.calories || 0,
+         sugars: generated.nutritionalInfo?.sugar || 0,
+         saturatedFat: generated.nutritionalInfo?.fat ? (generated.nutritionalInfo.fat * 0.3) : 0, // Estimación si no hay dato exacto
+         sodium: generated.nutritionalInfo?.sodium || 0,
+         fiber: generated.nutritionalInfo?.fiber || 0,
+         protein: generated.nutritionalInfo?.protein || 0,
+         fruitsVegetablesNuts: 0 // Estimación conservadora
+       };
+
+       const healthScore = NutritionCalculator.calculateScore(
+         nutritionInput,
+         { ingredients: ingredientsList, additives: [] },
+         {} // Dejar que el calculador decida por heurística
+       );
+
        const result: SearchResult = {
          decision: 'generated',
-         product: { ...generated, source: 'llm', isVerified: false },
+         product: { 
+           ...generated, 
+           source: 'llm', 
+           isVerified: false,
+           healthScore 
+         },
          source: 'llm',
          message: 'Producto generado por IA'
        };

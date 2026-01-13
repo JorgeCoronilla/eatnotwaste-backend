@@ -97,6 +97,7 @@ model Product {
   createdById      String?       @map("created_by_id") @db.Uuid
   createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz
   updatedAt        DateTime      @updatedAt @map("updated_at") @db.Timestamptz
+  healthScore      Json?         @map("health_score")
 
   // Relations
   userItems        UserItem[]

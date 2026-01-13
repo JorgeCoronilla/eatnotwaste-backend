@@ -11,7 +11,9 @@
       "carbohydrates": 14,
       "fat": 0.2,
       "fiber": 2.4,
-      "sugar": 10
+      "sugar": 10,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -27,7 +29,9 @@
       "carbohydrates": 23,
       "fat": 0.3,
       "fiber": 2.6,
-      "sugar": 12
+      "sugar": 12,
+      "saturatedFat": 0.1,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -43,7 +47,9 @@
       "carbohydrates": 12,
       "fat": 0.1,
       "fiber": 2.4,
-      "sugar": 9
+      "sugar": 9,
+      "saturatedFat": 0,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -59,7 +65,9 @@
       "carbohydrates": 15,
       "fat": 0.1,
       "fiber": 3.1,
-      "sugar": 10
+      "sugar": 10,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -75,7 +83,9 @@
       "carbohydrates": 7.7,
       "fat": 0.3,
       "fiber": 2,
-      "sugar": 4.9
+      "sugar": 4.9,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -91,7 +101,9 @@
       "carbohydrates": 13,
       "fat": 0.3,
       "fiber": 1.8,
-      "sugar": 11
+      "sugar": 11,
+      "saturatedFat": 0,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -107,7 +119,9 @@
       "carbohydrates": 17,
       "fat": 0.4,
       "fiber": 0.9,
-      "sugar": 16
+      "sugar": 16,
+      "saturatedFat": 0.1,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -123,7 +137,9 @@
       "carbohydrates": 8,
       "fat": 0.2,
       "fiber": 0.4,
-      "sugar": 6
+      "sugar": 6,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -139,7 +155,9 @@
       "carbohydrates": 8,
       "fat": 0.2,
       "fiber": 0.9,
-      "sugar": 8
+      "sugar": 8,
+      "saturatedFat": 0.1,
+      "sodium": 16
     },
     "source": "manual"
   },
@@ -155,7 +173,9 @@
       "carbohydrates": 15,
       "fat": 0.5,
       "fiber": 3,
-      "sugar": 9
+      "sugar": 9,
+      "saturatedFat": 0,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -171,7 +191,9 @@
       "carbohydrates": 13,
       "fat": 0.1,
       "fiber": 1.4,
-      "sugar": 10
+      "sugar": 10,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -187,7 +209,9 @@
       "carbohydrates": 15,
       "fat": 0.4,
       "fiber": 1.6,
-      "sugar": 14
+      "sugar": 14,
+      "saturatedFat": 0.1,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -203,7 +227,9 @@
       "carbohydrates": 11,
       "fat": 0.3,
       "fiber": 1.7,
-      "sugar": 8
+      "sugar": 8,
+      "saturatedFat": 0.1,
+      "sodium": 8
     },
     "source": "manual"
   },
@@ -219,7 +245,9 @@
       "carbohydrates": 9,
       "fat": 0.3,
       "fiber": 2.8,
-      "sugar": 2.5
+      "sugar": 2.5,
+      "saturatedFat": 0,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -235,7 +263,9 @@
       "carbohydrates": 11,
       "fat": 0.1,
       "fiber": 1.6,
-      "sugar": 7
+      "sugar": 7,
+      "saturatedFat": 0,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -251,7 +281,9 @@
       "carbohydrates": 11,
       "fat": 0.3,
       "fiber": 1.4,
-      "sugar": 10
+      "sugar": 10,
+      "saturatedFat": 0,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -267,7 +299,9 @@
       "carbohydrates": 10,
       "fat": 0.3,
       "fiber": 1.5,
-      "sugar": 8
+      "sugar": 8,
+      "saturatedFat": 0,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -283,7 +317,9 @@
       "carbohydrates": 11,
       "fat": 0.4,
       "fiber": 2,
-      "sugar": 9
+      "sugar": 9,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -299,7 +335,9 @@
       "carbohydrates": 12,
       "fat": 0.3,
       "fiber": 1.6,
-      "sugar": 8
+      "sugar": 8,
+      "saturatedFat": 0.1,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -315,7 +353,9 @@
       "carbohydrates": 12,
       "fat": 0.7,
       "fiber": 6.5,
-      "sugar": 4.5
+      "sugar": 4.5,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -331,7 +371,9 @@
       "carbohydrates": 14,
       "fat": 0.3,
       "fiber": 2.4,
-      "sugar": 10
+      "sugar": 10,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -347,7 +389,9 @@
       "carbohydrates": 10,
       "fat": 0.5,
       "fiber": 5.3,
-      "sugar": 4.9
+      "sugar": 4.9,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -363,7 +407,9 @@
       "carbohydrates": 19,
       "fat": 0.3,
       "fiber": 2.9,
-      "sugar": 16
+      "sugar": 16,
+      "saturatedFat": 0.1,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -379,7 +425,9 @@
       "carbohydrates": 19,
       "fat": 1.2,
       "fiber": 4,
-      "sugar": 14
+      "sugar": 14,
+      "saturatedFat": 0.1,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -395,7 +443,9 @@
       "carbohydrates": 19,
       "fat": 0.2,
       "fiber": 3.6,
-      "sugar": 13
+      "sugar": 13,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -411,7 +461,9 @@
       "carbohydrates": 11,
       "fat": 0.3,
       "fiber": 1.7,
-      "sugar": 8
+      "sugar": 8,
+      "saturatedFat": 0,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -427,7 +479,9 @@
       "carbohydrates": 9,
       "fat": 15,
       "fiber": 7,
-      "sugar": 0.7
+      "sugar": 0.7,
+      "saturatedFat": 2.1,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -443,7 +497,9 @@
       "carbohydrates": 15,
       "fat": 33,
       "fiber": 9,
-      "sugar": 6
+      "sugar": 6,
+      "saturatedFat": 29.7,
+      "sodium": 20
     },
     "source": "manual"
   },
@@ -459,7 +515,9 @@
       "carbohydrates": 23,
       "fat": 0.7,
       "fiber": 10,
-      "sugar": 11
+      "sugar": 11,
+      "saturatedFat": 0.1,
+      "sodium": 28
     },
     "source": "manual"
   },
@@ -475,7 +533,9 @@
       "carbohydrates": 17,
       "fat": 0.4,
       "fiber": 1.3,
-      "sugar": 15
+      "sugar": 15,
+      "saturatedFat": 0.1,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -491,7 +551,9 @@
       "carbohydrates": 14,
       "fat": 1,
       "fiber": 5.4,
-      "sugar": 9
+      "sugar": 9,
+      "saturatedFat": 0.3,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -507,7 +569,9 @@
       "carbohydrates": 32,
       "fat": 0.4,
       "fiber": 2.3,
-      "sugar": 15
+      "sugar": 15,
+      "saturatedFat": 0.1,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -523,7 +587,9 @@
       "carbohydrates": 18,
       "fat": 0.7,
       "fiber": 3,
-      "sugar": 13
+      "sugar": 13,
+      "saturatedFat": 0.1,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -539,7 +605,9 @@
       "carbohydrates": 15,
       "fat": 0.1,
       "fiber": 1.9,
-      "sugar": 12
+      "sugar": 12,
+      "saturatedFat": 0,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -555,7 +623,9 @@
       "carbohydrates": 12,
       "fat": 0.2,
       "fiber": 1.7,
-      "sugar": 7
+      "sugar": 7,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -571,7 +641,9 @@
       "carbohydrates": 7,
       "fat": 0.3,
       "fiber": 2.8,
-      "sugar": 4
+      "sugar": 4,
+      "saturatedFat": 0,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -587,7 +659,9 @@
       "carbohydrates": 13,
       "fat": 0.4,
       "fiber": 3,
-      "sugar": 8
+      "sugar": 8,
+      "saturatedFat": 0,
+      "sodium": 39
     },
     "source": "manual"
   },
@@ -603,7 +677,9 @@
       "carbohydrates": 63,
       "fat": 0.6,
       "fiber": 5.1,
-      "sugar": 38
+      "sugar": 38,
+      "saturatedFat": 0.3,
+      "sodium": 28
     },
     "source": "manual"
   },
@@ -619,7 +695,9 @@
       "carbohydrates": 17,
       "fat": 0.3,
       "fiber": 3.3,
-      "sugar": 13
+      "sugar": 13,
+      "saturatedFat": 0.1,
+      "sodium": 14
     },
     "source": "manual"
   },
@@ -635,7 +713,9 @@
       "carbohydrates": 10,
       "fat": 0.5,
       "fiber": 3.6,
-      "sugar": 7
+      "sugar": 7,
+      "saturatedFat": 0.1,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -651,7 +731,9 @@
       "carbohydrates": 3.9,
       "fat": 0.2,
       "fiber": 1.2,
-      "sugar": 2.6
+      "sugar": 2.6,
+      "saturatedFat": 0,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -667,7 +749,9 @@
       "carbohydrates": 2.9,
       "fat": 0.2,
       "fiber": 1.3,
-      "sugar": 0.8
+      "sugar": 0.8,
+      "saturatedFat": 0,
+      "sodium": 28
     },
     "source": "manual"
   },
@@ -683,7 +767,9 @@
       "carbohydrates": 9.3,
       "fat": 0.1,
       "fiber": 1.7,
-      "sugar": 4.2
+      "sugar": 4.2,
+      "saturatedFat": 0,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -699,7 +785,9 @@
       "carbohydrates": 33,
       "fat": 0.5,
       "fiber": 2.1,
-      "sugar": 1
+      "sugar": 1,
+      "saturatedFat": 0.1,
+      "sodium": 17
     },
     "source": "manual"
   },
@@ -715,7 +803,9 @@
       "carbohydrates": 10,
       "fat": 0.2,
       "fiber": 2.8,
-      "sugar": 4.7
+      "sugar": 4.7,
+      "saturatedFat": 0,
+      "sodium": 69
     },
     "source": "manual"
   },
@@ -731,7 +821,9 @@
       "carbohydrates": 3.6,
       "fat": 0.1,
       "fiber": 0.5,
-      "sugar": 1.7
+      "sugar": 1.7,
+      "saturatedFat": 0,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -747,7 +839,9 @@
       "carbohydrates": 6,
       "fat": 0.3,
       "fiber": 2.1,
-      "sugar": 4.2
+      "sugar": 4.2,
+      "saturatedFat": 0.1,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -763,7 +857,9 @@
       "carbohydrates": 4.6,
       "fat": 0.2,
       "fiber": 1.7,
-      "sugar": 2.4
+      "sugar": 2.4,
+      "saturatedFat": 0,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -779,7 +875,9 @@
       "carbohydrates": 7.3,
       "fat": 0.2,
       "fiber": 2.6,
-      "sugar": 2.3
+      "sugar": 2.3,
+      "saturatedFat": 0,
+      "sodium": 16
     },
     "source": "manual"
   },
@@ -795,7 +893,9 @@
       "carbohydrates": 3.1,
       "fat": 0.3,
       "fiber": 1,
-      "sugar": 2.5
+      "sugar": 2.5,
+      "saturatedFat": 0.1,
+      "sodium": 8
     },
     "source": "manual"
   },
@@ -811,7 +911,9 @@
       "carbohydrates": 6,
       "fat": 0.2,
       "fiber": 3,
-      "sugar": 3.5
+      "sugar": 3.5,
+      "saturatedFat": 0,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -827,7 +929,9 @@
       "carbohydrates": 17,
       "fat": 0.1,
       "fiber": 2.1,
-      "sugar": 0.8
+      "sugar": 0.8,
+      "saturatedFat": 0,
+      "sodium": 6
     },
     "source": "manual"
   },
@@ -843,7 +947,9 @@
       "carbohydrates": 7,
       "fat": 0.4,
       "fiber": 2.6,
-      "sugar": 1.7
+      "sugar": 1.7,
+      "saturatedFat": 0.1,
+      "sodium": 33
     },
     "source": "manual"
   },
@@ -859,7 +965,9 @@
       "carbohydrates": 3.6,
       "fat": 0.4,
       "fiber": 2.2,
-      "sugar": 0.4
+      "sugar": 0.4,
+      "saturatedFat": 0.1,
+      "sodium": 79
     },
     "source": "manual"
   },
@@ -875,7 +983,9 @@
       "carbohydrates": 3.7,
       "fat": 0.2,
       "fiber": 1.6,
-      "sugar": 1.1
+      "sugar": 1.1,
+      "saturatedFat": 0,
+      "sodium": 213
     },
     "source": "manual"
   },
@@ -891,7 +1001,9 @@
       "carbohydrates": 7,
       "fat": 0.1,
       "fiber": 3.4,
-      "sugar": 3.3
+      "sugar": 3.3,
+      "saturatedFat": 0,
+      "sodium": 6
     },
     "source": "manual"
   },
@@ -907,7 +1019,9 @@
       "carbohydrates": 14,
       "fat": 0.4,
       "fiber": 5.1,
-      "sugar": 5.7
+      "sugar": 5.7,
+      "saturatedFat": 0.1,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -923,7 +1037,9 @@
       "carbohydrates": 5,
       "fat": 0.3,
       "fiber": 2,
-      "sugar": 1.9
+      "sugar": 1.9,
+      "saturatedFat": 0.1,
+      "sodium": 30
     },
     "source": "manual"
   },
@@ -939,7 +1055,9 @@
       "carbohydrates": 11,
       "fat": 0.2,
       "fiber": 5.4,
-      "sugar": 1
+      "sugar": 1,
+      "saturatedFat": 0,
+      "sodium": 94
     },
     "source": "manual"
   },
@@ -955,7 +1073,9 @@
       "carbohydrates": 3.9,
       "fat": 0.1,
       "fiber": 2.1,
-      "sugar": 1.9
+      "sugar": 1.9,
+      "saturatedFat": 0,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -971,7 +1091,9 @@
       "carbohydrates": 3,
       "fat": 0.2,
       "fiber": 1.6,
-      "sugar": 1.3
+      "sugar": 1.3,
+      "saturatedFat": 0,
+      "sodium": 80
     },
     "source": "manual"
   },
@@ -987,7 +1109,9 @@
       "carbohydrates": 14,
       "fat": 0.3,
       "fiber": 1.8,
-      "sugar": 3.9
+      "sugar": 3.9,
+      "saturatedFat": 0,
+      "sodium": 20
     },
     "source": "manual"
   },
@@ -1003,7 +1127,9 @@
       "carbohydrates": 10,
       "fat": 0.2,
       "fiber": 2.8,
-      "sugar": 7
+      "sugar": 7,
+      "saturatedFat": 0,
+      "sodium": 78
     },
     "source": "manual"
   },
@@ -1019,7 +1145,9 @@
       "carbohydrates": 3.4,
       "fat": 0.1,
       "fiber": 1.6,
-      "sugar": 1.9
+      "sugar": 1.9,
+      "saturatedFat": 0,
+      "sodium": 39
     },
     "source": "manual"
   },
@@ -1035,7 +1163,9 @@
       "carbohydrates": 6.4,
       "fat": 0.1,
       "fiber": 1.8,
-      "sugar": 3.8
+      "sugar": 3.8,
+      "saturatedFat": 0,
+      "sodium": 67
     },
     "source": "manual"
   },
@@ -1051,7 +1181,9 @@
       "carbohydrates": 6.5,
       "fat": 0.1,
       "fiber": 0.5,
-      "sugar": 2.8
+      "sugar": 2.8,
+      "saturatedFat": 0,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -1067,7 +1199,9 @@
       "carbohydrates": 20,
       "fat": 0.1,
       "fiber": 3,
-      "sugar": 4.2
+      "sugar": 4.2,
+      "saturatedFat": 0,
+      "sodium": 55
     },
     "source": "manual"
   },
@@ -1083,7 +1217,9 @@
       "carbohydrates": 6,
       "fat": 0.1,
       "fiber": 2.5,
-      "sugar": 3.2
+      "sugar": 3.2,
+      "saturatedFat": 0,
+      "sodium": 18
     },
     "source": "manual"
   },
@@ -1099,7 +1235,9 @@
       "carbohydrates": 6,
       "fat": 0.1,
       "fiber": 2.5,
-      "sugar": 3.2
+      "sugar": 3.2,
+      "saturatedFat": 0,
+      "sodium": 18
     },
     "source": "manual"
   },
@@ -1115,7 +1253,9 @@
       "carbohydrates": 7.4,
       "fat": 0.2,
       "fiber": 2.1,
-      "sugar": 3.8
+      "sugar": 3.8,
+      "saturatedFat": 0,
+      "sodium": 27
     },
     "source": "manual"
   },
@@ -1131,7 +1271,9 @@
       "carbohydrates": 9,
       "fat": 0.3,
       "fiber": 3.8,
-      "sugar": 2.2
+      "sugar": 2.2,
+      "saturatedFat": 0.1,
+      "sodium": 25
     },
     "source": "manual"
   },
@@ -1147,7 +1289,9 @@
       "carbohydrates": 1.3,
       "fat": 0.1,
       "fiber": 0.5,
-      "sugar": 0.2
+      "sugar": 0.2,
+      "saturatedFat": 0,
+      "sodium": 41
     },
     "source": "manual"
   },
@@ -1163,7 +1307,9 @@
       "carbohydrates": 3.4,
       "fat": 0.2,
       "fiber": 3.1,
-      "sugar": 0.6
+      "sugar": 0.6,
+      "saturatedFat": 0,
+      "sodium": 22
     },
     "source": "manual"
   },
@@ -1179,7 +1325,9 @@
       "carbohydrates": 4,
       "fat": 0.2,
       "fiber": 3.1,
-      "sugar": 0.6
+      "sugar": 0.6,
+      "saturatedFat": 0,
+      "sodium": 22
     },
     "source": "manual"
   },
@@ -1195,7 +1343,9 @@
       "carbohydrates": 3.7,
       "fat": 0.7,
       "fiber": 1.6,
-      "sugar": 2.1
+      "sugar": 2.1,
+      "saturatedFat": 0,
+      "sodium": 27
     },
     "source": "manual"
   },
@@ -1211,7 +1361,9 @@
       "carbohydrates": 3.6,
       "fat": 0.4,
       "fiber": 1.5,
-      "sugar": 0.6
+      "sugar": 0.6,
+      "saturatedFat": 0,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -1227,7 +1379,9 @@
       "carbohydrates": 3.3,
       "fat": 0.3,
       "fiber": 1,
-      "sugar": 2
+      "sugar": 2,
+      "saturatedFat": 0,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -1243,7 +1397,9 @@
       "carbohydrates": 3.5,
       "fat": 0.3,
       "fiber": 2.2,
-      "sugar": 1.5
+      "sugar": 1.5,
+      "saturatedFat": 0.1,
+      "sodium": 6
     },
     "source": "manual"
   },
@@ -1259,7 +1415,9 @@
       "carbohydrates": 4.5,
       "fat": 0.1,
       "fiber": 1.7,
-      "sugar": 1.7
+      "sugar": 1.7,
+      "saturatedFat": 0,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -1275,7 +1433,9 @@
       "carbohydrates": 38,
       "fat": 0.3,
       "fiber": 1.8,
-      "sugar": 1.7
+      "sugar": 1.7,
+      "saturatedFat": 0.1,
+      "sodium": 14
     },
     "source": "manual"
   },
@@ -1291,7 +1451,9 @@
       "carbohydrates": 32,
       "fat": 0.4,
       "fiber": 2.3,
-      "sugar": 15
+      "sugar": 15,
+      "saturatedFat": 0.1,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -1307,7 +1469,9 @@
       "carbohydrates": 3.7,
       "fat": 0.5,
       "fiber": 2.8,
-      "sugar": 0.9
+      "sugar": 0.9,
+      "saturatedFat": 0,
+      "sodium": 46
     },
     "source": "manual"
   },
@@ -1323,7 +1487,9 @@
       "carbohydrates": 28,
       "fat": 0.2,
       "fiber": 4.1,
-      "sugar": 0.5
+      "sugar": 0.5,
+      "saturatedFat": 0.1,
+      "sodium": 9
     },
     "source": "manual"
   },
@@ -1339,7 +1505,9 @@
       "carbohydrates": 26,
       "fat": 0.2,
       "fiber": 4.1,
-      "sugar": 0.5
+      "sugar": 0.5,
+      "saturatedFat": 0,
+      "sodium": 11
     },
     "source": "manual"
   },
@@ -1355,7 +1523,9 @@
       "carbohydrates": 6.5,
       "fat": 0.4,
       "fiber": 2.8,
-      "sugar": 4.1
+      "sugar": 4.1,
+      "saturatedFat": 0,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -1371,7 +1541,9 @@
       "carbohydrates": 7.1,
       "fat": 0.4,
       "fiber": 3.7,
-      "sugar": 3.8
+      "sugar": 3.8,
+      "saturatedFat": 0.1,
+      "sodium": 10
     },
     "source": "manual"
   },
@@ -1387,7 +1559,9 @@
       "carbohydrates": 9,
       "fat": 0.4,
       "fiber": 4.4,
-      "sugar": 5.1
+      "sugar": 5.1,
+      "saturatedFat": 0.1,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -1403,7 +1577,9 @@
       "carbohydrates": 5.8,
       "fat": 1,
       "fiber": 1.9,
-      "sugar": 3.9
+      "sugar": 3.9,
+      "saturatedFat": 0.1,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -1419,7 +1595,9 @@
       "carbohydrates": 3.3,
       "fat": 0.1,
       "fiber": 2.2,
-      "sugar": 1.1
+      "sugar": 1.1,
+      "saturatedFat": 0,
+      "sodium": 20
     },
     "source": "manual"
   },
@@ -1435,7 +1613,9 @@
       "carbohydrates": 9,
       "fat": 0.1,
       "fiber": 4.9,
-      "sugar": 1.8
+      "sugar": 1.8,
+      "saturatedFat": 0,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -1451,7 +1631,9 @@
       "carbohydrates": 9,
       "fat": 15,
       "fiber": 7,
-      "sugar": 0.7
+      "sugar": 0.7,
+      "saturatedFat": 2.1,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -1467,7 +1649,9 @@
       "carbohydrates": 19,
       "fat": 1.2,
       "fiber": 2.7,
-      "sugar": 3.2
+      "sugar": 3.2,
+      "saturatedFat": 0.2,
+      "sodium": 15
     },
     "source": "manual"
   },
@@ -1483,7 +1667,9 @@
       "carbohydrates": 4.8,
       "fat": 3.3,
       "fiber": 0,
-      "sugar": 5.1
+      "sugar": 5.1,
+      "saturatedFat": 2.1,
+      "sodium": 40
     },
     "source": "manual"
   },
@@ -1499,7 +1685,9 @@
       "carbohydrates": 3.4,
       "fat": 21,
       "fiber": 0,
-      "sugar": 2.7
+      "sugar": 2.7,
+      "saturatedFat": 13,
+      "sodium": 320
     },
     "source": "manual"
   },
@@ -1515,7 +1703,9 @@
       "carbohydrates": 4.7,
       "fat": 3.3,
       "fiber": 0,
-      "sugar": 4.7
+      "sugar": 4.7,
+      "saturatedFat": 2.1,
+      "sodium": 45
     },
     "source": "manual"
   },
@@ -1531,7 +1721,9 @@
       "carbohydrates": 1,
       "fat": 33,
       "fiber": 0,
-      "sugar": 0.5
+      "sugar": 0.5,
+      "saturatedFat": 21,
+      "sodium": 650
     },
     "source": "manual"
   },
@@ -1547,7 +1739,9 @@
       "carbohydrates": 4,
       "fat": 34,
       "fiber": 0,
-      "sugar": 3
+      "sugar": 3,
+      "saturatedFat": 22,
+      "sodium": 380
     },
     "source": "manual"
   },
@@ -1563,7 +1757,9 @@
       "carbohydrates": 0.1,
       "fat": 81,
       "fiber": 0,
-      "sugar": 0.1
+      "sugar": 0.1,
+      "saturatedFat": 51,
+      "sodium": 11
     },
     "source": "manual"
   },
@@ -1579,7 +1775,9 @@
       "carbohydrates": 0.7,
       "fat": 80,
       "fiber": 0,
-      "sugar": 0.7
+      "sugar": 0.7,
+      "saturatedFat": 15,
+      "sodium": 800
     },
     "source": "manual"
   },
@@ -1595,7 +1793,9 @@
       "carbohydrates": 4.5,
       "fat": 1,
       "fiber": 0,
-      "sugar": 4.5
+      "sugar": 4.5,
+      "saturatedFat": 0.7,
+      "sodium": 40
     },
     "source": "manual"
   },
@@ -1611,7 +1811,9 @@
       "carbohydrates": 4.7,
       "fat": 1.6,
       "fiber": 0,
-      "sugar": 4.7
+      "sugar": 4.7,
+      "saturatedFat": 1.1,
+      "sodium": 35
     },
     "source": "manual"
   },
@@ -1627,7 +1829,9 @@
       "carbohydrates": 1.5,
       "fat": 30,
       "fiber": 0,
-      "sugar": 1
+      "sugar": 1,
+      "saturatedFat": 21,
+      "sodium": 450
     },
     "source": "manual"
   },
@@ -1643,7 +1847,9 @@
       "carbohydrates": 14,
       "fat": 2.5,
       "fiber": 0,
-      "sugar": 13
+      "sugar": 13,
+      "saturatedFat": 1.6,
+      "sodium": 60
     },
     "source": "manual"
   },
@@ -1659,7 +1865,9 @@
       "carbohydrates": 3,
       "fat": 20,
       "fiber": 0,
-      "sugar": 3
+      "sugar": 3,
+      "saturatedFat": 13,
+      "sodium": 35
     },
     "source": "manual"
   },
@@ -1675,7 +1883,9 @@
       "carbohydrates": 3,
       "fat": 27,
       "fiber": 0,
-      "sugar": 3
+      "sugar": 3,
+      "saturatedFat": 17,
+      "sodium": 40
     },
     "source": "manual"
   },
@@ -1691,7 +1901,9 @@
       "carbohydrates": 2,
       "fat": 12,
       "fiber": 0,
-      "sugar": 2
+      "sugar": 2,
+      "saturatedFat": 8,
+      "sodium": 280
     },
     "source": "manual"
   },
@@ -1707,7 +1919,9 @@
       "carbohydrates": 1.5,
       "fat": 31,
       "fiber": 0,
-      "sugar": 1
+      "sugar": 1,
+      "saturatedFat": 20,
+      "sodium": 600
     },
     "source": "manual"
   },
@@ -1723,7 +1937,9 @@
       "carbohydrates": 1,
       "fat": 33,
       "fiber": 0,
-      "sugar": 0.5
+      "sugar": 0.5,
+      "saturatedFat": 21,
+      "sodium": 700
     },
     "source": "manual"
   },
@@ -1739,7 +1955,9 @@
       "carbohydrates": 3,
       "fat": 4,
       "fiber": 0,
-      "sugar": 3
+      "sugar": 3,
+      "saturatedFat": 2.5,
+      "sodium": 150
     },
     "source": "manual"
   },
@@ -1755,7 +1973,9 @@
       "carbohydrates": 4,
       "fat": 6,
       "fiber": 0,
-      "sugar": 4
+      "sugar": 4,
+      "saturatedFat": 4,
+      "sodium": 50
     },
     "source": "manual"
   },
@@ -1771,7 +1991,9 @@
       "carbohydrates": 5,
       "fat": 1.6,
       "fiber": 0,
-      "sugar": 5
+      "sugar": 5,
+      "saturatedFat": 1,
+      "sodium": 40
     },
     "source": "manual"
   },
@@ -1787,7 +2009,9 @@
       "carbohydrates": 5,
       "fat": 0.1,
       "fiber": 0,
-      "sugar": 5
+      "sugar": 5,
+      "saturatedFat": 0.1,
+      "sodium": 40
     },
     "source": "manual"
   },
@@ -1803,7 +2027,9 @@
       "carbohydrates": 5,
       "fat": 1.6,
       "fiber": 0,
-      "sugar": 5
+      "sugar": 5,
+      "saturatedFat": 1,
+      "sodium": 40
     },
     "source": "manual"
   },
@@ -1819,7 +2045,9 @@
       "carbohydrates": 4,
       "fat": 10,
       "fiber": 0,
-      "sugar": 4
+      "sugar": 4,
+      "saturatedFat": 6.5,
+      "sodium": 50
     },
     "source": "manual"
   },
@@ -1835,7 +2063,9 @@
       "carbohydrates": 2,
       "fat": 33,
       "fiber": 0,
-      "sugar": 1
+      "sugar": 1,
+      "saturatedFat": 21,
+      "sodium": 620
     },
     "source": "manual"
   },
@@ -1851,7 +2081,9 @@
       "carbohydrates": 6,
       "fat": 21,
       "fiber": 0,
-      "sugar": 4
+      "sugar": 4,
+      "saturatedFat": 13,
+      "sodium": 750
     },
     "source": "manual"
   },
@@ -1867,7 +2099,9 @@
       "carbohydrates": 12,
       "fat": 2.5,
       "fiber": 0,
-      "sugar": 11
+      "sugar": 11,
+      "saturatedFat": 1.5,
+      "sodium": 55
     },
     "source": "manual"
   },
@@ -1883,7 +2117,9 @@
       "carbohydrates": 22,
       "fat": 4,
       "fiber": 0,
-      "sugar": 21
+      "sugar": 21,
+      "saturatedFat": 2.5,
+      "sodium": 90
     },
     "source": "manual"
   },
@@ -1899,7 +2135,9 @@
       "carbohydrates": 20,
       "fat": 4,
       "fiber": 0,
-      "sugar": 18
+      "sugar": 18,
+      "saturatedFat": 2.4,
+      "sodium": 85
     },
     "source": "manual"
   },
@@ -1915,7 +2153,9 @@
       "carbohydrates": 21,
       "fat": 3,
       "fiber": 0.4,
-      "sugar": 10
+      "sugar": 10,
+      "saturatedFat": 1.8,
+      "sodium": 70
     },
     "source": "manual"
   },
@@ -1931,7 +2171,9 @@
       "carbohydrates": 4,
       "fat": 34,
       "fiber": 0,
-      "sugar": 3
+      "sugar": 3,
+      "saturatedFat": 22,
+      "sodium": 380
     },
     "source": "manual"
   },
@@ -1947,506 +2189,12 @@
       "carbohydrates": 3,
       "fat": 22,
       "fiber": 0,
-      "sugar": 1
+      "sugar": 1,
+      "saturatedFat": 13,
+      "sodium": 480
     },
     "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440014",
-    "name": "Pollo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Pollo",
-    "nutritionalInfo": {
-      "calories": 165,
-      "protein": 31,
-      "carbohydrates": 0,
-      "fat": 3.6,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440014",
-    "name": "Pechuga de pollo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Pechuga de pollo",
-    "nutritionalInfo": {
-      "calories": 165,
-      "protein": 31,
-      "carbohydrates": 0,
-      "fat": 3.6,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440021",
-    "name": "Muslo de pollo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Muslo de pollo",
-    "nutritionalInfo": {
-      "calories": 209,
-      "protein": 26,
-      "carbohydrates": 0,
-      "fat": 11,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440022",
-    "name": "Alas de pollo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Alas de pollo",
-    "nutritionalInfo": {
-      "calories": 203,
-      "protein": 30,
-      "carbohydrates": 0,
-      "fat": 8.1,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440015",
-    "name": "Ternera",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Ternera",
-    "nutritionalInfo": {
-      "calories": 250,
-      "protein": 26,
-      "carbohydrates": 0,
-      "fat": 15,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440023",
-    "name": "Solomillo de ternera",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Solomillo de ternera",
-    "nutritionalInfo": {
-      "calories": 143,
-      "protein": 22,
-      "carbohydrates": 0,
-      "fat": 5.4,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440015",
-    "name": "Carne picada de ternera",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Carne picada de ternera",
-    "nutritionalInfo": {
-      "calories": 250,
-      "protein": 26,
-      "carbohydrates": 0,
-      "fat": 15,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440024",
-    "name": "Filete de ternera",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Filete de ternera",
-    "nutritionalInfo": {
-      "calories": 271,
-      "protein": 25,
-      "carbohydrates": 0,
-      "fat": 18,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440025",
-    "name": "Lomo de cerdo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Lomo de cerdo",
-    "nutritionalInfo": {
-      "calories": 143,
-      "protein": 21,
-      "carbohydrates": 0,
-      "fat": 6,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440016",
-    "name": "Chuleta de cerdo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Chuleta de cerdo",
-    "nutritionalInfo": {
-      "calories": 242,
-      "protein": 27,
-      "carbohydrates": 0,
-      "fat": 14,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440026",
-    "name": "Costillas de cerdo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Costillas de cerdo",
-    "nutritionalInfo": {
-      "calories": 277,
-      "protein": 19,
-      "carbohydrates": 0,
-      "fat": 22,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440027",
-    "name": "Pierna de cordero",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Pierna de cordero",
-    "nutritionalInfo": {
-      "calories": 234,
-      "protein": 25,
-      "carbohydrates": 0,
-      "fat": 14,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440028",
-    "name": "Chuletas de cordero",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Chuletas de cordero",
-    "nutritionalInfo": {
-      "calories": 282,
-      "protein": 24,
-      "carbohydrates": 0,
-      "fat": 20,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440029",
-    "name": "Pechuga de pavo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Pechuga de pavo",
-    "nutritionalInfo": {
-      "calories": 135,
-      "protein": 30,
-      "carbohydrates": 0,
-      "fat": 1.7,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440030",
-    "name": "Muslo de pavo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Muslo de pavo",
-    "nutritionalInfo": {
-      "calories": 144,
-      "protein": 28,
-      "carbohydrates": 0,
-      "fat": 3.2,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440031",
-    "name": "Conejo",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Conejo",
-    "nutritionalInfo": {
-      "calories": 173,
-      "protein": 33,
-      "carbohydrates": 0,
-      "fat": 3.5,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440032",
-    "name": "Hígado",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Hígado de ternera",
-    "nutritionalInfo": {
-      "calories": 135,
-      "protein": 20,
-      "carbohydrates": 3.9,
-      "fat": 3.6,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440033",
-    "name": "Salchichas",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Salchichas de cerdo",
-    "nutritionalInfo": {
-      "calories": 301,
-      "protein": 12,
-      "carbohydrates": 3.4,
-      "fat": 27,
-      "fiber": 0,
-      "sugar": 1.2
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440034",
-    "name": "Bacon",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Bacon (panceta)",
-    "nutritionalInfo": {
-      "calories": 541,
-      "protein": 37,
-      "carbohydrates": 1.4,
-      "fat": 42,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440035",
-    "name": "Jamón cocido",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Jamón cocido",
-    "nutritionalInfo": {
-      "calories": 145,
-      "protein": 21,
-      "carbohydrates": 1.5,
-      "fat": 6,
-      "fiber": 0,
-      "sugar": 1.5
-    },
-    "source": "manual"
-  },
-  {
-    "id": "550e8400-e29b-41d4-a716-446655440036",
-    "name": "Jamón serrano",
-    "category": "meat",
-    "description": "Producto básico",
-    "ingredients": "Jamón serrano",
-    "nutritionalInfo": {
-      "calories": 241,
-      "protein": 30,
-      "carbohydrates": 0.5,
-      "fat": 13,
-      "fiber": 0,
-      "sugar": 0.5
-    },
-    "source": "manual"
-  },
-  {
-    "id": "7a3e1b6f-9b7a-4c7d-b8c2-1a2e3f4a5b01",
-    "name": "Chorizo",
-    "category": "meats",
-    "description": "Embutido curado",
-    "ingredients": "Carne de cerdo, pimentón, ajo, sal",
-    "nutritionalInfo": {
-      "calories": 455,
-      "protein": 24,
-      "carbohydrates": 2,
-      "fat": 38,
-      "fiber": 0,
-      "sugar": 1
-    },
-    "source": "manual"
-  },
-  {
-    "id": "8b2c6e14-1c8d-4f91-a9c2-6d9a5e7b3a02",
-    "name": "Salchichón",
-    "category": "meats",
-    "description": "Embutido curado",
-    "ingredients": "Carne de cerdo, pimienta, sal",
-    "nutritionalInfo": {
-      "calories": 420,
-      "protein": 22,
-      "carbohydrates": 1,
-      "fat": 35,
-      "fiber": 0,
-      "sugar": 0.5
-    },
-    "source": "manual"
-  },
-  {
-    "id": "9d4a2f77-3a6e-41cb-92b4-8d1e6f5c0a03",
-    "name": "Fuet",
-    "category": "meats",
-    "description": "Embutido catalán curado",
-    "ingredients": "Carne de cerdo, pimienta, sal",
-    "nutritionalInfo": {
-      "calories": 450,
-      "protein": 23,
-      "carbohydrates": 1,
-      "fat": 38,
-      "fiber": 0,
-      "sugar": 0.5
-    },
-    "source": "manual"
-  },
-  {
-    "id": "1f6b3d0a-92c4-4db7-bf13-0a7e6c2b9e04",
-    "name": "Morcilla",
-    "category": "meats",
-    "description": "Embutido cocido",
-    "ingredients": "Sangre de cerdo, arroz, cebolla",
-    "nutritionalInfo": {
-      "calories": 379,
-      "protein": 14,
-      "carbohydrates": 19,
-      "fat": 30,
-      "fiber": 1,
-      "sugar": 1
-    },
-    "source": "manual"
-  },
-  {
-    "id": "2b9f71c8-0a3e-49dc-b4a5-7d6e3c8a1f05",
-    "name": "Butifarra",
-    "category": "meats",
-    "description": "Embutido fresco",
-    "ingredients": "Carne de cerdo, sal, especias",
-    "nutritionalInfo": {
-      "calories": 326,
-      "protein": 17,
-      "carbohydrates": 1,
-      "fat": 28,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "c6a9b7f2-1e5d-4e63-8c5a-0f4d3b8e9a06",
-    "name": "Longaniza",
-    "category": "meats",
-    "description": "Embutido curado",
-    "ingredients": "Carne de cerdo, especias",
-    "nutritionalInfo": {
-      "calories": 410,
-      "protein": 21,
-      "carbohydrates": 2,
-      "fat": 34,
-      "fiber": 0,
-      "sugar": 0.5
-    },
-    "source": "manual"
-  },
-  {
-    "id": "e2d4f6a1-78c9-4b9e-92d3-1a0f5c8b7e07",
-    "name": "Lomo embuchado",
-    "category": "meats",
-    "description": "Carne curada",
-    "ingredients": "Lomo de cerdo, pimentón, sal",
-    "nutritionalInfo": {
-      "calories": 380,
-      "protein": 50,
-      "carbohydrates": 0,
-      "fat": 20,
-      "fiber": 0,
-      "sugar": 0
-    },
-    "source": "manual"
-  },
-  {
-    "id": "5c8b9e7f-4a2d-48a6-9c31-2f0d6b1e3a08",
-    "name": "Sobrasada",
-    "category": "meats",
-    "description": "Embutido untado",
-    "ingredients": "Carne de cerdo, pimentón, manteca",
-    "nutritionalInfo": {
-      "calories": 500,
-      "protein": 14,
-      "carbohydrates": 2,
-      "fat": 48,
-      "fiber": 0,
-      "sugar": 1
-    },
-    "source": "manual"
-  },
-  {
-    "id": "6a7c1e8d-9b5f-41c2-a0f3-8b4d2e6a9c09",
-    "name": "Mortadela",
-    "category": "meats",
-    "description": "Embutido cocido",
-    "ingredients": "Carne de cerdo, grasa, especias",
-    "nutritionalInfo": {
-      "calories": 311,
-      "protein": 15,
-      "carbohydrates": 2,
-      "fat": 25,
-      "fiber": 0,
-      "sugar": 1
-    },
-    "source": "manual"
-  },
-  {
-    "id": "f9b6c2d4-7a81-43e9-8c3f-1e5d0a2b6a10",
-    "name": "Salami",
-    "category": "meats",
-    "description": "Embutido curado",
-    "ingredients": "Carne de cerdo, especias",
-    "nutritionalInfo": {
-      "calories": 407,
-      "protein": 22,
-      "carbohydrates": 2,
-      "fat": 33,
-      "fiber": 0,
-      "sugar": 1
-    },
-    "source": "manual"
-  },
+  }, 
   {
     "id": "550e8400-e29b-41d4-a716-446655440017",
     "name": "Arroz",
@@ -2458,8 +2206,10 @@
       "protein": 2.7,
       "carbohydrates": 28,
       "fat": 0.3,
+      "saturatedFat": 0.1,
       "fiber": 0.4,
-      "sugar": 0.1
+      "sugar": 0.1,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -2474,8 +2224,10 @@
       "protein": 5,
       "carbohydrates": 25,
       "fat": 1.1,
+      "saturatedFat": 0.2,
       "fiber": 1.8,
-      "sugar": 0.6
+      "sugar": 0.6,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -2490,8 +2242,10 @@
       "protein": 9,
       "carbohydrates": 49,
       "fat": 3.2,
+      "saturatedFat": 0.5,
       "fiber": 2.7,
-      "sugar": 5
+      "sugar": 5,
+      "sodium": 490
     },
     "source": "manual"
   },
@@ -2506,8 +2260,10 @@
       "protein": 17,
       "carbohydrates": 66,
       "fat": 7,
+      "saturatedFat": 1.2,
       "fiber": 11,
-      "sugar": 1
+      "sugar": 1,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -2522,8 +2278,10 @@
       "protein": 13,
       "carbohydrates": 72,
       "fat": 2.5,
+      "saturatedFat": 0.4,
       "fiber": 10.7,
-      "sugar": 0.4
+      "sugar": 0.4,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -2538,8 +2296,10 @@
       "protein": 12,
       "carbohydrates": 73,
       "fat": 2.3,
+      "saturatedFat": 0.5,
       "fiber": 17.3,
-      "sugar": 0.8
+      "sugar": 0.8,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -2554,8 +2314,10 @@
       "protein": 10,
       "carbohydrates": 76,
       "fat": 1.6,
+      "saturatedFat": 0.2,
       "fiber": 15.1,
-      "sugar": 0.9
+      "sugar": 0.9,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -2570,8 +2332,10 @@
       "protein": 4.4,
       "carbohydrates": 21,
       "fat": 1.9,
+      "saturatedFat": 0.2,
       "fiber": 2.8,
-      "sugar": 0.9
+      "sugar": 0.9,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -2586,8 +2350,10 @@
       "protein": 3.8,
       "carbohydrates": 23,
       "fat": 0.2,
+      "saturatedFat": 0,
       "fiber": 1.4,
-      "sugar": 0.1
+      "sugar": 0.1,
+      "sodium": 10
     },
     "source": "manual"
   },
@@ -2602,8 +2368,10 @@
       "protein": 3.1,
       "carbohydrates": 18.6,
       "fat": 0.2,
+      "saturatedFat": 0,
       "fiber": 4.5,
-      "sugar": 0.1
+      "sugar": 0.1,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -2618,8 +2386,10 @@
       "protein": 3.5,
       "carbohydrates": 23.7,
       "fat": 1,
+      "saturatedFat": 0.2,
       "fiber": 1.3,
-      "sugar": 0.1
+      "sugar": 0.1,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -2634,8 +2404,10 @@
       "protein": 3.8,
       "carbohydrates": 19,
       "fat": 1.6,
+      "saturatedFat": 0.3,
       "fiber": 2.1,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -2650,8 +2422,10 @@
       "protein": 14.6,
       "carbohydrates": 70,
       "fat": 2.4,
+      "saturatedFat": 0.4,
       "fiber": 10.7,
-      "sugar": 6.8
+      "sugar": 6.8,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -2666,8 +2440,10 @@
       "protein": 2.6,
       "carbohydrates": 23,
       "fat": 0.9,
+      "saturatedFat": 0.2,
       "fiber": 1.8,
-      "sugar": 0.4
+      "sugar": 0.4,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -2682,8 +2458,10 @@
       "protein": 10,
       "carbohydrates": 76,
       "fat": 1,
+      "saturatedFat": 0.2,
       "fiber": 2.7,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -2698,8 +2476,10 @@
       "protein": 8.1,
       "carbohydrates": 76.9,
       "fat": 3.9,
+      "saturatedFat": 0.5,
       "fiber": 7.3,
-      "sugar": 1.6
+      "sugar": 1.6,
+      "sodium": 35
     },
     "source": "manual"
   },
@@ -2714,8 +2494,10 @@
       "protein": 8,
       "carbohydrates": 80,
       "fat": 2.5,
+      "saturatedFat": 0.4,
       "fiber": 3.5,
-      "sugar": 6
+      "sugar": 6,
+      "sodium": 660
     },
     "source": "manual"
   },
@@ -2730,8 +2512,10 @@
       "protein": 12.7,
       "carbohydrates": 72.8,
       "fat": 1.1,
+      "saturatedFat": 0.2,
       "fiber": 3.9,
-      "sugar": 0.1
+      "sugar": 0.1,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -2746,8 +2530,10 @@
       "protein": 13.3,
       "carbohydrates": 71.5,
       "fat": 3.4,
+      "saturatedFat": 0.7,
       "fiber": 10,
-      "sugar": 0.9
+      "sugar": 0.9,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -2762,18 +2548,16 @@
       "protein": 4.4,
       "carbohydrates": 21.3,
       "fat": 1.9,
+      "saturatedFat": 0.2,
       "fiber": 2.8,
-      "sugar": 0.9
+      "sugar": 0.9,
+      "sodium": 7
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "15-20 minutos",
       "flavorProfile": "Suave y neutro",
-      "commonUses": [
-        "Ensaladas",
-        "Guarniciones",
-        "Sustituto de arroz"
-      ]
+      "commonUses": ["Ensaladas", "Guarniciones", "Sustituto de arroz"]
     }
   },
   {
@@ -2787,18 +2571,16 @@
       "protein": 4.8,
       "carbohydrates": 21,
       "fat": 2,
+      "saturatedFat": 0.2,
       "fiber": 3.3,
-      "sugar": 0.8
+      "sugar": 0.8,
+      "sodium": 7
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "15-20 minutos",
       "flavorProfile": "Terroso y ligeramente dulce",
-      "commonUses": [
-        "Ensaladas frías",
-        "Platos de invierno",
-        "Decoración"
-      ]
+      "commonUses": ["Ensaladas frías", "Platos de invierno", "Decoración"]
     }
   },
   {
@@ -2812,18 +2594,16 @@
       "protein": 5.1,
       "carbohydrates": 20.5,
       "fat": 2.1,
+      "saturatedFat": 0.2,
       "fiber": 3.5,
-      "sugar": 0.7
+      "sugar": 0.7,
+      "sodium": 7
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "20-25 minutos",
       "flavorProfile": "Terroso intenso",
-      "commonUses": [
-        "Platos gourmet",
-        "Contraste visual",
-        "Mezclas multicolores"
-      ]
+      "commonUses": ["Platos gourmet", "Contraste visual", "Mezclas multicolores"]
     }
   },
   {
@@ -2837,18 +2617,16 @@
       "protein": 4.8,
       "carbohydrates": 21,
       "fat": 2,
+      "saturatedFat": 0.2,
       "fiber": 3.2,
-      "sugar": 0.8
+      "sugar": 0.8,
+      "sodium": 7
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "18-22 minutos",
       "flavorProfile": "Complejo y equilibrado",
-      "commonUses": [
-        "Presentaciones especiales",
-        "Buffets",
-        "Cocina creativa"
-      ]
+      "commonUses": ["Presentaciones especiales", "Buffets", "Cocina creativa"]
     }
   },
   {
@@ -2862,18 +2640,16 @@
       "protein": 5,
       "carbohydrates": 20.8,
       "fat": 1.8,
+      "saturatedFat": 0.2,
       "fiber": 3.1,
-      "sugar": 0.8
+      "sugar": 0.8,
+      "sodium": 6
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "15-18 minutos",
       "flavorProfile": "Delicado y sutil",
-      "commonUses": [
-        "Cocina gourmet",
-        "Dietas especiales",
-        "Alimentación infantil"
-      ]
+      "commonUses": ["Cocina gourmet", "Dietas especiales", "Alimentación infantil"]
     }
   },
   {
@@ -2887,18 +2663,16 @@
       "protein": 4.6,
       "carbohydrates": 20.2,
       "fat": 1.7,
+      "saturatedFat": 0.2,
       "fiber": 2.9,
-      "sugar": 0.7
+      "sugar": 0.7,
+      "sodium": 6
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "8-10 minutos",
       "flavorProfile": "Suave y ligeramente dulce",
-      "commonUses": [
-        "Dietas crudiveganas",
-        "Personas con digestiones sensibles",
-        "Ensaladas crudas"
-      ]
+      "commonUses": ["Dietas crudiveganas", "Personas con digestiones sensibles", "Ensaladas crudas"]
     }
   },
   {
@@ -2912,18 +2686,16 @@
       "protein": 14.1,
       "carbohydrates": 64.2,
       "fat": 6.1,
+      "saturatedFat": 0.7,
       "fiber": 7,
-      "sugar": 2.4
+      "sugar": 2.4,
+      "sodium": 15
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "Varía según receta",
       "flavorProfile": "Ligeramente terroso y a nuez",
-      "commonUses": [
-        "Pan sin gluten",
-        "Repostería",
-        "Espesante para salsas"
-      ]
+      "commonUses": ["Pan sin gluten", "Repostería", "Espesante para salsas"]
     }
   },
   {
@@ -2937,18 +2709,16 @@
       "protein": 13.8,
       "carbohydrates": 68.9,
       "fat": 5.9,
+      "saturatedFat": 0.7,
       "fiber": 6.5,
-      "sugar": 2.8
+      "sugar": 2.8,
+      "sodium": 20
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "2-3 minutos",
       "flavorProfile": "Similar a la quinoa pero textura más suave",
-      "commonUses": [
-        "Desayunos",
-        "Barritas energéticas",
-        "Papillas infantiles"
-      ]
+      "commonUses": ["Desayunos", "Barritas energéticas", "Papillas infantiles"]
     }
   },
   {
@@ -2962,18 +2732,16 @@
       "protein": 13.1,
       "carbohydrates": 74.3,
       "fat": 5.2,
+      "saturatedFat": 0.6,
       "fiber": 6.1,
-      "sugar": 3.2
+      "sugar": 3.2,
+      "sodium": 25
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "No requiere cocción",
       "flavorProfile": "Crujiente y ligera",
-      "commonUses": [
-        "Cereales de desayuno",
-        "Toppings",
-        "Snacks saludables"
-      ]
+      "commonUses": ["Cereales de desayuno", "Toppings", "Snacks saludables"]
     }
   },
   {
@@ -2987,18 +2755,16 @@
       "protein": 4.4,
       "carbohydrates": 21,
       "fat": 1.9,
+      "saturatedFat": 0.2,
       "fiber": 2.7,
-      "sugar": 0.9
+      "sugar": 0.9,
+      "sodium": 8
     },
     "source": "manual",
     "additionalInfo": {
       "cookingTime": "12-15 minutos",
       "flavorProfile": "Más suave (sin amargor)",
-      "commonUses": [
-        "Cocina rápida",
-        "Principiantes con quinoa",
-        "Cocina institucional"
-      ]
+      "commonUses": ["Cocina rápida", "Principiantes con quinoa", "Cocina institucional"]
     }
   },
   {
@@ -3012,8 +2778,10 @@
       "protein": 9,
       "carbohydrates": 20,
       "fat": 0.4,
+      "saturatedFat": 0.1,
       "fiber": 8,
-      "sugar": 1.8
+      "sugar": 1.8,
+      "sodium": 6
     },
     "source": "manual"
   },
@@ -3028,8 +2796,10 @@
       "protein": 8.9,
       "carbohydrates": 27,
       "fat": 2.6,
+      "saturatedFat": 0.3,
       "fiber": 7.6,
-      "sugar": 4.8
+      "sugar": 4.8,
+      "sodium": 24
     },
     "source": "manual"
   },
@@ -3044,8 +2814,10 @@
       "protein": 9,
       "carbohydrates": 25,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 9.3,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 6
     },
     "source": "manual"
   },
@@ -3060,8 +2832,10 @@
       "protein": 9,
       "carbohydrates": 26,
       "fat": 0.7,
+      "saturatedFat": 0.1,
       "fiber": 9,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -3076,8 +2850,10 @@
       "protein": 8.9,
       "carbohydrates": 24,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 8.7,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 8
     },
     "source": "manual"
   },
@@ -3092,8 +2868,10 @@
       "protein": 8.7,
       "carbohydrates": 22,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 7.4,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -3108,8 +2886,10 @@
       "protein": 8.3,
       "carbohydrates": 21,
       "fat": 0.4,
+      "saturatedFat": 0.1,
       "fiber": 8.3,
-      "sugar": 2.9
+      "sugar": 2.9,
+      "sodium": 15
     },
     "source": "manual"
   },
@@ -3124,8 +2904,10 @@
       "protein": 26,
       "carbohydrates": 58,
       "fat": 1.5,
+      "saturatedFat": 0.2,
       "fiber": 25,
-      "sugar": 5.7
+      "sugar": 5.7,
+      "sodium": 13
     },
     "source": "manual"
   },
@@ -3140,8 +2922,10 @@
       "protein": 16.6,
       "carbohydrates": 9.9,
       "fat": 9,
+      "saturatedFat": 1.3,
       "fiber": 6,
-      "sugar": 3
+      "sugar": 3,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -3156,8 +2940,10 @@
       "protein": 7.5,
       "carbohydrates": 25,
       "fat": 0.1,
+      "saturatedFat": 0,
       "fiber": 7.3,
-      "sugar": 0.2
+      "sugar": 0.2,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -3172,8 +2958,10 @@
       "protein": 9.2,
       "carbohydrates": 28,
       "fat": 2.8,
+      "saturatedFat": 0.3,
       "fiber": 8.2,
-      "sugar": 4.5
+      "sugar": 4.5,
+      "sodium": 24
     },
     "source": "manual"
   },
@@ -3188,8 +2976,10 @@
       "protein": 9.3,
       "carbohydrates": 26,
       "fat": 0.6,
+      "saturatedFat": 0.1,
       "fiber": 9.8,
-      "sugar": 0.4
+      "sugar": 0.4,
+      "sodium": 6
     },
     "source": "manual"
   },
@@ -3204,8 +2994,10 @@
       "protein": 8.8,
       "carbohydrates": 24,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 8.5,
-      "sugar": 0.4
+      "sugar": 0.4,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -3220,8 +3012,10 @@
       "protein": 9.5,
       "carbohydrates": 25,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 9.2,
-      "sugar": 0.4
+      "sugar": 0.4,
+      "sodium": 8
     },
     "source": "manual"
   },
@@ -3236,8 +3030,10 @@
       "protein": 9.4,
       "carbohydrates": 28,
       "fat": 2.7,
+      "saturatedFat": 0.3,
       "fiber": 8.4,
-      "sugar": 4.6
+      "sugar": 4.6,
+      "sodium": 22
     },
     "source": "manual"
   },
@@ -3252,8 +3048,10 @@
       "protein": 9.3,
       "carbohydrates": 20,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 8.5,
-      "sugar": 1.7
+      "sugar": 1.7,
+      "sodium": 6
     },
     "source": "manual"
   },
@@ -3268,8 +3066,10 @@
       "protein": 9.1,
       "carbohydrates": 20,
       "fat": 0.4,
+      "saturatedFat": 0.1,
       "fiber": 8.2,
-      "sugar": 1.6
+      "sugar": 1.6,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -3284,8 +3084,10 @@
       "protein": 9.5,
       "carbohydrates": 20,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 8.8,
-      "sugar": 1.5
+      "sugar": 1.5,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -3300,8 +3102,10 @@
       "protein": 9.2,
       "carbohydrates": 24,
       "fat": 0.6,
+      "saturatedFat": 0.1,
       "fiber": 9.1,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 8
     },
     "source": "manual"
   },
@@ -3316,8 +3120,10 @@
       "protein": 8.9,
       "carbohydrates": 25,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 9,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 7
     },
     "source": "manual"
   },
@@ -3332,8 +3138,10 @@
       "protein": 25.8,
       "carbohydrates": 16,
       "fat": 49.2,
+      "saturatedFat": 6.8,
       "fiber": 8.5,
-      "sugar": 4.7
+      "sugar": 4.7,
+      "sodium": 18
     },
     "source": "manual"
   },
@@ -3348,8 +3156,10 @@
       "protein": 15.6,
       "carbohydrates": 10,
       "fat": 2.4,
+      "saturatedFat": 0.3,
       "fiber": 2.8,
-      "sugar": 0.4
+      "sugar": 0.4,
+      "sodium": 15
     },
     "source": "manual"
   },
@@ -3364,8 +3174,10 @@
       "protein": 21.2,
       "carbohydrates": 21.6,
       "fat": 49.9,
+      "saturatedFat": 3.8,
       "fiber": 12.5,
-      "sugar": 4.4
+      "sugar": 4.4,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -3380,8 +3192,10 @@
       "protein": 15.2,
       "carbohydrates": 13.7,
       "fat": 65.2,
+      "saturatedFat": 6.1,
       "fiber": 6.7,
-      "sugar": 2.6
+      "sugar": 2.6,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -3396,8 +3210,10 @@
       "protein": 15,
       "carbohydrates": 16.7,
       "fat": 60.8,
+      "saturatedFat": 4.5,
       "fiber": 9.7,
-      "sugar": 4.3
+      "sugar": 4.3,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -3412,8 +3228,10 @@
       "protein": 20.3,
       "carbohydrates": 27.2,
       "fat": 45.4,
+      "saturatedFat": 5.9,
       "fiber": 10.3,
-      "sugar": 7.7
+      "sugar": 7.7,
+      "sodium": 1
     },
     "source": "manual"
   },
@@ -3428,8 +3246,10 @@
       "protein": 13.7,
       "carbohydrates": 13.1,
       "fat": 68.4,
+      "saturatedFat": 4.9,
       "fiber": 3.7,
-      "sugar": 3.6
+      "sugar": 3.6,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -3444,8 +3264,10 @@
       "protein": 7.9,
       "carbohydrates": 13.8,
       "fat": 75.8,
+      "saturatedFat": 12.1,
       "fiber": 8.6,
-      "sugar": 4.6
+      "sugar": 4.6,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -3460,8 +3282,10 @@
       "protein": 9.2,
       "carbohydrates": 13.9,
       "fat": 71.9,
+      "saturatedFat": 6.2,
       "fiber": 9.6,
-      "sugar": 4
+      "sugar": 4,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -3476,8 +3300,10 @@
       "protein": 18.2,
       "carbohydrates": 30.2,
       "fat": 43.9,
+      "saturatedFat": 7.8,
       "fiber": 3.3,
-      "sugar": 5.9
+      "sugar": 5.9,
+      "sodium": 12
     },
     "source": "manual"
   },
@@ -3492,8 +3318,10 @@
       "protein": 2.4,
       "carbohydrates": 45.5,
       "fat": 2.3,
+      "saturatedFat": 0.4,
       "fiber": 8.1,
-      "sugar": 10.6
+      "sugar": 10.6,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -3508,8 +3336,10 @@
       "protein": 14.3,
       "carbohydrates": 12.3,
       "fat": 66.4,
+      "saturatedFat": 15.1,
       "fiber": 7.5,
-      "sugar": 2.3
+      "sugar": 2.3,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -3524,8 +3354,10 @@
       "protein": 15.2,
       "carbohydrates": 13.7,
       "fat": 65.2,
+      "saturatedFat": 6.1,
       "fiber": 6.7,
-      "sugar": 2.6
+      "sugar": 2.6,
+      "sodium": 2
     },
     "source": "manual"
   },
@@ -3540,8 +3372,10 @@
       "protein": 6.2,
       "carbohydrates": 40.8,
       "fat": 23.9,
+      "saturatedFat": 3.1,
       "fiber": 4.7,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 0
     },
     "source": "manual"
   },
@@ -3556,8 +3390,10 @@
       "protein": 3,
       "carbohydrates": 6.3,
       "fat": 0.8,
+      "saturatedFat": 0.1,
       "fiber": 3.3,
-      "sugar": 0.9
+      "sugar": 0.9,
+      "sodium": 56
     },
     "source": "manual"
   },
@@ -3572,8 +3408,10 @@
       "protein": 3.8,
       "carbohydrates": 8.4,
       "fat": 0.7,
+      "saturatedFat": 0.2,
       "fiber": 6.8,
-      "sugar": 0.2
+      "sugar": 0.2,
+      "sodium": 31
     },
     "source": "manual"
   },
@@ -3588,8 +3426,10 @@
       "protein": 3.3,
       "carbohydrates": 8.4,
       "fat": 0.7,
+      "saturatedFat": 0.2,
       "fiber": 6.8,
-      "sugar": 0.2
+      "sugar": 0.2,
+      "sodium": 30
     },
     "source": "manual"
   },
@@ -3604,8 +3444,10 @@
       "protein": 2.1,
       "carbohydrates": 3.7,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 2.8,
-      "sugar": 0.9
+      "sugar": 0.9,
+      "sodium": 46
     },
     "source": "manual"
   },
@@ -3620,8 +3462,10 @@
       "protein": 3.2,
       "carbohydrates": 2.7,
       "fat": 0.6,
+      "saturatedFat": 0.1,
       "fiber": 1.6,
-      "sugar": 0.3
+      "sugar": 0.3,
+      "sodium": 4
     },
     "source": "manual"
   },
@@ -3636,8 +3480,10 @@
       "protein": 9,
       "carbohydrates": 68.9,
       "fat": 4.3,
+      "saturatedFat": 1.6,
       "fiber": 42.5,
-      "sugar": 4.1
+      "sugar": 4.1,
+      "sodium": 25
     },
     "source": "manual"
   },
@@ -3652,11 +3498,13 @@
       "protein": 9.1,
       "carbohydrates": 63.9,
       "fat": 7.4,
+      "saturatedFat": 3.1,
       "fiber": 37,
-      "sugar": 1.7
+      "sugar": 1.7,
+      "sodium": 55
     },
     "source": "manual"
-  },
+  }, 
   {
     "id": "8d78d6b6-7d8d-4955-8a34-1f4d836fb782",
     "name": "Romero",
@@ -3668,8 +3516,10 @@
       "protein": 3.3,
       "carbohydrates": 20.7,
       "fat": 5.9,
+      "saturatedFat": 2.8,
       "fiber": 14.1,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 26
     },
     "source": "manual"
   },
@@ -3684,8 +3534,10 @@
       "protein": 10.6,
       "carbohydrates": 60.7,
       "fat": 12.8,
+      "saturatedFat": 5.9,
       "fiber": 40.3,
-      "sugar": 1.7
+      "sugar": 1.7,
+      "sodium": 11
     },
     "source": "manual"
   },
@@ -3700,8 +3552,10 @@
       "protein": 3.5,
       "carbohydrates": 7,
       "fat": 1.1,
+      "saturatedFat": 0.2,
       "fiber": 2.1,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 61
     },
     "source": "manual"
   },
@@ -3716,8 +3570,10 @@
       "protein": 3.3,
       "carbohydrates": 4.4,
       "fat": 0.7,
+      "saturatedFat": 0.1,
       "fiber": 2.5,
-      "sugar": 1.9
+      "sugar": 1.9,
+      "sodium": 3
     },
     "source": "manual"
   },
@@ -3732,8 +3588,10 @@
       "protein": 22.8,
       "carbohydrates": 50.2,
       "fat": 7.2,
+      "saturatedFat": 1.4,
       "fiber": 7.4,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 62
     },
     "source": "manual"
   },
@@ -3748,8 +3606,10 @@
       "protein": 7.6,
       "carbohydrates": 74.9,
       "fat": 8.4,
+      "saturatedFat": 2.3,
       "fiber": 26.3,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 23
     },
     "source": "manual"
   },
@@ -3764,8 +3624,10 @@
       "protein": 12.7,
       "carbohydrates": 60.6,
       "fat": 7,
+      "saturatedFat": 1.5,
       "fiber": 40.3,
-      "sugar": 4.1
+      "sugar": 4.1,
+      "sodium": 77
     },
     "source": "manual"
   },
@@ -3780,8 +3642,10 @@
       "protein": 1.2,
       "carbohydrates": 7.3,
       "fat": 0.2,
+      "saturatedFat": 0,
       "fiber": 3.1,
-      "sugar": 3.9
+      "sugar": 3.9,
+      "sodium": 52
     },
     "source": "manual"
   },
@@ -3796,8 +3660,10 @@
       "protein": 18.4,
       "carbohydrates": 0,
       "fat": 2.5,
+      "saturatedFat": 0.6,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 68
     },
     "source": "manual"
   },
@@ -3812,8 +3678,10 @@
       "protein": 18.9,
       "carbohydrates": 0,
       "fat": 2,
+      "saturatedFat": 0.5,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 65
     },
     "source": "manual"
   },
@@ -3828,8 +3696,10 @@
       "protein": 15.9,
       "carbohydrates": 0,
       "fat": 0.4,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 72
     },
     "source": "manual"
   },
@@ -3844,8 +3714,10 @@
       "protein": 14.9,
       "carbohydrates": 0,
       "fat": 1.2,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 81
     },
     "source": "manual"
   },
@@ -3860,8 +3732,10 @@
       "protein": 18.4,
       "carbohydrates": 0,
       "fat": 2,
+      "saturatedFat": 0.5,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 70
     },
     "source": "manual"
   },
@@ -3876,8 +3750,10 @@
       "protein": 20.5,
       "carbohydrates": 0,
       "fat": 1.5,
+      "saturatedFat": 0.4,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 66
     },
     "source": "manual"
   },
@@ -3892,8 +3768,10 @@
       "protein": 19.4,
       "carbohydrates": 0,
       "fat": 1,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 74
     },
     "source": "manual"
   },
@@ -3908,8 +3786,10 @@
       "protein": 15.8,
       "carbohydrates": 0,
       "fat": 0.8,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 69
     },
     "source": "manual"
   },
@@ -3924,8 +3804,10 @@
       "protein": 20.9,
       "carbohydrates": 0,
       "fat": 13.9,
+      "saturatedFat": 3.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 88
     },
     "source": "manual"
   },
@@ -3940,8 +3822,10 @@
       "protein": 20.4,
       "carbohydrates": 0,
       "fat": 14.1,
+      "saturatedFat": 3.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 92
     },
     "source": "manual"
   },
@@ -3956,8 +3840,10 @@
       "protein": 18.6,
       "carbohydrates": 0,
       "fat": 13.9,
+      "saturatedFat": 3.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 76
     },
     "source": "manual"
   },
@@ -3972,8 +3858,10 @@
       "protein": 25.5,
       "carbohydrates": 0,
       "fat": 8.2,
+      "saturatedFat": 2.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 50
     },
     "source": "manual"
   },
@@ -3988,8 +3876,10 @@
       "protein": 23.7,
       "carbohydrates": 0,
       "fat": 9.8,
+      "saturatedFat": 2.6,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 47
     },
     "source": "manual"
   },
@@ -4004,8 +3894,10 @@
       "protein": 18.5,
       "carbohydrates": 0,
       "fat": 9,
+      "saturatedFat": 2.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 61
     },
     "source": "manual"
   },
@@ -4020,8 +3912,10 @@
       "protein": 19.8,
       "carbohydrates": 0,
       "fat": 6.7,
+      "saturatedFat": 1.7,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 96
     },
     "source": "manual"
   },
@@ -4036,8 +3930,10 @@
       "protein": 17.8,
       "carbohydrates": 0,
       "fat": 0.7,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 54
     },
     "source": "manual"
   },
@@ -4052,8 +3948,10 @@
       "protein": 18.6,
       "carbohydrates": 0,
       "fat": 1,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 58
     },
     "source": "manual"
   },
@@ -4068,8 +3966,10 @@
       "protein": 17.8,
       "carbohydrates": 0,
       "fat": 0.4,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 60
     },
     "source": "manual"
   },
@@ -4084,8 +3984,10 @@
       "protein": 15.5,
       "carbohydrates": 0,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 68
     },
     "source": "manual"
   },
@@ -4100,8 +4002,10 @@
       "protein": 18.3,
       "carbohydrates": 0,
       "fat": 0.8,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 70
     },
     "source": "manual"
   },
@@ -4116,8 +4020,10 @@
       "protein": 16.5,
       "carbohydrates": 0,
       "fat": 0.8,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 75
     },
     "source": "manual"
   },
@@ -4132,8 +4038,10 @@
       "protein": 17.8,
       "carbohydrates": 0,
       "fat": 2.5,
+      "saturatedFat": 0.5,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 65
     },
     "source": "manual"
   },
@@ -4148,8 +4056,10 @@
       "protein": 20.4,
       "carbohydrates": 0,
       "fat": 13.4,
+      "saturatedFat": 3.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 59
     },
     "source": "manual"
   },
@@ -4164,8 +4074,10 @@
       "protein": 20.8,
       "carbohydrates": 0,
       "fat": 6.6,
+      "saturatedFat": 1.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 52
     },
     "source": "manual"
   },
@@ -4180,8 +4092,10 @@
       "protein": 20.5,
       "carbohydrates": 0,
       "fat": 3.5,
+      "saturatedFat": 0.7,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 45
     },
     "source": "manual"
   },
@@ -4196,8 +4110,10 @@
       "protein": 17.8,
       "carbohydrates": 0,
       "fat": 5.6,
+      "saturatedFat": 1.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 55
     },
     "source": "manual"
   },
@@ -4212,8 +4128,10 @@
       "protein": 19.3,
       "carbohydrates": 0,
       "fat": 0.7,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 50
     },
     "source": "manual"
   },
@@ -4228,8 +4146,10 @@
       "protein": 19.4,
       "carbohydrates": 0,
       "fat": 0.9,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 48
     },
     "source": "manual"
   },
@@ -4244,8 +4164,10 @@
       "protein": 20.8,
       "carbohydrates": 0,
       "fat": 3.2,
+      "saturatedFat": 0.7,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 60
     },
     "source": "manual"
   },
@@ -4260,8 +4182,10 @@
       "protein": 18.4,
       "carbohydrates": 0,
       "fat": 3.2,
+      "saturatedFat": 0.7,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 58
     },
     "source": "manual"
   },
@@ -4276,8 +4200,10 @@
       "protein": 20.1,
       "carbohydrates": 0,
       "fat": 1.7,
+      "saturatedFat": 0.5,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 52
     },
     "source": "manual"
   },
@@ -4292,8 +4218,10 @@
       "protein": 15.8,
       "carbohydrates": 0,
       "fat": 1.2,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 49
     },
     "source": "manual"
   },
@@ -4308,8 +4236,10 @@
       "protein": 19.8,
       "carbohydrates": 0,
       "fat": 2.4,
+      "saturatedFat": 0.5,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 56
     },
     "source": "manual"
   },
@@ -4324,8 +4254,10 @@
       "protein": 18.5,
       "carbohydrates": 0,
       "fat": 0.7,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 88
     },
     "source": "manual"
   },
@@ -4340,8 +4272,10 @@
       "protein": 20.5,
       "carbohydrates": 0,
       "fat": 2.7,
+      "saturatedFat": 0.6,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 62
     },
     "source": "manual"
   },
@@ -4356,8 +4290,10 @@
       "protein": 18.4,
       "carbohydrates": 0,
       "fat": 2.5,
+      "saturatedFat": 0.6,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 54
     },
     "source": "manual"
   },
@@ -4372,8 +4308,10 @@
       "protein": 20.9,
       "carbohydrates": 0,
       "fat": 4.5,
+      "saturatedFat": 1.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 79
     },
     "source": "manual"
   },
@@ -4388,8 +4326,10 @@
       "protein": 16.4,
       "carbohydrates": 0,
       "fat": 2.8,
+      "saturatedFat": 0.7,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 42
     },
     "source": "manual"
   },
@@ -4404,8 +4344,10 @@
       "protein": 20.2,
       "carbohydrates": 0,
       "fat": 3.2,
+      "saturatedFat": 0.8,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 65
     },
     "source": "manual"
   },
@@ -4420,8 +4362,10 @@
       "protein": 18.2,
       "carbohydrates": 0,
       "fat": 2.8,
+      "saturatedFat": 0.7,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 68
     },
     "source": "manual"
   },
@@ -4436,8 +4380,10 @@
       "protein": 18.3,
       "carbohydrates": 0,
       "fat": 1,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 72
     },
     "source": "manual"
   },
@@ -4452,8 +4398,10 @@
       "protein": 18.6,
       "carbohydrates": 0,
       "fat": 1.5,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 61
     },
     "source": "manual"
   },
@@ -4468,8 +4416,10 @@
       "protein": 18.4,
       "carbohydrates": 0,
       "fat": 1.2,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 55
     },
     "source": "manual"
   },
@@ -4484,8 +4434,10 @@
       "protein": 19.3,
       "carbohydrates": 0,
       "fat": 4,
+      "saturatedFat": 1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 58
     },
     "source": "manual"
   },
@@ -4500,8 +4452,10 @@
       "protein": 20.3,
       "carbohydrates": 0.9,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 119
     },
     "source": "manual"
   },
@@ -4516,8 +4470,10 @@
       "protein": 20.3,
       "carbohydrates": 0.9,
       "fat": 1.7,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 125
     },
     "source": "manual"
   },
@@ -4532,8 +4488,10 @@
       "protein": 21.5,
       "carbohydrates": 1.2,
       "fat": 1.8,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 150
     },
     "source": "manual"
   },
@@ -4548,8 +4506,10 @@
       "protein": 20.6,
       "carbohydrates": 1.1,
       "fat": 1.9,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 160
     },
     "source": "manual"
   },
@@ -4564,8 +4524,10 @@
       "protein": 18.8,
       "carbohydrates": 0.8,
       "fat": 0.9,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 190
     },
     "source": "manual"
   },
@@ -4580,8 +4542,10 @@
       "protein": 19,
       "carbohydrates": 0.7,
       "fat": 1,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 180
     },
     "source": "manual"
   },
@@ -4596,8 +4560,10 @@
       "protein": 18.1,
       "carbohydrates": 0,
       "fat": 1.1,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 290
     },
     "source": "manual"
   },
@@ -4612,8 +4578,10 @@
       "protein": 18.3,
       "carbohydrates": 0,
       "fat": 1,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 280
     },
     "source": "manual"
   },
@@ -4628,8 +4596,10 @@
       "protein": 16.8,
       "carbohydrates": 0,
       "fat": 1.2,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 320
     },
     "source": "manual"
   },
@@ -4644,8 +4614,10 @@
       "protein": 18.5,
       "carbohydrates": 0,
       "fat": 1.3,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 270
     },
     "source": "manual"
   },
@@ -4660,8 +4632,10 @@
       "protein": 14.3,
       "carbohydrates": 0.6,
       "fat": 1.2,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 430
     },
     "source": "manual"
   },
@@ -4676,8 +4650,10 @@
       "protein": 15.1,
       "carbohydrates": 1.3,
       "fat": 0.5,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 140
     },
     "source": "manual"
   },
@@ -4692,8 +4668,10 @@
       "protein": 14.8,
       "carbohydrates": 0.9,
       "fat": 0.4,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 130
     },
     "source": "manual"
   },
@@ -4708,8 +4686,10 @@
       "protein": 11.9,
       "carbohydrates": 3.7,
       "fat": 2.2,
+      "saturatedFat": 0.4,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 290
     },
     "source": "manual"
   },
@@ -4724,8 +4704,10 @@
       "protein": 12.8,
       "carbohydrates": 2.6,
       "fat": 0.8,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 120
     },
     "source": "manual"
   },
@@ -4740,8 +4722,10 @@
       "protein": 13.2,
       "carbohydrates": 2.7,
       "fat": 1,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 110
     },
     "source": "manual"
   },
@@ -4756,8 +4740,10 @@
       "protein": 12.2,
       "carbohydrates": 2.2,
       "fat": 0.6,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 90
     },
     "source": "manual"
   },
@@ -4772,8 +4758,10 @@
       "protein": 16.8,
       "carbohydrates": 1.9,
       "fat": 0.8,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 180
     },
     "source": "manual"
   },
@@ -4788,8 +4776,10 @@
       "protein": 9.5,
       "carbohydrates": 4.2,
       "fat": 2.3,
+      "saturatedFat": 0.5,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 110
     },
     "source": "manual"
   },
@@ -4804,8 +4794,10 @@
       "protein": 15.8,
       "carbohydrates": 2.1,
       "fat": 0.9,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 170
     },
     "source": "manual"
   },
@@ -4820,8 +4812,10 @@
       "protein": 10.8,
       "carbohydrates": 2.1,
       "fat": 0.6,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 100
     },
     "source": "manual"
   },
@@ -4836,8 +4830,10 @@
       "protein": 12.1,
       "carbohydrates": 2.3,
       "fat": 0.7,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 95
     },
     "source": "manual"
   },
@@ -4852,8 +4848,10 @@
       "protein": 11.9,
       "carbohydrates": 2.2,
       "fat": 0.6,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 90
     },
     "source": "manual"
   },
@@ -4868,8 +4866,10 @@
       "protein": 14.9,
       "carbohydrates": 2.2,
       "fat": 1,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 230
     },
     "source": "manual"
   },
@@ -4884,8 +4884,10 @@
       "protein": 15.6,
       "carbohydrates": 3.1,
       "fat": 1.4,
+      "saturatedFat": 0.4,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 45
     },
     "source": "manual"
   },
@@ -4900,8 +4902,10 @@
       "protein": 16.2,
       "carbohydrates": 0.8,
       "fat": 0.7,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 280
     },
     "source": "manual"
   },
@@ -4916,8 +4920,10 @@
       "protein": 15.1,
       "carbohydrates": 2.8,
       "fat": 1.2,
+      "saturatedFat": 0.3,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 50
     },
     "source": "manual"
   },
@@ -4932,8 +4938,10 @@
       "protein": 15.6,
       "carbohydrates": 1.6,
       "fat": 0.7,
+      "saturatedFat": 0.2,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 180
     },
     "source": "manual"
   },
@@ -4948,8 +4956,10 @@
       "protein": 13.8,
       "carbohydrates": 2.5,
       "fat": 2.5,
+      "saturatedFat": 0.5,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 170
     },
     "source": "manual"
   },
@@ -4964,8 +4974,10 @@
       "protein": 14.1,
       "carbohydrates": 2.1,
       "fat": 0.7,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0
+      "sugar": 0,
+      "sodium": 420
     },
     "source": "manual"
   },
@@ -4980,8 +4992,10 @@
       "protein": 12.6,
       "carbohydrates": 1.1,
       "fat": 11,
+      "saturatedFat": 3.3,
       "fiber": 0,
-      "sugar": 1.1
+      "sugar": 1.1,
+      "sodium": 140
     },
     "source": "manual"
   },
@@ -4996,8 +5010,10 @@
       "protein": 10.9,
       "carbohydrates": 0.7,
       "fat": 0.2,
+      "saturatedFat": 0.1,
       "fiber": 0,
-      "sugar": 0.7
+      "sugar": 0.7,
+      "sodium": 170
     },
     "source": "manual"
   },
@@ -5012,8 +5028,10 @@
       "protein": 15.9,
       "carbohydrates": 3.6,
       "fat": 26.5,
+      "saturatedFat": 9.6,
       "fiber": 0,
-      "sugar": 0.6
+      "sugar": 0.6,
+      "sodium": 50
     },
     "source": "manual"
   },
@@ -5028,8 +5046,10 @@
       "protein": 13.1,
       "carbohydrates": 0.4,
       "fat": 11.1,
+      "saturatedFat": 3.4,
       "fiber": 0,
-      "sugar": 0.4
+      "sugar": 0.4,
+      "sodium": 130
     },
     "source": "manual"
   },
@@ -5044,8 +5064,10 @@
       "protein": 9,
       "carbohydrates": 49,
       "fat": 3.2,
+      "saturatedFat": 0.5,
       "fiber": 2.7,
-      "sugar": 5
+      "sugar": 5,
+      "sodium": 490
     },
     "source": "manual"
   },
@@ -5060,8 +5082,10 @@
       "protein": 13,
       "carbohydrates": 41,
       "fat": 3.5,
+      "saturatedFat": 0.6,
       "fiber": 7,
-      "sugar": 2.8
+      "sugar": 2.8,
+      "sodium": 450
     },
     "source": "manual"
   },
@@ -5076,8 +5100,10 @@
       "protein": 8.5,
       "carbohydrates": 48,
       "fat": 3.3,
+      "saturatedFat": 0.4,
       "fiber": 5.8,
-      "sugar": 3.9
+      "sugar": 3.9,
+      "sodium": 420
     },
     "source": "manual"
   },
@@ -5092,8 +5118,10 @@
       "protein": 9.3,
       "carbohydrates": 51,
       "fat": 1.6,
+      "saturatedFat": 0.3,
       "fiber": 2.2,
-      "sugar": 0.6
+      "sugar": 0.6,
+      "sodium": 520
     },
     "source": "manual"
   },
@@ -5108,8 +5136,10 @@
       "protein": 8.5,
       "carbohydrates": 52,
       "fat": 2.5,
+      "saturatedFat": 0.4,
       "fiber": 2.8,
-      "sugar": 0.7
+      "sugar": 0.7,
+      "sodium": 480
     },
     "source": "manual"
   },
@@ -5124,8 +5154,10 @@
       "protein": 8.5,
       "carbohydrates": 50,
       "fat": 3.5,
+      "saturatedFat": 0.5,
       "fiber": 2.5,
-      "sugar": 5.5
+      "sugar": 5.5,
+      "sodium": 470
     },
     "source": "manual"
   },
@@ -5140,8 +5172,10 @@
       "protein": 8.2,
       "carbohydrates": 45,
       "fat": 21,
+      "saturatedFat": 12,
       "fiber": 2.6,
-      "sugar": 11
+      "sugar": 11,
+      "sodium": 320
     },
     "source": "manual"
   },
@@ -5156,8 +5190,10 @@
       "protein": 5.2,
       "carbohydrates": 54,
       "fat": 16,
+      "saturatedFat": 2.5,
       "fiber": 1.2,
-      "sugar": 24
+      "sugar": 24,
+      "sodium": 180
     },
     "source": "manual"
   },
@@ -5172,8 +5208,10 @@
       "protein": 5.3,
       "carbohydrates": 51,
       "fat": 25,
+      "saturatedFat": 5.5,
       "fiber": 1.8,
-      "sugar": 19
+      "sugar": 19,
+      "sodium": 270
     },
     "source": "manual"
   },
@@ -5188,8 +5226,10 @@
       "protein": 6.4,
       "carbohydrates": 70,
       "fat": 18,
+      "saturatedFat": 4,
       "fiber": 2.1,
-      "sugar": 21
+      "sugar": 21,
+      "sodium": 380
     },
     "source": "manual"
   },
@@ -5204,8 +5244,10 @@
       "protein": 6.5,
       "carbohydrates": 48,
       "fat": 13,
+      "saturatedFat": 7.5,
       "fiber": 1.2,
-      "sugar": 27
+      "sugar": 27,
+      "sodium": 240
     },
     "source": "manual"
   },
@@ -5220,8 +5262,10 @@
       "protein": 8.8,
       "carbohydrates": 50,
       "fat": 2.3,
+      "saturatedFat": 0.4,
       "fiber": 2.5,
-      "sugar": 0.8
+      "sugar": 0.8,
+      "sodium": 490
     },
     "source": "manual"
   },
@@ -5236,8 +5280,10 @@
       "protein": 6.3,
       "carbohydrates": 58,
       "fat": 15,
+      "saturatedFat": 2.2,
       "fiber": 1.8,
-      "sugar": 22
+      "sugar": 22,
+      "sodium": 120
     },
     "source": "manual"
   },
@@ -5252,8 +5298,10 @@
       "protein": 8.5,
       "carbohydrates": 15,
       "fat": 12,
+      "saturatedFat": 2.8,
       "fiber": 1.8,
-      "sugar": 1.5
+      "sugar": 1.5,
+      "sodium": 320
     },
     "source": "manual"
   },
@@ -5268,8 +5316,10 @@
       "protein": 6.2,
       "carbohydrates": 42,
       "fat": 25,
+      "saturatedFat": 14,
       "fiber": 2.1,
-      "sugar": 18
+      "sugar": 18,
+      "sodium": 210
     },
     "source": "manual"
   },
@@ -5284,8 +5334,10 @@
       "protein": 6.8,
       "carbohydrates": 40,
       "fat": 23,
+      "saturatedFat": 13,
       "fiber": 1.5,
-      "sugar": 16
+      "sugar": 16,
+      "sodium": 220
     },
     "source": "manual"
   },
@@ -5300,8 +5352,10 @@
       "protein": 7.5,
       "carbohydrates": 55,
       "fat": 14,
+      "saturatedFat": 6.5,
       "fiber": 2.3,
-      "sugar": 22
+      "sugar": 22,
+      "sodium": 180
     },
     "source": "manual"
   },
@@ -5316,8 +5370,10 @@
       "protein": 7.2,
       "carbohydrates": 48,
       "fat": 32,
+      "saturatedFat": 12,
       "fiber": 3.2,
-      "sugar": 24
+      "sugar": 24,
+      "sodium": 95
     },
     "source": "manual"
   },
@@ -5332,8 +5388,10 @@
       "protein": 5.8,
       "carbohydrates": 52,
       "fat": 28,
+      "saturatedFat": 10,
       "fiber": 1.8,
-      "sugar": 26
+      "sugar": 26,
+      "sodium": 100
     },
     "source": "manual"
   },
@@ -5348,8 +5406,10 @@
       "protein": 12,
       "carbohydrates": 55,
       "fat": 31,
+      "saturatedFat": 2.8,
       "fiber": 5.2,
-      "sugar": 48
+      "sugar": 48,
+      "sodium": 45
     },
     "source": "manual"
   },
@@ -5364,8 +5424,10 @@
       "protein": 13.5,
       "carbohydrates": 52,
       "fat": 33,
+      "saturatedFat": 3,
       "fiber": 5.8,
-      "sugar": 45
+      "sugar": 45,
+      "sodium": 40
     },
     "source": "manual"
   },
@@ -5380,8 +5442,10 @@
       "protein": 9.5,
       "carbohydrates": 58,
       "fat": 24,
+      "saturatedFat": 2.1,
       "fiber": 4.8,
-      "sugar": 52
+      "sugar": 52,
+      "sodium": 35
     },
     "source": "manual"
   },
@@ -5396,8 +5460,10 @@
       "protein": 10.2,
       "carbohydrates": 62,
       "fat": 25,
+      "saturatedFat": 2.3,
       "fiber": 5.2,
-      "sugar": 58
+      "sugar": 58,
+      "sodium": 5
     },
     "source": "manual"
   },
@@ -5412,9 +5478,615 @@
       "protein": 0.4,
       "carbohydrates": 82,
       "fat": 0.1,
+      "saturatedFat": 0,
       "fiber": 1.8,
-      "sugar": 75
+      "sugar": 75,
+      "sodium": 25
     },
     "source": "manual"
-  }
+  },
+  {
+  "id": "a1f3c8d2-4b6e-4e9a-9c71-8a0f2e5b1c01",
+  "name": "Aceite de oliva virgen extra",
+  "category": "oils",
+  "description": "Aceite vegetal para cocinar",
+  "ingredients": "Aceite de oliva virgen extra",
+  "nutritionalInfo": {
+    "calories": 884,
+    "protein": 0,
+    "carbohydrates": 0,
+    "fat": 100,
+    "saturatedFat": 14,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 2
+  },
+  "source": "manual"
+},
+{
+  "id": "b7e9d0a4-5f1c-4c3a-8b6d-2a1e9f8c4b02",
+  "name": "Aceite de girasol",
+  "category": "oils",
+  "description": "Aceite vegetal refinado",
+  "ingredients": "Aceite de girasol",
+  "nutritionalInfo": {
+    "calories": 884,
+    "protein": 0,
+    "carbohydrates": 0,
+    "fat": 100,
+    "saturatedFat": 10,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 0
+  },
+  "source": "manual"
+},
+{
+  "id": "c2b8e7a9-6d5f-4f3b-a0c1-9d8e4a7b5c03",
+  "name": "Aceite de coco",
+  "category": "oils",
+  "description": "Aceite vegetal tropical",
+  "ingredients": "Aceite de coco",
+  "nutritionalInfo": {
+    "calories": 892,
+    "protein": 0,
+    "carbohydrates": 0,
+    "fat": 100,
+    "saturatedFat": 87,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 0
+  },
+  "source": "manual"
+},
+{
+  "id": "d4a6b8e2-1f9c-4a7d-8c5e-3b0f9e6a2d04",
+  "name": "Aceite de colza",
+  "category": "oils",
+  "description": "Aceite vegetal suave",
+  "ingredients": "Aceite de colza",
+  "nutritionalInfo": {
+    "calories": 884,
+    "protein": 0,
+    "carbohydrates": 0,
+    "fat": 100,
+    "saturatedFat": 7,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 0
+  },
+  "source": "manual"
+},
+
+{
+  "id": "e9b1f3c2-6a8d-4e9b-8c7f-2a4d0e5b9c05",
+  "name": "Atún en aceite",
+  "category": "fish",
+  "description": "Conserva de pescado",
+  "ingredients": "Atún, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 198,
+    "protein": 29,
+    "carbohydrates": 0,
+    "fat": 8,
+    "saturatedFat": 1.3,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 350
+  },
+  "source": "manual"
+},
+{
+  "id": "f2a4c6e1-9d8b-4b7f-9e5c-0a3d7b8c1f06",
+  "name": "Atún al natural",
+  "category": "fish",
+  "description": "Conserva de pescado bajo en grasa",
+  "ingredients": "Atún, agua, sal",
+  "nutritionalInfo": {
+    "calories": 116,
+    "protein": 26,
+    "carbohydrates": 0,
+    "fat": 1,
+    "saturatedFat": 0.3,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 300
+  },
+  "source": "manual"
+},
+{
+  "id": "a5e8d1c9-4f7b-4a2e-9c6d-1f3b0e8a7c07",
+  "name": "Sardinas en aceite",
+  "category": "fish",
+  "description": "Conserva de pescado azul",
+  "ingredients": "Sardinas, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 208,
+    "protein": 24,
+    "carbohydrates": 0,
+    "fat": 11,
+    "saturatedFat": 2.6,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 450
+  },
+  "source": "manual"
+},
+{
+  "id": "b6d3f0a8-9c2e-4b5f-8e7a-4c1d9f2e0b08",
+  "name": "Caballa en escabeche",
+  "category": "fish",
+  "description": "Conserva de pescado azul",
+  "ingredients": "Caballa, vinagre, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 190,
+    "protein": 22,
+    "carbohydrates": 2,
+    "fat": 10,
+    "saturatedFat": 2.2,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 600
+  },
+  "source": "manual"
+},
+{
+  "id": "c8e5a4f7-0b1d-49c2-a6f9-3e7d8b4c5a09",
+  "name": "Mejillones en escabeche",
+  "category": "fish",
+  "description": "Molusco en conserva",
+  "ingredients": "Mejillones, vinagre, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 172,
+    "protein": 24,
+    "carbohydrates": 4,
+    "fat": 6,
+    "saturatedFat": 1.2,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 800
+  },
+  "source": "manual"
+},
+{
+  "id": "a1c9e3f4-2b6d-4f9a-8e71-0b5d8a7c2f01",
+  "name": "Caballa al natural",
+  "category": "fish",
+  "description": "Conserva de pescado azul",
+  "ingredients": "Caballa, agua, sal",
+  "nutritionalInfo": {
+    "calories": 155,
+    "protein": 23,
+    "carbohydrates": 0,
+    "fat": 7,
+    "saturatedFat": 1.7,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 300
+  },
+  "source": "manual"
+},
+{
+  "id": "b2d7f8a9-6c4e-4b3a-9f1d-7e5a0c8b3d02",
+  "name": "Caballa en aceite de girasol",
+  "category": "fish",
+  "description": "Conserva de pescado azul",
+  "ingredients": "Caballa, aceite de girasol, sal",
+  "nutritionalInfo": {
+    "calories": 205,
+    "protein": 22,
+    "carbohydrates": 0,
+    "fat": 12,
+    "saturatedFat": 2.1,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 350
+  },
+  "source": "manual"
+},
+{
+  "id": "c3f1a6e8-7d2b-4f9e-a8c4-0d9b5e1a7c03",
+  "name": "Caballa en aceite de oliva",
+  "category": "fish",
+  "description": "Conserva de pescado azul",
+  "ingredients": "Caballa, aceite de oliva, sal",
+  "nutritionalInfo": {
+    "calories": 215,
+    "protein": 22,
+    "carbohydrates": 0,
+    "fat": 13,
+    "saturatedFat": 2.3,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 360
+  },
+  "source": "manual"
+},
+{
+  "id": "d4e9b0c5-6a7f-4d2e-8c31-5a9f1e7b0d04",
+  "name": "Caballa en aceite de oliva con tomate",
+  "category": "fish",
+  "description": "Conserva de pescado azul con salsa",
+  "ingredients": "Caballa, tomate, aceite de oliva, sal",
+  "nutritionalInfo": {
+    "calories": 165,
+    "protein": 20,
+    "carbohydrates": 4,
+    "fat": 7,
+    "saturatedFat": 1.5,
+    "fiber": 1,
+    "sugar": 3,
+    "sodium": 420
+  },
+  "source": "manual"
+},
+{
+  "id": "e5c1a9b4-7d3f-4e6c-9a08-2f7d6b1c5e05",
+  "name": "Sardinas al natural",
+  "category": "fish",
+  "description": "Conserva de pescado azul",
+  "ingredients": "Sardinas, agua, sal",
+  "nutritionalInfo": {
+    "calories": 135,
+    "protein": 24,
+    "carbohydrates": 0,
+    "fat": 4.5,
+    "saturatedFat": 1,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 300
+  },
+  "source": "manual"
+},
+{
+  "id": "f6b2d4a8-9c5e-4a7d-8e1b-3c0f7a9e6b06",
+  "name": "Sardinas en aceite de girasol",
+  "category": "fish",
+  "description": "Conserva de pescado azul",
+  "ingredients": "Sardinas, aceite de girasol, sal",
+  "nutritionalInfo": {
+    "calories": 210,
+    "protein": 23,
+    "carbohydrates": 0,
+    "fat": 13,
+    "saturatedFat": 2.2,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 380
+  },
+  "source": "manual"
+},
+{
+  "id": "a7c8e1b9-2f6d-4e3a-9b0d-5c7f8a1e4d07",
+  "name": "Sardinas en aceite de oliva",
+  "category": "fish",
+  "description": "Conserva de pescado azul",
+  "ingredients": "Sardinas, aceite de oliva, sal",
+  "nutritionalInfo": {
+    "calories": 220,
+    "protein": 23,
+    "carbohydrates": 0,
+    "fat": 14,
+    "saturatedFat": 2.4,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 400
+  },
+  "source": "manual"
+},
+{
+  "id": "b8d9f3c7-1e6a-4a5d-8c2b-9f0e5a4d3c08",
+  "name": "Sardinas en tomate",
+  "category": "fish",
+  "description": "Conserva de pescado azul con salsa de tomate",
+  "ingredients": "Sardinas, tomate, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 160,
+    "protein": 20,
+    "carbohydrates": 5,
+    "fat": 6,
+    "saturatedFat": 1.3,
+    "fiber": 1,
+    "sugar": 4,
+    "sodium": 500
+  },
+  "source": "manual"
+},
+{
+  "id": "c9a5e6d1-4b7f-4d8c-a9e0-1f2b3c5a7e09",
+  "name": "Berberechos al natural",
+  "category": "fish",
+  "description": "Molusco en conserva",
+  "ingredients": "Berberechos, agua, sal",
+  "nutritionalInfo": {
+    "calories": 79,
+    "protein": 14,
+    "carbohydrates": 3,
+    "fat": 1,
+    "saturatedFat": 0.2,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 600
+  },
+  "source": "manual"
+},
+{
+  "id": "d0f8b7e2-6c1a-49e5-8b9d-5c3a1f7e0d10",
+  "name": "Pulpo en conserva",
+  "category": "fish",
+  "description": "Cefalópodo cocido",
+  "ingredients": "Pulpo, agua, sal",
+  "nutritionalInfo": {
+    "calories": 82,
+    "protein": 15,
+    "carbohydrates": 2,
+    "fat": 1,
+    "saturatedFat": 0.3,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 450
+  },
+  "source": "manual"
+},
+{
+  "id": "e1a7b9c5-0f6d-4a8c-9b5e-3d2c1a7f8e11",
+  "name": "Calamares en su tinta",
+  "category": "fish",
+  "description": "Cefalópodo en salsa",
+  "ingredients": "Calamares, tinta, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 128,
+    "protein": 12,
+    "carbohydrates": 4,
+    "fat": 6,
+    "saturatedFat": 1.1,
+    "fiber": 0,
+    "sugar": 0.5,
+    "sodium": 700
+  },
+  "source": "manual"
+},
+{
+  "id": "f2c4d6a9-8e1b-4f7d-9c3a-0b5e7d1a6f12",
+  "name": "Calamares en aceite",
+  "category": "fish",
+  "description": "Cefalópodo en conserva",
+  "ingredients": "Calamares, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 160,
+    "protein": 16,
+    "carbohydrates": 1,
+    "fat": 8,
+    "saturatedFat": 1.5,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 550
+  },
+  "source": "manual"
+},
+{
+  "id": "a01f9b6e-3c5d-4e8b-9a7f-2d1c6b5e9a01",
+  "name": "Mejillones al natural",
+  "category": "seafood",
+  "description": "Molusco en conserva",
+  "ingredients": "Mejillones, agua, sal",
+  "nutritionalInfo": {
+    "calories": 86,
+    "protein": 12,
+    "carbohydrates": 3,
+    "fat": 2,
+    "saturatedFat": 0.4,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 400
+  },
+  "source": "manual"
+},
+{
+  "id": "b02d7a1c-9e5f-4b6a-8c0e-1f5a7e9d2b02",
+  "name": "Mejillones en escabeche",
+  "category": "seafood",
+  "description": "Molusco en salsa",
+  "ingredients": "Mejillones, aceite, vinagre, sal",
+  "nutritionalInfo": {
+    "calories": 172,
+    "protein": 24,
+    "carbohydrates": 4,
+    "fat": 6,
+    "saturatedFat": 1.2,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 800
+  },
+  "source": "manual"
+},
+{
+  "id": "c03e6b9a-5d4f-4a1b-8e2c-9f7a6d5b3c03",
+  "name": "Mejillones en salsa picante",
+  "category": "seafood",
+  "description": "Molusco en salsa especiada",
+  "ingredients": "Mejillones, tomate, aceite, especias, sal",
+  "nutritionalInfo": {
+    "calories": 165,
+    "protein": 20,
+    "carbohydrates": 6,
+    "fat": 6,
+    "saturatedFat": 1.1,
+    "fiber": 1,
+    "sugar": 4,
+    "sodium": 850
+  },
+  "source": "manual"
+},
+{
+  "id": "d04a8c6f-7b9e-4d1a-8f5e-3c2a9b6d4e04",
+  "name": "Almejas al natural",
+  "category": "seafood",
+  "description": "Molusco en conserva",
+  "ingredients": "Almejas, agua, sal",
+  "nutritionalInfo": {
+    "calories": 74,
+    "protein": 13,
+    "carbohydrates": 2,
+    "fat": 1,
+    "saturatedFat": 0.2,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 500
+  },
+  "source": "manual"
+},
+{
+  "id": "e05b9a3d-2c6f-4a8e-9d1c-7f5b6a8e9a05",
+  "name": "Navajas al natural",
+  "category": "seafood",
+  "description": "Molusco en conserva",
+  "ingredients": "Navajas, agua, sal",
+  "nutritionalInfo": {
+    "calories": 78,
+    "protein": 15,
+    "carbohydrates": 1,
+    "fat": 1,
+    "saturatedFat": 0.2,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 420
+  },
+  "source": "manual"
+},
+{
+  "id": "f06d2b5c-9e8a-4b7f-8c1d-3a6e5b9a0f06",
+  "name": "Zamburiñas en salsa",
+  "category": "seafood",
+  "description": "Molusco en salsa",
+  "ingredients": "Zamburiñas, tomate, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 150,
+    "protein": 18,
+    "carbohydrates": 5,
+    "fat": 6,
+    "saturatedFat": 1.2,
+    "fiber": 1,
+    "sugar": 3,
+    "sodium": 650
+  },
+  "source": "manual"
+},
+{
+  "id": "a07c9d6e-4b5f-4e1a-9d8c-7a5b6e3f1a07",
+  "name": "Pulpo al natural",
+  "category": "seafood",
+  "description": "Cefalópodo cocido",
+  "ingredients": "Pulpo, agua, sal",
+  "nutritionalInfo": {
+    "calories": 82,
+    "protein": 15,
+    "carbohydrates": 2,
+    "fat": 1,
+    "saturatedFat": 0.3,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 450
+  },
+  "source": "manual"
+},
+{
+  "id": "b08f6e1d-9a7c-4c5b-8e2a-1d9f3b6e8c08",
+  "name": "Pulpo en aceite",
+  "category": "seafood",
+  "description": "Cefalópodo en conserva",
+  "ingredients": "Pulpo, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 135,
+    "protein": 14,
+    "carbohydrates": 1,
+    "fat": 7,
+    "saturatedFat": 1.3,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 520
+  },
+  "source": "manual"
+},
+{
+  "id": "c09a5e8b-7d6f-4e1c-9b3a-0d2f6a9c5b09",
+  "name": "Calamares al natural",
+  "category": "seafood",
+  "description": "Cefalópodo en conserva",
+  "ingredients": "Calamares, agua, sal",
+  "nutritionalInfo": {
+    "calories": 92,
+    "protein": 16,
+    "carbohydrates": 2,
+    "fat": 1.5,
+    "saturatedFat": 0.4,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 400
+  },
+  "source": "manual"
+},
+{
+  "id": "d10f3c9a-8b2e-4a5f-9c7d-1a6b5e0d4f10",
+  "name": "Calamares en su tinta",
+  "category": "seafood",
+  "description": "Cefalópodo en salsa",
+  "ingredients": "Calamares, tinta, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 128,
+    "protein": 12,
+    "carbohydrates": 4,
+    "fat": 6,
+    "saturatedFat": 1.1,
+    "fiber": 0,
+    "sugar": 0.5,
+    "sodium": 700
+  },
+  "source": "manual"
+},
+{
+  "id": "e11b7d4c-5a9f-4e6b-8c1a-3d0e6b9f7a11",
+  "name": "Chipirones en aceite",
+  "category": "seafood",
+  "description": "Cefalópodo pequeño en conserva",
+  "ingredients": "Chipirones, aceite, sal",
+  "nutritionalInfo": {
+    "calories": 145,
+    "protein": 15,
+    "carbohydrates": 1,
+    "fat": 7,
+    "saturatedFat": 1.4,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 550
+  },
+  "source": "manual"
+},
+{
+  "id": "f12a6b3e-9c5d-4f8a-8e1b-7d2a9c5b6f12",
+  "name": "Berberechos al natural",
+  "category": "seafood",
+  "description": "Molusco en conserva",
+  "ingredients": "Berberechos, agua, sal",
+  "nutritionalInfo": {
+    "calories": 79,
+    "protein": 14,
+    "carbohydrates": 3,
+    "fat": 1,
+    "saturatedFat": 0.2,
+    "fiber": 0,
+    "sugar": 0,
+    "sodium": 600
+  },
+  "source": "manual"
+}
+
+
+
+
+
+
+
+
+
 ]

@@ -3,6 +3,8 @@ import { prisma } from '../config/database';
 import { ProductService } from './ProductService';
 import type { ProductSource } from '../types/database';
 
+import NutritionCalculator, { HealthScoreResult } from './NutritionCalculator';
+
 interface APIHandler {
   name: string;
   handler: (barcode: string, language?: string) => Promise<ProductResult>;
@@ -52,7 +54,9 @@ interface ProductData {
   source: string;
   language: string;
   lastUpdated: Date;
+  healthScore?: HealthScoreResult;
 }
+
 
 class ProductAPIService {
   private apis: APIHandler[];
@@ -262,31 +266,31 @@ class ProductAPIService {
    * Mapear categoría de Chomp API
    */
   mapChompCategory(category: string): string {
-    if (!category) return 'Sin categoría';
+    if (!category) return 'uncategorized';
     
     const categoryMap: { [key: string]: string } = {
-      'Beverages': 'Bebidas',
-      'Dairy and Egg Products': 'Lácteos y Huevos',
-      'Spices and Herbs': 'Especias y Hierbas',
-      'Fats and Oils': 'Grasas y Aceites',
-      'Poultry Products': 'Productos Avícolas',
-      'Soups, Sauces, and Gravies': 'Sopas, Salsas y Caldos',
-      'Sausages and Luncheon Meats': 'Embutidos',
-      'Breakfast Cereals': 'Cereales',
-      'Fruits and Fruit Juices': 'Frutas y Zumos',
-      'Pork Products': 'Productos de Cerdo',
-      'Vegetables and Vegetable Products': 'Verduras y Vegetales',
-      'Nut and Seed Products': 'Frutos Secos y Semillas',
-      'Beef Products': 'Productos de Ternera',
-      'Finfish and Shellfish Products': 'Pescados y Mariscos',
-      'Legumes and Legume Products': 'Legumbres',
-      'Lamb, Veal, and Game Products': 'Cordero y Caza',
-      'Baked Products': 'Productos Horneados',
-      'Sweets': 'Dulces',
-      'Cereal Grains and Pasta': 'Cereales y Pasta',
-      'Fast Foods': 'Comida Rápida',
-      'Meals, Entrees, and Side Dishes': 'Comidas Preparadas',
-      'Snacks': 'Aperitivos'
+      'Beverages': 'beverages',
+      'Dairy and Egg Products': 'dairy_and_egg_products',
+      'Spices and Herbs': 'spices_and_herbs',
+      'Fats and Oils': 'fats_and_oils',
+      'Poultry Products': 'poultry_products',
+      'Soups, Sauces, and Gravies': 'soups_sauces_and_gravies',
+      'Sausages and Luncheon Meats': 'sausages_and_luncheon_meats',
+      'Breakfast Cereals': 'breakfast_cereals',
+      'Fruits and Fruit Juices': 'fruits_and_fruit_juices',
+      'Pork Products': 'pork_products',
+      'Vegetables and Vegetable Products': 'vegetables_and_vegetable_products',
+      'Nut and Seed Products': 'nut_and_seed_products',
+      'Beef Products': 'beef_products',
+      'Finfish and Shellfish Products': 'finfish_and_shellfish_products',
+      'Legumes and Legume Products': 'legumes_and_legume_products',
+      'Lamb, Veal, and Game Products': 'lamb_veal_and_game_products',
+      'Baked Products': 'baked_products',
+      'Sweets': 'sweets',
+      'Cereal Grains and Pasta': 'cereal_grains_and_pasta',
+      'Fast Foods': 'fast_foods',
+      'Meals, Entrees, and Side Dishes': 'meals_entrees_and_side_dishes',
+      'Snacks': 'snacks'
     };
     
     return categoryMap[category] || category;
@@ -299,7 +303,7 @@ class ProductAPIService {
     const nutrition = this.extractNutrition(rawData.nutriments);
     return {
       barcode,
-      name: rawData.product_name_es || rawData.product_name_en || rawData.product_name || 'Producto sin nombre',
+      name: rawData.product_name_es || rawData.product_name_en || rawData.product_name || 'Unnamed Product',
       brand: rawData.brands || undefined,
       category: this.mapCategory(rawData.categories),
       description: rawData.generic_name_es || rawData.generic_name_en || rawData.generic_name || undefined,
@@ -316,7 +320,28 @@ class ProductAPIService {
       packageUnit: undefined,
       source: 'openfoodfacts',
       language: 'es',
-      lastUpdated: new Date()
+      lastUpdated: new Date(),
+      healthScore: NutritionCalculator.calculateScore(
+        { // Nutrition Input
+          energy: nutrition.calories ?? 0, // kcal
+          sugars: nutrition.sugar ?? 0,
+          saturatedFat: nutrition.saturatedFat ?? 0,
+          sodium: nutrition.sodium ?? 0, // mg
+          fiber: nutrition.fiber ?? 0,
+          protein: nutrition.protein ?? 0,
+          fruitsVegetablesNuts: rawData.nutriments?.['fruits-vegetables-nuts-estimate-from-ingredients_100g'] 
+                             || rawData.nutriments?.['fruits-vegetables-nuts_100g']
+        },
+        { // Ingredient Input
+          ingredients: rawData.ingredients_text ? 
+            rawData.ingredients_text.split(/[,;]/).map((ing: string) => ing.trim()).filter((ing: string) => ing.length > 0) : 
+            [],
+          additives: rawData.additives_tags || [] // e.g. ["en:e102"]
+        },
+        { // Processing Input
+          novaGroup: rawData.nova_group // 1-4
+        }
+      )
     };
   }
 
@@ -480,7 +505,7 @@ class ProductAPIService {
         json: 1,
         page_size: limit,
         lang: language,
-        fields: 'code,product_name,product_name_es,product_name_en,brands,categories,ingredients_text,nutriments,image_url,quantity,generic_name,generic_name_es,generic_name_en'
+        fields: 'code,product_name,product_name_es,product_name_en,brands,categories,ingredients_text,nutriments,image_url,quantity,generic_name,generic_name_es,generic_name_en,nova_group,additives_tags'
       };
 
       // Dynamic Country Filtering based on language

@@ -3,6 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { ProductService } from '../../../src/services/ProductService'; // Adjust path if needed
 
+import NutritionCalculator from '../../../src/services/NutritionCalculator';
+
 const prisma = new PrismaClient();
 
 export async function seedFreshProducts() {
@@ -23,6 +25,29 @@ export async function seedFreshProducts() {
   let count = 0;
   for (const p of products) {
     try {
+        const nutInfo = p.nutritionalInfo || {};
+        
+        // Calculate dynamic health score for fresh products
+        // Assumptions: Fresh fruit/veg is NOVA 1, has 0 additives, and is 100% fruit/veg
+        const healthScore = NutritionCalculator.calculateScore(
+            {
+                energy: nutInfo.calories,
+                sugars: nutInfo.sugar,
+                saturatedFat: nutInfo.saturatedFat || 0, // Default to 0 if missing in JSON
+                sodium: nutInfo.sodium || 0,             // Default to 0 if missing in JSON
+                fiber: nutInfo.fiber,
+                protein: nutInfo.protein,
+                fruitsVegetablesNuts: 100 // It's a fresh fruit/veg
+            },
+            {
+                ingredients: [p.name],
+                additives: [] // Fresh products have no additives
+            },
+            {
+                novaGroup: 1 // Fresh products are unprocessed
+            }
+        );
+
         // We use upsert to be safe
         await prisma.product.upsert({
             where: { id: p.id },
@@ -32,7 +57,8 @@ export async function seedFreshProducts() {
                 description: p.description,
                 ingredients: p.ingredients,
                 source: 'manual', // Enforce manual for fresh items
-                isVerified: true
+                isVerified: true,
+                healthScore: healthScore as any // Store the calculated score
             },
             create: {
                 id: p.id,
@@ -42,7 +68,8 @@ export async function seedFreshProducts() {
                 ingredients: p.ingredients,
                 nutritionalInfo: p.nutritionalInfo || {},
                 source: 'manual',
-                isVerified: true
+                isVerified: true,
+                healthScore: healthScore as any
             }
         });
         count++;

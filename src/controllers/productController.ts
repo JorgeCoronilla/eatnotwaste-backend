@@ -29,7 +29,46 @@ export const scanBarcode: RequestHandler = async (req, res) => {
     });
 
     if (product) {
-      // Producto encontrado en base de datos local
+      // Check if product is missing Health Score (legacy/incomplete data)
+      if (!product.healthScore) {
+         console.log(`⚠️ Local product missing Health Score: ${barcode}. Attempting refresh from external API...`);
+         try {
+             // Attempt to fetch fresh data
+             const apiResult = await ProductAPIService.getProductData(barcode, lang as string);
+             
+             if (apiResult.success && apiResult.product) {
+                 const pd = apiResult.product;
+                 // Update the existing product with fresh data + Health Score
+                 product = await prisma.product.update({
+                     where: { id: product.id },
+                     data: {
+                         name: pd.name,
+                         brand: pd.brand || null,
+                         category: pd.category || null,
+                         description: pd.description || null,
+                         imageUrl: pd.imageUrl || null,
+                         nutritionalInfo: (pd as any).nutritionalInfo || pd.nutrition || {},
+                         ingredients: pd.ingredients ? pd.ingredients.join(", ") : null,
+                         healthScore: pd.healthScore as any || undefined, // Force update score
+                         updatedAt: new Date()
+                     }
+                 });
+                 console.log(`✅ Product ${barcode} healed with new Health Score.`);
+                 
+                 res.json({
+                    success: true,
+                    message: 'Producto actualizado con Health Score',
+                    data: product,
+                    source: 'api-refresh'
+                 });
+                 return;
+             }
+         } catch (refreshError) {
+             console.warn(`Failed to refresh product ${barcode}, returning local data:`, refreshError);
+         }
+      }
+
+      // Producto encontrado en base de datos local (Healthy or Fallback)
       res.json({
         success: true,
         message: 'Producto encontrado',
@@ -65,6 +104,7 @@ export const scanBarcode: RequestHandler = async (req, res) => {
             ingredients: productData.ingredients ? productData.ingredients.join(", ") : null,
             source: apiResult.source as ProductSource,
             isVerified: false, // Los productos de API no se verifican automáticamente
+            healthScore: productData.healthScore as any || undefined,
           }
         });
 
