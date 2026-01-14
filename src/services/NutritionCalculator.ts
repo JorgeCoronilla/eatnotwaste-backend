@@ -4,6 +4,7 @@ import { Product } from "@prisma/client";
 export interface NutritionInput {
   energy?: number;          // kcal per 100g
   sugars?: number;         // g per 100g
+  fat?: number;            // g per 100g
   saturatedFat?: number;   // g per 100g
   sodium?: number;         // mg per 100g (or salt * 400)
   fiber?: number;          // g per 100g
@@ -240,66 +241,133 @@ const UPF_EXCEPTIONS: Record<string, string[]> = {
   "colorant": ["fromage", "beurre"]
 };
 
+
 class FoodScorer {
 
+  // --- Helpers ---
+  private detectarSnackFrito(ingredients: string[], nombre: string): boolean {
+    const keywordsSnack = ['patata frita', 'chip', 'snack', 'crocante', 'frito', 'fried', 'palomitas', 'popcorn', 'ganchitos'];
+    const keywordsAceite = ['aceite', 'oil', 'grasa', 'fat', 'oleo'];
+    
+    // Normalize checks
+    const nombreNorm = nombre.toLowerCase();
+    const ingNorm = ingredients.map(i => i.toLowerCase());
+
+    const esSnack = keywordsSnack.some(kw => 
+      nombreNorm.includes(kw) || 
+      ingNorm.join(' ').includes('snack')
+    );
+    
+    // Check if oil is in top 3 ingredients
+    const tieneAceitePrincipal = ingNorm.slice(0, 3).some(ing => 
+      keywordsAceite.some(aceite => ing.includes(aceite))
+    );
+    
+    return esSnack && tieneAceitePrincipal;
+  }
+
+  private penalizarSal(sodioMg: number, category?: string, isSnack: boolean = false): { score: number, penalty?: HealthScoreMessage } {
+     // Default limits (g salt)
+     let limit = 1.5; // General: 1.5g salt (600mg sodium)
+     
+     if (isSnack) limit = 1.25; // Snack: 1.25g salt (500mg sodium)
+     else if (category?.toLowerCase().includes('salsa')) limit = 0.75; // Salsas: 0.75g
+     
+     const saltGrams = sodioMg / 400; // Approx conversion
+     
+     if (saltGrams <= limit * 0.5) return { score: 0 };
+     if (saltGrams <= limit) return { score: -5 };
+     if (saltGrams <= limit * 1.5) return { score: -10, penalty: { key: 'penalties.highSodium' } };
+     
+     return { score: -15, penalty: { key: 'penalties.highSodiumSevere' } };
+  }
+
   // --- 1. Nutrition Score (50 pts) ---
-  private calculateNutritionScore(nutrition: NutritionInput) {
-    let score = 35; // Base score (out of 50)
+  private calculateNutritionScore(nutrition: NutritionInput, category?: string, productName: string = '') {
+    let score = 50; 
     const penalties: HealthScoreMessage[] = [];
     const positives: HealthScoreMessage[] = [];
 
-    // Penalizaciones
-    if ((nutrition.sugars || 0) > 15) {
-      score -= 10;
-      penalties.push({ key: 'penalties.highSugar' });
-    } else if ((nutrition.sugars || 0) > 5) {
-       score -= 5;
+    const isSnack = (category && ['snacks', 'aperitivos', 'sweets', 'dulces', 'beverages', 'bebidas'].some(c => category.toLowerCase().includes(c))) ||
+                    productName.toLowerCase().includes('snack') ||
+                    productName.toLowerCase().includes('chip');
+
+    // A. Densidad Calórica
+    const kcal = nutrition.energy || 0;
+    const protein = nutrition.protein || 0;
+    const fiber = nutrition.fiber || 0;
+
+    if (kcal > 400) {
+        if (isSnack) {
+            if (protein < 5 && fiber < 3) {
+                score -= 15; // Snack vacío hipercalórico
+                penalties.push({ key: 'penalties.highCalorieDensity' });
+            } else {
+                score -= 10; // Snack calórico
+            }
+        } else {
+             // General foods (Nuts, Oil) - less severe if nutrient dense (handled by Ratio below)
+             // But raw calorie penalty still applies slightly
+             score -= 5;
+        }
+    } else if (kcal > 350 && isSnack) {
+        score -= 8;
     }
 
-    if ((nutrition.saturatedFat || 0) > 5) {
-      score -= 8;
-      penalties.push({ key: 'penalties.saturatedFat' });
-    }
-
-    const sodium = nutrition.sodium || 0;
-    if (sodium > 800) { // aprox 2g sal
-      score -= 10;
-      penalties.push({ key: 'penalties.highSodium' });
-    } else if (sodium > 400) { // aprox 1g sal
-      score -= 5;
-    }
-
-    // Energy density penalty
-    if ((nutrition.energy || 0) > 400) { // High calorie density
-        score -= 5;
-    }
-
-    // Bonificaciones
-    if ((nutrition.fiber || 0) > 3) {
-      score += 5;
-      positives.push({ key: 'positives.fiber' });
-    }
-    
-    if ((nutrition.protein || 0) > 8) {
-      score += 5;
-      positives.push({ key: 'positives.protein' });
-    }
-    
-    // Fruit/Veg bonus (conditional: only if sugar AND saturated fat are not excessive)
-    // Avoid rewarding "Ketchup" (Sugar) or "Fried Veggie Chips" (Sat Fat)
-    // Walnuts (~6g sat fat) should still pass. Threshold 10g seems safe.
-    const fruitVeg = nutrition.fruitsVegetablesNuts || 0;
-    if (fruitVeg > 40) {
-        if ((nutrition.sugars || 0) <= 15 && (nutrition.saturatedFat || 0) <= 10) { 
-             score += 5;
-             positives.push({ 
-                 key: 'positives.fruitVeg', 
-                 params: { percent: Math.round(fruitVeg) } 
-             });
+    // B. Grasa Total (Snacks)
+    const totalFat = nutrition.fat || 0;
+    if (isSnack) {
+        if (totalFat > 20) {
+             score -= 10;
+             penalties.push({ key: 'penalties.highFat' });
+        } else if (totalFat > 15) {
+             score -= 5;
         }
     }
 
-    // Clamp 0-50
+    // C. Límites Estrictos
+    // Sal
+    const sodium = nutrition.sodium || 0;
+    const saltRes = this.penalizarSal(sodium, category, isSnack || false);
+    score += saltRes.score;
+    if (saltRes.penalty) penalties.push(saltRes.penalty);
+
+    // Azúcar (Original Logic is fine, maybe stricter?)
+    const sugars = nutrition.sugars || 0;
+    if (sugars > 20) {
+         score -= 10;
+         penalties.push({ key: 'penalties.highSugar' });
+    } else if (sugars > 10) {
+         score -= 5;
+    }
+
+    // Sat Fat
+    const satFat = nutrition.saturatedFat || 0;
+    if (satFat > 10) {
+         score -= 8;
+         penalties.push({ key: 'penalties.saturatedFat' });
+    }
+
+    // D. Ratio Calorías Vacías
+    if (kcal > 0) {
+        const dens = kcal / 100;
+        // Sodium in g approx for this ratio: sodium/400
+        const emptyCal = (sugars + satFat + (sodium/400)) / dens * 10; // Scale x10
+        if (emptyCal > 40) {
+             score -= 20;
+             penalties.push({ key: 'penalties.emptyCaloriesSevere' });
+        } else if (emptyCal > 20) {
+             score -= 10;
+             penalties.push({ key: 'penalties.emptyCalories' });
+        }
+    }
+
+    // Legacy Bonus (Fiber) - OK to keep but careful not to over-reward
+    if (fiber > 5 && !isSnack) { 
+         score += 5;
+         positives.push({ key: 'positives.fiber' });
+    }
+
     return {
         score: Math.max(0, Math.min(50, score)),
         penalties,
@@ -308,7 +376,7 @@ class FoodScorer {
   }
 
   // --- 2. Ingredients Score (30 pts) ---
-  private calculateIngredientsScore(ingredients: IngredientInput) {
+  private calculateIngredientsScore(ingredients: IngredientInput, isSnackFrito: boolean) {
     let score = 30; // Start perfect
     const penalties: HealthScoreMessage[] = [];
     const positives: HealthScoreMessage[] = [];
@@ -348,25 +416,14 @@ class FoodScorer {
         }
 
         // B. Search by Synonym Name
-        // We iterate over our known list. 
-        // OPTIMIZATION: For long text, this is O(N*M). acceptable for current scale.
-        
-        // Scan Synonyms (already normalized in our logic assumption, but lets be safe)
         Object.entries(ADDITIVE_SYNONYMS).forEach(([code, synonyms]) => {
             if (synonyms.some(syn => {
                 const normSyn = normalize(syn);
-                // Use token-based check or exact substring?
-                // Substring is safer for compound words like "sorbato..." but riskier for "ana".
-                // "tartrazina" -> unique enough.
                 return normalizedText.includes(normSyn);
             })) {
                 detectedAdditives.add(code);
             }
         });
-
-        // Scan Main Names (REMOVED: Now we rely only on the Synonym List and direct Code matching)
-        // Since we removed 'name' from CONTROVERSIAL_ADDITIVES, we should ensure ADDITIVE_SYNONYMS covers the main name too.
-        // For this refactor, we assume ADDITIVE_SYNONYMS is comprehensive enough.
     }
 
     // Evaluate risks
@@ -429,10 +486,50 @@ class FoodScorer {
             }
         });
         
-        // Bonus for simple list
+        // Bonus for simple list (Conditional)
         if (ingredients.ingredients.length <= 5 && ingredients.ingredients.length > 0) {
-            score += 2; // Small bonus
-            positives.push({ key: 'positives.shortList' });
+            // Anti-Deceptive Triad Check
+            let allowBonus = true;
+            
+            if (isSnackFrito) allowBonus = false; // Never bonus fried snacks
+
+            if (allowBonus && ingredients.ingredients.length <= 3) {
+            if (allowBonus && ingredients.ingredients.length <= 3) {
+                 // Check EN, ES, FR, PT
+                 const ingLower = ingredients.ingredients.map(i => i.toLowerCase());
+                 
+                 // Logic: Must have (Potato OR Corn) AND (Oil) AND (Salt)
+                 const hasPotato = ingLower.some(i => 
+                    i.includes('patata') || i.includes('potato') || // ES/EN
+                    i.includes('pomme de terre') || i.includes('batata') // FR/PT
+                 );
+                 
+                 const hasCorn = ingLower.some(i => 
+                    i.includes('maíz') || i.includes('corn') || i.includes('maiz') || // ES/EN
+                    i.includes('mais') || i.includes('milho') // FR/PT
+                 );
+                 
+                 const hasOil = ingLower.some(i => 
+                    i.includes('aceite') || i.includes('oil') || i.includes('grasa') || i.includes('fat') || // ES/EN
+                    i.includes('huile') || i.includes('graisse') || // FR
+                    i.includes('óleo') || i.includes('azeite') || i.includes('gordura') // PT
+                 );
+                 
+                 const hasSalt = ingLower.some(i => 
+                    i.includes('sal') || i.includes('salt') || i.includes('sodio') || i.includes('sodium') || // ES/EN/PT
+                    i.includes('sel') // FR
+                 );
+
+                 if ((hasPotato || hasCorn) && hasOil && hasSalt) {
+                     allowBonus = false;
+                 }
+            }
+            }
+
+            if (allowBonus) {
+                score += 2;
+                positives.push({ key: 'positives.shortList' });
+            }
         }
     }
 
@@ -444,7 +541,7 @@ class FoodScorer {
   }
 
    // --- 3. Processing Score (20 pts) ---
-   private calculateProcessingScore(processing: ProcessingInput, ingredients?: IngredientInput) {
+   private calculateProcessingScore(processing: ProcessingInput, ingredients?: IngredientInput, isSnackFrito: boolean = false) {
      let score = 20; // Start perfect
      const penalties: HealthScoreMessage[] = [];
      const positives: HealthScoreMessage[] = [];
@@ -453,50 +550,39 @@ class FoodScorer {
      let nova = processing.novaGroup;
  
      // --- Advanced Heuristic Override ---
+     
+     // 0. Fried Snack = NOVA 4 (Instant)
+     if (isSnackFrito) {
+         nova = 4;
+         penalties.push({ key: 'processing.ultraProcessedIng' }); 
+     }
+
      // If NOVA is missing or low (1-3), verify against our UPF detector
-     if ((!nova || nova < 4) && ingredients?.ingredients) {
-          const text = ingredients.ingredients.join(" ").toLowerCase();
+     else if ((!nova || nova < 4) && ingredients?.ingredients) {
           const normalizedIngredients = ingredients.ingredients.map(i => i.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+          const normalizedText = normalizedIngredients.join(" ");
           
           let upfScore = 0;
-          let reasons: string[] = [];
-
-          const normalizedText = normalizedIngredients.join(" ");
 
           // A. Check DEFINITIVE terms (Weight: 2)
           UPF_DEFINITIVE_TERMS.forEach(term => {
               if (normalizedText.includes(term)) {
                   upfScore += 2;
-                  reasons.push(term);
               }
           });
 
           // B. Check SUSPICIOUS terms (Weight: 1)
-          // For suspicious terms, we check exceptions!
-          // We need a vague idea of product category or name to check exceptions. 
-          // Since we don't have 'productName' here easily without changing signature, 
-          // we will use a simplified approach: assume no exception unless we passed category context (future improvement).
-          // For now, strict check.
-          
           UPF_SUSPICIOUS_TERMS.forEach(term => {
               if (normalizedText.includes(term)) {
-                   // Check basic exceptions within the ingredient string itself? 
-                   // No, exceptions are usually Category-based (e.g. Yogurt). 
-                   // Without category, we count it. 
-                   // IMPROVEMENT: Pass category/name to calculateScore? 
-                   // For now, let's just count them.
                   upfScore += 1;
               }
           });
 
           // C. Heuristic Rules
-          // Rule 1: High Score -> NOVA 4
           if (upfScore >= 3) {
               nova = 4;
               penalties.push({ key: 'processing.ultraProcessedIng' }); 
           }
-          // Rule 2: Moderate Score + Complex List -> NOVA 4
-          // If we have some markers (score >= 2) AND long list (>5 ingredients) -> Likely Industrial
           else if (upfScore >= 2 && ingredients.ingredients.length > 5) {
                nova = 4;
                penalties.push({ key: 'processing.ultraProcessedIng' });
@@ -506,9 +592,7 @@ class FoodScorer {
      if (nova) {
          if (nova === 4) {
              score = 0; // Lost all processing points
-             // Avoid double messaging if heuristic already triggered
-             const alreadyHasUpf = penalties.some(p => p.key === 'healthScore.processing.ultraProcessedIng') || 
-                                   penalties.some(p => p.key === 'processing.ultraProcessedIng');
+             const alreadyHasUpf = penalties.some(p => p.key === 'processing.ultraProcessedIng');
              if (!alreadyHasUpf) {
                   penalties.push({ key: 'processing.nova4' });
              }
@@ -516,7 +600,6 @@ class FoodScorer {
              score = 10;
              penalties.push({ key: 'processing.nova3' });
          } else if (nova === 1) {
-              // Only give bonus if we haven't already pushed penalties
              if (score === 20) positives.push({ key: 'processing.nova1' });
          }
      }
@@ -540,12 +623,17 @@ class FoodScorer {
   public calculateScore(
     nutrition: NutritionInput,
     ingredients: IngredientInput,
-    processing: ProcessingInput
+    processing: ProcessingInput,
+    category?: string,
+    productName: string = '' // Add product name
   ): HealthScoreResult {
-    const nutritionScore = this.calculateNutritionScore(nutrition); // Max 50
-    const ingredientsScore = this.calculateIngredientsScore(ingredients); // Max 30
-    // Pass ingredients to processing for heuristic check
-    const processingScore = this.calculateProcessingScore(processing, ingredients); // Max 20
+    
+    // Detect Fried Snack Context
+    const isSnackFrito = this.detectarSnackFrito(ingredients.ingredients || [], productName);
+
+    const nutritionScore = this.calculateNutritionScore(nutrition, category, productName); // Max 50
+    const ingredientsScore = this.calculateIngredientsScore(ingredients, isSnackFrito); // Max 30
+    const processingScore = this.calculateProcessingScore(processing, ingredients, isSnackFrito); // Max 20
 
     const totalScore = Math.max(0, Math.min(100, nutritionScore.score + ingredientsScore.score + processingScore.score));
     
@@ -579,3 +667,4 @@ class FoodScorer {
 }
 
 export default new FoodScorer();
+

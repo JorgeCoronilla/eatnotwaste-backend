@@ -340,7 +340,9 @@ class ProductAPIService {
         },
         { // Processing Input
           novaGroup: rawData.nova_group // 1-4
-        }
+        },
+        this.mapCategory(rawData.categories), // Pass category
+        rawData.product_name // Pass name
       )
     };
   }

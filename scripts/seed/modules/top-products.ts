@@ -4,7 +4,7 @@ import ProductAPIService from '../../../src/services/ProductAPIService'; // Adju
 import { ProductSource } from '../../../src/types/database';
 
 const BATCH_SIZE = 100;
-const MAX_PRODUCTS = 1000;
+const MAX_PRODUCTS = 2500;
 
 // Configuration for target markets
 const TARGET_MARKETS = [

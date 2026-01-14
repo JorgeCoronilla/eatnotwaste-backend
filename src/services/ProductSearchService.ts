@@ -217,7 +217,9 @@ export class ProductSearchService {
        const healthScore = NutritionCalculator.calculateScore(
          nutritionInput,
          { ingredients: ingredientsList, additives: [] },
-         {} // Dejar que el calculador decida por heurística
+         {}, // Dejar que el calculador decida por heurística
+         generated.category,
+         generated.name // Pass name for heuristic detection
        );
 
        const result: SearchResult = {
