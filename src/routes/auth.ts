@@ -14,7 +14,8 @@ import {
   getProfile,
   updateProfile,
   changePassword,
-  logout
+  logout,
+  deleteAccount
 } from '../controllers/authController';
 
 // Middleware
@@ -252,12 +253,7 @@ router.post('/logout', authenticateToken, logout);
  *       401:
  *         description: No autorizado.
  */
-router.delete('/account', authenticateToken, (req: Request, res: Response) => {
-  res.json({
-    success: true,
-    message: 'Cuenta eliminada exitosamente'
-  });
-});
+router.delete('/account', authenticateToken, deleteAccount as unknown as express.RequestHandler);
 
 /**
  * @swagger

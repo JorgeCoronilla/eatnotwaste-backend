@@ -2,6 +2,7 @@ import { Request, Response, RequestHandler } from 'express';
 import { validationResult } from 'express-validator';
 import * as jwt from 'jsonwebtoken';
 import { UserService } from '../services/UserService';
+import { checkVersion } from '../utils/version';
 
 // Interfaces simplificadas
 interface UserData {
@@ -14,6 +15,7 @@ interface UserData {
 interface AuthenticatedRequest extends Request {
   user?: UserData;
 }
+
 
 /**
  * Generar token JWT
@@ -93,6 +95,17 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const { email, password } = req.body;
+    
+    // Check Client Version
+    const versionCheck = checkVersion(req);
+    if (!versionCheck.valid) {
+      res.status(426).json({
+        success: false,
+        message: 'Actualización requerida',
+        error: versionCheck.message
+      });
+      return;
+    }
 
     // Use real UserService for authentication
     const result = await UserService.authenticateUser(email, password);
@@ -130,6 +143,17 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 export const refreshToken = async (req: Request, res: Response): Promise<void> => {
   try {
     const { refreshToken: token } = req.body;
+    
+    // Check Client Version
+    const versionCheck = checkVersion(req);
+    if (!versionCheck.valid) {
+      res.status(426).json({
+        success: false,
+        message: 'Actualización requerida',
+        error: versionCheck.message
+      });
+      return;
+    }
 
     if (!token) {
       res.status(401).json({
@@ -292,12 +316,20 @@ export const deleteAccount = async (req: AuthenticatedRequest, res: Response): P
       return;
     }
 
-    console.log(`✅ Cuenta eliminada: ${req.user.email}`);
+    // Use real UserService for account deletion
+    const result = await UserService.deleteUser(req.user.id);
+
+    if (!result.success) {
+      res.status(500).json({
+        success: false,
+        message: result.error || 'Error al eliminar cuenta'
+      });
+      return;
+    }
 
     res.json({
       success: true,
-      message: 'Cuenta eliminada exitosamente',
-      data: {}
+      message: result.message || 'Cuenta eliminada exitosamente'
     });
 
   } catch (error) {

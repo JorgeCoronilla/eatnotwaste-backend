@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { AuthenticatedRequest } from '../types';
+import { checkVersion } from '../utils/version';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -11,6 +12,16 @@ const prisma = new PrismaClient();
  */
 export const authenticateToken: RequestHandler = async (req, res, next) => {
   try {
+    // 1. Validar versión del cliente globalmente
+    const versionCheck = checkVersion(req);
+    if (!versionCheck.valid) {
+      return res.status(426).json({
+        success: false,
+        message: 'Actualización requerida',
+        error: versionCheck.message
+      });
+    }
+
     // Obtener token del header Authorization
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.startsWith('Bearer ')
