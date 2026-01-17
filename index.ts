@@ -26,6 +26,9 @@ import { swaggerSpec } from './src/config/swagger';
 // Crear aplicación Express
 const app = express();
 
+// Configurar trust proxy para entornos detrás de proxies (como Vercel, Heroku, Railway, etc.)
+app.set('trust proxy', 1);
+
 // Configuración de rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
