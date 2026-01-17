@@ -37,11 +37,17 @@ export const authenticateToken: RequestHandler = async (req, res, next) => {
       process.env.JWT_SECRET || 'fallback_secret_key'
     ) as any;
 
+    if (!decoded || !decoded.userId) {
+      console.error('Token decodificado no contiene userId:', decoded);
+      return res.status(401).json({ success: false, error: 'Token mal formado' });
+    }
+
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
     });
 
     if (!user) {
+      console.error(`Usuario no encontrado para ID: ${decoded.userId}`);
       return res.status(401).json({ success: false, error: 'Usuario no encontrado' });
     }
 
@@ -74,12 +80,14 @@ export const optionalAuth: RequestHandler = async (req, res, next) => {
       process.env.JWT_SECRET || 'fallback_secret_key'
     ) as any;
 
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.userId },
-    });
+    if (decoded && decoded.userId) {
+      const user = await prisma.user.findUnique({
+        where: { id: decoded.userId },
+      });
 
-    if (user) {
-      (req as AuthenticatedRequest).user = user;
+      if (user) {
+        (req as AuthenticatedRequest).user = user;
+      }
     }
 
     return next();
