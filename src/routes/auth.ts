@@ -266,9 +266,15 @@ router.delete('/account', authenticateToken, deleteAccount as unknown as express
  *       302:
  *         description: Redirección a Google.
  */
-router.get('/google', passport.authenticate('google', {
-  scope: ['profile', 'email']
-}));
+router.get('/google', (req: Request, res: Response, next: express.NextFunction) => {
+  const callbackUrl = req.query.callbackUrl as string;
+  const state = callbackUrl ? Buffer.from(JSON.stringify({ callbackUrl })).toString('base64') : undefined;
+  
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    state
+  })(req, res, next);
+});
 
 /**
  * @swagger
@@ -291,6 +297,38 @@ router.get('/google/callback',
       return res.redirect(`${process.env.FRONTEND_URL}/auth/callback?error=NoUser`);
     }
 
+    // Determinar URL de redirección
+    let redirectUrl = process.env.FRONTEND_URL;
+    try {
+      if (req.query.state) {
+        const state = JSON.parse(Buffer.from(req.query.state as string, 'base64').toString());
+        if (state.callbackUrl) {
+          // Validar que la URL esté en la lista permitida para evitar open redirects
+          const allowedOrigins = [
+            'http://localhost:5174', 
+            'http://localhost:5173', 
+            'http://localhost:8082', 
+            'http://localhost:8083', 
+            'http://localhost:3000', 
+            'http://localhost'
+          ];
+          
+          if (process.env.CORS_ORIGIN) {
+            allowedOrigins.push(...process.env.CORS_ORIGIN.split(',').map(o => o.trim()));
+          }
+
+          const url = new URL(state.callbackUrl);
+          if (allowedOrigins.some(origin => origin.includes(url.origin))) {
+             // Si la URL es válida, usar su origen base + /auth/callback
+             // O si el cliente envió la ruta completa, usarla, pero por seguridad reconstruimos
+             redirectUrl = url.origin;
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Error parsing OAuth state:', e);
+    }
+
     // Generar tokens JWT
     const accessToken = jwt.sign(
       { userId: user.id, email: user.email },
@@ -303,7 +341,7 @@ router.get('/google/callback',
       { expiresIn: '7d' }
     );
 
-    res.redirect(`${process.env.FRONTEND_URL}/auth/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
+    res.redirect(`${redirectUrl}/auth/callback?accessToken=${accessToken}&refreshToken=${refreshToken}`);
   }
 );
 
