@@ -17,7 +17,7 @@
     "lint": "echo 'Linting not configured yet'",
     "vercel-build": "npm run build",
     "postinstall": "prisma generate",
-    "deploy": "prisma migrate deploy && npm run start",
+    "deploy": "prisma db push && npm run start",
     "seed": "npm run seed:all",
     "seed:all": "ts-node scripts/seed/main.ts all",
     "seed:fresh": "ts-node scripts/seed/main.ts fresh",
