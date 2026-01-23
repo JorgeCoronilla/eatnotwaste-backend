@@ -4,6 +4,7 @@ import { validationResult } from 'express-validator';
 import { prisma } from '../config/database';
 import ProductAPIService from '../services/ProductAPIService';
 import ProductSearchService from '../services/ProductSearchService';
+import NutritionCalculator from '../services/NutritionCalculator';
 import { AuthenticatedRequest } from '../types';
 
 /**
@@ -105,6 +106,7 @@ export const scanBarcode: RequestHandler = async (req, res) => {
             source: apiResult.source as ProductSource,
             isVerified: false, // Los productos de API no se verifican automáticamente
             healthScore: productData.healthScore as any || undefined,
+            healthScoreVersion: NutritionCalculator.ENGINE_VERSION,
           }
         });
 
@@ -330,10 +332,38 @@ export const getProduct = async (req: Request, res: Response): Promise<void> => 
       return;
     }
 
+    // Lazy Recalculation for getProduct
+    let productData = product;
+
+    if (product.healthScoreVersion === null || product.healthScoreVersion < NutritionCalculator.ENGINE_VERSION) {
+         console.log(`♻️ Recalculating outdated Health Score for ${product.name} (v${product.healthScoreVersion} -> v${NutritionCalculator.ENGINE_VERSION})`);
+          
+          const newScore = NutritionCalculator.calculateScore(
+              product.nutritionalInfo as any,
+              { 
+                  ingredients: product.ingredients ? product.ingredients.split(", ") : [], 
+                  additives: product.allergens 
+              },
+              { novaGroup: (product.nutritionalInfo as any)?.novaGroup },
+              product.category || undefined,
+              product.name
+          );
+
+          // Update local variable and DB
+          productData = await prisma.product.update({
+              where: { id: product.id },
+              data: {
+                  healthScore: newScore as any,
+                  healthScoreVersion: NutritionCalculator.ENGINE_VERSION,
+                  updatedAt: new Date()
+              }
+          });
+    }
+
     res.json({
       success: true,
       message: 'Producto obtenido exitosamente',
-      data: product
+      data: productData
     });
 
   } catch (error) {

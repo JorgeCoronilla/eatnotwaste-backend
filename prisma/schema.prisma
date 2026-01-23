@@ -98,6 +98,7 @@ model Product {
   createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz
   updatedAt        DateTime      @updatedAt @map("updated_at") @db.Timestamptz
   healthScore      Json?         @map("health_score")
+  healthScoreVersion Int          @default(0) @map("health_score_version")
 
   // Relations
   userItems        UserItem[]

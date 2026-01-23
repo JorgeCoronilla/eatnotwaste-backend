@@ -243,6 +243,7 @@ const UPF_EXCEPTIONS: Record<string, string[]> = {
 
 
 class FoodScorer {
+  public readonly ENGINE_VERSION = 1;
 
   // --- Helpers ---
   private detectarSnackFrito(ingredients: string[], nombre: string): boolean {
