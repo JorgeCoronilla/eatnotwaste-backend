@@ -62,12 +62,11 @@ if (!admin.apps.length) {
         });
         console.log('🔥 Firebase Admin SDK initialized with JSON file (local)');
       } catch (fileError) {
-        throw new Error('Firebase configuration missing. Set environment variables or add JSON file.');
+        console.warn('⚠️ Firebase configuration missing. Notifications will not work in local dev.');
       }
     }
   } catch (error) {
     console.error('❌ Failed to initialize Firebase Admin SDK:', error);
-    throw new Error('Firebase configuration failed');
   }
 }
 

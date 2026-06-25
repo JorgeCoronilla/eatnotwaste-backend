@@ -68,7 +68,6 @@ model User {
   updatedAt       DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
   // Relations
-  userItems               UserItem[]
   itemMovements          ItemMovement[]
   deviceTokens           UserDeviceToken[]
   notificationHistory    NotificationHistory[]
@@ -101,7 +100,6 @@ model Product {
   healthScoreVersion Int          @default(0) @map("health_score_version")
 
   // Relations
-  userItems        UserItem[]
   itemMovements    ItemMovement[]
   userProducts     UserProduct[]
   createdBy        User?         @relation("CreatedProducts", fields: [createdById], references: [id], onDelete: SetNull)
@@ -109,31 +107,6 @@ model Product {
   @@map("products")
 }
 
-model UserItem {
-  id            String    @id @default(uuid()) @db.Uuid
-  userId        String    @map("user_id") @db.Uuid
-  productId     String    @map("product_id") @db.Uuid
-  listType      ListType  @map("list_type")
-  quantity      Int       @default(1)
-  unit          String    @default("units") @db.VarChar(50)
-  purchaseDate  DateTime? @map("purchase_date") @db.Date
-  expiryDate    DateTime? @map("expiry_date") @db.Date
-  price         Decimal?  @db.Decimal(10, 2)
-  store         String?   @db.VarChar(255)
-  notes         String?   @db.Text
-  isConsumed    Boolean   @default(false) @map("is_consumed")
-  consumedAt    DateTime? @map("consumed_at") @db.Timestamptz
-  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz
-
-  // Relations
-  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
-  movements     ItemMovement[]
-
-  @@unique([userId, productId, listType, purchaseDate, expiryDate])
-  @@map("user_items")
-}
 
 model UserProduct {
   id          String   @id @default(uuid()) @db.Uuid
@@ -157,7 +130,7 @@ model UserProduct {
 model ItemMovement {
   id           String       @id @default(uuid()) @db.Uuid
   userId       String       @map("user_id") @db.Uuid
-  userItemId   String?      @map("user_item_id") @db.Uuid
+  userProductLocationId String? @map("user_product_location_id") @db.Uuid
   productId    String       @map("product_id") @db.Uuid
   movementType MovementType @map("movement_type")
   fromList     ListType?    @map("from_list")
@@ -169,7 +142,7 @@ model ItemMovement {
 
   // Relations
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userItem     UserItem?    @relation(fields: [userItemId], references: [id], onDelete: SetNull)
+  userProductLocation UserProductLocation? @relation(fields: [userProductLocationId], references: [id], onDelete: SetNull)
   product      Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@map("item_movements")
@@ -270,6 +243,7 @@ model UserProductLocation {
 
   // Relations
   userProduct UserProduct @relation(fields: [userProductId], references: [id], onDelete: Cascade)
+  movements   ItemMovement[]
 
   @@index([userProductId, listType, removedAt])
   @@map("user_product_locations")

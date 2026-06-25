@@ -39,25 +39,16 @@ const router = express.Router();
  *         description: Forbidden.
  */
 router.get('/', authenticateToken, requireRole('admin'), async (req: Request, res: Response) => {
-  try {
-    // TODO: Implementar listado de usuarios para admin
-    res.json({
-      success: true,
-      message: 'Listado de usuarios - En desarrollo',
-      data: {
-        users: [],
-        total: 0,
-        page: 1,
-        limit: 10
-      }
-    });
-  } catch (error) {
-    console.error('Error en GET /users:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor'
-    });
-  }
+  res.json({
+          success: true,
+          message: 'Listado de usuarios - En desarrollo',
+          data: {
+            users: [],
+            total: 0,
+            page: 1,
+            limit: 10
+          }
+        });
 });
 
 /**
@@ -82,26 +73,17 @@ router.get('/', authenticateToken, requireRole('admin'), async (req: Request, re
  *         description: Unauthorized.
  */
 router.get('/stats', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    // TODO: Implementar estadísticas de usuario
-    res.json({
-      success: true,
-      message: 'Estadísticas de usuario - En desarrollo',
-      data: {
-        totalScans: 0,
-        totalProducts: 0,
-        wasteReduced: 0,
-        moneySaved: 0,
-        streakDays: 0
-      }
-    });
-  } catch (error) {
-    console.error('Error en GET /users/stats:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor'
-    });
-  }
+  res.json({
+          success: true,
+          message: 'Estadísticas de usuario - En desarrollo',
+          data: {
+            totalScans: 0,
+            totalProducts: 0,
+            wasteReduced: 0,
+            moneySaved: 0,
+            streakDays: 0
+          }
+        });
 });
 
 /**
@@ -134,22 +116,13 @@ router.get('/stats', authenticateToken, async (req: Request, res: Response) => {
  *         description: Unauthorized.
  */
 router.put('/preferences', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    // TODO: Implementar actualización de preferencias
-    res.json({
-      success: true,
-      message: 'Actualización de preferencias - En desarrollo',
-      data: {
-        preferences: req.body
-      }
-    });
-  } catch (error) {
-    console.error('Error en PUT /users/preferences:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor'
-    });
-  }
+  res.json({
+          success: true,
+          message: 'Actualización de preferencias - En desarrollo',
+          data: {
+            preferences: req.body
+          }
+        });
 });
 
 /**
@@ -158,51 +131,38 @@ router.put('/preferences', authenticateToken, async (req: Request, res: Response
  * @access  Private
  */
 router.get('/notification-settings', authenticateToken, async (req: Request, res: Response): Promise<void> => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
-
     if (!userId) {
-      res.status(401).json({
-        success: false,
-        message: 'Usuario no autenticado'
-      });
-      return;
-    }
-
-    // Buscar configuración existente o crear una por defecto
-    let settings = await prisma.userNotificationSettings.findUnique({
-      where: { userId }
-    });
-
-    if (!settings) {
-      // Crear configuración por defecto
-      settings = await prisma.userNotificationSettings.create({
-        data: {
-          userId,
-          expiryAlerts: true,
-          expiryDaysBefore: 2,
-          shoppingReminders: true,
-          shoppingReminderTime: "10:00:00",
-          shoppingReminderDays: [1, 3, 5],
-          weeklySummary: true,
-          weeklySummaryDay: 0,
-          weeklySummaryTime: "18:00:00"
+          res.status(401).json({
+            success: false,
+            message: 'Usuario no autenticado'
+          });
+          return;
         }
-      });
-    }
-
+    let settings = await prisma.userNotificationSettings.findUnique({
+          where: { userId }
+        });
+    if (!settings) {
+          // Crear configuración por defecto
+          settings = await prisma.userNotificationSettings.create({
+            data: {
+              userId,
+              expiryAlerts: true,
+              expiryDaysBefore: 2,
+              shoppingReminders: true,
+              shoppingReminderTime: "10:00:00",
+              shoppingReminderDays: [1, 3, 5],
+              weeklySummary: true,
+              weeklySummaryDay: 0,
+              weeklySummaryTime: "18:00:00"
+            }
+          });
+        }
     res.json({
-      success: true,
-      data: settings
-    });
-  } catch (error) {
-    console.error('Error getting notification settings:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor'
-    });
-  }
+          success: true,
+          data: settings
+        });
 });
 
 /**
@@ -211,67 +171,54 @@ router.get('/notification-settings', authenticateToken, async (req: Request, res
  * @access  Private
  */
 router.put('/notification-settings', authenticateToken, async (req: Request, res: Response): Promise<void> => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
-
     if (!userId) {
-      res.status(401).json({
-        success: false,
-        message: 'Usuario no autenticado'
-      });
-      return;
-    }
-
+          res.status(401).json({
+            success: false,
+            message: 'Usuario no autenticado'
+          });
+          return;
+        }
     const {
-      expiryAlerts,
-      expiryDaysBefore,
-      shoppingReminders,
-      shoppingReminderTime,
-      shoppingReminderDays,
-      weeklySummary,
-      weeklySummaryDay,
-      weeklySummaryTime
-    } = req.body;
-
-    // Actualizar o crear configuración
+          expiryAlerts,
+          expiryDaysBefore,
+          shoppingReminders,
+          shoppingReminderTime,
+          shoppingReminderDays,
+          weeklySummary,
+          weeklySummaryDay,
+          weeklySummaryTime
+        } = req.body;
     const settings = await prisma.userNotificationSettings.upsert({
-      where: { userId },
-      update: {
-        ...(expiryAlerts !== undefined && { expiryAlerts }),
-        ...(expiryDaysBefore !== undefined && { expiryDaysBefore }),
-        ...(shoppingReminders !== undefined && { shoppingReminders }),
-        ...(shoppingReminderTime !== undefined && { shoppingReminderTime }),
-        ...(shoppingReminderDays !== undefined && { shoppingReminderDays }),
-        ...(weeklySummary !== undefined && { weeklySummary }),
-        ...(weeklySummaryDay !== undefined && { weeklySummaryDay }),
-        ...(weeklySummaryTime !== undefined && { weeklySummaryTime }),
-      },
-      create: {
-        userId,
-        expiryAlerts: expiryAlerts ?? true,
-        expiryDaysBefore: expiryDaysBefore ?? 2,
-        shoppingReminders: shoppingReminders ?? true,
-        shoppingReminderTime: shoppingReminderTime ?? "10:00:00",
-        shoppingReminderDays: shoppingReminderDays ?? [1, 3, 5],
-        weeklySummary: weeklySummary ?? true,
-        weeklySummaryDay: weeklySummaryDay ?? 0,
-        weeklySummaryTime: weeklySummaryTime ?? "18:00:00"
-      }
-    });
-
+          where: { userId },
+          update: {
+            ...(expiryAlerts !== undefined && { expiryAlerts }),
+            ...(expiryDaysBefore !== undefined && { expiryDaysBefore }),
+            ...(shoppingReminders !== undefined && { shoppingReminders }),
+            ...(shoppingReminderTime !== undefined && { shoppingReminderTime }),
+            ...(shoppingReminderDays !== undefined && { shoppingReminderDays }),
+            ...(weeklySummary !== undefined && { weeklySummary }),
+            ...(weeklySummaryDay !== undefined && { weeklySummaryDay }),
+            ...(weeklySummaryTime !== undefined && { weeklySummaryTime }),
+          },
+          create: {
+            userId,
+            expiryAlerts: expiryAlerts ?? true,
+            expiryDaysBefore: expiryDaysBefore ?? 2,
+            shoppingReminders: shoppingReminders ?? true,
+            shoppingReminderTime: shoppingReminderTime ?? "10:00:00",
+            shoppingReminderDays: shoppingReminderDays ?? [1, 3, 5],
+            weeklySummary: weeklySummary ?? true,
+            weeklySummaryDay: weeklySummaryDay ?? 0,
+            weeklySummaryTime: weeklySummaryTime ?? "18:00:00"
+          }
+        });
     res.json({
-      success: true,
-      data: settings,
-      message: 'Configuración actualizada correctamente'
-    });
-  } catch (error) {
-    console.error('Error updating notification settings:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor'
-    });
-  }
+          success: true,
+          data: settings,
+          message: 'Configuración actualizada correctamente'
+        });
 });
 
 export default router;

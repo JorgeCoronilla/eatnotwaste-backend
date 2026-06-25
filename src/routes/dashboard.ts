@@ -34,30 +34,19 @@ const router = express.Router();
  *         description: Unauthorized.
  */
 router.get('/', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
-    
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     const dashboardData = await DashboardService.getDashboardData(userId);
-    
     return res.json({
-      success: true,
-      data: dashboardData
-    });
-  } catch (error) {
-    console.error('Error getting dashboard data:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          data: dashboardData
+        });
 });
 
 /**
@@ -82,30 +71,19 @@ router.get('/', authenticateToken, async (req: Request, res: Response) => {
  *         description: Unauthorized.
  */
 router.get('/inventory-summary', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
-    
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     const summary = await DashboardService.getInventorySummary(userId);
-    
     return res.json({
-      success: true,
-      data: summary,
-    });
-  } catch (error) {
-    console.error('Error getting inventory summary:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          data: summary,
+        });
 });
 
 /**
@@ -137,31 +115,20 @@ router.get('/inventory-summary', authenticateToken, async (req: Request, res: Re
  *         description: Unauthorized.
  */
 router.get('/consumption-stats', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
     const days = parseInt(req.query.days as string) || 30;
-    
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     const stats = await DashboardService.getConsumptionStats(userId, days);
-    
     return res.json({
-      success: true,
-      data: stats,
-    });
-  } catch (error) {
-    console.error('Error getting consumption stats:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          data: stats,
+        });
 });
 
 export default router;

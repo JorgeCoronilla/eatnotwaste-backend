@@ -4,7 +4,6 @@
 import type {
   User as PrismaUser,
   Product as PrismaProduct,
-  UserItem as PrismaUserItem,
   UserProduct as PrismaUserProduct,
   UserProductLocation as PrismaUserProductLocation,
   ItemMovement as PrismaItemMovement,
@@ -51,7 +50,6 @@ export interface UserProductLocationWithProduct extends PrismaUserProductLocatio
 // Extended ItemMovement with related data (updated for new schema)
 export interface ItemMovementWithDetails extends PrismaItemMovement {
   product: PrismaProduct;
-  userItem?: PrismaUserItem;
   userProduct?: UserProductWithProduct;
   userProductLocation?: UserProductLocationWithProduct;
 }
@@ -182,7 +180,6 @@ export interface CacheEntry<T = any> {
 export type {
   PrismaUser as User,
   PrismaProduct as Product,
-  PrismaUserItem as UserItem,
   PrismaUserProduct as UserProduct,
   PrismaUserProductLocation as UserProductLocation,
   PrismaItemMovement as ItemMovement,

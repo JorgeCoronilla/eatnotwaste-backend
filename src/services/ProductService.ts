@@ -77,8 +77,8 @@ export class ProductService {
       const product = await prisma.product.findUnique({
         where: { id: productId },
         include: {
-          userItems: {
-            where: { isConsumed: false },
+          userProducts: {
+            where: { isActive: true },
             include: { user: { select: { id: true, name: true } } },
           },
           itemMovements: {
@@ -98,9 +98,9 @@ export class ProductService {
 
       const productWithUsage: ProductWithUsage = {
         ...product,
-        activeUsers: product.userItems.length,
+        activeUsers: product.userProducts.length,
         recentMovements: product.itemMovements,
-      } as ProductWithUsage;
+      } as any;
 
       return {
         success: true,
@@ -218,7 +218,7 @@ export class ProductService {
           { name: 'asc' },
         ],
         where: {
-          userItems: { some: {} }, // Products that have been used
+          userProducts: { some: {} }, // Products that have been used
         },
       });
 

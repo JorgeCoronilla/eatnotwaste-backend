@@ -18,35 +18,42 @@ export class DashboardService {
         recentActivity,
         shoppingListCount,
         consumedThisWeek,
-        topCategories,
+        userProductsData,
       ] = await Promise.all([
         // Inventory statistics
-        prisma.userItem.aggregate({
+        prisma.userProductLocation.aggregate({
           where: {
-            userId,
+            userProduct: { userId },
             isConsumed: false,
+            removedAt: null,
+            listType: { in: ['pantry', 'fridge', 'freezer'] },
           },
           _count: { id: true },
           _sum: { quantity: true },
         }),
 
         // Items expiring in the next 3 days
-        prisma.userItem.findMany({
+        prisma.userProductLocation.findMany({
           where: {
-            userId,
+            userProduct: { userId },
             isConsumed: false,
+            removedAt: null,
             expiryDate: {
               gte: new Date(),
               lte: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
             },
           },
           include: {
-            product: {
-              select: {
-                id: true,
-                name: true,
-                imageUrl: true,
-                category: true,
+            userProduct: {
+              include: {
+                product: {
+                  select: {
+                    id: true,
+                    name: true,
+                    imageUrl: true,
+                    category: true,
+                  },
+                },
               },
             },
           },
@@ -71,17 +78,18 @@ export class DashboardService {
         }),
 
         // Shopping list count
-        prisma.userItem.count({
+        prisma.userProductLocation.count({
           where: {
-            userId,
+            userProduct: { userId },
             listType: 'shopping',
+            removedAt: null,
           },
         }),
 
         // Items consumed this week
-        prisma.userItem.count({
+        prisma.userProductLocation.count({
           where: {
-            userId,
+            userProduct: { userId },
             isConsumed: true,
             consumedAt: {
               gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
@@ -89,37 +97,22 @@ export class DashboardService {
           },
         }),
 
-        // Top categories by item count
-        prisma.userItem.groupBy({
-          by: ['productId'],
-          where: {
-            userId,
-            isConsumed: false,
-          },
-          _count: { id: true },
-          orderBy: { _count: { id: 'desc' } },
-          take: 5,
+        // Active UserProducts to calculate categories
+        prisma.userProduct.findMany({
+          where: { userId, isActive: true },
+          include: {
+            product: { select: { id: true, category: true } },
+            locations: { where: { isConsumed: false, removedAt: null, listType: { in: ['pantry', 'fridge', 'freezer'] } } }
+          }
         }),
       ]);
 
-      // Get category information for top categories
-      const topCategoryProducts = await prisma.product.findMany({
-        where: {
-          id: { in: topCategories.map(tc => tc.productId) },
-        },
-        select: {
-          id: true,
-          category: true,
-        },
-      });
-
-      // Process category data
+      // Process category data in memory
       const categoryMap = new Map<string, number>();
-      topCategories.forEach(tc => {
-        const product = topCategoryProducts.find(p => p.id === tc.productId);
-        if (product?.category) {
-          const current = categoryMap.get(product.category) || 0;
-          categoryMap.set(product.category, current + tc._count.id);
+      userProductsData.forEach(up => {
+        if (up.product?.category && up.locations.length > 0) {
+          const current = categoryMap.get(up.product.category) || 0;
+          categoryMap.set(up.product.category, current + up.locations.length);
         }
       });
 
@@ -130,7 +123,7 @@ export class DashboardService {
 
       // Calculate expiry alerts
       const expiryAlerts = {
-        today: expiringItems.filter(item => {
+        today: expiringItems.filter((item: any) => {
           if (!item.expiryDate) return false;
           const today = new Date();
           today.setHours(0, 0, 0, 0);
@@ -138,7 +131,7 @@ export class DashboardService {
           expiry.setHours(0, 0, 0, 0);
           return expiry.getTime() === today.getTime();
         }).length,
-        tomorrow: expiringItems.filter(item => {
+        tomorrow: expiringItems.filter((item: any) => {
           if (!item.expiryDate) return false;
           const tomorrow = new Date();
           tomorrow.setDate(tomorrow.getDate() + 1);
@@ -217,40 +210,48 @@ export class DashboardService {
    */
   static async getInventorySummary(userId: string) {
     try {
-      const [totalItems, expiringCount, categories] = await Promise.all([
-        prisma.userItem.count({
+      const [totalItems, expiringCount, userProductsData] = await Promise.all([
+        prisma.userProductLocation.count({
           where: {
-            userId,
+            userProduct: { userId },
             isConsumed: false,
+            removedAt: null,
+            listType: { in: ['pantry', 'fridge', 'freezer'] }
           },
         }),
 
-        prisma.userItem.count({
+        prisma.userProductLocation.count({
           where: {
-            userId,
+            userProduct: { userId },
             isConsumed: false,
+            removedAt: null,
             expiryDate: {
               lte: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             },
           },
         }),
 
-        prisma.userItem.groupBy({
-          by: ['productId'],
-          where: {
-            userId,
-            isConsumed: false,
-          },
-          _count: { id: true },
+        prisma.userProduct.findMany({
+          where: { userId, isActive: true },
+          include: {
+            product: { select: { category: true } },
+            locations: { where: { isConsumed: false, removedAt: null, listType: { in: ['pantry', 'fridge', 'freezer'] } } }
+          }
         }),
       ]);
+
+      const categoriesCount = new Set(
+        userProductsData
+          .filter(up => up.locations.length > 0 && up.product?.category)
+          .map(up => up.product.category)
+      ).size;
 
       return {
         success: true,
         data: {
           totalItems,
           expiringCount,
-          categoriesCount: categories.length,
+          categoriesCount,
         },
       };
     } catch (error) {
@@ -269,31 +270,35 @@ export class DashboardService {
     try {
       const startDate = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
 
-      const consumedItems = await prisma.userItem.findMany({
+      const consumedItems = await prisma.userProductLocation.findMany({
         where: {
-          userId,
+          userProduct: { userId },
           isConsumed: true,
           consumedAt: { gte: startDate },
         },
         include: {
-          product: {
-            select: {
-              category: true,
-            },
-          },
+          userProduct: {
+            include: {
+              product: {
+                select: {
+                  category: true,
+                },
+              },
+            }
+          }
         },
       });
 
       // Group by category
-      const categoryStats = consumedItems.reduce((acc, item) => {
-        const category = item.product.category || 'Sin categoría';
+      const categoryStats = consumedItems.reduce((acc, item: any) => {
+        const category = item.userProduct?.product?.category || 'Sin categoría';
         if (!acc[category]) acc[category] = 0;
         acc[category] += item.quantity;
         return acc;
       }, {} as Record<string, number>);
 
       // Group by day for trend analysis
-      const dailyStats = consumedItems.reduce((acc, item) => {
+      const dailyStats = consumedItems.reduce((acc, item: any) => {
         if (!item.consumedAt) return acc;
         const day = item.consumedAt.toISOString().split('T')[0];
         if (day) {

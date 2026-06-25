@@ -12,210 +12,168 @@ import { ProductSource } from '@prisma/client';
  * Obtener inventario del usuario (nuevo diseño)
  */
 export const getInventory: RequestHandler = async (req, res) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     const userId = reqAuth.user.id;
     const { page = 1, limit = 20, listType, category, expiring = false } = req.query as any;
-
-    // Si se solicitan productos expirando, usar el método específico
     if (expiring === 'true') {
-      const result = await UserProductService.getExpiringLocations(userId, 3);
-      if (!result.success) {
-        res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
-        return;
-      }
+          const result = await UserProductService.getExpiringLocations(userId, 3);
+          if (!result.success) {
+            res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
+            return;
+          }
 
-      res.json({ 
-        success: true, 
-        message: 'Productos próximos a expirar obtenidos', 
-        data: result.data
-      });
-      return;
-    }
-
-    // Construir filtros para ubicaciones de productos
+          res.json({ 
+            success: true, 
+            message: 'Productos próximos a expirar obtenidos', 
+            data: result.data
+          });
+          return;
+        }
     const filters: any = {};
     if (listType && listType !== 'all') {
-      filters.listType = listType; // 'fridge' | 'freezer' | 'pantry' | 'shopping'
-    }
+          filters.listType = listType; // 'fridge' | 'freezer' | 'pantry' | 'shopping'
+        }
     if (category && category !== 'all') {
-      filters.category = category;
-    }
-
-    // Obtener ubicaciones de productos del usuario
+          filters.category = category;
+        }
     const result = await UserProductService.getUserProductLocations(userId, filters, Number(page), Number(limit));
-    
     if (!result.success) {
-      res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
-      return;
-    }
-
+          res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
+          return;
+        }
     res.json({ 
-      success: true, 
-      message: 'Inventario obtenido exitosamente', 
-      data: result.data, 
-      pagination: result.pagination
-    });
-
-  } catch (error) {
-    console.error('Error en getInventory:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true, 
+          message: 'Inventario obtenido exitosamente', 
+          data: result.data, 
+          pagination: result.pagination
+        });
 };
 
 /**
  * Agregar producto al inventario (nuevo diseño)
  */
 export const addToInventory: RequestHandler = async (req, res) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({ success: false, message: 'Datos de entrada inválidos', error: 'Validation failed', details: errors.array() });
-      return;
-    }
-
+          res.status(400).json({ success: false, message: 'Datos de entrada inválidos', error: 'Validation failed', details: errors.array() });
+          return;
+        }
     if (!reqAuth.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     const { productId: incomingProductId, product, quantity, unit, location, purchaseDate, expirationDate, expiryDate, price, notes } = req.body as any;
-
     const locationData: {
-      productId: string;
-      location: ListType;
-      quantity: number;
-      unit?: string;
-      purchaseDate?: Date;
-      expiryDate?: Date;
-      price?: number;
-      store?: string;
-      notes?: string;
-    } = {
-      productId: incomingProductId,
-      location: location || 'pantry',
-      quantity: Number(quantity),
-    };
-
+          productId: string;
+          location: ListType;
+          quantity: number;
+          unit?: string;
+          purchaseDate?: Date;
+          expiryDate?: Date;
+          price?: number;
+          store?: string;
+          notes?: string;
+        } = {
+          productId: incomingProductId,
+          location: location || 'pantry',
+          quantity: Number(quantity),
+        };
     if (unit !== undefined) locationData.unit = unit;
     if (purchaseDate !== undefined) locationData.purchaseDate = new Date(purchaseDate);
     if (expirationDate !== undefined || expiryDate !== undefined) {
-      locationData.expiryDate = new Date(expirationDate || expiryDate);
-    }
+          locationData.expiryDate = new Date(expirationDate || expiryDate);
+        }
     if (price !== undefined) locationData.price = price;
     if (notes !== undefined) locationData.notes = notes;
-
-    // Si no hay productId pero se envía `product`, crear/usar existente
     if (!locationData.productId && product) {
-      const name = (product.name || '').trim();
-      const brand = product.brand || undefined;
-      const barcode = product.barcode || undefined;
-      const category = product.category || undefined;
-      const imageUrl = product.imageUrl || undefined;
-      const sourceRaw = product.source || 'llm';
+          const name = (product.name || '').trim();
+          const brand = product.brand || undefined;
+          const barcode = product.barcode || undefined;
+          const category = product.category || undefined;
+          const imageUrl = product.imageUrl || undefined;
+          const sourceRaw = product.source || 'llm';
 
-      // Buscar por barcode primero
-      let dbProduct = undefined as any;
-      if (barcode) {
-        dbProduct = await prisma.product.findFirst({ where: { barcode } });
-      }
-      // Si no hay barcode o no se encontró, intentar coincidencia exacta por nombre
-      if (!dbProduct && name) {
-        dbProduct = await prisma.product.findFirst({ where: { name: { equals: name, mode: 'insensitive' } } });
-      }
-
-      if (!dbProduct) {
-        dbProduct = await prisma.product.create({
-          data: {
-            name,
-            brand,
-            barcode,
-            category,
-            imageUrl,
-            source: sourceRaw === 'openfoodfacts' ? ProductSource.openfoodfacts : ProductSource.llm,
-            isVerified: false,
+          // Buscar por barcode primero
+          let dbProduct = undefined as any;
+          if (barcode) {
+            dbProduct = await prisma.product.findFirst({ where: { barcode } });
           }
-        });
-      } else {
-        // Feature: Auto-upgrade product data if existing is "low quality" (LLM/empty) and incoming is better
-        const isExistingLowQuality = (dbProduct.source === ProductSource.llm || dbProduct.source === null) && (!dbProduct.imageUrl || !dbProduct.description);
-        const isIncomingBetter = sourceRaw === 'openfoodfacts' || (imageUrl && !dbProduct.imageUrl);
+          // Si no hay barcode o no se encontró, intentar coincidencia exacta por nombre
+          if (!dbProduct && name) {
+            dbProduct = await prisma.product.findFirst({ where: { name: { equals: name, mode: 'insensitive' } } });
+          }
 
-        if (isExistingLowQuality && isIncomingBetter) {
-            logger.info('addToInventory: Upgrading product data', { id: dbProduct.id, oldSource: dbProduct.source, newSource: sourceRaw });
-            dbProduct = await prisma.product.update({
-                where: { id: dbProduct.id },
-                data: {
-                    brand: brand || dbProduct.brand,
-                    category: category || dbProduct.category,
-                    imageUrl: imageUrl || dbProduct.imageUrl,
-                    description: product.description || dbProduct.description,
-                    source: sourceRaw === 'openfoodfacts' ? ProductSource.openfoodfacts : ProductSource.llm,
-                    // Merge nutritional info if existing is empty
-                    nutritionalInfo: (Object.keys(dbProduct.nutritionalInfo || {}).length === 0 && product.nutritionalInfo) 
-                        ? product.nutritionalInfo 
-                        : dbProduct.nutritionalInfo
-                }
+          if (!dbProduct) {
+            dbProduct = await prisma.product.create({
+              data: {
+                name,
+                brand,
+                barcode,
+                category,
+                imageUrl,
+                source: sourceRaw === 'openfoodfacts' ? ProductSource.openfoodfacts : ProductSource.llm,
+                isVerified: false,
+              }
             });
+          } else {
+            // Feature: Auto-upgrade product data if existing is "low quality" (LLM/empty) and incoming is better
+            const isExistingLowQuality = (dbProduct.source === ProductSource.llm || dbProduct.source === null) && (!dbProduct.imageUrl || !dbProduct.description);
+            const isIncomingBetter = sourceRaw === 'openfoodfacts' || (imageUrl && !dbProduct.imageUrl);
+
+            if (isExistingLowQuality && isIncomingBetter) {
+                logger.info('addToInventory: Upgrading product data', { id: dbProduct.id, oldSource: dbProduct.source, newSource: sourceRaw });
+                dbProduct = await prisma.product.update({
+                    where: { id: dbProduct.id },
+                    data: {
+                        brand: brand || dbProduct.brand,
+                        category: category || dbProduct.category,
+                        imageUrl: imageUrl || dbProduct.imageUrl,
+                        description: product.description || dbProduct.description,
+                        source: sourceRaw === 'openfoodfacts' ? ProductSource.openfoodfacts : ProductSource.llm,
+                        // Merge nutritional info if existing is empty
+                        nutritionalInfo: (Object.keys(dbProduct.nutritionalInfo || {}).length === 0 && product.nutritionalInfo) 
+                            ? product.nutritionalInfo 
+                            : dbProduct.nutritionalInfo
+                    }
+                });
+            }
+          }
+
+          locationData.productId = dbProduct.id;
         }
-      }
-
-      locationData.productId = dbProduct.id;
-    }
-
     const result = await UserProductService.addProductLocation(reqAuth.user.id, locationData);
-
     if (!result.success) {
-      res.status(400).json({ success: false, message: 'Error al agregar producto', error: result.error });
-      return;
-    }
-
+          res.status(400).json({ success: false, message: 'Error al agregar producto', error: result.error });
+          return;
+        }
     res.status(201).json({ 
-      success: true, 
-      message: 'Producto agregado al inventario exitosamente', 
-      data: result.data 
-    });
-
-  } catch (error) {
-    console.error('Error en addToInventory:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true, 
+          message: 'Producto agregado al inventario exitosamente', 
+          data: result.data 
+        });
 };
 
 /**
  * Actualizar producto en inventario (nuevo diseño)
  */
 export const updateInventoryItem: RequestHandler = async (req, res) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({ success: false, message: 'Datos de entrada inválidos', error: 'Validation failed', details: errors.array() });
-      return;
-    }
-
+          res.status(400).json({ success: false, message: 'Datos de entrada inválidos', error: 'Validation failed', details: errors.array() });
+          return;
+        }
     if (!reqAuth.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     const { id } = req.params as { id: string };
     const { quantity, unit, location, expirationDate, price, notes } = req.body as any;
-
     const updatePayload: any = {};
     if (quantity !== undefined) updatePayload.quantity = Number(quantity);
     if (unit !== undefined) updatePayload.unit = unit;
@@ -223,28 +181,16 @@ export const updateInventoryItem: RequestHandler = async (req, res) => {
     if (expirationDate) updatePayload.expiryDate = new Date(expirationDate);
     if (price !== undefined) updatePayload.price = price;
     if (notes !== undefined) updatePayload.notes = notes;
-
     const result = await UserProductService.updateProductLocation(reqAuth.user.id, id, updatePayload);
-
     if (!result.success) {
-      res.status(400).json({ success: false, message: 'Error al actualizar producto', error: result.error });
-      return;
-    }
-
+          res.status(400).json({ success: false, message: 'Error al actualizar producto', error: result.error });
+          return;
+        }
     res.json({ 
-      success: true, 
-      message: 'Producto actualizado exitosamente', 
-      data: result.data 
-    });
-
-  } catch (error) {
-    console.error('Error en updateInventoryItem:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true, 
+          message: 'Producto actualizado exitosamente', 
+          data: result.data 
+        });
 };
 
 /**
@@ -252,190 +198,125 @@ export const updateInventoryItem: RequestHandler = async (req, res) => {
  */
 export const moveInventoryItem: RequestHandler = async (req, res) => {
   logger.info('moveInventoryItem: Received request');
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      logger.warn('moveInventoryItem: Validation errors', { errors: errors.array() });
-      return res.status(400).json({ success: false, message: 'Datos de entrada inválidos', details: errors.array() });
-    }
-
+          logger.warn('moveInventoryItem: Validation errors', { errors: errors.array() });
+          return res.status(400).json({ success: false, message: 'Datos de entrada inválidos', details: errors.array() });
+        }
     if (!reqAuth.user) {
-      logger.warn('moveInventoryItem: Unauthenticated user');
-      return res.status(401).json({ success: false, message: 'Usuario no autenticado' });
-    }
-
+          logger.warn('moveInventoryItem: Unauthenticated user');
+          return res.status(401).json({ success: false, message: 'Usuario no autenticado' });
+        }
     const { productId } = req.params as { productId: string };
     const { location, quantity, unit, notes } = req.body as any;
     logger.info('moveInventoryItem: Parsed data', { productId, location, quantity, unit, notes });
-
     logger.info('moveInventoryItem: Calling UserProductService.updateProductLocation');
     const result = await UserProductService.updateProductLocation(reqAuth.user.id, productId, {
-      location,
-      quantity,
-      unit,
-      notes,
-    });
+          location,
+          quantity,
+          unit,
+          notes,
+        });
     logger.info('moveInventoryItem: UserProductService.updateProductLocation returned', { result });
-
     if (!result.success) {
-      logger.error('moveInventoryItem: Error moving product', { error: result.error });
-      return res.status(400).json({ success: false, message: 'Error al mover producto', error: result.error });
-    }
-
+          logger.error('moveInventoryItem: Error moving product', { error: result.error });
+          return res.status(400).json({ success: false, message: 'Error al mover producto', error: result.error });
+        }
     logger.info('moveInventoryItem: Product moved successfully');
     return res.json({ success: true, message: 'Producto movido exitosamente', data: result.data });
-  } catch (error) {
-    logger.error('moveInventoryItem: Caught exception', { error });
-    console.error('Error en moveInventoryItem:', error);
-    return res.status(500).json({ success: false, message: 'Error interno del servidor' });
-  }
 };
 
 /**
  * Eliminar un ítem del inventario (nuevo diseño)
  */
 export const deleteInventoryItem: RequestHandler = async (req, res) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     const { id } = req.params as { id: string };
     const result = await UserProductService.deleteProductLocation(reqAuth.user.id, id);
-
     if (!result.success) {
-      res.status(400).json({ success: false, message: 'Error al eliminar producto', error: result.error });
-      return;
-    }
-
+          res.status(400).json({ success: false, message: 'Error al eliminar producto', error: result.error });
+          return;
+        }
     res.json({ 
-      success: true, 
-      message: 'Producto eliminado del inventario exitosamente' 
-    });
-
-  } catch (error) {
-    console.error('Error en deleteInventoryItem:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true, 
+          message: 'Producto eliminado del inventario exitosamente' 
+        });
 };
 
 /**
  * Marcar producto como consumido (nuevo diseño)
  */
 export const markAsConsumed: RequestHandler = async (req, res) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     const { id } = req.params as { id: string };
     const { consumedQuantity } = req.body as any;
-
     const updateData: {
-      isConsumed: boolean;
-      quantity?: number;
-    } = {
-      isConsumed: true,
-    };
-
+          isConsumed: boolean;
+          quantity?: number;
+        } = {
+          isConsumed: true,
+        };
     if (consumedQuantity !== undefined) {
-      updateData.quantity = Number(consumedQuantity);
-    }
-
+          updateData.quantity = Number(consumedQuantity);
+        }
     const result = await UserProductService.updateProductLocation(reqAuth.user.id, id, updateData);
-
     if (!result.success) {
-      res.status(400).json({ success: false, message: 'Error al consumir producto', error: result.error });
-      return;
-    }
-
+          res.status(400).json({ success: false, message: 'Error al consumir producto', error: result.error });
+          return;
+        }
     res.json({ 
-      success: true, 
-      message: 'Producto marcado como consumido exitosamente',
-      data: result.data
-    });
-
-  } catch (error) {
-    console.error('Error en markAsConsumed:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true, 
+          message: 'Producto marcado como consumido exitosamente',
+          data: result.data
+        });
 };
 
 /**
  * Obtener estadísticas del inventario
  */
 export const getInventoryStats: RequestHandler = async (req, res) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     const userId = reqAuth.user.id;
     const summary = await DashboardService.getInventorySummary(userId);
     if (!summary.success) {
-      res.status(500).json({ success: false, message: 'Error interno del servidor', error: summary.error });
-      return;
-    }
-
+          res.status(500).json({ success: false, message: 'Error interno del servidor', error: summary.error });
+          return;
+        }
     res.json({ success: true, message: 'Estadísticas del inventario obtenidas', data: summary.data });
-
-  } catch (error) {
-    console.error('Error en getInventoryStats:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
 };
 
 /**
  * Obtener productos próximos a expirar (nuevo diseño)
  */
 export const getExpiringItems: RequestHandler = async (req, res) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     if (!reqAuth.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     const userId = reqAuth.user.id;
     const { days = 3 } = req.query as any;
-    
     const result = await UserProductService.getExpiringLocations(userId, Number(days));
     if (!result.success) {
-      res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
-      return;
-    }
-
+          res.status(500).json({ success: false, message: 'Error interno del servidor', error: result.error });
+          return;
+        }
     res.json({ 
-      success: true, 
-      message: 'Productos próximos a expirar obtenidos', 
-      data: result.data 
-    });
-
-  } catch (error) {
-    console.error('Error en getExpiringItems:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true, 
+          message: 'Productos próximos a expirar obtenidos', 
+          data: result.data 
+        });
 };

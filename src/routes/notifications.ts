@@ -69,47 +69,35 @@ router.post(
     body('appVersion').optional().isString(),
   ],
   async (req: Request, res: Response) => {
-    try {
-      const errors = validationResult(req);
+    const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({
-          success: false,
-          error: 'Datos de validación incorrectos',
-          details: errors.array(),
-        });
-      }
-
+              return res.status(400).json({
+                success: false,
+                error: 'Datos de validación incorrectos',
+                details: errors.array(),
+              });
+            }
       const reqAuth = req as AuthenticatedRequest;
       const userId = reqAuth.user?.id;
       if (!userId) {
-        return res.status(401).json({
-          success: false,
-          error: 'Usuario no autenticado',
-        });
-      }
-
+              return res.status(401).json({
+                success: false,
+                error: 'Usuario no autenticado',
+              });
+            }
       const { fcmToken, deviceId, platform, appVersion } = req.body;
-
       const notificationService = new NotificationService();
       await notificationService.registerDeviceToken(
-        userId,
-        deviceId,
-        fcmToken,
-        platform,
-        appVersion
-      );
-
+              userId,
+              deviceId,
+              fcmToken,
+              platform,
+              appVersion
+            );
       return res.json({
-        success: true,
-        message: 'Dispositivo registrado exitosamente',
-      });
-    } catch (error) {
-      console.error('Error registering device:', error);
-      return res.status(500).json({
-        success: false,
-        error: 'Error interno del servidor',
-      });
-    }
+              success: true,
+              message: 'Dispositivo registrado exitosamente',
+            });
   }
 );
 
@@ -119,39 +107,27 @@ router.post(
  * @access  Private
  */
 router.delete('/unregister-device/:deviceId', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
     const deviceId = req.params.deviceId;
-
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     if (!deviceId) {
-      return res.status(400).json({
-        success: false,
-        error: 'ID del dispositivo es requerido',
-      });
-    }
-
+          return res.status(400).json({
+            success: false,
+            error: 'ID del dispositivo es requerido',
+          });
+        }
     const notificationService = new NotificationService();
     await notificationService.unregisterDeviceToken(userId, deviceId);
-
     return res.json({
-      success: true,
-      message: 'Dispositivo desregistrado exitosamente',
-    });
-  } catch (error) {
-    console.error('Error unregistering device:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          message: 'Dispositivo desregistrado exitosamente',
+        });
 });
 
 /**
@@ -169,45 +145,32 @@ router.post(
     body('data').optional().isObject(),
   ],
   async (req: Request, res: Response) => {
-    try {
-      const errors = validationResult(req);
+    const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({
-          success: false,
-          error: 'Datos de validación incorrectos',
-          details: errors.array(),
-        });
-      }
-
+              return res.status(400).json({
+                success: false,
+                error: 'Datos de validación incorrectos',
+                details: errors.array(),
+              });
+            }
       const reqAuth = req as AuthenticatedRequest;
-      // Verificar que el usuario sea admin
       if (reqAuth.user?.role !== 'admin') {
-        return res.status(403).json({
-          success: false,
-          error: 'Acceso denegado',
-        });
-      }
-
+              return res.status(403).json({
+                success: false,
+                error: 'Acceso denegado',
+              });
+            }
       const { targetUserId, title, body, data } = req.body;
-
       const notificationService = new NotificationService();
       const result = await notificationService.sendNotificationToUser(
-        targetUserId,
-        { title, body, data }
-      );
-
+              targetUserId,
+              { title, body, data }
+            );
       return res.json({
-        success: true,
-        message: 'Notificación enviada',
-        data: result,
-      });
-    } catch (error) {
-      console.error('Error sending notification:', error);
-      return res.status(500).json({
-        success: false,
-        error: 'Error interno del servidor',
-      });
-    }
+              success: true,
+              message: 'Notificación enviada',
+              data: result,
+            });
   }
 );
 
@@ -217,35 +180,22 @@ router.post(
  * @access  Private
  */
 router.post('/send-expiry-alert', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
-
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
-    // Por ahora enviamos una alerta genérica, en el futuro se podría obtener los items reales
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     const expiringItems = [{ name: 'Producto de ejemplo', daysUntilExpiry: 2 }];
-    
     const notificationService = new NotificationService();
     const result = await notificationService.sendExpiryNotification(userId, expiringItems);
-
     return res.json({
-      success: true,
-      message: 'Alerta de vencimiento enviada',
-      data: result,
-    });
-  } catch (error) {
-    console.error('Error sending expiry alert:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          message: 'Alerta de vencimiento enviada',
+          data: result,
+        });
 });
 
 /**
@@ -254,35 +204,23 @@ router.post('/send-expiry-alert', authenticateToken, async (req: Request, res: R
  * @access  Private
  */
 router.post('/send-shopping-reminder', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
-
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     const { items } = req.body;
     const itemCount = Array.isArray(items) ? items.length : 0;
-    
     const notificationService = new NotificationService();
     const result = await notificationService.sendShoppingReminder(userId, itemCount);
-
     return res.json({
-      success: true,
-      message: 'Recordatorio de compras enviado',
-      data: result,
-    });
-  } catch (error) {
-    console.error('Error sending shopping reminder:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          message: 'Recordatorio de compras enviado',
+          data: result,
+        });
 });
 
 /**
@@ -291,37 +229,25 @@ router.post('/send-shopping-reminder', authenticateToken, async (req: Request, r
  * @access  Private
  */
 router.get('/history', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
-
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     const { page = 1, limit = 20 } = req.query;
-    
     const notificationService = new NotificationService();
     const history = await notificationService.getNotificationHistory(
-      userId, 
-      parseInt(page as string), 
-      parseInt(limit as string)
-    );
-
+          userId, 
+          parseInt(page as string), 
+          parseInt(limit as string)
+        );
     return res.json({
-      success: true,
-      data: history,
-    });
-  } catch (error) {
-    console.error('Error getting notification history:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          data: history,
+        });
 });
 
 /**
@@ -330,39 +256,27 @@ router.get('/history', authenticateToken, async (req: Request, res: Response) =>
  * @access  Private
  */
 router.put('/:notificationId/read', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
     const { notificationId } = req.params;
-
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     if (!notificationId) {
-      return res.status(400).json({
-        success: false,
-        error: 'ID de notificación es requerido',
-      });
-    }
-
+          return res.status(400).json({
+            success: false,
+            error: 'ID de notificación es requerido',
+          });
+        }
     const notificationService = new NotificationService();
     await notificationService.markNotificationAsRead(notificationId);
-
     return res.json({
-      success: true,
-      message: 'Notificación marcada como leída',
-    });
-  } catch (error) {
-    console.error('Error marking notification as read:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          message: 'Notificación marcada como leída',
+        });
 });
 
 /**
@@ -371,31 +285,20 @@ router.put('/:notificationId/read', authenticateToken, async (req: Request, res:
  * @access  Private
  */
 router.post('/test-expiry-check', authenticateToken, async (req: Request, res: Response) => {
-  try {
-    const reqAuth = req as AuthenticatedRequest;
+  const reqAuth = req as AuthenticatedRequest;
     const userId = reqAuth.user?.id;
-
     if (!userId) {
-      return res.status(401).json({
-        success: false,
-        error: 'Usuario no autenticado',
-      });
-    }
-
+          return res.status(401).json({
+            success: false,
+            error: 'Usuario no autenticado',
+          });
+        }
     const notificationScheduler = new NotificationScheduler();
     await notificationScheduler.checkUserExpiringProducts(userId);
-
     return res.json({
-      success: true,
-      message: 'Verificación de productos próximos a vencer completada',
-    });
-  } catch (error) {
-    console.error('Error in test expiry check:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error interno del servidor',
-    });
-  }
+          success: true,
+          message: 'Verificación de productos próximos a vencer completada',
+        });
 });
 
 /**
@@ -404,35 +307,21 @@ router.post('/test-expiry-check', authenticateToken, async (req: Request, res: R
  * @access  Public
  */
 router.post('/test-firebase', async (req: Request, res: Response) => {
-  try {
-    const notificationService = new NotificationService();
-    
-    // Simular datos de productos próximos a vencer
+  const notificationService = new NotificationService();
     const testExpiringItems = [
-      { name: 'Leche', daysUntilExpiry: 2 },
-      { name: 'Pan', daysUntilExpiry: 1 }
-    ];
-    
-    // Intentar enviar notificación (aunque no haya tokens registrados)
+          { name: 'Leche', daysUntilExpiry: 2 },
+          { name: 'Pan', daysUntilExpiry: 1 }
+        ];
     const result = await notificationService.sendExpiryNotification(
-      'a78f1560-d99b-429c-909b-938e2f47236b', 
-      testExpiringItems
-    );
-
+          'a78f1560-d99b-429c-909b-938e2f47236b', 
+          testExpiringItems
+        );
     return res.json({
-      success: true,
-      message: 'Test de Firebase completado',
-      result: result,
-      note: 'Si no hay tokens FCM registrados, no se enviará notificación real'
-    });
-  } catch (error) {
-    console.error('Error in Firebase test:', error);
-    return res.status(500).json({
-      success: false,
-      error: 'Error en test de Firebase',
-      details: error instanceof Error ? error.message : 'Error desconocido'
-    });
-  }
+          success: true,
+          message: 'Test de Firebase completado',
+          result: result,
+          note: 'Si no hay tokens FCM registrados, no se enviará notificación real'
+        });
 });
 
 export default router;

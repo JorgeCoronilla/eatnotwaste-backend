@@ -5,7 +5,6 @@ import { prisma } from '../config/database';
 import { logger } from '../utils/logger';
 import type { Decimal } from '@prisma/client/runtime/library';
 import type {
-  UserItem,
   UserProductWithProduct,
   UserProductLocationWithProduct,
   ItemMovement,
@@ -302,16 +301,16 @@ export class InventoryService {
 
       // Create movement record if list type changed
       if (updateData.listType) {
-        const currentItem = await prisma.userItem.findFirst({
-          where: { id: itemId, userId },
-          include: { product: true },
+        const currentItem = await prisma.userProductLocation.findFirst({
+          where: { id: itemId, userProduct: { userId } },
+          include: { userProduct: { include: { product: true } } },
         });
 
         if (currentItem && updateData.listType !== currentItem.listType) {
           await prisma.itemMovement.create({
             data: {
               userId,
-              productId: currentItem.productId,
+              productId: currentItem.userProduct.productId,
               movementType: 'move',
               quantity: currentItem.quantity,
               fromList: currentItem.listType,

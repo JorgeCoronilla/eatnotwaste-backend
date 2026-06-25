@@ -32,157 +32,111 @@ const generateToken = (userId: string, role: string = 'user'): string => {
  * Registro de usuario
  */
 export const register = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const errors = validationResult(req);
+  const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({
-        success: false,
-        message: 'Datos de entrada inválidos',
-        error: 'Validation failed',
-        details: errors.array()
-      });
-      return;
-    }
-
+          res.status(400).json({
+            success: false,
+            message: 'Datos de entrada inválidos',
+            error: 'Validation failed',
+            details: errors.array()
+          });
+          return;
+        }
     const { name, email, password } = req.body;
-
-    // Use real UserService for user creation
     const result = await UserService.createUser({
-      name,
-      email,
-      password
-    });
-
+          name,
+          email,
+          password
+        });
     if (!result.success) {
-      res.status(400).json({
-        success: false,
-        message: result.error || 'Error al crear usuario'
-      });
-      return;
-    }
-
+          res.status(400).json({
+            success: false,
+            message: result.error || 'Error al crear usuario'
+          });
+          return;
+        }
     res.status(201).json({
-      success: true,
-      message: result.message || 'Usuario registrado exitosamente',
-      data: {
-        user: result.data
-      }
-    });
-
-  } catch (error) {
-    console.error('Registration error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor'
-    });
-  }
+          success: true,
+          message: result.message || 'Usuario registrado exitosamente',
+          data: {
+            user: result.data
+          }
+        });
 };
 
 /**
  * Inicio de sesión
  */
 export const login = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const errors = validationResult(req);
+  const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({
-        success: false,
-        message: 'Datos de entrada inválidos',
-        error: 'Validation failed',
-        details: errors.array()
-      });
-      return;
-    }
-
+          res.status(400).json({
+            success: false,
+            message: 'Datos de entrada inválidos',
+            error: 'Validation failed',
+            details: errors.array()
+          });
+          return;
+        }
     const { email, password } = req.body;
-    
-    // Check Client Version
     const versionCheck = checkVersion(req);
     if (!versionCheck.valid) {
-      res.status(426).json({
-        success: false,
-        message: 'Actualización requerida',
-        error: versionCheck.message
-      });
-      return;
-    }
-
-    // Use real UserService for authentication
+          res.status(426).json({
+            success: false,
+            message: 'Actualización requerida',
+            error: versionCheck.message
+          });
+          return;
+        }
     const result = await UserService.authenticateUser(email, password);
-
     if (!result.success) {
-      res.status(401).json({
-        success: false,
-        message: result.error || 'Credenciales inválidas'
-      });
-      return;
-    }
-
+          res.status(401).json({
+            success: false,
+            message: result.error || 'Credenciales inválidas'
+          });
+          return;
+        }
     res.json({
-      success: true,
-      message: result.message || 'Login exitoso',
-      data: {
-        user: result.data!.user,
-        token: result.data!.token,
-        refreshToken: result.data!.refreshToken
-      }
-    });
-
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor'
-    });
-  }
+          success: true,
+          message: result.message || 'Login exitoso',
+          data: {
+            user: result.data!.user,
+            token: result.data!.token,
+            refreshToken: result.data!.refreshToken
+          }
+        });
 };
 
 /**
  * Renovar token
  */
 export const refreshToken = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { refreshToken: token } = req.body;
-    
-    // Check Client Version
+  const { refreshToken: token } = req.body;
     const versionCheck = checkVersion(req);
     if (!versionCheck.valid) {
-      res.status(426).json({
-        success: false,
-        message: 'Actualización requerida',
-        error: versionCheck.message
-      });
-      return;
-    }
-
+          res.status(426).json({
+            success: false,
+            message: 'Actualización requerida',
+            error: versionCheck.message
+          });
+          return;
+        }
     if (!token) {
-      res.status(401).json({
-        success: false,
-        message: 'Refresh token requerido',
-        error: 'Token required'
-      });
-      return;
-    }
-
-    // Mock token verification
+          res.status(401).json({
+            success: false,
+            message: 'Refresh token requerido',
+            error: 'Token required'
+          });
+          return;
+        }
     const newToken = generateToken('user123');
-
     res.json({
-      success: true,
-      message: 'Token renovado exitosamente',
-      data: {
-        token: newToken
-      }
-    });
-
-  } catch (error) {
-    console.error('Error en refreshToken:', error);
-    res.status(401).json({
-      success: false,
-      message: 'Token inválido o expirado',
-      error: 'Invalid token'
-    });
-  }
+          success: true,
+          message: 'Token renovado exitosamente',
+          data: {
+            token: newToken
+          }
+        });
 };
 
 /**
@@ -190,29 +144,19 @@ export const refreshToken = async (req: Request, res: Response): Promise<void> =
  */
 export const getProfile: RequestHandler = async (req, res) => {
   const authedReq = req as AuthenticatedRequest;
-  try {
-    if (!authedReq.user) {
-      res.status(401).json({
-        success: false,
-        message: 'Usuario no autenticado',
-        error: 'Not authenticated'
-      });
-      return;
-    }
-
+  if (!authedReq.user) {
+          res.status(401).json({
+            success: false,
+            message: 'Usuario no autenticado',
+            error: 'Not authenticated'
+          });
+          return;
+        }
     res.json({
-      success: true,
-      message: 'Perfil obtenido exitosamente',
-      data: authedReq.user
-    });
-  } catch (error) {
-    console.error('Error en getProfile:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true,
+          message: 'Perfil obtenido exitosamente',
+          data: authedReq.user
+        });
 };
 
 /**
@@ -220,44 +164,32 @@ export const getProfile: RequestHandler = async (req, res) => {
  */
 export const updateProfile: RequestHandler = async (req, res) => {
   const authedReq = req as AuthenticatedRequest;
-  try {
-    const errors = validationResult(req);
+  const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({
-        success: false,
-        message: 'Datos de entrada inválidos',
-        error: 'Validation failed'
-      });
-      return;
-    }
-
+          res.status(400).json({
+            success: false,
+            message: 'Datos de entrada inválidos',
+            error: 'Validation failed'
+          });
+          return;
+        }
     if (!authedReq.user) {
-      res.status(401).json({
-        success: false,
-        message: 'Usuario no autenticado',
-        error: 'Not authenticated'
-      });
-      return;
-    }
-
+          res.status(401).json({
+            success: false,
+            message: 'Usuario no autenticado',
+            error: 'Not authenticated'
+          });
+          return;
+        }
     const updatedUser: UserData = {
-      ...authedReq.user,
-      ...req.body
-    };
-
+          ...authedReq.user,
+          ...req.body
+        };
     res.json({
-      success: true,
-      message: 'Perfil actualizado exitosamente',
-      data: updatedUser
-    });
-  } catch (error) {
-    console.error('Error en updateProfile:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true,
+          message: 'Perfil actualizado exitosamente',
+          data: updatedUser
+        });
 };
 
 /**
@@ -265,23 +197,16 @@ export const updateProfile: RequestHandler = async (req, res) => {
  */
 export const changePassword: RequestHandler = async (req, res) => {
   const authedReq = req as AuthenticatedRequest;
-  try {
-    const errors = validationResult(req);
+  const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({ success: false, message: 'Datos de entrada inválidos', error: 'Validation failed' });
-      return;
-    }
-
+          res.status(400).json({ success: false, message: 'Datos de entrada inválidos', error: 'Validation failed' });
+          return;
+        }
     if (!authedReq.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     res.json({ success: true, message: 'Contraseña actualizada exitosamente' });
-  } catch (error) {
-    console.error('Error en changePassword:', error);
-    res.status(500).json({ success: false, message: 'Error interno del servidor', error: 'Internal server error' });
-  }
 };
 
 /**
@@ -289,55 +214,35 @@ export const changePassword: RequestHandler = async (req, res) => {
  */
 export const logout: RequestHandler = async (req, res) => {
   const authedReq = req as AuthenticatedRequest;
-  try {
-    if (!authedReq.user) {
-      res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
-      return;
-    }
-
+  if (!authedReq.user) {
+          res.status(401).json({ success: false, message: 'Usuario no autenticado', error: 'Not authenticated' });
+          return;
+        }
     res.json({ success: true, message: 'Logout exitoso' });
-  } catch (error) {
-    console.error('Error en logout:', error);
-    res.status(500).json({ success: false, message: 'Error interno del servidor' });
-  }
 };
 
 /**
  * Eliminar cuenta
  */
 export const deleteAccount = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-  try {
-    if (!req.user) {
-      res.status(401).json({
-        success: false,
-        message: 'Usuario no autenticado',
-        error: 'Not authenticated'
-      });
-      return;
-    }
-
-    // Use real UserService for account deletion
+  if (!req.user) {
+          res.status(401).json({
+            success: false,
+            message: 'Usuario no autenticado',
+            error: 'Not authenticated'
+          });
+          return;
+        }
     const result = await UserService.deleteUser(req.user.id);
-
     if (!result.success) {
-      res.status(500).json({
-        success: false,
-        message: result.error || 'Error al eliminar cuenta'
-      });
-      return;
-    }
-
+          res.status(500).json({
+            success: false,
+            message: result.error || 'Error al eliminar cuenta'
+          });
+          return;
+        }
     res.json({
-      success: true,
-      message: result.message || 'Cuenta eliminada exitosamente'
-    });
-
-  } catch (error) {
-    console.error('Error en deleteAccount:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error interno del servidor',
-      error: 'Internal server error'
-    });
-  }
+          success: true,
+          message: result.message || 'Cuenta eliminada exitosamente'
+        });
 };

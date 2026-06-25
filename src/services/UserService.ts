@@ -247,9 +247,9 @@ export class UserService {
       const user = await prisma.user.findUnique({
         where: { id: userId },
         include: {
-          userItems: {
-            where: { isConsumed: false },
-            include: { product: true },
+          userProducts: {
+            where: { isActive: true },
+            include: { product: true, locations: { where: { isConsumed: false, removedAt: null } } },
           },
           itemMovements: {
             take: 10,
@@ -267,16 +267,16 @@ export class UserService {
       }
 
       // Calculate stats
-      const totalItems = user.userItems.length;
-      const expiringItems = user.userItems.filter((item: any) => {
-        if (!item.expiryDate) return false;
+      const totalItems = user.userProducts.reduce((sum: number, up: any) => sum + up.locations.length, 0);
+      const expiringItems = user.userProducts.reduce((sum: number, up: any) => sum + up.locations.filter((loc: any) => {
+        if (!loc.expiryDate) return false;
         const daysUntilExpiry = Math.ceil(
-          (item.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
+          (loc.expiryDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
         );
         return daysUntilExpiry <= 3 && daysUntilExpiry >= 0;
-      }).length;
+      }).length, 0);
 
-      const { passwordHash, userItems, itemMovements, ...userWithoutSensitiveData } = user;
+      const { passwordHash, userProducts, itemMovements, ...userWithoutSensitiveData } = user;
 
       const userWithStats: UserWithStats = {
         ...userWithoutSensitiveData,

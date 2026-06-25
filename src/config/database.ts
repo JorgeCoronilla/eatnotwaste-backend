@@ -84,7 +84,6 @@ export const prisma = db.getClient();
 export type {
   User,
   Product,
-  UserItem,
   UserProduct,
   UserProductLocation,
   ItemMovement,
