@@ -5,6 +5,7 @@ import { prisma } from '../config/database';
 import ProductAPIService from '../services/ProductAPIService';
 import ProductSearchService from '../services/ProductSearchService';
 import NutritionCalculator from '../services/NutritionCalculator';
+import { logger } from '../utils/logger';
 import { AuthenticatedRequest } from '../types';
 
 /**
@@ -139,35 +140,29 @@ export const scanBarcode: RequestHandler = async (req, res) => {
  */
 export const searchProducts = async (req: Request, res: Response): Promise<void> => {
   const { q: query, limit = 20, offset = 0 } = req.query;
-    if (!query || typeof query !== 'string') {
-          res.status(400).json({
-            success: false,
-            message: 'Parámetro de búsqueda requerido'
-          });
-          return;
-        }
-    const products = await prisma.product.findMany({
-          where: {
-            OR: [
-              { name: { contains: query, mode: 'insensitive' } },
-              { brand: { contains: query, mode: 'insensitive' } },
-              { category: { contains: query, mode: 'insensitive' } }
-            ]
-          },
-          take: Number(limit),
-          skip: Number(offset),
-          orderBy: { createdAt: 'desc' }
-        });
-    res.json({
-          success: true,
-          message: 'Búsqueda completada',
-          data: products,
-          pagination: {
-            limit: Number(limit),
-            offset: Number(offset),
-            total: products.length
-          }
-        });
+  if (!query || typeof query !== 'string') {
+    res.status(400).json({ success: false, message: 'Parámetro de búsqueda requerido' });
+    return;
+  }
+
+  const normalizedQuery = query.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').trim();
+  const searchLimit = Math.min(Number(limit), 50);
+  const searchOffset = Math.max(Number(offset), 0);
+
+  const result = await ProductSearchService.searchLocalPaginated(normalizedQuery, searchLimit, searchOffset);
+  const products = result.products ?? [];
+
+  res.json({
+    success: true,
+    message: 'Búsqueda completada',
+    data: products,
+    pagination: {
+      limit: searchLimit,
+      offset: searchOffset,
+      total: result.total ?? products.length,
+      totalPages: Math.ceil((result.total ?? products.length) / searchLimit),
+    },
+  });
 };
 
 /**
@@ -175,16 +170,18 @@ export const searchProducts = async (req: Request, res: Response): Promise<void>
  */
 export const manualSearchByName: RequestHandler = async (req, res) => {
   const reqAuth = req as AuthenticatedRequest;
-    const { q, lang = 'es', type = 'all' } = req.query;
-    if (!q || typeof q !== 'string') {
-          res.status(400).json({ success: false, message: 'Parámetro de búsqueda requerido' });
-          return;
-        }
-    const searchType = (type === 'fast' || type === 'external') ? type : 'smart';
-    console.info('manualSearchByName:request', { q, lang, type: searchType, userId: reqAuth.user?.id });
-    const result = await ProductSearchService.searchByName(q, String(lang), reqAuth.user?.id, searchType);
-    console.info('manualSearchByName:response', { decision: result.decision, source: result.source, products: result.products?.length || 0 });
-    res.json({ success: true, ...result });
+  const { q, lang = 'es', type = 'smart', limit = 20 } = req.query;
+  if (!q || typeof q !== 'string') {
+    res.status(400).json({ success: false, message: 'Parámetro de búsqueda requerido' });
+    return;
+  }
+  const searchType = (type === 'fast' || type === 'external' || type === 'ai') ? type as 'fast' | 'external' | 'ai' : 'smart';
+  const searchLimit = Math.min(Math.max(Number(limit) || 20, 1), 50);
+
+  logger.info('manualSearchByName:request', { q, lang, type: searchType, limit: searchLimit, userId: reqAuth.user?.id });
+  const result = await ProductSearchService.searchByName(q, String(lang), reqAuth.user?.id, searchType, searchLimit);
+  logger.info('manualSearchByName:response', { decision: result.decision, source: result.source, count: result.products?.length ?? 0 });
+  res.json({ success: true, ...result });
 };
 
 /**

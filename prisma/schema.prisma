@@ -98,11 +98,33 @@ model Product {
   updatedAt        DateTime      @updatedAt @map("updated_at") @db.Timestamptz
   healthScore      Json?         @map("health_score")
   healthScoreVersion Int          @default(0) @map("health_score_version")
+  // Multilingual translation columns added in migration 20251115095922.
+  // Currently unused in search — registered here to prevent Prisma schema drift.
+  // TODO: wire into search queries per-language, or drop via a future migration.
+  nameTranslations        Json @default("{}") @map("name_translations")
+  brandTranslations       Json @default("{}") @map("brand_translations")
+  categoryTranslations    Json @default("{}") @map("category_translations")
+  descriptionTranslations Json @default("{}") @map("description_translations")
+  ingredientsTranslations Json @default("{}") @map("ingredients_translations")
 
   // Relations
   itemMovements    ItemMovement[]
   userProducts     UserProduct[]
   createdBy        User?         @relation("CreatedProducts", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([name])
+  @@index([brand])
+  @@index([barcode])
+  @@index([category])
+  @@index([source])
+  // GIN trigram indexes for fuzzy / similarity() search — created in migration
+  // 20260625000000_restore_search_indexes. Declared here so `prisma migrate dev`
+  // does NOT treat them as schema drift and drop them again.
+  @@index([name(ops: raw("gin_trgm_ops"))], type: Gin, map: "products_name_trgm_idx")
+  @@index([brand(ops: raw("gin_trgm_ops"))], type: Gin, map: "products_brand_trgm_idx")
+  // NOTE: the functional index products_name_unaccent_lower_idx (on immutable_unaccent(lower(name)))
+  // cannot be expressed in Prisma schema syntax — it lives only in the SQL migration.
+  // Do NOT drop it manually and do NOT let `migrate dev` remove it.
 
   @@map("products")
 }

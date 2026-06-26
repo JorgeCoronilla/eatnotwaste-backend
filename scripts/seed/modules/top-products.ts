@@ -32,6 +32,9 @@ export async function seedTopProducts() {
             sort_by: 'popularity_key',
             fields: 'code,product_name,product_name_es,product_name_en,brands,categories,ingredients_text,nutriments,image_url,quantity,generic_name,generic_name_es,generic_name_en,nova_group,additives_tags'
             },
+            headers: {
+                'User-Agent': 'EatNotWaste/1.0 (jorgecn@example.com)'
+            },
             timeout: 30000 
         });
 

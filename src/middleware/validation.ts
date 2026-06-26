@@ -72,17 +72,32 @@ export const validateProductSearch: ValidationChain[] = [
     .isLength({ min: 2, max: 100 })
     .withMessage('La búsqueda debe tener entre 2 y 100 caracteres')
     .trim()
-    .escape(),
-  
+    .customSanitizer(value => typeof value === 'string' ? value.replace(/<[^>]*>/g, '') : value),
+
+  query('lang')
+    .optional()
+    .isIn(['es', 'en', 'fr', 'pt'])
+    .withMessage('Idioma no soportado'),
+
   query('language')
     .optional()
     .isIn(['es', 'en', 'fr', 'pt'])
     .withMessage('Idioma no soportado'),
-  
+
+  query('type')
+    .optional()
+    .isIn(['fast', 'external', 'smart', 'ai'])
+    .withMessage('Tipo de búsqueda inválido. Valores permitidos: fast, external, smart, ai'),
+
   query('limit')
     .optional()
     .isInt({ min: 1, max: 50 })
-    .withMessage('Límite debe ser entre 1 y 50')
+    .withMessage('Límite debe ser entre 1 y 50'),
+
+  query('offset')
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage('Offset debe ser un entero >= 0'),
 ];
 
 export const validateCreateProduct: ValidationChain[] = [
