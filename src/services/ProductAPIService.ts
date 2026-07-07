@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import { prisma } from '../config/database';
 import { ProductService } from './ProductService';
 import type { ProductSource } from '../types/database';
+import { logger } from '../utils/logger';
 
 import NutritionCalculator, { HealthScoreResult } from './NutritionCalculator';
 
@@ -69,9 +70,8 @@ class ProductAPIService {
       { name: 'Local', handler: this.getLocalData.bind(this) }
     ];
     
-    // Configurar axios con timeout
     this.httpClient = axios.create({
-      timeout: 25000, // 25 segundos para tolerar lentitud de OpenFoodFacts
+      timeout: 7000, // 7s per source — enough for real networks, fails fast on flaky APIs
       headers: {
         'User-Agent': 'FreshKeeper/1.0 (https://freshkeeper.app)'
       }
@@ -79,37 +79,51 @@ class ProductAPIService {
   }
 
   /**
-   * Obtener datos de producto por código de barras
-   * Implementa estrategia de fallback entre APIs
+   * Fetch product data by barcode.
+   * OFF and Chomp are raced in parallel (Promise.any); Local DB is a last-resort
+   * fallback for the case where the controller's initial DB check was bypassed.
    */
   async getProductData(barcode: string, language: string = 'es'): Promise<ProductResult> {
-    console.log(`🔍 Buscando producto con código: ${barcode}`);
+    logger.info('ProductAPIService:getProductData', { barcode });
 
-    for (const api of this.apis) {
-      try {
-        console.log(`📡 Intentando con ${api.name}...`);
-        const result = await api.handler(barcode, language);
-        
-        if (result.success) {
-          console.log(`✅ Producto encontrado en ${api.name}`);
-          
-          // Guardar/actualizar en base de datos local
-          await this.cacheProduct(result.product);
-          
-          return result;
-        }
-      } catch (error: any) {
-        console.warn(`⚠️ Error en ${api.name}:`, error.message);
-        continue;
-      }
+    // Race OFF and Chomp — first success wins, losers are ignored.
+    // Promise.any polyfill: invert errors to values and values to errors, then use Promise.all.
+    const raceFirst = <T>(promises: Promise<T>[]): Promise<T> =>
+      new Promise((resolve, reject) => {
+        let remaining = promises.length;
+        promises.forEach(p =>
+          p.then(resolve).catch(() => { if (--remaining === 0) reject(new Error('all failed')); })
+        );
+      });
+
+    try {
+      const result = await raceFirst([
+        this.getOpenFoodFactsData(barcode, language).then(r => {
+          if (!r.success) throw new Error(r.error ?? 'not found');
+          return r;
+        }),
+        this.getChompAPIData(barcode, language).then(r => {
+          if (!r.success) throw new Error(r.error ?? 'not found');
+          return r;
+        }),
+      ]);
+
+      logger.info('ProductAPIService:externalHit', { barcode, source: result.source });
+      await this.cacheProduct(result.product);
+      return result;
+    } catch {
+      // Both external sources failed — fall back to local DB.
+      logger.warn('ProductAPIService:externalMiss', { barcode });
     }
 
-    console.log(`❌ Producto no encontrado: ${barcode}`);
-    return {
-      success: false,
-      error: 'Producto no encontrado en ninguna fuente',
-      source: 'none'
-    };
+    const localResult = await this.getLocalData(barcode, language);
+    if (localResult.success) {
+      logger.info('ProductAPIService:localHit', { barcode });
+      return localResult;
+    }
+
+    logger.warn('ProductAPIService:notFound', { barcode });
+    return { success: false, error: 'Producto no encontrado en ninguna fuente', source: 'none' };
   }
 
   /**
@@ -124,32 +138,19 @@ class ProductAPIService {
       // Aseguramos no duplicar la barra /
       const cleanUrl = apiUrl.endsWith('/') ? apiUrl.slice(0, -1) : apiUrl;
       const url = `${cleanUrl}/product/${barcode}.json`;
-      console.log('OpenFoodFacts URL:', url);
+      logger.debug('ProductAPIService:offUrl', { url });
       const response = await this.httpClient.get(url);
-      console.log('OpenFoodFacts raw response:', JSON.stringify(response.data, null, 2));
-      
+
       if (response.data.status === 1 && response.data.product) {
         const normalizedProduct = this.normalizeOpenFoodFactsData(response.data.product, barcode);
-        return {
-          success: true,
-          product: normalizedProduct,
-          source: 'openfoodfacts'
-        };
+        return { success: true, product: normalizedProduct, source: 'openfoodfacts' };
       } else {
-        console.log('OpenFoodFacts status check failed:', { status: response.data.status, productExists: !!response.data.product });
-        return {
-          success: false,
-          error: 'Producto no encontrado en OpenFoodFacts',
-          source: 'openfoodfacts'
-        };
+        logger.debug('ProductAPIService:offMiss', { barcode, status: response.data.status });
+        return { success: false, error: 'Producto no encontrado en OpenFoodFacts', source: 'openfoodfacts' };
       }
     } catch (error: any) {
-      console.error('Error in getOpenFoodFactsData:', error);
-      return {
-        success: false,
-        error: error.message,
-        source: 'openfoodfacts'
-      };
+      logger.debug('ProductAPIService:offError', { barcode, message: error.message });
+      return { success: false, error: error.message, source: 'openfoodfacts' };
     }
   }
 
@@ -469,36 +470,17 @@ class ProductAPIService {
   async cacheProduct(productData: ProductData): Promise<void> {
     try {
       await ProductService.cacheProduct(productData as any, productData.source as ProductSource);
-      console.log(`💾 Producto cacheado: ${productData.barcode}`);
+      logger.debug('ProductAPIService:productCached', { barcode: productData.barcode });
     } catch (error: any) {
-      console.warn('⚠️ Error guardando en cache:', error.message);
+      logger.warn('ProductAPIService:cacheError', { message: error.message });
     }
   }
 
-  /**
-   * Buscar productos por texto
-   */
-  async searchProducts(query: string, language: string = 'es', limit: number = 20): Promise<any[]> {
-    try {
-      // Primero buscar en base de datos local
-      const resp = await ProductService.searchProducts(query, 1, limit);
-
-      if (resp.success && Array.isArray(resp.data) && resp.data.length > 0) {
-        return resp.data;
-      }
-
-      // Si no hay resultados locales, buscar en OpenFoodFacts
-      return await this.searchOpenFoodFacts(query, language, limit);
-    } catch (error: any) {
-      console.error('Error en búsqueda de productos:', error);
-      return [];
-    }
-  }
 
   /**
    * Buscar en OpenFoodFacts
    */
-  async searchOpenFoodFacts(query: string, language: string = 'es', limit: number = 20): Promise<any[]> {
+  async searchOpenFoodFacts(query: string, language: string = 'es', limit: number = 20, signal?: AbortSignal): Promise<any[]> {
     try {
       const params: any = {
         search_terms: query,
@@ -520,6 +502,7 @@ class ProductAPIService {
 
       const response = await this.httpClient.get('https://world.openfoodfacts.org/cgi/search.pl', {
         params,
+        ...(signal !== undefined && { signal }),
         paramsSerializer: (params) => {
           // OpenFoodFacts CGI script seems to have trouble with unencoded single quotes
           const searchParams = new URLSearchParams();
@@ -538,7 +521,11 @@ class ProductAPIService {
 
       return [];
     } catch (error: any) {
-      console.error('Error buscando en OpenFoodFacts:', error);
+      if (axios.isCancel(error)) {
+        logger.debug('ProductAPIService:offSearchCanceled', { query });
+        return [];
+      }
+      logger.error('ProductAPIService:offSearchError', { query, message: (error as any)?.message });
       return [];
     }
   }

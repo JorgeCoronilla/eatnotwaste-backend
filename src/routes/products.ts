@@ -1,4 +1,6 @@
 import express, { Request, Response } from 'express';
+import rateLimit from 'express-rate-limit';
+import { ProductService } from '../services/ProductService';
 
 const router = express.Router();
 
@@ -33,6 +35,16 @@ import {
  *   name: Products
  *   description: API for managing products
  */
+
+// Stricter limiter for the name-search route: guards against anonymous users
+// spamming the LLM fallback (auth gate is in the service, this is a second line of defence).
+const searchNameLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 60,                   // 60 req / 15 min per IP (~4/min)
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Demasiadas búsquedas. Espera unos minutos.' },
+});
 
 /**
  * @route   GET /api/products/scan/:barcode
@@ -74,6 +86,7 @@ router.get('/scan/:barcode',
  * @access  Public (auth opcional)
  */
 router.get('/search/name',
+  searchNameLimiter,
   validateProductSearch,
   optionalAuth,
   manualSearchByName
@@ -173,20 +186,19 @@ router.get('/user/recent',
  *       200:
  *         description: A list of categories.
  */
-router.get('/categories', (req: Request, res: Response) => {
-  res.json({
-    success: true,
-    message: 'Categorías obtenidas exitosamente',
-    data: {
-      categories: [
-        { name: 'dairy', count: 15 },
-        { name: 'fruits', count: 25 },
-        { name: 'vegetables', count: 30 },
-        { name: 'grains', count: 12 },
-        { name: 'other', count: 8 }
-      ]
-    }
-  });
+router.get('/categories', async (req: Request, res: Response) => {
+  try {
+    const result = await ProductService.getCategories();
+    res.json({
+      success: true,
+      message: 'Categorías obtenidas exitosamente',
+      data: {
+        categories: result.data?.map(c => ({ name: c, count: 0 })) || []
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error interno' });
+  }
 });
 
 /**

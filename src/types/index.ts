@@ -1,6 +1,8 @@
 import { Request } from 'express';
 import { User } from '@prisma/client';
 
+export { ProductDTO, NutritionalInfo, toProductDTO } from './ProductDTO';
+
 // Tipos de usuario
 export interface IUser {
   email: string;
