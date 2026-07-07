@@ -33,6 +33,10 @@ interface NutritionInfo {
   iron?: number;
   vitaminC?: number;
   vitaminA?: number;
+  // Score-engine inputs — persisted so recalc can reproduce the exact same score
+  novaGroup?: number;
+  additivesTags?: string[];
+  fruitsVegetablesNuts?: number;
 }
 
 interface ProductData {
@@ -301,16 +305,33 @@ class ProductAPIService {
    * Normalizar datos de OpenFoodFacts
    */
   normalizeOpenFoodFactsData(rawData: any, barcode: string): ProductData {
-    const nutrition = this.extractNutrition(rawData.nutriments);
+    const baseNutrition = this.extractNutrition(rawData.nutriments);
+
+    // Persist score-engine inputs alongside the nutrition data so the
+    // recalc path can reproduce the EXACT same score without raw OFF data.
+    const fruitsVegetablesNuts: number | undefined =
+      rawData.nutriments?.['fruits-vegetables-nuts-estimate-from-ingredients_100g'] ??
+      rawData.nutriments?.['fruits-vegetables-nuts_100g'] ??
+      undefined;
+
+    const nutrition: NutritionInfo = {
+      ...baseNutrition,
+      novaGroup: rawData.nova_group ?? undefined,
+      additivesTags: rawData.additives_tags ?? [],
+      ...(fruitsVegetablesNuts !== undefined ? { fruitsVegetablesNuts } : {}),
+    };
+
+    const ingredientsList: string[] = rawData.ingredients_text
+      ? rawData.ingredients_text.split(/[,;]/).map((ing: string) => ing.trim()).filter((ing: string) => ing.length > 0)
+      : [];
+
     return {
       barcode,
       name: rawData.product_name_es || rawData.product_name_en || rawData.product_name || 'Unnamed Product',
       brand: rawData.brands || undefined,
       category: this.mapCategory(rawData.categories),
       description: rawData.generic_name_es || rawData.generic_name_en || rawData.generic_name || undefined,
-      ingredients: rawData.ingredients_text ? 
-        rawData.ingredients_text.split(/[,;]/).map((ing: string) => ing.trim()).filter((ing: string) => ing.length > 0) : 
-        [],
+      ingredients: ingredientsList,
       allergens: this.extractAllergens(rawData.allergens),
       nutritionalInfo: nutrition,
       nutrition,
@@ -323,27 +344,27 @@ class ProductAPIService {
       language: 'es',
       lastUpdated: new Date(),
       healthScore: NutritionCalculator.calculateScore(
-        { // Nutrition Input
-          energy: nutrition.calories ?? 0, // kcal
+        { // Nutrition Input — derived from persisted nutrition (single source of truth)
+          energy: nutrition.calories ?? 0,
           sugars: nutrition.sugar ?? 0,
+          fat: nutrition.fat ?? 0,
           saturatedFat: nutrition.saturatedFat ?? 0,
-          sodium: nutrition.sodium ?? 0, // mg
+          sodium: nutrition.sodium ?? 0,
           fiber: nutrition.fiber ?? 0,
           protein: nutrition.protein ?? 0,
-          fruitsVegetablesNuts: rawData.nutriments?.['fruits-vegetables-nuts-estimate-from-ingredients_100g'] 
-                             || rawData.nutriments?.['fruits-vegetables-nuts_100g']
+          ...(typeof nutrition.fruitsVegetablesNuts === 'number'
+            ? { fruitsVegetablesNuts: nutrition.fruitsVegetablesNuts }
+            : {}),
         },
         { // Ingredient Input
-          ingredients: rawData.ingredients_text ? 
-            rawData.ingredients_text.split(/[,;]/).map((ing: string) => ing.trim()).filter((ing: string) => ing.length > 0) : 
-            [],
-          additives: rawData.additives_tags || [] // e.g. ["en:e102"]
+          ingredients: ingredientsList,
+          additives: nutrition.additivesTags ?? [],
         },
         { // Processing Input
-          novaGroup: rawData.nova_group // 1-4
+          ...(typeof nutrition.novaGroup === 'number' ? { novaGroup: nutrition.novaGroup } : {}),
         },
-        this.mapCategory(rawData.categories), // Pass category
-        rawData.product_name // Pass name
+        this.mapCategory(rawData.categories),
+        rawData.product_name
       )
     };
   }
@@ -353,7 +374,25 @@ class ProductAPIService {
    */
   extractNutrition(nutriments: any): NutritionInfo {
     if (!nutriments) return {};
-    
+
+    // OFF provides sodium in grams (sodium_100g), NOT milligrams.
+    // The scoring engine expects sodium in mg, so multiply by 1000.
+    // When sodium is absent but salt_100g (or salt) is present, derive it:
+    //   sodium_mg = salt_g * 400  (i.e. salt_g / 2.5 * 1000)
+    // This ensures the engine always receives mg regardless of which field OFF populated.
+    const sodiumG: number | undefined =
+      nutriments.sodium_100g ?? nutriments.sodium ?? undefined;
+    const saltG: number | undefined =
+      nutriments.salt_100g ?? nutriments.salt ?? undefined;
+
+    let sodiumMg: number | undefined;
+    if (sodiumG !== undefined && sodiumG !== null) {
+      sodiumMg = sodiumG * 1000;
+    } else if (saltG !== undefined && saltG !== null) {
+      // Fallback: derive sodium from salt (salt_g × 400 = sodium_mg)
+      sodiumMg = saltG * 400;
+    }
+
     return {
       calories: nutriments['energy-kcal_100g'] || nutriments['energy-kcal'] || undefined,
       protein: nutriments.proteins_100g || nutriments.proteins || undefined,
@@ -361,7 +400,8 @@ class ProductAPIService {
       fat: nutriments.fat_100g || nutriments.fat || undefined,
       fiber: nutriments.fiber_100g || nutriments.fiber || undefined,
       sugar: nutriments.sugars_100g || nutriments.sugars || undefined,
-      sodium: nutriments.sodium_100g || nutriments.sodium || undefined,
+      // exactOptionalPropertyTypes: only include sodium when it has a value
+      ...(sodiumMg !== undefined ? { sodium: sodiumMg } : {}),
       saturatedFat: nutriments['saturated-fat_100g'] || nutriments['saturated-fat'] || undefined,
       transFat: nutriments['trans-fat_100g'] || nutriments['trans-fat'] || undefined,
       cholesterol: nutriments.cholesterol_100g || nutriments.cholesterol || undefined,

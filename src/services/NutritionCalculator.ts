@@ -1,5 +1,3 @@
-import { Product } from "@prisma/client";
-
 // --- Tipos de Datos ---
 export interface NutritionInput {
   energy?: number;          // kcal per 100g
@@ -38,6 +36,45 @@ export interface HealthScoreResult {
     penalties: HealthScoreMessage[];
     positives: HealthScoreMessage[];
   };
+  /**
+   * 'full'  — at least one key numeric field was present in the input.
+   * 'low'   — ALL key numeric fields were absent (undefined/null); the score
+   *           reflects defaults only and should not be shown as authoritative.
+   * Omitted when not needed (all existing callers that do not check this field
+   * are unaffected — the field is optional on the interface).
+   */
+  confidence?: 'full' | 'low';
+}
+
+// --- Helpers ---
+
+/**
+ * Coerce a raw value to a safe non-negative finite number.
+ * Returns v unchanged if it is already a finite number >= 0; returns 0 otherwise.
+ * This prevents null | undefined | NaN | negative | string from propagating into
+ * arithmetic and producing garbage scores.
+ */
+function coerceNumber(v: unknown): number {
+  if (typeof v === 'number' && isFinite(v) && v >= 0) return v;
+  return 0;
+}
+
+/**
+ * Detect whether the caller passed NO nutritional data at all.
+ * "No data" means EVERY key numeric field is undefined or null — i.e. missing.
+ * A product with explicit zeros (e.g. mineral water: energy=0, sugars=0 …)
+ * is NOT "no data" because the fields are present; it has real measured values.
+ */
+function hasNoNutritionData(nutrition: NutritionInput): boolean {
+  return (
+    nutrition.energy === undefined &&
+    nutrition.sugars === undefined &&
+    nutrition.fat === undefined &&
+    nutrition.saturatedFat === undefined &&
+    nutrition.sodium === undefined &&
+    nutrition.fiber === undefined &&
+    nutrition.protein === undefined
+  );
 }
 
 // --- Listas de Referencia ---
@@ -128,20 +165,20 @@ const ADDITIVE_SYNONYMS: Record<string, string[]> = {
   "E102": ["tartrazina", "tartracina", "amarillo 5", "amarillo tartrazina", "ci 19140", "fd&c yellow 5"],
   "E110": ["amarillo ocaso fcf", "amarillo 6", "amarillo anaranjado s", "ci 15985", "fd&c yellow 6", "amarillo sunset"],
   "E120": ["carmin", "acido carminico", "cochinilla", "rojo natural 4", "ci 75470", "carmin de cochinilla", "carmine", "cochineal", "carminic acid"],
-  "E129": ["rojo allura ac", "rojo 40", "rojo allura", "ci 16035", "fd&c red 40", "rojo allura ac"],
+  "E129": ["rojo allura ac", "rojo 40", "rojo allura", "ci 16035", "fd&c red 40"],
   "E133": ["azul brillante fcf", "azul 1", "azul brillante", "ci 42090", "fd&c blue 1", "blue 1", "brilliant blue fcf", "azul brilhante fcf", "bleu brillant fcf"],
   "E150d": ["caramelo amonico sulfito", "caramelo iv", "caramelo sulfito amonico", "colorante caramelo", "caramelo de sulfito amonico", "corante caramelo", "colorant caramel"],
-  "E171": ["dioxido de titanio", "oxido de titanio", "titanio", "blanco de titanio", "ci 77891", "titanio dioxide", "dioxido de titanio", "dioxyde de titane"],
+  "E171": ["dioxido de titanio", "oxido de titanio", "titanio", "blanco de titanio", "ci 77891", "titanio dioxide", "dioxyde de titane"],
 
   // CONSERVANTES
   "E200": ["acido sorbico", "sorbico", "2,4-hexadienoico", "sorbic acid"],
   "E202": ["sorbato de potasio", "sorbato potasico", "sorbato potásico", "2,4-hexadienoato de potasio", "potassium sorbate", "sorbato de potassio", "sorbate de potassium"],
-  "E210": ["acido benzoico", "benzoico", "benzoic acid", "acido benzoico", "acide benzoique"],
-  "E211": ["benzoato de sodio", "benzoato sodico", "benzoato sódico", "sodium benzoate", "benzoato de sodio", "benzoate de sodium"],
+  "E210": ["acido benzoico", "benzoico", "benzoic acid", "acide benzoique"],
+  "E211": ["benzoato de sodio", "benzoato sodico", "benzoato sódico", "sodium benzoate", "benzoate de sodium"],
   "E212": ["benzoato de potasio", "benzoato potasico", "benzoato potásico", "benzoato de potassio", "benzoate de potassium"],
-  "E213": ["benzoato de calcio", "benzoato calcico", "benzoato cálcico", "benzoato de calcio", "benzoate de calcium"],
+  "E213": ["benzoato de calcio", "benzoato calcico", "benzoato cálcico", "benzoate de calcium"],
   "E220": ["dioxido de azufre", "anhidrido sulfuroso", "so2", "oxido de azufre", "dioxido de enxofre", "dioxyde de soufre"],
-  "E221": ["sulfito de sodio", "sulfito sodico", "sulfito sódico", "social sulfite", "sulfito de sodio", "sulfite de sodium"],
+  "E221": ["sulfito de sodio", "sulfito sodico", "sulfito sódico", "social sulfite", "sulfite de sodium"],
   "E222": ["bisulfito de sodio", "hidrogenosulfito de sodio", "bisulfito sodico", "bisulfito sódico"],
   "E223": ["metabisulfito de sodio", "pirosulfito de sodio", "metabisulfito sodico", "metabisulfito sódico"],
   "E224": ["metabisulfito de potasio", "pirosulfito de potasio", "metabisulfito potasico", "metabisulfito potásico"],
@@ -151,7 +188,7 @@ const ADDITIVE_SYNONYMS: Record<string, string[]> = {
   "E252": ["nitrato de potasio", "nitrato potasico", "nitrato potásico", "sal nitro", "salitre", "potassium nitrate", "saltpeter"],
 
   // ANTIOXIDANTES
-  "E320": ["bha", "butilhidroxianisol", "hidroxianisol butilado", "butylated hydroxyanisole", "butilhidroxianisol", "butylhydroxyanisole"],
+  "E320": ["bha", "butilhidroxianisol", "hidroxianisol butilado", "butylated hydroxyanisole", "butylhydroxyanisole"],
   "E321": ["bht", "butilhidroxitolueno", "hidroxitolueno butilado", "butylated hydroxytoluene", "butil-hidroxi-tolueno", "butylhydroxytoluene"],
   "E385": ["edta calcico disodico", "edta calcio disodio", "sal disodica de calcio edta", "etilendiaminotetraacetato de calcio y disodio"],
 
@@ -161,20 +198,20 @@ const ADDITIVE_SYNONYMS: Record<string, string[]> = {
   "E631": ["inosinato disodico", "inosinato de disodio", "5'-inosinato de sodio", "imp disodico"],
 
   // EDULCORANTES
-  "E950": ["acesulfamo k", "acesulfamo potasico", "acesulfamo de potasio", "acesulfame k", "acesulfame potassium", "acesulfame k", "acesulfame k"],
-  "E951": ["aspartamo", "aspartame", "l-aspartil-l-fenilalanina metil ester", "nutrasweet", "canderel", "aspartame", "aspartame"],
-  "E954": ["sacarina", "sacarinas", "saccharin", "sacarina sodica", "sacarina de sodio", "sacarinas sodicas", "sodium saccharin", "sacarina", "saccharine"],
-  "E955": ["sucralosa", "splenda", "trichlorogalactosucrose", "1,6-dicloro-1,6-dideoxi-beta-d-fructofuranosil-4-cloro-4-deoxi-alfa-d-galactopiranosido", "sucralose", "sucralose", "sucralose"],
+  "E950": ["acesulfamo k", "acesulfamo potasico", "acesulfamo de potasio", "acesulfame k", "acesulfame potassium"],
+  "E951": ["aspartamo", "aspartame", "l-aspartil-l-fenilalanina metil ester", "nutrasweet", "canderel"],
+  "E954": ["sacarina", "sacarinas", "saccharin", "sacarina sodica", "sacarina de sodio", "sacarinas sodicas", "sodium saccharin", "saccharine"],
+  "E955": ["sucralosa", "splenda", "trichlorogalactosucrose", "1,6-dicloro-1,6-dideoxi-beta-d-fructofuranosil-4-cloro-4-deoxi-alfa-d-galactopiranosido", "sucralose"],
   "E960": ["glucosidos de esteviol", "estevia", "esteviol glucosidos", "stevia", "rebaudiosido a", "esteviosido"],
 
   // EMULGENTES/ESPESANTES
-  "E407": ["carragenanos", "carragenanos", "carragenina", "carrageenan", "407"],
+  "E407": ["carragenanos", "carragenina", "carrageenan", "407"],
   "E415": ["goma xantana", "xantana", "goma xanthan", "xanthan gum", "polysaccharide b-1459"],
   "E433": ["polisorbato 80", "monooleato de polioxietileno sorbitan", "tween 80", "poxi 80"],
   "E466": ["carboximetilcelulosa", "cmc", "celulosa gum", "carmelosa", "celulose gum"],
 
   // OTROS
-  "E330": ["acido citrico", "citrico", "2-hidroxi-1,2,3-propanotricarboxilico", "citric acid", "acido citrico", "acide citrique"],
+  "E330": ["acido citrico", "citrico", "2-hidroxi-1,2,3-propanotricarboxilico", "citric acid", "acide citrique"],
   "E338": ["acido fosforico", "fosforico", "orthophosphoric acid", "phosphoric acid"],
   "E551": ["dioxido de silicio", "silicio", "silica", "oxido de silicio", "arena coloidal"]
 };
@@ -285,7 +322,7 @@ class FoodScorer {
 
   // --- 1. Nutrition Score (50 pts) ---
   private calculateNutritionScore(nutrition: NutritionInput, category?: string, productName: string = '') {
-    let score = 50; 
+    let score = 50;
     const penalties: HealthScoreMessage[] = [];
     const positives: HealthScoreMessage[] = [];
 
@@ -293,11 +330,19 @@ class FoodScorer {
                     productName.toLowerCase().includes('snack') ||
                     productName.toLowerCase().includes('chip');
 
-    // A. Densidad Calórica
-    const kcal = nutrition.energy || 0;
-    const protein = nutrition.protein || 0;
-    const fiber = nutrition.fiber || 0;
+    // Sanitize all numeric inputs — coerceNumber turns null/undefined/NaN/negative into 0.
+    // Valid numbers pass through unchanged, so golden test values are unaffected.
+    const kcal    = coerceNumber(nutrition.energy);
+    const protein = coerceNumber(nutrition.protein);
+    const fiber   = coerceNumber(nutrition.fiber);
+    const totalFat = coerceNumber(nutrition.fat);
+    const sodium  = coerceNumber(nutrition.sodium);
+    const sugars  = coerceNumber(nutrition.sugars);
+    const satFat  = coerceNumber(nutrition.saturatedFat);
+    // fruitsVegetablesNuts is coerced but currently unused in scoring (deferred)
+    coerceNumber(nutrition.fruitsVegetablesNuts);
 
+    // A. Densidad Calórica
     if (kcal > 400) {
         if (isSnack) {
             if (protein < 5 && fiber < 3) {
@@ -316,7 +361,6 @@ class FoodScorer {
     }
 
     // B. Grasa Total (Snacks)
-    const totalFat = nutrition.fat || 0;
     if (isSnack) {
         if (totalFat > 20) {
              score -= 10;
@@ -328,13 +372,11 @@ class FoodScorer {
 
     // C. Límites Estrictos
     // Sal
-    const sodium = nutrition.sodium || 0;
     const saltRes = this.penalizarSal(sodium, category, isSnack || false);
     score += saltRes.score;
     if (saltRes.penalty) penalties.push(saltRes.penalty);
 
     // Azúcar (Original Logic is fine, maybe stricter?)
-    const sugars = nutrition.sugars || 0;
     if (sugars > 20) {
          score -= 10;
          penalties.push({ key: 'penalties.highSugar' });
@@ -343,7 +385,6 @@ class FoodScorer {
     }
 
     // Sat Fat
-    const satFat = nutrition.saturatedFat || 0;
     if (satFat > 10) {
          score -= 8;
          penalties.push({ key: 'penalties.saturatedFat' });
@@ -364,7 +405,7 @@ class FoodScorer {
     }
 
     // Legacy Bonus (Fiber) - OK to keep but careful not to over-reward
-    if (fiber > 5 && !isSnack) { 
+    if (fiber > 5 && !isSnack) {
          score += 5;
          positives.push({ key: 'positives.fiber' });
     }
@@ -495,28 +536,27 @@ class FoodScorer {
             if (isSnackFrito) allowBonus = false; // Never bonus fried snacks
 
             if (allowBonus && ingredients.ingredients.length <= 3) {
-            if (allowBonus && ingredients.ingredients.length <= 3) {
                  // Check EN, ES, FR, PT
                  const ingLower = ingredients.ingredients.map(i => i.toLowerCase());
-                 
+
                  // Logic: Must have (Potato OR Corn) AND (Oil) AND (Salt)
-                 const hasPotato = ingLower.some(i => 
+                 const hasPotato = ingLower.some(i =>
                     i.includes('patata') || i.includes('potato') || // ES/EN
                     i.includes('pomme de terre') || i.includes('batata') // FR/PT
                  );
-                 
-                 const hasCorn = ingLower.some(i => 
+
+                 const hasCorn = ingLower.some(i =>
                     i.includes('maíz') || i.includes('corn') || i.includes('maiz') || // ES/EN
                     i.includes('mais') || i.includes('milho') // FR/PT
                  );
-                 
-                 const hasOil = ingLower.some(i => 
+
+                 const hasOil = ingLower.some(i =>
                     i.includes('aceite') || i.includes('oil') || i.includes('grasa') || i.includes('fat') || // ES/EN
                     i.includes('huile') || i.includes('graisse') || // FR
                     i.includes('óleo') || i.includes('azeite') || i.includes('gordura') // PT
                  );
-                 
-                 const hasSalt = ingLower.some(i => 
+
+                 const hasSalt = ingLower.some(i =>
                     i.includes('sal') || i.includes('salt') || i.includes('sodio') || i.includes('sodium') || // ES/EN/PT
                     i.includes('sel') // FR
                  );
@@ -524,7 +564,6 @@ class FoodScorer {
                  if ((hasPotato || hasCorn) && hasOil && hasSalt) {
                      allowBonus = false;
                  }
-            }
             }
 
             if (allowBonus) {
@@ -628,7 +667,12 @@ class FoodScorer {
     category?: string,
     productName: string = '' // Add product name
   ): HealthScoreResult {
-    
+
+    // Detect whether there is genuinely no nutritional data at all.
+    // "No data" = every key numeric field is undefined/null (the caller passed nothing).
+    // A product with explicit zeros (e.g. mineral water) is NOT "no data".
+    const noData = hasNoNutritionData(nutrition);
+
     // Detect Fried Snack Context
     const isSnackFrito = this.detectarSnackFrito(ingredients.ingredients || [], productName);
 
@@ -637,14 +681,14 @@ class FoodScorer {
     const processingScore = this.calculateProcessingScore(processing, ingredients, isSnackFrito); // Max 20
 
     const totalScore = Math.max(0, Math.min(100, nutritionScore.score + ingredientsScore.score + processingScore.score));
-    
+
     // Unificar detalles
     const allPenalties = [
       ...nutritionScore.penalties,
       ...ingredientsScore.penalties,
       ...processingScore.penalties
     ];
-    
+
     const allPositives = [
       ...nutritionScore.positives,
       ...ingredientsScore.positives,
@@ -662,7 +706,10 @@ class FoodScorer {
       details: {
         penalties: allPenalties,
         positives: allPositives
-      }
+      },
+      // confidence is only included when no nutritional data was supplied, to avoid
+      // adding the property to every result object (exactOptionalPropertyTypes compliance).
+      ...(noData ? { confidence: 'low' as const } : {}),
     };
   }
 }

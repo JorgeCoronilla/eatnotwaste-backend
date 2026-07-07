@@ -21,7 +21,11 @@ export interface NutritionalInfo {
   iron?: number;
   vitaminC?: number;
   vitaminA?: number;
-  [key: string]: number | undefined;
+  // Score-engine inputs — persisted at import time so recalc can reproduce the exact same score
+  novaGroup?: number;
+  additivesTags?: string[];
+  fruitsVegetablesNuts?: number;
+  [key: string]: number | string[] | undefined;
 }
 
 export interface ProductDTO {

@@ -8,6 +8,7 @@ import { cache as redisCache } from '../config/redis';
 import { logger } from '../utils/logger';
 import { looksGenericOrFresh } from '../utils/genericKeywords';
 import { ProductDTO, toProductDTO } from '../types/ProductDTO';
+import { splitIngredients } from './scoreInputs';
 
 export type SearchDecision = 'found' | 'list' | 'clarify' | 'generated' | 'none';
 
@@ -339,9 +340,7 @@ export class ProductSearchService {
 
     const generated = await LLMProductGenerator.generateGenericProduct(query, language);
     if (generated) {
-      const ingredientsList = generated.ingredients
-        ? generated.ingredients.split(',').map(i => i.trim())
-        : [];
+      const ingredientsList = splitIngredients(generated.ingredients ?? null);
 
       const healthScore = NutritionCalculator.calculateScore(
         {

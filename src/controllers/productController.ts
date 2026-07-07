@@ -5,6 +5,7 @@ import { prisma } from '../config/database';
 import ProductAPIService from '../services/ProductAPIService';
 import ProductSearchService from '../services/ProductSearchService';
 import NutritionCalculator from '../services/NutritionCalculator';
+import { buildScoreInputs } from '../services/scoreInputs';
 import { logger } from '../utils/logger';
 import { AuthenticatedRequest } from '../types';
 
@@ -271,14 +272,18 @@ export const getProduct = async (req: Request, res: Response): Promise<void> => 
     let productData = product;
     if (product.healthScoreVersion === null || product.healthScoreVersion < NutritionCalculator.ENGINE_VERSION) {
              console.log(`♻️ Recalculating outdated Health Score for ${product.name} (v${product.healthScoreVersion} -> v${NutritionCalculator.ENGINE_VERSION})`);
-              
-              const newScore = NutritionCalculator.calculateScore(
+
+              // Use the shared helper so import and recalc always agree on field mapping.
+              // Previously this passed product.nutritionalInfo directly as NutritionInput
+              // (wrong: calories≠energy, sugar≠sugars) and product.allergens as additives (completely wrong).
+              const { nutrition, ingredients, processing } = buildScoreInputs(
                   product.nutritionalInfo as any,
-                  { 
-                      ingredients: product.ingredients ? product.ingredients.split(", ") : [], 
-                      additives: product.allergens 
-                  },
-                  { novaGroup: (product.nutritionalInfo as any)?.novaGroup },
+                  product.ingredients,
+              );
+              const newScore = NutritionCalculator.calculateScore(
+                  nutrition,
+                  ingredients,
+                  processing,
                   product.category || undefined,
                   product.name
               );
