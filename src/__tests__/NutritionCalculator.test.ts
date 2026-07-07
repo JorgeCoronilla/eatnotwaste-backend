@@ -8,6 +8,19 @@
  * engine intentionally changes during a refactor phase.
  *
  * Captured: 2026-07-07  Engine version: 1
+ *
+ * ── VERSION HISTORY ─────────────────────────────────────────────────────────
+ * ENGINE_VERSION 1  → initial golden capture (2026-07-07, Phase 0)
+ * ENGINE_VERSION 2  → frozen as of Phase 4 (2026-07-07)
+ *   Phases 1-3 changed DATA-FLOW, EXTRACTION UNITS, and DEFENSIVE GUARDS only.
+ *   The engine's scoring logic, thresholds, and response to any given set of
+ *   inputs were NOT changed. Therefore all 10 golden numeric values below are
+ *   IDENTICAL to the original capture and are expected to remain stable across
+ *   any further data-flow or extraction refactors.
+ *   Only a deliberate change to calculateNutritionScore / calculateIngredientsScore /
+ *   calculateProcessingScore / penalizarSal / detectarSnackFrito should ever
+ *   require updating these values.
+ * ─────────────────────────────────────────────────────────────────────────────
  */
 
 import { describe, it, expect } from 'vitest';
